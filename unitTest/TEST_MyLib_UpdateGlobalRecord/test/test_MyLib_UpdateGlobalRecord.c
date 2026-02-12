@@ -1,6 +1,6 @@
-#include "unity.h"
 #include "MyLib_UpdateGlobalRecord.h"
 #include "mock_MyLib.h"
+#include "unity.h"
 
 /**
  * @file test_MyLib_UpdateGlobalRecord.c
@@ -12,8 +12,7 @@
 
 /* Test setup and teardown */
 
-void setUp(void)
-{
+void setUp(void) {
   /* Reset global variables before each test */
   g_counter_u32 = 0U;
   g_record.id_u16 = 0U;
@@ -21,10 +20,7 @@ void setUp(void)
   g_systemReady_b = false;
 }
 
-void tearDown(void)
-{
-  /* Cleanup after each test */
-}
+void tearDown(void) { /* Cleanup after each test */ }
 
 /**
  * @test MyLib_UpdateGlobalRecord_ValidInput_UpdatesDestinationAndGlobals
@@ -36,8 +32,7 @@ void tearDown(void)
  *   - g_record is updated to match dest_p
  *   - g_systemReady_b is set to true
  */
-void test_MyLib_UpdateGlobalRecord_ValidInput_UpdatesDestinationAndGlobals(void)
-{
+void test_MyLib_UpdateGlobalRecord_ValidInput_UpdatesDestinationAndGlobals(void) {
   /* Arrange */
   MyLib_record_t source = {0x1234U, 0x56789ABCU};
   MyLib_record_t destination = {0U, 0U};
@@ -73,8 +68,7 @@ void test_MyLib_UpdateGlobalRecord_ValidInput_UpdatesDestinationAndGlobals(void)
  *   - No global state is modified
  *   - Function returns without side effects
  */
-void test_MyLib_UpdateGlobalRecord_NullDestinationPointer_NoUpdate(void)
-{
+void test_MyLib_UpdateGlobalRecord_NullDestinationPointer_NoUpdate(void) {
   /* Arrange */
   MyLib_record_t source = {0xABCDU, 0xDEADBEEFU};
 
@@ -102,8 +96,7 @@ void test_MyLib_UpdateGlobalRecord_NullDestinationPointer_NoUpdate(void)
  *   - Global state is not modified
  *   - Function returns without side effects
  */
-void test_MyLib_UpdateGlobalRecord_NullSourcePointer_NoUpdate(void)
-{
+void test_MyLib_UpdateGlobalRecord_NullSourcePointer_NoUpdate(void) {
   /* Arrange */
   MyLib_record_t destination = {0x5555U, 0xAAAAAAAAU};
 
@@ -134,8 +127,7 @@ void test_MyLib_UpdateGlobalRecord_NullSourcePointer_NoUpdate(void)
  *   - Global state remains unchanged
  *   - Function returns without side effects
  */
-void test_MyLib_UpdateGlobalRecord_BothPointersNull_NoUpdate(void)
-{
+void test_MyLib_UpdateGlobalRecord_BothPointersNull_NoUpdate(void) {
   /* Arrange */
   /* Pre-set some state to verify it is not modified */
   g_systemReady_b = true;
@@ -165,8 +157,7 @@ void test_MyLib_UpdateGlobalRecord_BothPointersNull_NoUpdate(void)
  *   - Each call properly updates both destination and global state
  *   - Previous state is properly overwritten
  */
-void test_MyLib_UpdateGlobalRecord_MultipleCallsWithDifferentValues_UpdatesCorrectly(void)
-{
+void test_MyLib_UpdateGlobalRecord_MultipleCallsWithDifferentValues_UpdatesCorrectly(void) {
   /* Arrange */
   MyLib_record_t source1 = {100U, 1000U};
   MyLib_record_t source2 = {200U, 2000U};
@@ -203,8 +194,7 @@ void test_MyLib_UpdateGlobalRecord_MultipleCallsWithDifferentValues_UpdatesCorre
  *   - Global record reflects zero values
  *   - System ready flag is still set to true
  */
-void test_MyLib_UpdateGlobalRecord_EdgeCaseZeroValues_UpdatesCorrectly(void)
-{
+void test_MyLib_UpdateGlobalRecord_EdgeCaseZeroValues_UpdatesCorrectly(void) {
   /* Arrange */
   MyLib_record_t source = {0U, 0U};
   MyLib_record_t destination = {0xFFFFU, 0xFFFFFFFFU};
@@ -234,8 +224,7 @@ void test_MyLib_UpdateGlobalRecord_EdgeCaseZeroValues_UpdatesCorrectly(void)
  *   - Global record reflects max values
  *   - System ready flag is set to true
  */
-void test_MyLib_UpdateGlobalRecord_EdgeCaseMaxValues_UpdatesCorrectly(void)
-{
+void test_MyLib_UpdateGlobalRecord_EdgeCaseMaxValues_UpdatesCorrectly(void) {
   /* Arrange */
   MyLib_record_t source = {0xFFFFU, 0xFFFFFFFFU};
   MyLib_record_t destination = {0U, 0U};
@@ -250,5 +239,3 @@ void test_MyLib_UpdateGlobalRecord_EdgeCaseMaxValues_UpdatesCorrectly(void)
   TEST_ASSERT_EQUAL_UINT32(0xFFFFFFFFU, g_record.value_u32);
   TEST_ASSERT_TRUE(g_systemReady_b);
 }
-
-

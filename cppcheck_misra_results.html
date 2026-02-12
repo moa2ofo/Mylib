@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Cppcheck MISRA Results</title>
+<style>
+table {
+    border-collapse: collapse;
+    width: 100%;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+th, td {
+    border: 1px solid #ccc;
+    padding: 4px 8px;
+}
+th {
+    background-color: #f2f2f2;
+}
+tbody tr:hover td {
+    background-color: #e8f2ff;
+}
+.meta {
+    margin: 6px 0 10px 0;
+}
+</style>
+</head>
+<body>
+<h1>Cppcheck MISRA Results</h1>
+<p class="meta"><strong>Tester: root&nbsp;&nbsp;Date: 12/02/26&nbsp;&nbsp;Time: 09:46:40</strong></p>
+<p>Source file: <code>/home/runner/work/Mylib/Mylib/unitTestLauncher/cppcheck_misra_results.xml</code></p>
+<table>
+<thead><tr><th>id</th><th>severity</th><th>msg</th><th>locations</th></tr></thead>
+<tbody><tr><td>variableScope</td><td>style</td><td>The scope of the variable &#x27;l_new_u32&#x27; can be reduced.</td><td>pltf/MyLib.c:114:12</td></tr><tr><td>unreadVariable</td><td>style</td><td>Variable &#x27;l_new_u32&#x27; is assigned a value that is never used.</td><td>pltf/MyLib.c:114:22</td></tr><tr style="background-color: #ffcc80;"><td>misra-c2012-8.2</td><td>Required</td><td>Function types shall be in prototype form with named parameters </td><td>pltf/MyLib.c:140:9</td></tr><tr style="background-color: #ffff99;"><td>misra-c2012-8.9</td><td>Advisory</td><td>An object should be defined at block scope if its identifier only appears in a single function </td><td>pltf/MyLib.c:10:13</td></tr><tr style="background-color: #ffff99;"><td>misra-c2012-8.9</td><td>Advisory</td><td>An object should be defined at block scope if its identifier only appears in a single function </td><td>pltf/MyLib.c:9:17</td></tr><tr style="background-color: #ffcc80;"><td>misra-c2012-10.8</td><td>Required</td><td>The value of a composite expression shall not be cast to a different essential type category or a wider essential type </td><td>pltf/MyLib.c:17:18</td></tr><tr style="background-color: #ffcc80;"><td>misra-c2012-11.3</td><td>Required</td><td>A cast shall not be performed between a pointer to object type and a pointer to a different object type </td><td>pltf/MyLib.c:53:51</td></tr><tr style="background-color: #ffff99;"><td>misra-c2012-15.5</td><td>Advisory</td><td>A function should have a single point of exit at the end </td><td>pltf/MyLib.c:25:5</td></tr><tr style="background-color: #ffff99;"><td>misra-c2012-15.5</td><td>Advisory</td><td>A function should have a single point of exit at the end </td><td>pltf/MyLib.c:67:5</td></tr><tr style="background-color: #ffff99;"><td>misra-c2012-15.5</td><td>Advisory</td><td>A function should have a single point of exit at the end </td><td>pltf/MyLib.c:85:5</td></tr></tbody>
+</table>
+</body>
+</html>

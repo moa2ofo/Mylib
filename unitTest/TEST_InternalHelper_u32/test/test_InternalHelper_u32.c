@@ -1,9 +1,8 @@
-#include "unity.h"
 #include "InternalHelper_u32.h"
+#include "unity.h"
 
 /* Test setup and teardown */
-void setUp(void)
-{
+void setUp(void) {
   /* Reset global variables before each test */
   g_counter_u32 = 0U;
   g_record.id_u16 = 0U;
@@ -11,10 +10,7 @@ void setUp(void)
   g_systemReady_b = false;
 }
 
-void tearDown(void)
-{
-  /* Cleanup after each test if needed */
-}
+void tearDown(void) { /* Cleanup after each test if needed */ }
 
 /* =============================================================================
  * TEST SUITE: InternalHelper_u32 - Deterministic Arithmetic Helper
@@ -54,8 +50,7 @@ void tearDown(void)
  *
  * @assertion result == 0
  */
-void test_InternalHelper_u32__x_is_zero_y_is_zero(void)
-{
+void test_InternalHelper_u32__x_is_zero_y_is_zero(void) {
   /* Arrange */
   uint32_t x_u32 = 0U;
   uint16_t y_u16 = 0U;
@@ -78,8 +73,7 @@ void test_InternalHelper_u32__x_is_zero_y_is_zero(void)
  *
  * @assertion result == x_u32
  */
-void test_InternalHelper_u32__x_nonzero_y_is_zero(void)
-{
+void test_InternalHelper_u32__x_nonzero_y_is_zero(void) {
   /* Arrange */
   uint32_t x_u32 = 100U;
   uint16_t y_u16 = 0U;
@@ -104,12 +98,11 @@ void test_InternalHelper_u32__x_nonzero_y_is_zero(void)
  *
  * @assertion result == 0
  */
-void test_InternalHelper_u32__x_is_zero_y_is_one(void)
-{
+void test_InternalHelper_u32__x_is_zero_y_is_one(void) {
   /* Arrange */
   uint32_t x_u32 = 0U;
   uint16_t y_u16 = 1U;
-  uint32_t expected_u32 = 0U;  /* 0 + 1*(1-1) = 0 */
+  uint32_t expected_u32 = 0U; /* 0 + 1*(1-1) = 0 */
 
   /* Act */
   uint32_t result_u32 = InternalHelper_u32(x_u32, y_u16);
@@ -129,12 +122,11 @@ void test_InternalHelper_u32__x_is_zero_y_is_one(void)
  *
  * @assertion result == 50
  */
-void test_InternalHelper_u32__x_nonzero_y_is_one(void)
-{
+void test_InternalHelper_u32__x_nonzero_y_is_one(void) {
   /* Arrange */
   uint32_t x_u32 = 50U;
   uint16_t y_u16 = 1U;
-  uint32_t expected_u32 = 50U;  /* 50 + 1*(1-1) = 50 */
+  uint32_t expected_u32 = 50U; /* 50 + 1*(1-1) = 50 */
 
   /* Act */
   uint32_t result_u32 = InternalHelper_u32(x_u32, y_u16);
@@ -161,12 +153,11 @@ void test_InternalHelper_u32__x_nonzero_y_is_one(void)
  *
  * @assertion result == 2
  */
-void test_InternalHelper_u32__x_is_zero_y_is_two(void)
-{
+void test_InternalHelper_u32__x_is_zero_y_is_two(void) {
   /* Arrange */
   uint32_t x_u32 = 0U;
   uint16_t y_u16 = 2U;
-  uint32_t expected_u32 = 2U;  /* 0 + 2*1 = 2 */
+  uint32_t expected_u32 = 2U; /* 0 + 2*1 = 2 */
 
   /* Act */
   uint32_t result_u32 = InternalHelper_u32(x_u32, y_u16);
@@ -192,12 +183,11 @@ void test_InternalHelper_u32__x_is_zero_y_is_two(void)
  *
  * @assertion result == 20
  */
-void test_InternalHelper_u32__x_is_zero_y_is_five(void)
-{
+void test_InternalHelper_u32__x_is_zero_y_is_five(void) {
   /* Arrange */
   uint32_t x_u32 = 0U;
   uint16_t y_u16 = 5U;
-  uint32_t expected_u32 = 20U;  /* 0 + 5*4 = 20 */
+  uint32_t expected_u32 = 20U; /* 0 + 5*4 = 20 */
 
   /* Act */
   uint32_t result_u32 = InternalHelper_u32(x_u32, y_u16);
@@ -218,12 +208,11 @@ void test_InternalHelper_u32__x_is_zero_y_is_five(void)
  *
  * @assertion result == 120
  */
-void test_InternalHelper_u32__x_nonzero_y_is_five(void)
-{
+void test_InternalHelper_u32__x_nonzero_y_is_five(void) {
   /* Arrange */
   uint32_t x_u32 = 100U;
   uint16_t y_u16 = 5U;
-  uint32_t expected_u32 = 120U;  /* 100 + 5*4 = 120 */
+  uint32_t expected_u32 = 120U; /* 100 + 5*4 = 120 */
 
   /* Act */
   uint32_t result_u32 = InternalHelper_u32(x_u32, y_u16);
@@ -244,12 +233,11 @@ void test_InternalHelper_u32__x_nonzero_y_is_five(void)
  *
  * @assertion result == 340
  */
-void test_InternalHelper_u32__x_is_250_y_is_ten(void)
-{
+void test_InternalHelper_u32__x_is_250_y_is_ten(void) {
   /* Arrange */
   uint32_t x_u32 = 250U;
   uint16_t y_u16 = 10U;
-  uint32_t expected_u32 = 340U;  /* 250 + 10*9 = 340 */
+  uint32_t expected_u32 = 340U; /* 250 + 10*9 = 340 */
 
   /* Act */
   uint32_t result_u32 = InternalHelper_u32(x_u32, y_u16);
@@ -272,8 +260,7 @@ void test_InternalHelper_u32__x_is_250_y_is_ten(void)
  *
  * @assertion result == UINT32_MAX
  */
-void test_InternalHelper_u32__x_max_u32_y_is_one(void)
-{
+void test_InternalHelper_u32__x_max_u32_y_is_one(void) {
   /* Arrange */
   uint32_t x_u32 = UINT32_MAX;
   uint16_t y_u16 = 1U;
@@ -299,8 +286,7 @@ void test_InternalHelper_u32__x_max_u32_y_is_one(void)
  * @note The result may be within the documented range (0..700 per MyLib.h is
  *       a constraint for typical usage, not for all inputs).
  */
-void test_InternalHelper_u32__x_is_zero_y_max_u16(void)
-{
+void test_InternalHelper_u32__x_is_zero_y_max_u16(void) {
   /* Arrange */
   uint32_t x_u32 = 0U;
   uint16_t y_u16 = UINT16_MAX;
@@ -317,7 +303,6 @@ void test_InternalHelper_u32__x_is_zero_y_max_u16(void)
   TEST_ASSERT_EQUAL_UINT32(expected_u32, result_u32);
 }
 
-
 /* ============================================================================
  * TEST GROUP 4: Input Range Limits (as documented in MyLib.h)
  * ============================================================================ */
@@ -333,12 +318,11 @@ void test_InternalHelper_u32__x_is_zero_y_max_u16(void)
  *
  * @assertion result == 70435
  */
-void test_InternalHelper_u32__x_at_documented_max_y_moderate(void)
-{
+void test_InternalHelper_u32__x_at_documented_max_y_moderate(void) {
   /* Arrange */
   uint32_t x_u32 = 60535U;
   uint16_t y_u16 = 100U;
-  uint32_t expected_u32 = 70435U;  /* 60535 + 100*99 */
+  uint32_t expected_u32 = 70435U; /* 60535 + 100*99 */
 
   /* Act */
   uint32_t result_u32 = InternalHelper_u32(x_u32, y_u16);
@@ -346,7 +330,6 @@ void test_InternalHelper_u32__x_at_documented_max_y_moderate(void)
   /* Assert */
   TEST_ASSERT_EQUAL_UINT32(expected_u32, result_u32);
 }
-
 
 /* ============================================================================
  * TEST GROUP 5: Global Variables Verification
@@ -363,8 +346,7 @@ void test_InternalHelper_u32__x_at_documented_max_y_moderate(void)
  *
  * @assertion g_counter_u32 == 0 (unchanged after call)
  */
-void test_InternalHelper_u32__does_not_modify_global_counter(void)
-{
+void test_InternalHelper_u32__does_not_modify_global_counter(void) {
   /* Arrange */
   g_counter_u32 = 0U;
   uint32_t x_u32 = 100U;
@@ -388,8 +370,7 @@ void test_InternalHelper_u32__does_not_modify_global_counter(void)
  *
  * @assertion g_record remains unchanged (id_u16 = 0, value_u32 = 0)
  */
-void test_InternalHelper_u32__does_not_modify_global_record(void)
-{
+void test_InternalHelper_u32__does_not_modify_global_record(void) {
   /* Arrange */
   g_record.id_u16 = 0U;
   g_record.value_u32 = 0U;
@@ -415,8 +396,7 @@ void test_InternalHelper_u32__does_not_modify_global_record(void)
  *
  * @assertion g_systemReady_b remains false
  */
-void test_InternalHelper_u32__does_not_modify_system_ready_flag(void)
-{
+void test_InternalHelper_u32__does_not_modify_system_ready_flag(void) {
   /* Arrange */
   g_systemReady_b = false;
   bool ready_before = g_systemReady_b;
@@ -451,13 +431,12 @@ void test_InternalHelper_u32__does_not_modify_system_ready_flag(void)
  *
  * @assertion result == 6 (verifies loop executed exactly 3 times)
  */
-void test_InternalHelper_u32__loop_executes_exactly_y_times(void)
-{
+void test_InternalHelper_u32__loop_executes_exactly_y_times(void) {
   /* Arrange */
   uint32_t x_u32 = 0U;
   uint16_t y_u16 = 3U;
   /* Loop iterations: i=0 (add 0), i=1 (add 2), i=2 (add 4) = sum 6 */
-  uint32_t expected_u32 = 6U;  /* 0 + 3*2 = 6 */
+  uint32_t expected_u32 = 6U; /* 0 + 3*2 = 6 */
 
   /* Act */
   uint32_t result_u32 = InternalHelper_u32(x_u32, y_u16);
@@ -482,12 +461,11 @@ void test_InternalHelper_u32__loop_executes_exactly_y_times(void)
  *
  * @assertion result == 12 (verifies counter incremented correctly)
  */
-void test_InternalHelper_u32__loop_counter_increments_correctly(void)
-{
+void test_InternalHelper_u32__loop_counter_increments_correctly(void) {
   /* Arrange */
   uint32_t x_u32 = 0U;
   uint16_t y_u16 = 4U;
-  uint32_t expected_u32 = 12U;  /* 0 + 4*3 = 12 */
+  uint32_t expected_u32 = 12U; /* 0 + 4*3 = 12 */
 
   /* Act */
   uint32_t result_u32 = InternalHelper_u32(x_u32, y_u16);
@@ -514,12 +492,11 @@ void test_InternalHelper_u32__loop_counter_increments_correctly(void)
  *
  * @assertion result == 39800
  */
-void test_InternalHelper_u32__uint16_to_uint32_cast_correctness(void)
-{
+void test_InternalHelper_u32__uint16_to_uint32_cast_correctness(void) {
   /* Arrange */
   uint32_t x_u32 = 0U;
   uint16_t y_u16 = 200U;
-  uint32_t expected_u32 = 39800U;  /* 0 + 200*199 */
+  uint32_t expected_u32 = 39800U; /* 0 + 200*199 */
 
   /* Act */
   uint32_t result_u32 = InternalHelper_u32(x_u32, y_u16);
@@ -541,12 +518,11 @@ void test_InternalHelper_u32__uint16_to_uint32_cast_correctness(void)
  *
  * @assertion Loop completes without unexpected behavior
  */
-void test_InternalHelper_u32__accumulation_prevents_intermediate_overflow(void)
-{
+void test_InternalHelper_u32__accumulation_prevents_intermediate_overflow(void) {
   /* Arrange */
   uint32_t x_u32 = 0U;
   uint16_t y_u16 = 500U;
-  uint32_t expected_u32 = 249500U;  /* 0 + 500*499 */
+  uint32_t expected_u32 = 249500U; /* 0 + 500*499 */
 
   /* Act */
   uint32_t result_u32 = InternalHelper_u32(x_u32, y_u16);
@@ -571,8 +547,7 @@ void test_InternalHelper_u32__accumulation_prevents_intermediate_overflow(void)
  * Call 2: x=20, y=3 → 20 + 3*2 = 26
  * Call 3: x=30, y=1 → 30 + 1*0 = 30
  */
-void test_InternalHelper_u32__alternating_values_consistency(void)
-{
+void test_InternalHelper_u32__alternating_values_consistency(void) {
   /* Act & Assert - Call 1 */
   uint32_t result1 = InternalHelper_u32(10U, 2U);
   TEST_ASSERT_EQUAL_UINT32(12U, result1);
@@ -598,12 +573,11 @@ void test_InternalHelper_u32__alternating_values_consistency(void)
  * Testing with x=42, y=7:
  * Expected: 42 + 7*6 = 84
  */
-void test_InternalHelper_u32__repeated_same_input_returns_same_output(void)
-{
+void test_InternalHelper_u32__repeated_same_input_returns_same_output(void) {
   /* Arrange */
   uint32_t x_u32 = 42U;
   uint16_t y_u16 = 7U;
-  uint32_t expected_u32 = 84U;  /* 42 + 7*6 */
+  uint32_t expected_u32 = 84U; /* 42 + 7*6 */
 
   /* Act & Assert - Call 1 */
   uint32_t result1 = InternalHelper_u32(x_u32, y_u16);
@@ -617,5 +591,3 @@ void test_InternalHelper_u32__repeated_same_input_returns_same_output(void)
   uint32_t result3 = InternalHelper_u32(x_u32, y_u16);
   TEST_ASSERT_EQUAL_UINT32(expected_u32, result3);
 }
-
-

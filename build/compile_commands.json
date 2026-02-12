@@ -1,0 +1,8 @@
+[
+{
+  "directory": "/workspace/build",
+  "command": "/usr/bin/cc  -I/workspace/pltf -I/workspace/cfg -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/new.dir/pltf/MyLib.c.o -c /workspace/pltf/MyLib.c",
+  "file": "/workspace/pltf/MyLib.c",
+  "output": "CMakeFiles/new.dir/pltf/MyLib.c.o"
+}
+]
