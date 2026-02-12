@@ -10,7 +10,7 @@ static uint32_t CounterLimit_u32 = MYLIB_MAX_COUNT_U32;
 static bool     SaturationEn_b   = true;
 
 /* Local (c-file static) function */
-uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16)
+static uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16)
 {
   uint32_t l_acc_u32 = x_u32;
 

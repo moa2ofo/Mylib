@@ -343,7 +343,7 @@ uint32_t MyLib_Orchestrate_u32(uint32_t start_u32, const uint16_t *delta_pc_u16)
  * @return uint32_t
  * Final accumulated value (wrap-around possible on 32-bit overflow).
  */
-uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
+static uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
 
 
 /**
