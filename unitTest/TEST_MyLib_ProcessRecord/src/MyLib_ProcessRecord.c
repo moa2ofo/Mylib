@@ -37,6 +37,6 @@ void MyLib_ProcessRecord(const MyLib_record_t *rec_pc, uint8_t multiplier_u8) {
 
   g_counter_u32 += l_acc_u32;
 
-  /* Call another function */
+  /* Call MyLib_ComputeAdjustedValue_u32 with l_acc_u32 and pointer to multiplier_u8 */
   (void)MyLib_ComputeAdjustedValue_u32(l_acc_u32, (const uint16_t *)&multiplier_u8);
 }

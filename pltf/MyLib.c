@@ -15,21 +15,21 @@ static uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16) {
 
   /* Accumulate even-step sequence: for each l_i_u16 in [0 .. y_u16-1],
      add (l_i_u16 * 2) to l_acc_u32 */
-  for (uint16_t l_i_u16 = 0U; l_i_u16 < y_u16; l_i_u16++) {
+  for(uint16_t l_i_u16 = 0U; l_i_u16 < y_u16; l_i_u16++) {
     l_acc_u32 += (uint32_t)(l_i_u16 * 2U);
   }
 
   return l_acc_u32;
 }
 void MyLib_ProcessRecord(const MyLib_record_t *rec_pc, uint8_t multiplier_u8) {
-  if (rec_pc == NULL) {
+  if(rec_pc == NULL) {
     return;
   }
 
   uint32_t l_acc_u32 = 0U;
 
   /* Fast paths / special cases for deterministic and efficient execution. */
-  switch (multiplier_u8) {
+  switch(multiplier_u8) {
   case 0U:
     /* No accumulation requested. */
     l_acc_u32 = 0U;
@@ -42,7 +42,7 @@ void MyLib_ProcessRecord(const MyLib_record_t *rec_pc, uint8_t multiplier_u8) {
 
   default:
     /* Bounded accumulation: wrap-around is acceptable by design. */
-    for (uint8_t l_i_u8 = 0U; l_i_u8 < multiplier_u8; l_i_u8++) {
+    for(uint8_t l_i_u8 = 0U; l_i_u8 < multiplier_u8; l_i_u8++) {
       l_acc_u32 += rec_pc->value_u32;
     }
     break;
@@ -84,7 +84,7 @@ uint32_t MyLib_AnalyzeArray_u32(uint16_t *values_pu16, size_t len_u32, uint16_t 
 }
 
 void MyLib_UpdateGlobalRecord(MyLib_record_t *dest_p, const MyLib_record_t *src_pc) {
-  if ((dest_p == NULL) || (src_pc == NULL)) {
+  if((dest_p == NULL) || (src_pc == NULL)) {
     return;
   }
 

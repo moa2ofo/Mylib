@@ -74,4 +74,4 @@
   InternalHelper_u32 called with correct arguments'
 - 'test_MyLib_Orchestrate_u32.c:220:test_MyLib_Orchestrate_u32_CallsProcessRecordWithMultiplierValue_Verified:INFO:
   MyLib_ProcessRecord called with correct multiplier'
-:time: 0.000936784999964857
+:time: 0.0008159919999854992
