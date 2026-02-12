@@ -200,7 +200,6 @@ uint32_t MyLib_ComputeAdjustedValue_u32(uint32_t base_u32, const uint16_t *delta
  * @return uint32_t
  * Sum of the scaled array elements (wrap-around possible on overflow).
  */
-uint32_t MyLib_AnalyzeArray_u32(uint16_t *values_pu16, size_t len_u32, uint16_t factor_u16);
 
 /**
  * @brief Copy a record into a destination and update module global state.
