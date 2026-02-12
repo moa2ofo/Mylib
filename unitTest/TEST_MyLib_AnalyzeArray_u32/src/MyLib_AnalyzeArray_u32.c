@@ -18,7 +18,7 @@ uint32_t MyLib_AnalyzeArray_u32(uint16_t *values_pu16, size_t len_u32, uint16_t 
 
   uint32_t l_sum_u32 = 0U;
 
-  if(l_inNull_b == false){
+  if(l_inNull_b == false) {
     for(size_t l_i_u32 = 0U; l_i_u32 < len_u32; l_i_u32++) {
       values_pu16[l_i_u32] = (uint16_t)(values_pu16[l_i_u32] * factor_u16);
       l_sum_u32 += values_pu16[l_i_u32];
