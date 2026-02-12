@@ -1,0 +1,203 @@
+@startuml inline_umlgraph_1.svg
+start
+if (values_pu16 == NULL or len_u32 == 0) then (yes)
+  :return 0;
+else (no)
+  :l_sum_u32 = 0;
+  :for l_i_u32 in [0..len_u32-1];
+    :values_pu16[l_i_u32] *= factor_u16;
+    :l_sum_u32 += values_pu16[l_i_u32];
+  :endfor;
+  :call MyLib_ComputeAdjustedValue_u32(l_sum_u32, NULL);
+  :return l_sum_u32;
+endif
+stop
+@enduml
+@startuml inline_umlgraph_2.svg
+start
+if (delta_pc_u16 == NULL) then (yes)
+  :l_d_u16 = 1;
+else (no)
+  :l_d_u16 = *delta_pc_u16;
+endif
+:l_val_u32 = base_u32 * l_d_u16;
+:l_val_u32 = InternalHelper_u32(l_val_u32, (uint16_t)MYLIB_MULT_VALUE_U8);
+:return l_val_u32;
+stop
+@enduml
+@startuml inline_umlgraph_3.svg
+start
+if (delta_pc_u16 == NULL) then (yes)
+  :l_d_u16 = 0;
+else (no)
+  :l_d_u16 = *delta_pc_u16;
+endif
+:l_base_u32 = InternalHelper_u32(start_u32, l_d_u16);
+:l_r.id_u16 = (l_base_u32 & 0xFFFF);
+:l_r.value_u32 = l_base_u32 / 2;
+:call MyLib_ProcessRecord(&l_r, MYLIB_MULT_VALUE_U8);
+:return (l_base_u32 + g_counter_u32);
+stop
+@enduml
+@startuml inline_umlgraph_4.svg
+start
+if (rec_pc == NULL) then (yes)
+  :return;
+else (no)
+  :switch(multiplier_u8);
+    case (0U)
+      :l_acc_u32 = 0U;
+    case (1U)
+      :l_acc_u32 = rec_pc->value_u32;
+    case (default)
+      :for l_i_u8 in [0..multiplier_u8-1];
+        :l_acc_u32 += rec_pc->value_u32;
+      :endfor;
+  :endswitch;
+  :g_counter_u32 += l_acc_u32;
+  :call MyLib_ComputeAdjustedValue_u32(l_acc_u32, (const uint16_t *)&multiplier_u8);
+  :return;
+endif
+stop
+@enduml
+@startuml inline_umlgraph_5.svg
+start
+:static l_CycleCnt_u32++;
+if (g_systemReady_b == false) then (yes)
+  :return 1;
+else (no)
+  :l_new_u32 = g_counter_u32 + add_u32;
+  if ((SaturationEn_b == true) && (l_new_u32 > CounterLimit_u32)) then (yes)
+    :g_counter_u32 = CounterLimit_u32;
+    :l_ret_u8 = 2;
+  else (no)
+    :g_counter_u32 = l_new_u32;
+    :l_ret_u8 = 0;
+  endif
+  if ((l_CycleCnt_u32 & 0x0F) == 0) then (yes)
+    :SaturationEn_b = !SaturationEn_b;
+  endif
+  :return l_ret_u8;
+endif
+stop
+@enduml
+@startuml inline_umlgraph_6.svg
+start
+if (dest_p == NULL or src_pc == NULL) then (yes)
+  :return;
+else (no)
+  :dest_p->id_u16 = src_pc->id_u16;
+  :dest_p->value_u32 = src_pc->value_u32;
+  :g_record = *dest_p;
+  :g_systemReady_b = true;
+  :return;
+endif
+stop
+@enduml
+@startuml inline_umlgraph_7.svg
+start
+:l_acc_u32 = x_u32;
+:l_i_u16 = 0;
+while (l_i_u16 < y_u16) is (yes)
+  :l_acc_u32 += (l_i_u16 * 2);
+  :l_i_u16++;
+endwhile (no)
+:return l_acc_u32;
+stop
+@enduml
+@startuml inline_umlgraph_8.svg
+start
+if (values_pu16 == NULL or len_u32 == 0) then (yes)
+  :return 0;
+else (no)
+  :l_sum_u32 = 0;
+  :for l_i_u32 in [0..len_u32-1];
+    :values_pu16[l_i_u32] *= factor_u16;
+    :l_sum_u32 += values_pu16[l_i_u32];
+  :endfor;
+  :call MyLib_ComputeAdjustedValue_u32(l_sum_u32, NULL);
+  :return l_sum_u32;
+endif
+stop
+@enduml
+@startuml inline_umlgraph_9.svg
+start
+if (delta_pc_u16 == NULL) then (yes)
+  :l_d_u16 = 1;
+else (no)
+  :l_d_u16 = *delta_pc_u16;
+endif
+:l_val_u32 = base_u32 * l_d_u16;
+:l_val_u32 = InternalHelper_u32(l_val_u32, (uint16_t)MYLIB_MULT_VALUE_U8);
+:return l_val_u32;
+stop
+@enduml
+@startuml inline_umlgraph_10.svg
+start
+if (delta_pc_u16 == NULL) then (yes)
+  :l_d_u16 = 0;
+else (no)
+  :l_d_u16 = *delta_pc_u16;
+endif
+:l_base_u32 = InternalHelper_u32(start_u32, l_d_u16);
+:l_r.id_u16 = (l_base_u32 & 0xFFFF);
+:l_r.value_u32 = l_base_u32 / 2;
+:call MyLib_ProcessRecord(&l_r, MYLIB_MULT_VALUE_U8);
+:return (l_base_u32 + g_counter_u32);
+stop
+@enduml
+@startuml inline_umlgraph_11.svg
+start
+if (rec_pc == NULL) then (yes)
+  :return;
+else (no)
+  :switch(multiplier_u8);
+    case (0U)
+      :l_acc_u32 = 0U;
+    case (1U)
+      :l_acc_u32 = rec_pc->value_u32;
+    case (default)
+      :for l_i_u8 in [0..multiplier_u8-1];
+        :l_acc_u32 += rec_pc->value_u32;
+      :endfor;
+  :endswitch;
+  :g_counter_u32 += l_acc_u32;
+  :call MyLib_ComputeAdjustedValue_u32(l_acc_u32, (const uint16_t *)&multiplier_u8);
+  :return;
+endif
+stop
+@enduml
+@startuml inline_umlgraph_12.svg
+start
+:static l_CycleCnt_u32++;
+if (g_systemReady_b == false) then (yes)
+  :return 1;
+else (no)
+  :l_new_u32 = g_counter_u32 + add_u32;
+  if ((SaturationEn_b == true) && (l_new_u32 > CounterLimit_u32)) then (yes)
+    :g_counter_u32 = CounterLimit_u32;
+    :l_ret_u8 = 2;
+  else (no)
+    :g_counter_u32 = l_new_u32;
+    :l_ret_u8 = 0;
+  endif
+  if ((l_CycleCnt_u32 & 0x0F) == 0) then (yes)
+    :SaturationEn_b = !SaturationEn_b;
+  endif
+  :return l_ret_u8;
+endif
+stop
+@enduml
+@startuml inline_umlgraph_13.svg
+start
+if (dest_p == NULL or src_pc == NULL) then (yes)
+  :return;
+else (no)
+  :dest_p->id_u16 = src_pc->id_u16;
+  :dest_p->value_u32 = src_pc->value_u32;
+  :g_record = *dest_p;
+  :g_systemReady_b = true;
+  :return;
+endif
+stop
+@enduml
