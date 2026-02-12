@@ -1,9 +1,9 @@
 #include "MyLib_Orchestrate_u32.h"
 
 /* Global variables */
-uint32_t      g_counter_u32 = 0U;
-MyLib_record_t g_record     = {0U, 0U};
-bool          g_systemReady_b = false;
+uint32_t g_counter_u32 = 0U;
+MyLib_record_t g_record = {0U, 0U};
+bool g_systemReady_b = false;
 
 /* FUNCTION TO TEST */
 

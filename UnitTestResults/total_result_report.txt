@@ -1,0 +1,8 @@
+| function_name                  | total | passed | failed | ignored | linesCvrg | branchesCvrg | Date and time  | Tester |
+|--------------------------------|-------|--------|--------|---------|-----------|--------------|----------------|--------|
+| MyLib_UpdateGlobalRecord       | 7     | 7      | 0      | 0       | 100.0%    | 100.0%       | 12/02/26 09:47 | root   |
+| InternalHelper_u32             | 20    | 20     | 0      | 0       | 100.0%    | 100.0%       | 12/02/26 09:47 | root   |
+| MyLib_UpdateCounter_u8         | 22    | 22     | 0      | 0       | 94.7%     | 100.0%       | 12/02/26 09:47 | root   |
+| MyLib_ProcessRecord            | 9     | 9      | 0      | 0       | 100.0%    | 100.0%       | 12/02/26 09:47 | root   |
+| MyLib_Orchestrate_u32          | 14    | 14     | 0      | 0       | 100.0%    | 100.0%       | 12/02/26 09:47 | root   |
+| MyLib_ComputeAdjustedValue_u32 | 10    | 10     | 0      | 0       | 100.0%    | 100.0%       | 12/02/26 09:47 | root   |

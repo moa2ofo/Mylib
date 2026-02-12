@@ -1,0 +1,2 @@
+/usr/bin/ar qc libnew.a CMakeFiles/new.dir/pltf/MyLib.c.o
+/usr/bin/ranlib libnew.a

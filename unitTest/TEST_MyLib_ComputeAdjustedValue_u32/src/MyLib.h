@@ -3,17 +3,16 @@
 #ifndef MYLIB_H
 #define MYLIB_H
 
-#include <stdint.h>
 #include <stdbool.h>
 #include <stddef.h>
+#include <stdint.h>
 
 /* Numeric macros */
-#define MYLIB_MAX_COUNT_U32   (100U)
-#define MYLIB_MULT_VALUE_U8   (5U)
+#define MYLIB_MAX_COUNT_U32 (100U)
+#define MYLIB_MULT_VALUE_U8 (5U)
 
 /* Typedef / struct */
-typedef struct
-{
+typedef struct {
   uint16_t id_u16;
   uint32_t value_u32;
 } MyLib_record_t;
@@ -239,7 +238,7 @@ uint32_t MyLib_AnalyzeArray_u32(uint16_t *values_pu16, size_t len_u32, uint16_t 
  * @return void
  * No return value.
  */
-void MyLib_UpdateGlobalRecord(MyLib_record_t * dest_p, const MyLib_record_t *src_pc);
+void MyLib_UpdateGlobalRecord(MyLib_record_t *dest_p, const MyLib_record_t *src_pc);
 
 /**
  * @brief Run an orchestration sequence and return a combined result.
@@ -341,6 +340,5 @@ uint32_t MyLib_Orchestrate_u32(uint32_t start_u32, const uint16_t *delta_pc_u16)
  * Final accumulated value (wrap-around possible on 32-bit overflow).
  */
 uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
-
 
 #endif /* MYLIB_H */

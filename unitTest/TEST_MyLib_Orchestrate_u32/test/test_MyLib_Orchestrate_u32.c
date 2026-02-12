@@ -3,11 +3,11 @@
  * @brief Unit tests for MyLib_Orchestrate_u32 function using CMock
  */
 
-#include <stdint.h>
-#include <stdbool.h>
-#include "unity.h"
 #include "MyLib_Orchestrate_u32.h"
 #include "mock_MyLib.h"
+#include "unity.h"
+#include <stdbool.h>
+#include <stdint.h>
 
 /* ============================================================================
    SETUP AND TEARDOWN
@@ -17,8 +17,7 @@
  * @brief Set up test fixtures before each test
  * Reset global state and mock expectations
  */
-void setUp(void)
-{
+void setUp(void) {
   /* Reset global counter before each test */
   g_counter_u32 = 0U;
   g_record.id_u16 = 0U;
@@ -30,10 +29,7 @@ void setUp(void)
  * @brief Tear down test fixtures after each test
  * Verify all mock expectations were met
  */
-void tearDown(void)
-{
-  /* CMock will verify that all expectations were met */
-}
+void tearDown(void) { /* CMock will verify that all expectations were met */ }
 
 /* ============================================================================
    TEST GROUP 1: Basic Functionality with Valid Inputs
@@ -50,26 +46,25 @@ void tearDown(void)
  * - g_counter_u32 = 50 (after processing)
  * - Expected return: 100 + 50 = 150
  */
-void test_MyLib_Orchestrate_u32_WhenDeltaIsNullAndStartIsZero_ReturnsExpectedValue(void)
-{
+void test_MyLib_Orchestrate_u32_WhenDeltaIsNullAndStartIsZero_ReturnsExpectedValue(void) {
   /* Arrange */
   uint32_t start_u32 = 0U;
   uint32_t l_base_u32 = 100U;
   uint32_t expected_return = 150U;
-  
+
   /* Mock InternalHelper_u32 to return l_base_u32 */
   InternalHelper_u32_ExpectAndReturn(start_u32, 0U, l_base_u32);
-  
+
   /* Mock MyLib_ProcessRecord - verify it's called with correct arguments */
   MyLib_ProcessRecord_Expect(NULL, MYLIB_MULT_VALUE_U8);
-  MyLib_ProcessRecord_IgnoreArg_rec_pc();  /* Ignore pointer value, just check it's called */
-  
+  MyLib_ProcessRecord_IgnoreArg_rec_pc(); /* Ignore pointer value, just check it's called */
+
   /* Set counter to simulate state after MyLib_ProcessRecord execution */
   g_counter_u32 = 50U;
-  
+
   /* Act */
   uint32_t result = MyLib_Orchestrate_u32(start_u32, NULL);
-  
+
   /* Assert */
   TEST_ASSERT_EQUAL_UINT32(expected_return, result);
 }
@@ -85,26 +80,25 @@ void test_MyLib_Orchestrate_u32_WhenDeltaIsNullAndStartIsZero_ReturnsExpectedVal
  * - g_counter_u32 = 30
  * - Expected return: 250 + 30 = 280
  */
-void test_MyLib_Orchestrate_u32_WhenDeltaIsNotNullAndStartIsNonZero_UsesCorrectDelta(void)
-{
+void test_MyLib_Orchestrate_u32_WhenDeltaIsNotNullAndStartIsNonZero_UsesCorrectDelta(void) {
   /* Arrange */
   uint32_t start_u32 = 200U;
   uint16_t delta_value = 42U;
   uint32_t l_base_u32 = 250U;
   uint32_t expected_return = 280U;
-  
+
   /* Mock InternalHelper_u32 to be called with correct start and delta values */
   InternalHelper_u32_ExpectAndReturn(start_u32, delta_value, l_base_u32);
-  
+
   /* Mock MyLib_ProcessRecord */
   MyLib_ProcessRecord_Expect(NULL, MYLIB_MULT_VALUE_U8);
   MyLib_ProcessRecord_IgnoreArg_rec_pc();
-  
+
   g_counter_u32 = 30U;
-  
+
   /* Act */
   uint32_t result = MyLib_Orchestrate_u32(start_u32, &delta_value);
-  
+
   /* Assert */
   TEST_ASSERT_EQUAL_UINT32(expected_return, result);
 }
@@ -121,28 +115,27 @@ void test_MyLib_Orchestrate_u32_WhenDeltaIsNotNullAndStartIsNonZero_UsesCorrectD
  * - base_u32 = 0x12345678
  * - record.id_u16 should be 0x5678 (lower 16 bits)
  */
-void test_MyLib_Orchestrate_u32_RecordIdIsLower16BitsOfBase_Verified(void)
-{
+void test_MyLib_Orchestrate_u32_RecordIdIsLower16BitsOfBase_Verified(void) {
   /* Arrange */
   uint32_t start_u32 = 100U;
   uint32_t l_base_u32 = 0x12345678U;
   uint16_t expected_id = 0x5678U;
   MyLib_record_t captured_record;
-  
+
   InternalHelper_u32_ExpectAndReturn(start_u32, 0U, l_base_u32);
-  
+
   /* Capture the record passed to MyLib_ProcessRecord */
   MyLib_ProcessRecord_Expect(NULL, MYLIB_MULT_VALUE_U8);
   MyLib_ProcessRecord_IgnoreArg_rec_pc();
-  
+
   g_counter_u32 = 0U;
-  
+
   /* Act */
   MyLib_Orchestrate_u32(start_u32, NULL);
-  
+
   /* Assert - verify the record was constructed correctly */
   /* Note: In real scenario, we'd use ReturnData or callback to capture the record */
-  TEST_ASSERT_EQUAL_UINT32(l_base_u32, l_base_u32);  /* Verify base was computed */
+  TEST_ASSERT_EQUAL_UINT32(l_base_u32, l_base_u32); /* Verify base was computed */
 }
 
 /**
@@ -153,22 +146,21 @@ void test_MyLib_Orchestrate_u32_RecordIdIsLower16BitsOfBase_Verified(void)
  * - base_u32 = 1000
  * - record.value_u32 should be 500
  */
-void test_MyLib_Orchestrate_u32_RecordValueIsHalfOfBase_Verified(void)
-{
+void test_MyLib_Orchestrate_u32_RecordValueIsHalfOfBase_Verified(void) {
   /* Arrange */
   uint32_t start_u32 = 50U;
   uint32_t l_base_u32 = 1000U;
-  
+
   InternalHelper_u32_ExpectAndReturn(start_u32, 0U, l_base_u32);
-  
+
   MyLib_ProcessRecord_Expect(NULL, MYLIB_MULT_VALUE_U8);
   MyLib_ProcessRecord_IgnoreArg_rec_pc();
-  
+
   g_counter_u32 = 0U;
-  
+
   /* Act */
   MyLib_Orchestrate_u32(start_u32, NULL);
-  
+
   /* Assert - computation verified indirectly */
   TEST_PASS_MESSAGE("Record value computation verified through mock");
 }
@@ -183,23 +175,22 @@ void test_MyLib_Orchestrate_u32_RecordValueIsHalfOfBase_Verified(void)
  * 
  * Scenario: Mock should verify exact argument values
  */
-void test_MyLib_Orchestrate_u32_CallsInternalHelperWithCorrectArguments_Verified(void)
-{
+void test_MyLib_Orchestrate_u32_CallsInternalHelperWithCorrectArguments_Verified(void) {
   /* Arrange */
   uint32_t start_u32 = 150U;
   uint16_t delta_value = 25U;
-  
+
   /* Expect exactly one call with these specific arguments */
   InternalHelper_u32_ExpectAndReturn(start_u32, delta_value, 300U);
-  
+
   MyLib_ProcessRecord_Expect(NULL, MYLIB_MULT_VALUE_U8);
   MyLib_ProcessRecord_IgnoreArg_rec_pc();
-  
+
   g_counter_u32 = 0U;
-  
+
   /* Act */
   MyLib_Orchestrate_u32(start_u32, &delta_value);
-  
+
   /* Assert - CMock will verify the call was made with expected arguments */
   TEST_PASS_MESSAGE("InternalHelper_u32 called with correct arguments");
 }
@@ -210,22 +201,21 @@ void test_MyLib_Orchestrate_u32_CallsInternalHelperWithCorrectArguments_Verified
  * 
  * Scenario: The multiplier must always be MYLIB_MULT_VALUE_U8 (5U)
  */
-void test_MyLib_Orchestrate_u32_CallsProcessRecordWithMultiplierValue_Verified(void)
-{
+void test_MyLib_Orchestrate_u32_CallsProcessRecordWithMultiplierValue_Verified(void) {
   /* Arrange */
   uint32_t start_u32 = 100U;
-  
+
   InternalHelper_u32_ExpectAndReturn(start_u32, 0U, 200U);
-  
+
   /* Expect MyLib_ProcessRecord with exact multiplier value */
   MyLib_ProcessRecord_Expect(NULL, MYLIB_MULT_VALUE_U8);
   MyLib_ProcessRecord_IgnoreArg_rec_pc();
-  
+
   g_counter_u32 = 0U;
-  
+
   /* Act */
   MyLib_Orchestrate_u32(start_u32, NULL);
-  
+
   /* Assert - CMock verifies multiplier was MYLIB_MULT_VALUE_U8 */
   TEST_PASS_MESSAGE("MyLib_ProcessRecord called with correct multiplier");
 }
@@ -240,27 +230,26 @@ void test_MyLib_Orchestrate_u32_CallsProcessRecordWithMultiplierValue_Verified(v
  * 
  * Scenario: Multiple combinations of base and counter values
  */
-void test_MyLib_Orchestrate_u32_ReturnIsBaseAddCounter_Verified(void)
-{
+void test_MyLib_Orchestrate_u32_ReturnIsBaseAddCounter_Verified(void) {
   /* Arrange */
   uint32_t start_u32 = 0U;
   uint32_t l_base_u32 = 123U;
   uint32_t counter_value = 456U;
   uint32_t expected_return = 123U + 456U;
-  
+
   InternalHelper_u32_ExpectAndReturn(start_u32, 0U, l_base_u32);
-  
+
   MyLib_ProcessRecord_Expect(NULL, MYLIB_MULT_VALUE_U8);
   MyLib_ProcessRecord_IgnoreArg_rec_pc();
-  
+
   g_counter_u32 = counter_value;
-  
+
   /* Act */
   uint32_t result = MyLib_Orchestrate_u32(start_u32, NULL);
-  
+
   /* Assert */
   TEST_ASSERT_EQUAL_UINT32(expected_return, result);
-  TEST_ASSERT_EQUAL_UINT32(579U, result);  /* 123 + 456 */
+  TEST_ASSERT_EQUAL_UINT32(579U, result); /* 123 + 456 */
 }
 
 /**
@@ -269,24 +258,23 @@ void test_MyLib_Orchestrate_u32_ReturnIsBaseAddCounter_Verified(void)
  * 
  * Scenario: base + counter exceeds uint32_t range
  */
-void test_MyLib_Orchestrate_u32_ReturnWithLargeValues_WraparoundHandled(void)
-{
+void test_MyLib_Orchestrate_u32_ReturnWithLargeValues_WraparoundHandled(void) {
   /* Arrange */
   uint32_t start_u32 = 1000U;
   uint32_t l_base_u32 = 0xFFFFFF00U;
   uint32_t counter_value = 0x00000200U;
-  uint32_t expected_return = l_base_u32 + counter_value;  /* Tests wrap-around */
-  
+  uint32_t expected_return = l_base_u32 + counter_value; /* Tests wrap-around */
+
   InternalHelper_u32_ExpectAndReturn(start_u32, 0U, l_base_u32);
-  
+
   MyLib_ProcessRecord_Expect(NULL, MYLIB_MULT_VALUE_U8);
   MyLib_ProcessRecord_IgnoreArg_rec_pc();
-  
+
   g_counter_u32 = counter_value;
-  
+
   /* Act */
   uint32_t result = MyLib_Orchestrate_u32(start_u32, NULL);
-  
+
   /* Assert */
   TEST_ASSERT_EQUAL_UINT32(expected_return, result);
 }
@@ -301,22 +289,21 @@ void test_MyLib_Orchestrate_u32_ReturnWithLargeValues_WraparoundHandled(void)
  * 
  * Scenario: start_u32 = 0xFFFFFFFF
  */
-void test_MyLib_Orchestrate_u32_WhenStartIsMaxUint32_HandledCorrectly(void)
-{
+void test_MyLib_Orchestrate_u32_WhenStartIsMaxUint32_HandledCorrectly(void) {
   /* Arrange */
   uint32_t start_u32 = 0xFFFFFFFFU;
   uint32_t l_base_u32 = 0x50000000U;
-  
+
   InternalHelper_u32_ExpectAndReturn(start_u32, 0U, l_base_u32);
-  
+
   MyLib_ProcessRecord_Expect(NULL, MYLIB_MULT_VALUE_U8);
   MyLib_ProcessRecord_IgnoreArg_rec_pc();
-  
+
   g_counter_u32 = 100U;
-  
+
   /* Act */
   uint32_t result = MyLib_Orchestrate_u32(start_u32, NULL);
-  
+
   /* Assert */
   uint32_t expected = l_base_u32 + 100U;
   TEST_ASSERT_EQUAL_UINT32(expected, result);
@@ -328,22 +315,21 @@ void test_MyLib_Orchestrate_u32_WhenStartIsMaxUint32_HandledCorrectly(void)
  * 
  * Scenario: g_counter_u32 = 0, so return = base + 0 = base
  */
-void test_MyLib_Orchestrate_u32_WhenCounterIsZero_ReturnsBaseValue(void)
-{
+void test_MyLib_Orchestrate_u32_WhenCounterIsZero_ReturnsBaseValue(void) {
   /* Arrange */
   uint32_t start_u32 = 42U;
   uint32_t l_base_u32 = 555U;
-  
+
   InternalHelper_u32_ExpectAndReturn(start_u32, 0U, l_base_u32);
-  
+
   MyLib_ProcessRecord_Expect(NULL, MYLIB_MULT_VALUE_U8);
   MyLib_ProcessRecord_IgnoreArg_rec_pc();
-  
+
   g_counter_u32 = 0U;
-  
+
   /* Act */
   uint32_t result = MyLib_Orchestrate_u32(start_u32, NULL);
-  
+
   /* Assert */
   TEST_ASSERT_EQUAL_UINT32(l_base_u32, result);
 }
@@ -354,8 +340,7 @@ void test_MyLib_Orchestrate_u32_WhenCounterIsZero_ReturnsBaseValue(void)
  * 
  * Scenario: Test multiple delta values in sequence
  */
-void test_MyLib_Orchestrate_u32_WhenMultipleDeltaValues_AllProcessedCorrectly(void)
-{
+void test_MyLib_Orchestrate_u32_WhenMultipleDeltaValues_AllProcessedCorrectly(void) {
   /* Test with delta = 10 */
   {
     uint16_t delta_value = 10U;
@@ -363,11 +348,11 @@ void test_MyLib_Orchestrate_u32_WhenMultipleDeltaValues_AllProcessedCorrectly(vo
     MyLib_ProcessRecord_Expect(NULL, MYLIB_MULT_VALUE_U8);
     MyLib_ProcessRecord_IgnoreArg_rec_pc();
     g_counter_u32 = 0U;
-    
+
     uint32_t result = MyLib_Orchestrate_u32(50U, &delta_value);
     TEST_ASSERT_EQUAL_UINT32(100U, result);
   }
-  
+
   /* Test with delta = 255 (max uint8) */
   {
     uint16_t delta_value = 255U;
@@ -375,7 +360,7 @@ void test_MyLib_Orchestrate_u32_WhenMultipleDeltaValues_AllProcessedCorrectly(vo
     MyLib_ProcessRecord_Expect(NULL, MYLIB_MULT_VALUE_U8);
     MyLib_ProcessRecord_IgnoreArg_rec_pc();
     g_counter_u32 = 0U;
-    
+
     uint32_t result = MyLib_Orchestrate_u32(60U, &delta_value);
     TEST_ASSERT_EQUAL_UINT32(150U, result);
   }
@@ -391,26 +376,25 @@ void test_MyLib_Orchestrate_u32_WhenMultipleDeltaValues_AllProcessedCorrectly(vo
  * 
  * Scenario: Counter is modified by ProcessRecord and used in return calculation
  */
-void test_MyLib_Orchestrate_u32_GlobalCounterPreservedAcrossCalls_Verified(void)
-{
+void test_MyLib_Orchestrate_u32_GlobalCounterPreservedAcrossCalls_Verified(void) {
   /* Arrange - simulate ProcessRecord modifying the counter */
   uint32_t start_u32 = 100U;
   uint32_t l_base_u32 = 200U;
-  
+
   InternalHelper_u32_ExpectAndReturn(start_u32, 0U, l_base_u32);
-  
+
   /* MyLib_ProcessRecord will modify g_counter_u32 */
   MyLib_ProcessRecord_Expect(NULL, MYLIB_MULT_VALUE_U8);
   MyLib_ProcessRecord_IgnoreArg_rec_pc();
-  
-  g_counter_u32 = 75U;  /* Simulated value after ProcessRecord */
-  
+
+  g_counter_u32 = 75U; /* Simulated value after ProcessRecord */
+
   /* Act */
   uint32_t result = MyLib_Orchestrate_u32(start_u32, NULL);
-  
+
   /* Assert */
-  TEST_ASSERT_EQUAL_UINT32(275U, result);  /* 200 + 75 */
-  TEST_ASSERT_EQUAL_UINT32(75U, g_counter_u32);  /* Counter preserved */
+  TEST_ASSERT_EQUAL_UINT32(275U, result);       /* 200 + 75 */
+  TEST_ASSERT_EQUAL_UINT32(75U, g_counter_u32); /* Counter preserved */
 }
 
 /**
@@ -419,25 +403,24 @@ void test_MyLib_Orchestrate_u32_GlobalCounterPreservedAcrossCalls_Verified(void)
  * 
  * Scenario: Multiple calls to verify state management
  */
-void test_MyLib_Orchestrate_u32_SequentialCalls_CounterAccumulatesAsExpected(void)
-{
+void test_MyLib_Orchestrate_u32_SequentialCalls_CounterAccumulatesAsExpected(void) {
   /* First call */
   InternalHelper_u32_ExpectAndReturn(10U, 0U, 50U);
   MyLib_ProcessRecord_Expect(NULL, MYLIB_MULT_VALUE_U8);
   MyLib_ProcessRecord_IgnoreArg_rec_pc();
   g_counter_u32 = 10U;
-  
+
   uint32_t result1 = MyLib_Orchestrate_u32(10U, NULL);
-  TEST_ASSERT_EQUAL_UINT32(60U, result1);  /* 50 + 10 */
-  
+  TEST_ASSERT_EQUAL_UINT32(60U, result1); /* 50 + 10 */
+
   /* Second call - counter may have changed */
   InternalHelper_u32_ExpectAndReturn(20U, 0U, 100U);
   MyLib_ProcessRecord_Expect(NULL, MYLIB_MULT_VALUE_U8);
   MyLib_ProcessRecord_IgnoreArg_rec_pc();
   g_counter_u32 = 30U;
-  
+
   uint32_t result2 = MyLib_Orchestrate_u32(20U, NULL);
-  TEST_ASSERT_EQUAL_UINT32(130U, result2);  /* 100 + 30 */
+  TEST_ASSERT_EQUAL_UINT32(130U, result2); /* 100 + 30 */
 }
 
 /* ============================================================================
@@ -450,20 +433,17 @@ void test_MyLib_Orchestrate_u32_SequentialCalls_CounterAccumulatesAsExpected(voi
  * 
  * Scenario: When we only care that functions are called, not what arguments
  */
-void test_MyLib_Orchestrate_u32_WithIgnoredArguments_FunctionStillExecutes(void)
-{
+void test_MyLib_Orchestrate_u32_WithIgnoredArguments_FunctionStillExecutes(void) {
   /* Arrange - using ExpectAnyArgs for InternalHelper */
   InternalHelper_u32_ExpectAnyArgsAndReturn(175U);
-  
+
   MyLib_ProcessRecord_ExpectAnyArgs();
-  
+
   g_counter_u32 = 25U;
-  
+
   /* Act */
   uint32_t result = MyLib_Orchestrate_u32(100U, NULL);
-  
+
   /* Assert */
-  TEST_ASSERT_EQUAL_UINT32(200U, result);  /* 175 + 25 */
+  TEST_ASSERT_EQUAL_UINT32(200U, result); /* 175 + 25 */
 }
-
-
