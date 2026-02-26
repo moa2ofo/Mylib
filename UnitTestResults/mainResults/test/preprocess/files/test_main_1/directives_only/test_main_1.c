@@ -824,442 +824,46 @@
 
 # 0 "<command-line>" 2
 # 1 "utExecutionAndResults/utUnderTest/test/test_main_1.c"
-# 1 "utExecutionAndResults/utUnderTest/src/main.h" 1
+# 1 "utExecutionAndResults/utUnderTest/build/vendor/unity/src/unity.h" 1
+/* =========================================================================
+    Unity - A Test Framework for C
+    ThrowTheSwitch.org
+    Copyright (c) 2007-25 Mike Karlesky, Mark VanderVoord, & Greg Williams
+    SPDX-License-Identifier: MIT
+========================================================================= */
 
-#define TEST_MAIN_H 
 
-# 1 "utExecutionAndResults/utUnderTest/src/MyLib.h" 1
-/* MyLib.h */
+#define UNITY_FRAMEWORK_H 
+#define UNITY 
 
+#define UNITY_VERSION_MAJOR 2
+#define UNITY_VERSION_MINOR 6
+#define UNITY_VERSION_BUILD 1
+#define UNITY_VERSION ((UNITY_VERSION_MAJOR << 16) | (UNITY_VERSION_MINOR << 8) | UNITY_VERSION_BUILD)
 
-#define MYLIB_H 
 
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/12/include/stdbool.h" 1 3 4
-/* Copyright (C) 1998-2022 Free Software Foundation, Inc.
 
-This file is part of GCC.
 
-GCC is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 3, or (at your option)
-any later version.
 
-GCC is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
 
-Under Section 7 of GPL version 3, you are granted additional
-permissions described in the GCC Runtime Library Exception, version
-3.1, as published by the Free Software Foundation.
+# 1 "utExecutionAndResults/utUnderTest/build/vendor/unity/src/unity_internals.h" 1
+/* =========================================================================
+    Unity - A Test Framework for C
+    ThrowTheSwitch.org
+    Copyright (c) 2007-25 Mike Karlesky, Mark VanderVoord, & Greg Williams
+    SPDX-License-Identifier: MIT
+========================================================================= */
 
-You should have received a copy of the GNU General Public License and
-a copy of the GCC Runtime Library Exception along with this program;
-see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
-<http://www.gnu.org/licenses/>.  */
 
-/*
- * ISO C Standard:  7.16  Boolean type and values  <stdbool.h>
- */
+#define UNITY_INTERNALS_H 
 
 
-#define _STDBOOL_H 
 
 
 
-#define bool _Bool
 
-
-
-
-#define true 1
-#define false 0
-
-
-
-
-
-
-
-
-
-/* Signal that all the definitions are present.  */
-#define __bool_true_false_are_defined 1
-
-# 7 "utExecutionAndResults/utUnderTest/src/MyLib.h" 2
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/12/include/stddef.h" 1 3 4
-/* Copyright (C) 1989-2022 Free Software Foundation, Inc.
-
-This file is part of GCC.
-
-GCC is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 3, or (at your option)
-any later version.
-
-GCC is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-Under Section 7 of GPL version 3, you are granted additional
-permissions described in the GCC Runtime Library Exception, version
-3.1, as published by the Free Software Foundation.
-
-You should have received a copy of the GNU General Public License and
-a copy of the GCC Runtime Library Exception along with this program;
-see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
-<http://www.gnu.org/licenses/>.  */
-
-/*
- * ISO C Standard:  7.17  Common definitions  <stddef.h>
- */
-
-
-
-
-
-
-/* Any one of these symbols __need_* means that GNU libc
-   wants us just to define one data type.  So don't define
-   the symbols that indicate this file's entire job has been done.  */
-
-
-
-#define _STDDEF_H 
-#define _STDDEF_H_ 
-/* snaroff@next.com says the NeXT needs this.  */
-#define _ANSI_STDDEF_H 
-
-
-
-/* This avoids lossage on SunOS but only if stdtypes.h comes first.
-   There's no way to win with the other order!  Sun lossage.  */
-
-
-
-
-
-
-
-
-
-# 85 "/usr/lib/gcc/x86_64-linux-gnu/12/include/stddef.h" 3 4
-
-/* Sequent's header files use _PTRDIFF_T_ in some conflicting way.
-   Just ignore it.  */
-
-
-
-
-/* On VxWorks, <type/vxTypesBase.h> may have defined macros like
-   _TYPE_size_t which will typedef size_t.  fixincludes patched the
-   vxTypesBase.h so that this macro is only defined if _GCC_SIZE_T is
-   not defined, and so that defining this macro defines _GCC_SIZE_T.
-   If we find that the macros are still defined at this point, we must
-   invoke them so that the type is defined as expected.  */
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* In case nobody has defined these types, but we aren't running under
-   GCC 2.00, make sure that __PTRDIFF_TYPE__, __SIZE_TYPE__, and
-   __WCHAR_TYPE__ have reasonable values.  This can happen if the
-   parts of GCC is compiled by an older compiler, that actually
-   include gstddef.h, such as collect2.  */
-
-/* Signed type of difference of two pointers.  */
-
-/* Define this type if we are doing the whole job,
-   or if we want this type in particular.  */
-
-
-
-
-
-
-
-
-
-
-
-#define _PTRDIFF_T 
-#define _T_PTRDIFF_ 
-#define _T_PTRDIFF 
-#define __PTRDIFF_T 
-#define _PTRDIFF_T_ 
-#define _BSD_PTRDIFF_T_ 
-#define ___int_ptrdiff_t_h 
-#define _GCC_PTRDIFF_T 
-#define _PTRDIFF_T_DECLARED 
-#define __DEFINED_ptrdiff_t 
-
-
-
-typedef __PTRDIFF_TYPE__ ptrdiff_t;
-
-
-
-
-
-
-
-
-
-
-
-/* If this symbol has done its job, get rid of it.  */
-#undef __need_ptrdiff_t
-
-
-
-/* Unsigned type of `sizeof' something.  */
-
-/* Define this type if we are doing the whole job,
-   or if we want this type in particular.  */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#define __size_t__ 
-#define __SIZE_T__ 
-#define _SIZE_T 
-#define _SYS_SIZE_T_H 
-#define _T_SIZE_ 
-#define _T_SIZE 
-#define __SIZE_T 
-#define _SIZE_T_ 
-#define _BSD_SIZE_T_ 
-#define _SIZE_T_DEFINED_ 
-#define _SIZE_T_DEFINED 
-#define _BSD_SIZE_T_DEFINED_ 
-#define _SIZE_T_DECLARED 
-#define __DEFINED_size_t 
-#define ___int_size_t_h 
-#define _GCC_SIZE_T 
-#define _SIZET_ 
-
-
-
-
-
-
-#define __size_t 
-
-
-
-
-
-typedef __SIZE_TYPE__ size_t;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#undef __need_size_t
-
-
-
-/* Wide character type.
-   Locale-writers should change this as necessary to
-   be big enough to hold unique values not between 0 and 127,
-   and not (wchar_t) -1, for each defined multibyte character.  */
-
-/* Define this type if we are doing the whole job,
-   or if we want this type in particular.  */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#define __wchar_t__ 
-#define __WCHAR_T__ 
-#define _WCHAR_T 
-#define _T_WCHAR_ 
-#define _T_WCHAR 
-#define __WCHAR_T 
-#define _WCHAR_T_ 
-#define _BSD_WCHAR_T_ 
-#define _WCHAR_T_DEFINED_ 
-#define _WCHAR_T_DEFINED 
-#define _WCHAR_T_H 
-#define ___int_wchar_t_h 
-#define __INT_WCHAR_T_H 
-#define _GCC_WCHAR_T 
-#define _WCHAR_T_DECLARED 
-#define __DEFINED_wchar_t 
-
-/* On BSD/386 1.1, at least, machine/ansi.h defines _BSD_WCHAR_T_
-   instead of _WCHAR_T_, and _BSD_RUNE_T_ (which, unlike the other
-   symbols in the _FOO_T_ family, stays defined even after its
-   corresponding type is defined).  If we define wchar_t, then we
-   must undef _WCHAR_T_; for BSD/386 1.1 (and perhaps others), if
-   we undef _WCHAR_T_, then we must also define rune_t, since 
-   headers like runetype.h assume that if machine/ansi.h is included,
-   and _BSD_WCHAR_T_ is not defined, then rune_t is available.
-   machine/ansi.h says, "Note that _WCHAR_T_ and _RUNE_T_ must be of
-   the same type." */
-
-#undef _BSD_WCHAR_T_
-# 310 "/usr/lib/gcc/x86_64-linux-gnu/12/include/stddef.h" 3 4
-
-/* FreeBSD 5 can't be handled well using "traditional" logic above
-   since it no longer defines _BSD_RUNE_T_ yet still desires to export
-   rune_t in some cases... */
-# 324 "/usr/lib/gcc/x86_64-linux-gnu/12/include/stddef.h" 3 4
-
-
-
-
-
-typedef __WCHAR_TYPE__ wchar_t;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#undef __need_wchar_t
-
-
-# 363 "/usr/lib/gcc/x86_64-linux-gnu/12/include/stddef.h" 3 4
-
-# 393 "/usr/lib/gcc/x86_64-linux-gnu/12/include/stddef.h" 3 4
-
-
-
-/* A null pointer constant.  */
-
-
-#undef NULL
-
-
-
-
-#define NULL ((void *)0)
-
-
-
-
-
-#undef __need_NULL
-
-
-
-/* Offset of member MEMBER in a struct of type TYPE. */
-#define offsetof(TYPE,MEMBER) __builtin_offsetof (TYPE, MEMBER)
-
-
-
-
-#define _GCC_MAX_ALIGN_T 
-/* Type whose alignment is supported in every context and is at least
-   as great as that of any standard type not using alignment
-   specifiers.  */
-typedef struct {
-  long long __max_align_ll __attribute__((__aligned__(__alignof__(long long))));
-  long double __max_align_ld __attribute__((__aligned__(__alignof__(long double))));
-  /* _Float128 is defined as a basic type, so max_align_t must be
-     sufficiently aligned for it.  This code must work in C++, so we
-     use __float128 here; that is only available on some
-     architectures, but only on i386 is extra alignment needed for
-     __float128.  */
-
-
-
-} max_align_t;
-
-
-
-
-
-
-
-
-
-
-
-
-# 8 "utExecutionAndResults/utUnderTest/src/MyLib.h" 2
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/12/include/stdint.h" 1 3 4
-
-
-
-
-
-
-
-
-# 1 "/usr/include/stdint.h" 1 3 4
-/* Copyright (C) 1997-2022 Free Software Foundation, Inc.
+# 1 "/usr/include/setjmp.h" 1 3 4
+/* Copyright (C) 1991-2022 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -1277,45 +881,11 @@ typedef struct {
    <https://www.gnu.org/licenses/>.  */
 
 /*
- *	ISO C99: 7.18 Integer types <stdint.h>
+ *	ISO C99 Standard: 7.13 Nonlocal jumps	<setjmp.h>
  */
 
 
-#define _STDINT_H 1
-
-#define __GLIBC_INTERNAL_STARTING_HEADER_IMPLEMENTATION 
-# 1 "/usr/include/x86_64-linux-gnu/bits/libc-header-start.h" 1 3 4
-/* Handle feature test macros at the start of a header.
-   Copyright (C) 2016-2022 Free Software Foundation, Inc.
-   This file is part of the GNU C Library.
-
-   The GNU C Library is free software; you can redistribute it and/or
-   modify it under the terms of the GNU Lesser General Public
-   License as published by the Free Software Foundation; either
-   version 2.1 of the License, or (at your option) any later version.
-
-   The GNU C Library is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-   Lesser General Public License for more details.
-
-   You should have received a copy of the GNU Lesser General Public
-   License along with the GNU C Library; if not, see
-   <https://www.gnu.org/licenses/>.  */
-
-/* This header is internal to glibc and should not be included outside
-   of glibc headers.  Headers including it must define
-   __GLIBC_INTERNAL_STARTING_HEADER_IMPLEMENTATION first.  This header
-   cannot have multiple include guards because ISO C feature test
-   macros depend on the definition of the macro when an affected
-   header is included, not when the first system header is
-   included.  */
-
-
-
-
-
-#undef __GLIBC_INTERNAL_STARTING_HEADER_IMPLEMENTATION
+#define _SETJMP_H 1
 
 # 1 "/usr/include/features.h" 1 3 4
 /* Copyright (C) 1991-2022 Free Software Foundation, Inc.
@@ -2430,7 +2000,241 @@ typedef struct {
 # 514 "/usr/include/features.h" 2 3 4
 
 
-# 34 "/usr/include/x86_64-linux-gnu/bits/libc-header-start.h" 2 3 4
+# 26 "/usr/include/setjmp.h" 2 3 4
+
+__BEGIN_DECLS
+
+# 1 "/usr/include/x86_64-linux-gnu/bits/setjmp.h" 1 3 4
+/* Copyright (C) 2001-2022 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, see
+   <https://www.gnu.org/licenses/>.  */
+
+/* Define the machine-dependent type `jmp_buf'.  x86-64 version.  */
+
+#define _BITS_SETJMP_H 1
+
+
+
+
+
+# 1 "/usr/include/x86_64-linux-gnu/bits/wordsize.h" 1 3 4
+/* Determine the wordsize from the preprocessor defines.  */
+
+
+#define __WORDSIZE 64
+
+
+
+
+
+
+#define __WORDSIZE_TIME64_COMPAT32 1
+
+
+/* Both x86-64 and x32 use the 64-bit system call interface.  */
+#define __SYSCALL_WORDSIZE 64
+# 27 "/usr/include/x86_64-linux-gnu/bits/setjmp.h" 2 3 4
+
+
+
+
+typedef long int __jmp_buf[8];
+
+
+
+
+
+
+
+
+# 30 "/usr/include/setjmp.h" 2 3 4
+# 1 "/usr/include/x86_64-linux-gnu/bits/types/struct___jmp_buf_tag.h" 1 3 4
+/* Define struct __jmp_buf_tag.
+   Copyright (C) 1991-2022 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, see
+   <https://www.gnu.org/licenses/>.  */
+
+
+#define __jmp_buf_tag_defined 1
+
+
+# 1 "/usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h" 1 3 4
+
+#define ____sigset_t_defined 
+
+#define _SIGSET_NWORDS (1024 / (8 * sizeof (unsigned long int)))
+typedef struct
+{
+  unsigned long int __val[_SIGSET_NWORDS];
+} __sigset_t;
+
+# 24 "/usr/include/x86_64-linux-gnu/bits/types/struct___jmp_buf_tag.h" 2 3 4
+
+/* Calling environment, plus possibly a saved signal mask.  */
+struct __jmp_buf_tag
+  {
+    /* NOTE: The machine-dependent definitions of `__sigsetjmp'
+       assume that a `jmp_buf' begins with a `__jmp_buf' and that
+       `__mask_was_saved' follows it.  Do not move these members
+       or add others before it.  */
+    __jmp_buf __jmpbuf;		/* Calling environment.  */
+    int __mask_was_saved;	/* Saved the signal mask?  */
+    __sigset_t __saved_mask;	/* Saved signal mask.  */
+  };
+
+# 31 "/usr/include/setjmp.h" 2 3 4
+
+typedef struct __jmp_buf_tag jmp_buf[1];
+
+/* Store the calling environment in ENV, also saving the signal mask.
+   Return 0.  */
+extern int setjmp (jmp_buf __env) __THROWNL;
+
+/* Store the calling environment in ENV, also saving the
+   signal mask if SAVEMASK is nonzero.  Return 0.
+   This is the internal name for `sigsetjmp'.  */
+extern int __sigsetjmp (struct __jmp_buf_tag __env[1], int __savemask) __THROWNL;
+
+/* Store the calling environment in ENV, not saving the signal mask.
+   Return 0.  */
+extern int _setjmp (struct __jmp_buf_tag __env[1]) __THROWNL;
+
+/* Do not save the signal mask.  This is equivalent to the `_setjmp'
+   BSD function.  */
+#define setjmp(env) _setjmp (env)
+
+
+/* Jump to the environment saved in ENV, making the
+   `setjmp' call there return VAL, or 1 if VAL is 0.  */
+extern void longjmp (struct __jmp_buf_tag __env[1], int __val)
+     __THROWNL __attribute__ ((__noreturn__));
+
+
+/* Same.  Usually `_longjmp' is used with `_setjmp', which does not save
+   the signal mask.  But it is how ENV was saved that determines whether
+   `longjmp' restores the mask; `_longjmp' is just an alias.  */
+extern void _longjmp (struct __jmp_buf_tag __env[1], int __val)
+     __THROWNL __attribute__ ((__noreturn__));
+
+
+
+
+/* Use the same type for `jmp_buf' and `sigjmp_buf'.
+   The `__mask_was_saved' flag determines whether
+   or not `longjmp' will restore the signal mask.  */
+typedef struct __jmp_buf_tag sigjmp_buf[1];
+
+/* Store the calling environment in ENV, also saving the
+   signal mask if SAVEMASK is nonzero.  Return 0.  */
+#define sigsetjmp(env,savemask) __sigsetjmp (env, savemask)
+
+/* Jump to the environment saved in ENV, making the
+   sigsetjmp call there return VAL, or 1 if VAL is 0.
+   Restore the signal mask if that sigsetjmp call saved it.
+   This is just an alias `longjmp'.  */
+extern void siglongjmp (sigjmp_buf __env, int __val)
+     __THROWNL __attribute__ ((__noreturn__));
+
+
+
+/* Define helper functions to catch unsafe code.  */
+
+
+
+
+__END_DECLS
+
+# 17 "utExecutionAndResults/utUnderTest/build/vendor/unity/src/unity_internals.h" 2
+
+
+
+# 1 "/usr/include/math.h" 1 3 4
+/* Declarations for math functions.
+   Copyright (C) 1991-2022 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, see
+   <https://www.gnu.org/licenses/>.  */
+
+/*
+ *	ISO C99 Standard: 7.12 Mathematics	<math.h>
+ */
+
+
+#define _MATH_H 1
+
+#define __GLIBC_INTERNAL_STARTING_HEADER_IMPLEMENTATION 
+# 1 "/usr/include/x86_64-linux-gnu/bits/libc-header-start.h" 1 3 4
+/* Handle feature test macros at the start of a header.
+   Copyright (C) 2016-2022 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, see
+   <https://www.gnu.org/licenses/>.  */
+
+/* This header is internal to glibc and should not be included outside
+   of glibc headers.  Headers including it must define
+   __GLIBC_INTERNAL_STARTING_HEADER_IMPLEMENTATION first.  This header
+   cannot have multiple include guards because ISO C feature test
+   macros depend on the definition of the macro when an affected
+   header is included, not when the first system header is
+   included.  */
+
+
+
+
+
+#undef __GLIBC_INTERNAL_STARTING_HEADER_IMPLEMENTATION
+
+
 
 /* ISO/IEC TR 24731-2:2010 defines the __STDC_WANT_LIB_EXT2__
    macro.  */
@@ -2507,7 +2311,16 @@ typedef struct {
 
 
 #define __GLIBC_USE_IEC_60559_TYPES_EXT 0
-# 27 "/usr/include/stdint.h" 2 3 4
+# 28 "/usr/include/math.h" 2 3 4
+
+
+
+
+
+
+__BEGIN_DECLS
+
+/* Get definitions of __intmax_t and __uintmax_t.  */
 # 1 "/usr/include/x86_64-linux-gnu/bits/types.h" 1 3 4
 /* bits/types.h -- definitions of __*_t types underlying *_t types.
    Copyright (C) 2002-2022 Free Software Foundation, Inc.
@@ -2925,1174 +2738,7 @@ typedef int __sig_atomic_t;
 
 #undef __STD_TYPE
 
-# 28 "/usr/include/stdint.h" 2 3 4
-# 1 "/usr/include/x86_64-linux-gnu/bits/wchar.h" 1 3 4
-/* wchar_t type related definitions.
-   Copyright (C) 2000-2022 Free Software Foundation, Inc.
-   This file is part of the GNU C Library.
-
-   The GNU C Library is free software; you can redistribute it and/or
-   modify it under the terms of the GNU Lesser General Public
-   License as published by the Free Software Foundation; either
-   version 2.1 of the License, or (at your option) any later version.
-
-   The GNU C Library is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-   Lesser General Public License for more details.
-
-   You should have received a copy of the GNU Lesser General Public
-   License along with the GNU C Library; if not, see
-   <https://www.gnu.org/licenses/>.  */
-
-
-#define _BITS_WCHAR_H 1
-
-/* The fallback definitions, for when __WCHAR_MAX__ or __WCHAR_MIN__
-   are not defined, give the right value and type as long as both int
-   and wchar_t are 32-bit types.  Adding L'\0' to a constant value
-   ensures that the type is correct; it is necessary to use (L'\0' +
-   0) rather than just L'\0' so that the type in C++ is the promoted
-   version of wchar_t rather than the distinct wchar_t type itself.
-   Because wchar_t in preprocessor #if expressions is treated as
-   intmax_t or uintmax_t, the expression (L'\0' - 1) would have the
-   wrong value for WCHAR_MAX in such expressions and so cannot be used
-   to define __WCHAR_MAX in the unsigned case.  */
-
-
-#define __WCHAR_MAX __WCHAR_MAX__
-
-
-
-
-
-
-
-#define __WCHAR_MIN __WCHAR_MIN__
-
-
-
-
-
-
-# 29 "/usr/include/stdint.h" 2 3 4
-# 1 "/usr/include/x86_64-linux-gnu/bits/wordsize.h" 1 3 4
-/* Determine the wordsize from the preprocessor defines.  */
-
-
-#define __WORDSIZE 64
-
-
-
-
-
-
-#define __WORDSIZE_TIME64_COMPAT32 1
-
-
-/* Both x86-64 and x32 use the 64-bit system call interface.  */
-#define __SYSCALL_WORDSIZE 64
-# 30 "/usr/include/stdint.h" 2 3 4
-
-/* Exact integral types.  */
-
-/* Signed.  */
-# 1 "/usr/include/x86_64-linux-gnu/bits/stdint-intn.h" 1 3 4
-/* Define intN_t types.
-   Copyright (C) 2017-2022 Free Software Foundation, Inc.
-   This file is part of the GNU C Library.
-
-   The GNU C Library is free software; you can redistribute it and/or
-   modify it under the terms of the GNU Lesser General Public
-   License as published by the Free Software Foundation; either
-   version 2.1 of the License, or (at your option) any later version.
-
-   The GNU C Library is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-   Lesser General Public License for more details.
-
-   You should have received a copy of the GNU Lesser General Public
-   License along with the GNU C Library; if not, see
-   <https://www.gnu.org/licenses/>.  */
-
-
-#define _BITS_STDINT_INTN_H 1
-
-
-
-typedef __int8_t int8_t;
-typedef __int16_t int16_t;
-typedef __int32_t int32_t;
-typedef __int64_t int64_t;
-
-# 35 "/usr/include/stdint.h" 2 3 4
-
-/* Unsigned.  */
-# 1 "/usr/include/x86_64-linux-gnu/bits/stdint-uintn.h" 1 3 4
-/* Define uintN_t types.
-   Copyright (C) 2017-2022 Free Software Foundation, Inc.
-   This file is part of the GNU C Library.
-
-   The GNU C Library is free software; you can redistribute it and/or
-   modify it under the terms of the GNU Lesser General Public
-   License as published by the Free Software Foundation; either
-   version 2.1 of the License, or (at your option) any later version.
-
-   The GNU C Library is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-   Lesser General Public License for more details.
-
-   You should have received a copy of the GNU Lesser General Public
-   License along with the GNU C Library; if not, see
-   <https://www.gnu.org/licenses/>.  */
-
-
-#define _BITS_STDINT_UINTN_H 1
-
-
-
-typedef __uint8_t uint8_t;
-typedef __uint16_t uint16_t;
-typedef __uint32_t uint32_t;
-typedef __uint64_t uint64_t;
-
-# 38 "/usr/include/stdint.h" 2 3 4
-
-
-/* Small types.  */
-
-/* Signed.  */
-typedef __int_least8_t int_least8_t;
-typedef __int_least16_t int_least16_t;
-typedef __int_least32_t int_least32_t;
-typedef __int_least64_t int_least64_t;
-
-/* Unsigned.  */
-typedef __uint_least8_t uint_least8_t;
-typedef __uint_least16_t uint_least16_t;
-typedef __uint_least32_t uint_least32_t;
-typedef __uint_least64_t uint_least64_t;
-
-
-/* Fast types.  */
-
-/* Signed.  */
-typedef signed char		int_fast8_t;
-
-typedef long int		int_fast16_t;
-typedef long int		int_fast32_t;
-typedef long int		int_fast64_t;
-
-
-
-
-
-
-
-/* Unsigned.  */
-typedef unsigned char		uint_fast8_t;
-
-typedef unsigned long int	uint_fast16_t;
-typedef unsigned long int	uint_fast32_t;
-typedef unsigned long int	uint_fast64_t;
-
-
-
-
-
-
-
-
-/* Types for `void *' pointers.  */
-
-
-typedef long int		intptr_t;
-#define __intptr_t_defined 
-
-typedef unsigned long int	uintptr_t;
-
-
-
-
-
-
-
-
-
-/* Largest integral types.  */
-typedef __intmax_t		intmax_t;
-typedef __uintmax_t		uintmax_t;
-
-
-
-#define __INT64_C(c) c ## L
-#define __UINT64_C(c) c ## UL
-
-
-
-
-
-/* Limits of integral types.  */
-
-/* Minimum of signed integral types.  */
-#define INT8_MIN (-128)
-#define INT16_MIN (-32767-1)
-#define INT32_MIN (-2147483647-1)
-#define INT64_MIN (-__INT64_C(9223372036854775807)-1)
-/* Maximum of signed integral types.  */
-#define INT8_MAX (127)
-#define INT16_MAX (32767)
-#define INT32_MAX (2147483647)
-#define INT64_MAX (__INT64_C(9223372036854775807))
-
-/* Maximum of unsigned integral types.  */
-#define UINT8_MAX (255)
-#define UINT16_MAX (65535)
-#define UINT32_MAX (4294967295U)
-#define UINT64_MAX (__UINT64_C(18446744073709551615))
-
-
-/* Minimum of signed integral types having a minimum size.  */
-#define INT_LEAST8_MIN (-128)
-#define INT_LEAST16_MIN (-32767-1)
-#define INT_LEAST32_MIN (-2147483647-1)
-#define INT_LEAST64_MIN (-__INT64_C(9223372036854775807)-1)
-/* Maximum of signed integral types having a minimum size.  */
-#define INT_LEAST8_MAX (127)
-#define INT_LEAST16_MAX (32767)
-#define INT_LEAST32_MAX (2147483647)
-#define INT_LEAST64_MAX (__INT64_C(9223372036854775807))
-
-/* Maximum of unsigned integral types having a minimum size.  */
-#define UINT_LEAST8_MAX (255)
-#define UINT_LEAST16_MAX (65535)
-#define UINT_LEAST32_MAX (4294967295U)
-#define UINT_LEAST64_MAX (__UINT64_C(18446744073709551615))
-
-
-/* Minimum of fast signed integral types having a minimum size.  */
-#define INT_FAST8_MIN (-128)
-
-#define INT_FAST16_MIN (-9223372036854775807L-1)
-#define INT_FAST32_MIN (-9223372036854775807L-1)
-
-
-
-
-#define INT_FAST64_MIN (-__INT64_C(9223372036854775807)-1)
-/* Maximum of fast signed integral types having a minimum size.  */
-#define INT_FAST8_MAX (127)
-
-#define INT_FAST16_MAX (9223372036854775807L)
-#define INT_FAST32_MAX (9223372036854775807L)
-
-
-
-
-#define INT_FAST64_MAX (__INT64_C(9223372036854775807))
-
-/* Maximum of fast unsigned integral types having a minimum size.  */
-#define UINT_FAST8_MAX (255)
-
-#define UINT_FAST16_MAX (18446744073709551615UL)
-#define UINT_FAST32_MAX (18446744073709551615UL)
-
-
-
-
-#define UINT_FAST64_MAX (__UINT64_C(18446744073709551615))
-
-
-/* Values to test for integral types holding `void *' pointer.  */
-
-#define INTPTR_MIN (-9223372036854775807L-1)
-#define INTPTR_MAX (9223372036854775807L)
-#define UINTPTR_MAX (18446744073709551615UL)
-
-
-
-
-
-
-
-/* Minimum for largest signed integral type.  */
-#define INTMAX_MIN (-__INT64_C(9223372036854775807)-1)
-/* Maximum for largest signed integral type.  */
-#define INTMAX_MAX (__INT64_C(9223372036854775807))
-
-/* Maximum for largest unsigned integral type.  */
-#define UINTMAX_MAX (__UINT64_C(18446744073709551615))
-
-
-/* Limits of other integer types.  */
-
-/* Limits of `ptrdiff_t' type.  */
-
-#define PTRDIFF_MIN (-9223372036854775807L-1)
-#define PTRDIFF_MAX (9223372036854775807L)
-# 220 "/usr/include/stdint.h" 3 4
-
-/* Limits of `sig_atomic_t'.  */
-#define SIG_ATOMIC_MIN (-2147483647-1)
-#define SIG_ATOMIC_MAX (2147483647)
-
-/* Limit of `size_t' type.  */
-
-#define SIZE_MAX (18446744073709551615UL)
-
-
-
-
-
-
-
-
-/* Limits of `wchar_t'.  */
-
-/* These constants might also be defined in <wchar.h>.  */
-#define WCHAR_MIN __WCHAR_MIN
-#define WCHAR_MAX __WCHAR_MAX
-
-
-/* Limits of `wint_t'.  */
-#define WINT_MIN (0u)
-#define WINT_MAX (4294967295u)
-
-/* Signed.  */
-#define INT8_C(c) c
-#define INT16_C(c) c
-#define INT32_C(c) c
-
-#define INT64_C(c) c ## L
-
-
-
-
-/* Unsigned.  */
-#define UINT8_C(c) c
-#define UINT16_C(c) c
-#define UINT32_C(c) c ## U
-
-#define UINT64_C(c) c ## UL
-
-
-
-
-/* Maximal type.  */
-
-#define INTMAX_C(c) c ## L
-#define UINTMAX_C(c) c ## UL
-
-
-
-
-
-# 318 "/usr/include/stdint.h" 3 4
-
-# 10 "/usr/lib/gcc/x86_64-linux-gnu/12/include/stdint.h" 2 3 4
-
-
-
-#define _GCC_WRAP_STDINT_H 
-# 9 "utExecutionAndResults/utUnderTest/src/MyLib.h" 2
-
-/* Numeric macros */
-#define MYLIB_MAX_COUNT_U32 (100U)
-#define MYLIB_MULT_VALUE_U8 (5U)
-
-/* Typedef / struct */
-typedef struct {
-  uint16_t id_u16;
-  uint32_t value_u32;
-} MyLib_record_t;
-
-/* Global variables */
-extern uint32_t g_counter_u32;
-extern MyLib_record_t g_record;
-extern bool g_systemReady_b;
-
-/**
- * @brief Process one record with a bounded accumulation and update module globals.
- *
- * @details
- * **Goal of the function**
- *
- * Consume an input record and apply a deterministic accumulation based on
- * `multiplier_u8`. The accumulation logic is implemented using a switch-case
- * structure to optimize specific scenarios while keeping execution bounded.
- *
- * Processing behavior:
- * - If `rec_pc == NULL`, the function returns immediately (no side effects).
- * - Otherwise, a local accumulator (`l_acc_u32`) is computed as follows:
- *   - `multiplier_u8 == 0U`
- *       → No accumulation (`l_acc_u32 = 0U`).
- *   - `multiplier_u8 == 1U`
- *       → Single direct assignment (`l_acc_u32 = rec_pc->value_u32`).
- *   - `default`
- *       → Bounded loop accumulation:
- *         `l_acc_u32 += rec_pc->value_u32` repeated `multiplier_u8` times.
- *
- * After accumulation:
- * - `g_counter_u32` is incremented by `l_acc_u32`.
- * - `MyLib_ComputeAdjustedValue_u32()` is invoked.
- *
- * Wrap-around on `uint32_t` is permitted by design.
- *
- * @par Interface summary
- *
- * | Interface                      | In | Out | Type / Signature                        | Param | Factor | Offset | Size | Range              | Unit |
- * |--------------------------------|----|-----|-----------------------------------------|-------|--------|--------|------|--------------------|------|
- * | rec_pc                         | X  |     | const MyLib_record_t*                   |   X   |   1    |   0    |   1  | pointer / NULL     | [-]  |
- * | multiplier_u8                  | X  |     | uint8_t                                 |   X   |   1    |   0    |   1  | 0..255             | [-]  |
- * | MyLib_ComputeAdjustedValue_u32 | X  |  X  | uint32_t (uint32_t , const uint16_t *)  |       |   1    |   0    |   1  | -                  | [-]  |
- * | g_counter_u32                  |    |  X  | uint32_t (global)                       |       |   1    |   0    |   1  | 0..(wrap)          | [-]  |
- * | return val                     |    |     | void                                    |       |   1    |   0    |   1  | -                  | [-]  |
- *
- * @par Activity diagram (PlantUML)
- *
- * @startuml
- * start
- * if (rec_pc == NULL) then (yes)
- *   :return;
- * else (no)
- *   :switch(multiplier_u8);
- *     case (0U)
- *       :l_acc_u32 = 0U;
- *     case (1U)
- *       :l_acc_u32 = rec_pc->value_u32;
- *     case (default)
- *       :for l_i_u8 in [0..multiplier_u8-1];
- *         :l_acc_u32 += rec_pc->value_u32;
- *       :endfor;
- *   :endswitch;
- *   :g_counter_u32 += l_acc_u32;
- *   :call MyLib_ComputeAdjustedValue_u32(l_acc_u32, (const uint16_t *)&multiplier_u8);
- *   :return;
- * endif
- * stop
- * @enduml
- *
- * @param rec_pc
- * Pointer to the input record. If NULL, the function returns immediately.
- *
- * @param multiplier_u8
- * Accumulation selector:
- * - 0 → no accumulation
- * - 1 → single accumulation
- * - >1 → bounded loop accumulation
- *
- * @return void
- * No return value.
- */
-void MyLib_ProcessRecord(const MyLib_record_t *rec_pc, uint8_t multiplier_u8);
-
-/**
- * @brief Compute an adjusted value from a base value and an optional delta.
- *
- * @details
- * **Goal of the function**
- *
- * Multiply `base_u32` by a delta factor and apply a deterministic internal
- * post-processing step. If `delta_pc_u16` is NULL, a default delta of `1` is used.
- *
- * @par Interface summary
- *
- * | Interface           | In | Out | Type / Signature                 | Param | Factor | Offset | Size | Range              | Unit |
- * |---------------------|----|-----|----------------------------------|-------|--------|--------|------|--------------------|------|
- * | base_u32            | X  |     | uint32_t                         |   X   |   1    |   0    |   1  | 0..600             | [-]  |
- * | delta_pc_u16        | X  |     | const uint16_t*                  |   X   |   1    |   0    |   1  | pointer / NULL     | [-]  |
- * | InternalHelper_u32  | X  |  X  | uint32_t (uint32_t , uint16_t )  |       |   1    |   0    |   1  | -                  | [-]  |
- * | return val          |    |  X  | uint32_t                         |       |   1    |   0    |   1  | 0..500             | [-]  |
- *
- * @par Activity diagram (PlantUML)
- *
- * @startuml
- * start
- * if (delta_pc_u16 == NULL) then (yes)
- *   :l_d_u16 = 1;
- * else (no)
- *   :l_d_u16 = *delta_pc_u16;
- * endif
- * :l_val_u32 = base_u32 * l_d_u16;
- * :l_val_u32 = InternalHelper_u32(l_val_u32, (uint16_t)MYLIB_MULT_VALUE_U8);
- * :return l_val_u32;
- * stop
- * @enduml
- *
- * @param base_u32
- * Base input value.
- *
- * @param delta_pc_u16
- * Optional pointer to delta factor. If NULL, delta defaults to 1.
- *
- * @return uint32_t
- * Adjusted value after applying delta and internal post-processing.
- */
-uint32_t MyLib_ComputeAdjustedValue_u32(uint32_t base_u32, const uint16_t *delta_pc_u16);
-
-/**
- * @brief Scale an array in-place and return the sum of scaled elements.
- *
- * @details
- * **Goal of the function**
- *
- * Iterate over `values_pu16` for `len_u32` elements, multiply each element by
- * `factor_u16`, store the result back into the array, and compute the sum.
- * If the pointer is NULL or the length is 0, return 0.
- *
- * The function also invokes `MyLib_ComputeAdjustedValue_u32()` to trigger a
- * secondary deterministic computation (its return value is not used).
- *
- * @par Interface summary
- *
- * | Interface                      | In | Out | Type / Signature                        | Param | Factor | Offset | Size | Range              | Unit |
- * |--------------------------------|----|-----|-----------------------------------------|-------|--------|--------|------|--------------------|------|
- * | values_pu16                    | X  |  X  | uint16_t*                               |   X   |   1    |   0    |   1  | pointer / NULL     | [-]  |
- * | len_u32                        | X  |     | size_t                                  |   X   |   1    |   0    |   1  | 0..600             | [-]  |
- * | factor_u16                     | X  |     | uint16_t                                |   X   |   1    |   0    |   1  | 0..65535           | [-]  |
- * | MyLib_ComputeAdjustedValue_u32 | X  |  X  | uint32_t (uint32_t , const uint16_t *)  |       |   1    |   0    |   1  | -                  | [-]  |
- * | return val                     |    |  X  | uint32_t                                |       |   1    |   0    |   1  | 0..500             | [-]  |
- *
- * @par Activity diagram (PlantUML)
- *
- * @startuml
- * start
- * : l_inNull_b = false;
- * 
- * if (values_pu16 == NULL or len_u32 == 0) then (yes)
- *   : l_inNull_b = true;
- * endif
- * :l_sum_u32 = 0;
- * 
- * if (l_inNull_b == false) then (process)
- *   :for l_i_u32 in [0 .. len_u32-1];
- *     :values_pu16[l_i_u32] = values_pu16[l_i_u32] * factor_u16;
- *     :l_sum_u32 += values_pu16[l_i_u32];
- *   :endfor;
- * 
- *   :call MyLib_ComputeAdjustedValue_u32(l_sum_u32, NULL);
- * endif
- * :return l_sum_u32;
- * 
- * stop
- * @enduml
- *
- * @param values_pu16
- * Pointer to the array to be scaled in-place. If NULL, the function returns 0.
- *
- * @param len_u32
- * Number of elements in the array. If 0, the function returns 0.
- *
- * @param factor_u16
- * Scaling factor applied to each element.
- *
- * @return uint32_t
- * Sum of the scaled array elements (wrap-around possible on overflow).
- */
-uint32_t MyLib_AnalyzeArray_u32(uint16_t *values_pu16, size_t len_u32, uint16_t factor_u16);
-
-/**
- * @brief Copy a record into a destination and update module global state.
- *
- * @details
- * **Goal of the function**
- *
- * Copy the content of `src_pc` into `dest_p`. On success, mirror the copied
- * record to the module global record and mark the system as ready.
- * If any pointer is NULL, the function returns immediately without changes.
- *
- * @par Interface summary
- *
- * | Interface         | In | Out | Type / Signature       | Param | Factor | Offset | Size | Range              | Unit |
- * |-------------------|----|-----|------------------------|-------|--------|--------|------|--------------------|------|
- * | dest_p            | X  |  X  | MyLib_record_t*        |   X   |   1    |   0    |   1  | pointer / NULL     | [-]  |
- * | src_pc            | X  |     | const MyLib_record_t*  |   X   |   1    |   0    |   1  | pointer / NULL     | [-]  |
- * | g_record          |    |  X  | MyLib_record_t         |       |   1    |   0    |   1  | -                  | [-]  |
- * | g_systemReady_b   |    |  X  | bool                   |       |   1    |   0    |   1  | false/true         | [-]  |
- * | return val        |    |     | void                   |       |   1    |   0    |   1  | -                  | [-]  |
- *
- * @par Activity diagram (PlantUML)
- *
- * @startuml
- * start
- * if (dest_p == NULL or src_pc == NULL) then (yes)
- *   :return;
- * else (no)
- *   :dest_p->id_u16 = src_pc->id_u16;
- *   :dest_p->value_u32 = src_pc->value_u32;
- *   :g_record = *dest_p;
- *   :g_systemReady_b = true;
- *   :return;
- * endif
- * stop
- * @enduml
- *
- * @param dest_p
- * Destination record pointer. Updated if not NULL and `src_pc` is not NULL.
- *
- * @param src_pc
- * Source record pointer. Read-only. If NULL, nothing is updated.
- *
- * @return void
- * No return value.
- */
-void MyLib_UpdateGlobalRecord(MyLib_record_t *dest_p, const MyLib_record_t *src_pc);
-
-/**
- * @brief Run an orchestration sequence and return a combined result.
- *
- * @details
- * **Goal of the function**
- *
- * Execute a deterministic sequence:
- * - Derive a delta (`l_d_u16`) from `delta_pc_u16` (default 0 if NULL)
- * - Compute a base using an internal helper
- * - Build a temporary record derived from the base
- * - Process the record via `MyLib_ProcessRecord()`
- * - Return `l_base_u32 + g_counter_u32`
- *
- * @par Interface summary
- *
- * | Interface              | In | Out | Type / Signature                         | Param | Factor | Offset | Size | Range              | Unit |
- * |------------------------|----|-----|------------------------------------------|-------|--------|--------|------|--------------------|------|
- * | start_u32              | X  |     | uint32_t                                 |   X   |   1    |   0    |   1  | 0..200             | [-]  |
- * | delta_pc_u16           | X  |     | const uint16_t*                          |   X   |   1    |   0    |   1  | pointer / NULL     | [-]  |
- * | InternalHelper_u32     |    |  X  | uint32_t (uint32_t x_u32, uint16_t y_u16)|       |   1    |   0    |   1  | -                  | [-]  |
- * | MyLib_ProcessRecord    |    |  X  | void (const MyLib_record_t *, uint8_t )  |       |   1    |   0    |   1  | -                  | [-]  |
- * | g_counter_u32          |    |  X  | uint32_t (global)                        |       |   1    |   0    |   1  | 0..500             | [-]  |
- * | return val             |    |  X  | uint32_t                                 |       |   1    |   0    |   1  | 0..400             | [-]  |
- *
- * @par Activity diagram (PlantUML)
- *
- * @startuml
- * start
- * if (delta_pc_u16 == NULL) then (yes)
- *   :l_d_u16 = 0;
- * else (no)
- *   :l_d_u16 = *delta_pc_u16;
- * endif
- * :l_base_u32 = InternalHelper_u32(start_u32, l_d_u16);
- * :l_r.id_u16 = (l_base_u32 & 0xFFFF);
- * :l_r.value_u32 = l_base_u32 / 2;
- * :call MyLib_ProcessRecord(&l_r, MYLIB_MULT_VALUE_U8);
- * :return (l_base_u32 + g_counter_u32);
- * stop
- * @enduml
- *
- * @param start_u32
- * Input start value used to derive the orchestration base.
- *
- * @param delta_pc_u16
- * Optional pointer to delta. If NULL, delta defaults to 0.
- *
- * @return uint32_t
- * Combined result: computed base plus the current global counter.
- */
-uint32_t MyLib_Orchestrate_u32(uint32_t start_u32, const uint16_t *delta_pc_u16);
-
-/**
- * @brief Compute a deterministic accumulated value based on an input seed and loop bound.
- *
- * @details
- * **Goal of the function**
- *
- * Provide a small, deterministic arithmetic helper that starts from `x_u32` and
- * accumulates an even-step sequence for `y_u16` iterations:
- * - Initialize `l_acc_u32` with `x_u32`
- * - For each `l_i_u16` in `[0 .. y_u16-1]`, add `(l_i_u16 * 2)` to `l_acc_u32`
- * - Return the final accumulated value
- *
- * This function is typically used as an internal building block to apply a
- * bounded and predictable post-processing step.
- *
- * @par Interface summary
- *
- * | Interface   | In | Out | Type / Signature | Param | Factor | Offset | Size | Range      | Unit |
- * |-------------|----|-----|------------------|-------|--------|--------|------|------------|------|
- * | x_u32       | X  |     | uint32_t         |   X   |   1    |   0    |   1  | 0..60535   | [-]  |
- * | y_u16       | X  |     | uint16_t         |   X   |   1    |   0    |   1  | 0..60535   | [-]  |
- * | return val  |    |  X  | uint32_t         |       |   1    |   0    |   1  | 0..700     | [-]  |
- *
- * @par Activity diagram (PlantUML)
- *
- * @startuml
- * start
- * :l_acc_u32 = x_u32;
- * :l_i_u16 = 0;
- * while (l_i_u16 < y_u16) is (yes)
- *   :l_acc_u32 += (l_i_u16 * 2);
- *   :l_i_u16++;
- * endwhile (no)
- * :return l_acc_u32;
- * stop
- * @enduml
- *
- * @param x_u32
- * Seed value used to initialize the accumulator.
- *
- * @param y_u16
- * Number of loop iterations. The accumulation adds `2*l_i_u16` for each
- * `l_i_u16` from 0 to `y_u16-1`.
- *
- * @return uint32_t
- * Final accumulated value (wrap-around possible on 32-bit overflow).
- */
-static uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
-
-/**
- * @brief Update the module global counter with optional saturation handling.
- *
- * @details
- * **Goal of the function**
- *
- * Execute a deterministic sequence:
- * - Increment a function-static cycle counter (`l_CycleCnt_u32`)
- * - Check module readiness via `g_systemReady_b`
- *   - If not ready, return error code 1 and perform no update
- * - Compute a tentative new counter value (`l_new_u32 = g_counter_u32 + add_u32`)
- * - Apply saturation (if enabled):
- *   - If `SaturationEn_b == true` and `l_new_u32 > CounterLimit_u32`, clamp `g_counter_u32` and return code 2
- *   - Otherwise store `l_new_u32` into `g_counter_u32` and return code 0
- * - Periodically toggle `SaturationEn_b` every 16 calls (when `(l_CycleCnt_u32 & 0x0FU) == 0U`)
- *
- * @par Interface summary
- *
- * | Interface         | In | Out | Type / Signature           | Param | Factor | Offset | Size | Range              | Unit |
- * |-------------------|----|-----|----------------------------|-------|--------|--------|------|--------------------|------|
- * | add_u32           | X  |     | uint32_t                   |   X   |   1    |   0    |   1  | 0..(wrap)          | [-]  |
- * | g_systemReady_b   |    |  X  | bool                       |       |   1    |   0    |   1  | false/true         | [-]  |
- * | g_counter_u32     |    |  X  | uint32_t                   |       |   1    |   0    |   1  | 0..(wrap)          | [-]  |
- * | CounterLimit_u32  |    |  X  | uint32_t                   |       |   1    |   0    |   1  | 0..(wrap)          | [-]  |
- * | SaturationEn_b    |    |  X  | bool                       |       |   1    |   0    |   1  | false/true         | [-]  |
- * | return val        |    |  X  | uint8_t                    |       |   1    |   0    |   1  | 0..2               | [-]  |
- *
- * @par Activity diagram (PlantUML)
- *
- * @startuml
- * start
- * :static l_CycleCnt_u32++;
- * if (g_systemReady_b == false) then (yes)
- *   :return 1;
- * else (no)
- *   :l_new_u32 = g_counter_u32 + add_u32;
- *   if ((SaturationEn_b == true) && (l_new_u32 > CounterLimit_u32)) then (yes)
- *     :g_counter_u32 = CounterLimit_u32;
- *     :l_ret_u8 = 2;
- *   else (no)
- *     :g_counter_u32 = l_new_u32;
- *     :l_ret_u8 = 0;
- *   endif
- *   if ((l_CycleCnt_u32 & 0x0F) == 0) then (yes)
- *     :SaturationEn_b = !SaturationEn_b;
- *   endif
- *   :return l_ret_u8;
- * endif
- * stop
- * @enduml
- *
- * @param add_u32
- * Unsigned increment added to `g_counter_u32` (wrap-around may occur before saturation check).
- *
- * @return uint8_t
- * Status code:
- * - 0: Update applied (no saturation clamp)
- * - 1: Rejected because `g_systemReady_b == false`
- * - 2: Saturation applied and `g_counter_u32` clamped to `CounterLimit_u32`
- */
-uint8_t MyLib_UpdateCounter_u8(uint32_t add_u32);
-
-# 5 "utExecutionAndResults/utUnderTest/src/main.h" 2
-
-int main(void);
-
-# 2 "utExecutionAndResults/utUnderTest/test/test_main_1.c" 2
-# 1 "utExecutionAndResults/utUnderTest/build/vendor/unity/src/unity.h" 1
-/* =========================================================================
-    Unity - A Test Framework for C
-    ThrowTheSwitch.org
-    Copyright (c) 2007-25 Mike Karlesky, Mark VanderVoord, & Greg Williams
-    SPDX-License-Identifier: MIT
-========================================================================= */
-
-
-#define UNITY_FRAMEWORK_H 
-#define UNITY 
-
-#define UNITY_VERSION_MAJOR 2
-#define UNITY_VERSION_MINOR 6
-#define UNITY_VERSION_BUILD 1
-#define UNITY_VERSION ((UNITY_VERSION_MAJOR << 16) | (UNITY_VERSION_MINOR << 8) | UNITY_VERSION_BUILD)
-
-
-
-
-
-
-# 1 "utExecutionAndResults/utUnderTest/build/vendor/unity/src/unity_internals.h" 1
-/* =========================================================================
-    Unity - A Test Framework for C
-    ThrowTheSwitch.org
-    Copyright (c) 2007-25 Mike Karlesky, Mark VanderVoord, & Greg Williams
-    SPDX-License-Identifier: MIT
-========================================================================= */
-
-
-#define UNITY_INTERNALS_H 
-
-
-
-
-
-
-# 1 "/usr/include/setjmp.h" 1 3 4
-/* Copyright (C) 1991-2022 Free Software Foundation, Inc.
-   This file is part of the GNU C Library.
-
-   The GNU C Library is free software; you can redistribute it and/or
-   modify it under the terms of the GNU Lesser General Public
-   License as published by the Free Software Foundation; either
-   version 2.1 of the License, or (at your option) any later version.
-
-   The GNU C Library is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-   Lesser General Public License for more details.
-
-   You should have received a copy of the GNU Lesser General Public
-   License along with the GNU C Library; if not, see
-   <https://www.gnu.org/licenses/>.  */
-
-/*
- *	ISO C99 Standard: 7.13 Nonlocal jumps	<setjmp.h>
- */
-
-
-#define _SETJMP_H 1
-
-
-
-__BEGIN_DECLS
-
-# 1 "/usr/include/x86_64-linux-gnu/bits/setjmp.h" 1 3 4
-/* Copyright (C) 2001-2022 Free Software Foundation, Inc.
-   This file is part of the GNU C Library.
-
-   The GNU C Library is free software; you can redistribute it and/or
-   modify it under the terms of the GNU Lesser General Public
-   License as published by the Free Software Foundation; either
-   version 2.1 of the License, or (at your option) any later version.
-
-   The GNU C Library is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-   Lesser General Public License for more details.
-
-   You should have received a copy of the GNU Lesser General Public
-   License along with the GNU C Library; if not, see
-   <https://www.gnu.org/licenses/>.  */
-
-/* Define the machine-dependent type `jmp_buf'.  x86-64 version.  */
-
-#define _BITS_SETJMP_H 1
-
-
-
-
-
-# 1 "/usr/include/x86_64-linux-gnu/bits/wordsize.h" 1 3 4
-/* Determine the wordsize from the preprocessor defines.  */
-
-
-#define __WORDSIZE 64
-
-
-
-
-
-
-#define __WORDSIZE_TIME64_COMPAT32 1
-
-
-/* Both x86-64 and x32 use the 64-bit system call interface.  */
-#define __SYSCALL_WORDSIZE 64
-# 27 "/usr/include/x86_64-linux-gnu/bits/setjmp.h" 2 3 4
-
-
-
-
-typedef long int __jmp_buf[8];
-
-
-
-
-
-
-
-
-# 30 "/usr/include/setjmp.h" 2 3 4
-# 1 "/usr/include/x86_64-linux-gnu/bits/types/struct___jmp_buf_tag.h" 1 3 4
-/* Define struct __jmp_buf_tag.
-   Copyright (C) 1991-2022 Free Software Foundation, Inc.
-   This file is part of the GNU C Library.
-
-   The GNU C Library is free software; you can redistribute it and/or
-   modify it under the terms of the GNU Lesser General Public
-   License as published by the Free Software Foundation; either
-   version 2.1 of the License, or (at your option) any later version.
-
-   The GNU C Library is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-   Lesser General Public License for more details.
-
-   You should have received a copy of the GNU Lesser General Public
-   License along with the GNU C Library; if not, see
-   <https://www.gnu.org/licenses/>.  */
-
-
-#define __jmp_buf_tag_defined 1
-
-
-# 1 "/usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h" 1 3 4
-
-#define ____sigset_t_defined 
-
-#define _SIGSET_NWORDS (1024 / (8 * sizeof (unsigned long int)))
-typedef struct
-{
-  unsigned long int __val[_SIGSET_NWORDS];
-} __sigset_t;
-
-# 24 "/usr/include/x86_64-linux-gnu/bits/types/struct___jmp_buf_tag.h" 2 3 4
-
-/* Calling environment, plus possibly a saved signal mask.  */
-struct __jmp_buf_tag
-  {
-    /* NOTE: The machine-dependent definitions of `__sigsetjmp'
-       assume that a `jmp_buf' begins with a `__jmp_buf' and that
-       `__mask_was_saved' follows it.  Do not move these members
-       or add others before it.  */
-    __jmp_buf __jmpbuf;		/* Calling environment.  */
-    int __mask_was_saved;	/* Saved the signal mask?  */
-    __sigset_t __saved_mask;	/* Saved signal mask.  */
-  };
-
-# 31 "/usr/include/setjmp.h" 2 3 4
-
-typedef struct __jmp_buf_tag jmp_buf[1];
-
-/* Store the calling environment in ENV, also saving the signal mask.
-   Return 0.  */
-extern int setjmp (jmp_buf __env) __THROWNL;
-
-/* Store the calling environment in ENV, also saving the
-   signal mask if SAVEMASK is nonzero.  Return 0.
-   This is the internal name for `sigsetjmp'.  */
-extern int __sigsetjmp (struct __jmp_buf_tag __env[1], int __savemask) __THROWNL;
-
-/* Store the calling environment in ENV, not saving the signal mask.
-   Return 0.  */
-extern int _setjmp (struct __jmp_buf_tag __env[1]) __THROWNL;
-
-/* Do not save the signal mask.  This is equivalent to the `_setjmp'
-   BSD function.  */
-#define setjmp(env) _setjmp (env)
-
-
-/* Jump to the environment saved in ENV, making the
-   `setjmp' call there return VAL, or 1 if VAL is 0.  */
-extern void longjmp (struct __jmp_buf_tag __env[1], int __val)
-     __THROWNL __attribute__ ((__noreturn__));
-
-
-/* Same.  Usually `_longjmp' is used with `_setjmp', which does not save
-   the signal mask.  But it is how ENV was saved that determines whether
-   `longjmp' restores the mask; `_longjmp' is just an alias.  */
-extern void _longjmp (struct __jmp_buf_tag __env[1], int __val)
-     __THROWNL __attribute__ ((__noreturn__));
-
-
-
-
-/* Use the same type for `jmp_buf' and `sigjmp_buf'.
-   The `__mask_was_saved' flag determines whether
-   or not `longjmp' will restore the signal mask.  */
-typedef struct __jmp_buf_tag sigjmp_buf[1];
-
-/* Store the calling environment in ENV, also saving the
-   signal mask if SAVEMASK is nonzero.  Return 0.  */
-#define sigsetjmp(env,savemask) __sigsetjmp (env, savemask)
-
-/* Jump to the environment saved in ENV, making the
-   sigsetjmp call there return VAL, or 1 if VAL is 0.
-   Restore the signal mask if that sigsetjmp call saved it.
-   This is just an alias `longjmp'.  */
-extern void siglongjmp (sigjmp_buf __env, int __val)
-     __THROWNL __attribute__ ((__noreturn__));
-
-
-
-/* Define helper functions to catch unsafe code.  */
-
-
-
-
-__END_DECLS
-
-# 17 "utExecutionAndResults/utUnderTest/build/vendor/unity/src/unity_internals.h" 2
-
-
-
-# 1 "/usr/include/math.h" 1 3 4
-/* Declarations for math functions.
-   Copyright (C) 1991-2022 Free Software Foundation, Inc.
-   This file is part of the GNU C Library.
-
-   The GNU C Library is free software; you can redistribute it and/or
-   modify it under the terms of the GNU Lesser General Public
-   License as published by the Free Software Foundation; either
-   version 2.1 of the License, or (at your option) any later version.
-
-   The GNU C Library is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-   Lesser General Public License for more details.
-
-   You should have received a copy of the GNU Lesser General Public
-   License along with the GNU C Library; if not, see
-   <https://www.gnu.org/licenses/>.  */
-
-/*
- *	ISO C99 Standard: 7.12 Mathematics	<math.h>
- */
-
-
-#define _MATH_H 1
-
-#define __GLIBC_INTERNAL_STARTING_HEADER_IMPLEMENTATION 
-# 1 "/usr/include/x86_64-linux-gnu/bits/libc-header-start.h" 1 3 4
-/* Handle feature test macros at the start of a header.
-   Copyright (C) 2016-2022 Free Software Foundation, Inc.
-   This file is part of the GNU C Library.
-
-   The GNU C Library is free software; you can redistribute it and/or
-   modify it under the terms of the GNU Lesser General Public
-   License as published by the Free Software Foundation; either
-   version 2.1 of the License, or (at your option) any later version.
-
-   The GNU C Library is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-   Lesser General Public License for more details.
-
-   You should have received a copy of the GNU Lesser General Public
-   License along with the GNU C Library; if not, see
-   <https://www.gnu.org/licenses/>.  */
-
-/* This header is internal to glibc and should not be included outside
-   of glibc headers.  Headers including it must define
-   __GLIBC_INTERNAL_STARTING_HEADER_IMPLEMENTATION first.  This header
-   cannot have multiple include guards because ISO C feature test
-   macros depend on the definition of the macro when an affected
-   header is included, not when the first system header is
-   included.  */
-
-
-
-
-
-#undef __GLIBC_INTERNAL_STARTING_HEADER_IMPLEMENTATION
-
-
-
-/* ISO/IEC TR 24731-2:2010 defines the __STDC_WANT_LIB_EXT2__
-   macro.  */
-#undef __GLIBC_USE_LIB_EXT2
-
-
-
-
-#define __GLIBC_USE_LIB_EXT2 0
-
-
-/* ISO/IEC TS 18661-1:2014 defines the __STDC_WANT_IEC_60559_BFP_EXT__
-   macro.  Most but not all symbols enabled by that macro in TS
-   18661-1 are enabled unconditionally in C2X.  In C2X, the symbols in
-   Annex F still require a new feature test macro
-   __STDC_WANT_IEC_60559_EXT__ instead (C2X does not define
-   __STDC_WANT_IEC_60559_BFP_EXT__), while a few features from TS
-   18661-1 are not included in C2X (and thus should depend on
-   __STDC_WANT_IEC_60559_BFP_EXT__ even when C2X features are
-   enabled).
-
-   __GLIBC_USE (IEC_60559_BFP_EXT) controls those features from TS
-   18661-1 not included in C2X.
-
-   __GLIBC_USE (IEC_60559_BFP_EXT_C2X) controls those features from TS
-   18661-1 that are also included in C2X (with no feature test macro
-   required in C2X).
-
-   __GLIBC_USE (IEC_60559_EXT) controls those features from TS 18661-1
-   that are included in C2X but conditional on
-   __STDC_WANT_IEC_60559_EXT__.  (There are currently no features
-   conditional on __STDC_WANT_IEC_60559_EXT__ that are not in TS
-   18661-1.)  */
-#undef __GLIBC_USE_IEC_60559_BFP_EXT
-
-
-
-#define __GLIBC_USE_IEC_60559_BFP_EXT 0
-
-#undef __GLIBC_USE_IEC_60559_BFP_EXT_C2X
-
-
-
-#define __GLIBC_USE_IEC_60559_BFP_EXT_C2X 0
-
-#undef __GLIBC_USE_IEC_60559_EXT
-
-
-
-#define __GLIBC_USE_IEC_60559_EXT 0
-
-
-/* ISO/IEC TS 18661-4:2015 defines the
-   __STDC_WANT_IEC_60559_FUNCS_EXT__ macro.  Other than the reduction
-   functions, the symbols from this TS are enabled unconditionally in
-   C2X.  */
-#undef __GLIBC_USE_IEC_60559_FUNCS_EXT
-
-
-
-#define __GLIBC_USE_IEC_60559_FUNCS_EXT 0
-
-#undef __GLIBC_USE_IEC_60559_FUNCS_EXT_C2X
-
-
-
-#define __GLIBC_USE_IEC_60559_FUNCS_EXT_C2X 0
-
-
-/* ISO/IEC TS 18661-3:2015 defines the
-   __STDC_WANT_IEC_60559_TYPES_EXT__ macro.  */
-#undef __GLIBC_USE_IEC_60559_TYPES_EXT
-
-
-
-#define __GLIBC_USE_IEC_60559_TYPES_EXT 0
-# 28 "/usr/include/math.h" 2 3 4
-
-
-
-
-
-
-__BEGIN_DECLS
-
-/* Get definitions of __intmax_t and __uintmax_t.  */
-
+# 38 "/usr/include/math.h" 2 3 4
 
 /* Get machine-dependent vector math functions declarations.  */
 # 1 "/usr/include/x86_64-linux-gnu/bits/math-vector.h" 1 3 4
@@ -6826,6 +5472,340 @@ see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
 /*
  * ISO C Standard:  7.17  Common definitions  <stddef.h>
  */
+
+
+
+
+
+
+/* Any one of these symbols __need_* means that GNU libc
+   wants us just to define one data type.  So don't define
+   the symbols that indicate this file's entire job has been done.  */
+
+
+
+#define _STDDEF_H 
+#define _STDDEF_H_ 
+/* snaroff@next.com says the NeXT needs this.  */
+#define _ANSI_STDDEF_H 
+
+
+
+/* This avoids lossage on SunOS but only if stdtypes.h comes first.
+   There's no way to win with the other order!  Sun lossage.  */
+
+
+
+
+
+
+
+
+
+# 85 "/usr/lib/gcc/x86_64-linux-gnu/12/include/stddef.h" 3 4
+
+/* Sequent's header files use _PTRDIFF_T_ in some conflicting way.
+   Just ignore it.  */
+
+
+
+
+/* On VxWorks, <type/vxTypesBase.h> may have defined macros like
+   _TYPE_size_t which will typedef size_t.  fixincludes patched the
+   vxTypesBase.h so that this macro is only defined if _GCC_SIZE_T is
+   not defined, and so that defining this macro defines _GCC_SIZE_T.
+   If we find that the macros are still defined at this point, we must
+   invoke them so that the type is defined as expected.  */
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* In case nobody has defined these types, but we aren't running under
+   GCC 2.00, make sure that __PTRDIFF_TYPE__, __SIZE_TYPE__, and
+   __WCHAR_TYPE__ have reasonable values.  This can happen if the
+   parts of GCC is compiled by an older compiler, that actually
+   include gstddef.h, such as collect2.  */
+
+/* Signed type of difference of two pointers.  */
+
+/* Define this type if we are doing the whole job,
+   or if we want this type in particular.  */
+
+
+
+
+
+
+
+
+
+
+
+#define _PTRDIFF_T 
+#define _T_PTRDIFF_ 
+#define _T_PTRDIFF 
+#define __PTRDIFF_T 
+#define _PTRDIFF_T_ 
+#define _BSD_PTRDIFF_T_ 
+#define ___int_ptrdiff_t_h 
+#define _GCC_PTRDIFF_T 
+#define _PTRDIFF_T_DECLARED 
+#define __DEFINED_ptrdiff_t 
+
+
+
+typedef __PTRDIFF_TYPE__ ptrdiff_t;
+
+
+
+
+
+
+
+
+
+
+
+/* If this symbol has done its job, get rid of it.  */
+#undef __need_ptrdiff_t
+
+
+
+/* Unsigned type of `sizeof' something.  */
+
+/* Define this type if we are doing the whole job,
+   or if we want this type in particular.  */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#define __size_t__ 
+#define __SIZE_T__ 
+#define _SIZE_T 
+#define _SYS_SIZE_T_H 
+#define _T_SIZE_ 
+#define _T_SIZE 
+#define __SIZE_T 
+#define _SIZE_T_ 
+#define _BSD_SIZE_T_ 
+#define _SIZE_T_DEFINED_ 
+#define _SIZE_T_DEFINED 
+#define _BSD_SIZE_T_DEFINED_ 
+#define _SIZE_T_DECLARED 
+#define __DEFINED_size_t 
+#define ___int_size_t_h 
+#define _GCC_SIZE_T 
+#define _SIZET_ 
+
+
+
+
+
+
+#define __size_t 
+
+
+
+
+
+typedef __SIZE_TYPE__ size_t;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#undef __need_size_t
+
+
+
+/* Wide character type.
+   Locale-writers should change this as necessary to
+   be big enough to hold unique values not between 0 and 127,
+   and not (wchar_t) -1, for each defined multibyte character.  */
+
+/* Define this type if we are doing the whole job,
+   or if we want this type in particular.  */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#define __wchar_t__ 
+#define __WCHAR_T__ 
+#define _WCHAR_T 
+#define _T_WCHAR_ 
+#define _T_WCHAR 
+#define __WCHAR_T 
+#define _WCHAR_T_ 
+#define _BSD_WCHAR_T_ 
+#define _WCHAR_T_DEFINED_ 
+#define _WCHAR_T_DEFINED 
+#define _WCHAR_T_H 
+#define ___int_wchar_t_h 
+#define __INT_WCHAR_T_H 
+#define _GCC_WCHAR_T 
+#define _WCHAR_T_DECLARED 
+#define __DEFINED_wchar_t 
+
+/* On BSD/386 1.1, at least, machine/ansi.h defines _BSD_WCHAR_T_
+   instead of _WCHAR_T_, and _BSD_RUNE_T_ (which, unlike the other
+   symbols in the _FOO_T_ family, stays defined even after its
+   corresponding type is defined).  If we define wchar_t, then we
+   must undef _WCHAR_T_; for BSD/386 1.1 (and perhaps others), if
+   we undef _WCHAR_T_, then we must also define rune_t, since 
+   headers like runetype.h assume that if machine/ansi.h is included,
+   and _BSD_WCHAR_T_ is not defined, then rune_t is available.
+   machine/ansi.h says, "Note that _WCHAR_T_ and _RUNE_T_ must be of
+   the same type." */
+
+#undef _BSD_WCHAR_T_
+# 310 "/usr/lib/gcc/x86_64-linux-gnu/12/include/stddef.h" 3 4
+
+/* FreeBSD 5 can't be handled well using "traditional" logic above
+   since it no longer defines _BSD_RUNE_T_ yet still desires to export
+   rune_t in some cases... */
+# 324 "/usr/lib/gcc/x86_64-linux-gnu/12/include/stddef.h" 3 4
+
+
+
+
+
+typedef __WCHAR_TYPE__ wchar_t;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#undef __need_wchar_t
+
+
+# 363 "/usr/lib/gcc/x86_64-linux-gnu/12/include/stddef.h" 3 4
+
+# 393 "/usr/lib/gcc/x86_64-linux-gnu/12/include/stddef.h" 3 4
+
+
+
+/* A null pointer constant.  */
+
+
+#undef NULL
+
+
+
+
+#define NULL ((void *)0)
+
+
+
+
+
+#undef __need_NULL
+
+
+
+/* Offset of member MEMBER in a struct of type TYPE. */
+#define offsetof(TYPE,MEMBER) __builtin_offsetof (TYPE, MEMBER)
+
+
+
+
+#define _GCC_MAX_ALIGN_T 
+/* Type whose alignment is supported in every context and is at least
+   as great as that of any standard type not using alignment
+   specifiers.  */
+typedef struct {
+  long long __max_align_ll __attribute__((__aligned__(__alignof__(long long))));
+  long double __max_align_ld __attribute__((__aligned__(__alignof__(long double))));
+  /* _Float128 is defined as a basic type, so max_align_t must be
+     sufficiently aligned for it.  This code must work in C++, so we
+     use __float128 here; that is only available on some
+     architectures, but only on i386 is extra alignment needed for
+     __float128.  */
+
+
+
+} max_align_t;
+
+
+
+
+
+
+
+
+
+
+
+
 # 25 "utExecutionAndResults/utUnderTest/build/vendor/unity/src/unity_internals.h" 2
 
 
@@ -6839,7 +5819,524 @@ see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
  * The user may override any of these derived constants:
  * UNITY_INT_WIDTH, UNITY_LONG_WIDTH, UNITY_POINTER_WIDTH */
 
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/12/include/stdint.h" 1 3 4
 
+
+
+
+
+
+
+
+# 1 "/usr/include/stdint.h" 1 3 4
+/* Copyright (C) 1997-2022 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, see
+   <https://www.gnu.org/licenses/>.  */
+
+/*
+ *	ISO C99: 7.18 Integer types <stdint.h>
+ */
+
+
+#define _STDINT_H 1
+
+#define __GLIBC_INTERNAL_STARTING_HEADER_IMPLEMENTATION 
+# 1 "/usr/include/x86_64-linux-gnu/bits/libc-header-start.h" 1 3 4
+/* Handle feature test macros at the start of a header.
+   Copyright (C) 2016-2022 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, see
+   <https://www.gnu.org/licenses/>.  */
+
+/* This header is internal to glibc and should not be included outside
+   of glibc headers.  Headers including it must define
+   __GLIBC_INTERNAL_STARTING_HEADER_IMPLEMENTATION first.  This header
+   cannot have multiple include guards because ISO C feature test
+   macros depend on the definition of the macro when an affected
+   header is included, not when the first system header is
+   included.  */
+
+
+
+
+
+#undef __GLIBC_INTERNAL_STARTING_HEADER_IMPLEMENTATION
+
+
+
+/* ISO/IEC TR 24731-2:2010 defines the __STDC_WANT_LIB_EXT2__
+   macro.  */
+#undef __GLIBC_USE_LIB_EXT2
+
+
+
+
+#define __GLIBC_USE_LIB_EXT2 0
+
+
+/* ISO/IEC TS 18661-1:2014 defines the __STDC_WANT_IEC_60559_BFP_EXT__
+   macro.  Most but not all symbols enabled by that macro in TS
+   18661-1 are enabled unconditionally in C2X.  In C2X, the symbols in
+   Annex F still require a new feature test macro
+   __STDC_WANT_IEC_60559_EXT__ instead (C2X does not define
+   __STDC_WANT_IEC_60559_BFP_EXT__), while a few features from TS
+   18661-1 are not included in C2X (and thus should depend on
+   __STDC_WANT_IEC_60559_BFP_EXT__ even when C2X features are
+   enabled).
+
+   __GLIBC_USE (IEC_60559_BFP_EXT) controls those features from TS
+   18661-1 not included in C2X.
+
+   __GLIBC_USE (IEC_60559_BFP_EXT_C2X) controls those features from TS
+   18661-1 that are also included in C2X (with no feature test macro
+   required in C2X).
+
+   __GLIBC_USE (IEC_60559_EXT) controls those features from TS 18661-1
+   that are included in C2X but conditional on
+   __STDC_WANT_IEC_60559_EXT__.  (There are currently no features
+   conditional on __STDC_WANT_IEC_60559_EXT__ that are not in TS
+   18661-1.)  */
+#undef __GLIBC_USE_IEC_60559_BFP_EXT
+
+
+
+#define __GLIBC_USE_IEC_60559_BFP_EXT 0
+
+#undef __GLIBC_USE_IEC_60559_BFP_EXT_C2X
+
+
+
+#define __GLIBC_USE_IEC_60559_BFP_EXT_C2X 0
+
+#undef __GLIBC_USE_IEC_60559_EXT
+
+
+
+#define __GLIBC_USE_IEC_60559_EXT 0
+
+
+/* ISO/IEC TS 18661-4:2015 defines the
+   __STDC_WANT_IEC_60559_FUNCS_EXT__ macro.  Other than the reduction
+   functions, the symbols from this TS are enabled unconditionally in
+   C2X.  */
+#undef __GLIBC_USE_IEC_60559_FUNCS_EXT
+
+
+
+#define __GLIBC_USE_IEC_60559_FUNCS_EXT 0
+
+#undef __GLIBC_USE_IEC_60559_FUNCS_EXT_C2X
+
+
+
+#define __GLIBC_USE_IEC_60559_FUNCS_EXT_C2X 0
+
+
+/* ISO/IEC TS 18661-3:2015 defines the
+   __STDC_WANT_IEC_60559_TYPES_EXT__ macro.  */
+#undef __GLIBC_USE_IEC_60559_TYPES_EXT
+
+
+
+#define __GLIBC_USE_IEC_60559_TYPES_EXT 0
+# 27 "/usr/include/stdint.h" 2 3 4
+
+# 1 "/usr/include/x86_64-linux-gnu/bits/wchar.h" 1 3 4
+/* wchar_t type related definitions.
+   Copyright (C) 2000-2022 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, see
+   <https://www.gnu.org/licenses/>.  */
+
+
+#define _BITS_WCHAR_H 1
+
+/* The fallback definitions, for when __WCHAR_MAX__ or __WCHAR_MIN__
+   are not defined, give the right value and type as long as both int
+   and wchar_t are 32-bit types.  Adding L'\0' to a constant value
+   ensures that the type is correct; it is necessary to use (L'\0' +
+   0) rather than just L'\0' so that the type in C++ is the promoted
+   version of wchar_t rather than the distinct wchar_t type itself.
+   Because wchar_t in preprocessor #if expressions is treated as
+   intmax_t or uintmax_t, the expression (L'\0' - 1) would have the
+   wrong value for WCHAR_MAX in such expressions and so cannot be used
+   to define __WCHAR_MAX in the unsigned case.  */
+
+
+#define __WCHAR_MAX __WCHAR_MAX__
+
+
+
+
+
+
+
+#define __WCHAR_MIN __WCHAR_MIN__
+
+
+
+
+
+
+# 29 "/usr/include/stdint.h" 2 3 4
+# 1 "/usr/include/x86_64-linux-gnu/bits/wordsize.h" 1 3 4
+/* Determine the wordsize from the preprocessor defines.  */
+
+
+#define __WORDSIZE 64
+
+
+
+
+
+
+#define __WORDSIZE_TIME64_COMPAT32 1
+
+
+/* Both x86-64 and x32 use the 64-bit system call interface.  */
+#define __SYSCALL_WORDSIZE 64
+# 30 "/usr/include/stdint.h" 2 3 4
+
+/* Exact integral types.  */
+
+/* Signed.  */
+# 1 "/usr/include/x86_64-linux-gnu/bits/stdint-intn.h" 1 3 4
+/* Define intN_t types.
+   Copyright (C) 2017-2022 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, see
+   <https://www.gnu.org/licenses/>.  */
+
+
+#define _BITS_STDINT_INTN_H 1
+
+
+
+typedef __int8_t int8_t;
+typedef __int16_t int16_t;
+typedef __int32_t int32_t;
+typedef __int64_t int64_t;
+
+# 35 "/usr/include/stdint.h" 2 3 4
+
+/* Unsigned.  */
+# 1 "/usr/include/x86_64-linux-gnu/bits/stdint-uintn.h" 1 3 4
+/* Define uintN_t types.
+   Copyright (C) 2017-2022 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, see
+   <https://www.gnu.org/licenses/>.  */
+
+
+#define _BITS_STDINT_UINTN_H 1
+
+
+
+typedef __uint8_t uint8_t;
+typedef __uint16_t uint16_t;
+typedef __uint32_t uint32_t;
+typedef __uint64_t uint64_t;
+
+# 38 "/usr/include/stdint.h" 2 3 4
+
+
+/* Small types.  */
+
+/* Signed.  */
+typedef __int_least8_t int_least8_t;
+typedef __int_least16_t int_least16_t;
+typedef __int_least32_t int_least32_t;
+typedef __int_least64_t int_least64_t;
+
+/* Unsigned.  */
+typedef __uint_least8_t uint_least8_t;
+typedef __uint_least16_t uint_least16_t;
+typedef __uint_least32_t uint_least32_t;
+typedef __uint_least64_t uint_least64_t;
+
+
+/* Fast types.  */
+
+/* Signed.  */
+typedef signed char		int_fast8_t;
+
+typedef long int		int_fast16_t;
+typedef long int		int_fast32_t;
+typedef long int		int_fast64_t;
+
+
+
+
+
+
+
+/* Unsigned.  */
+typedef unsigned char		uint_fast8_t;
+
+typedef unsigned long int	uint_fast16_t;
+typedef unsigned long int	uint_fast32_t;
+typedef unsigned long int	uint_fast64_t;
+
+
+
+
+
+
+
+
+/* Types for `void *' pointers.  */
+
+
+typedef long int		intptr_t;
+#define __intptr_t_defined 
+
+typedef unsigned long int	uintptr_t;
+
+
+
+
+
+
+
+
+
+/* Largest integral types.  */
+typedef __intmax_t		intmax_t;
+typedef __uintmax_t		uintmax_t;
+
+
+
+#define __INT64_C(c) c ## L
+#define __UINT64_C(c) c ## UL
+
+
+
+
+
+/* Limits of integral types.  */
+
+/* Minimum of signed integral types.  */
+#define INT8_MIN (-128)
+#define INT16_MIN (-32767-1)
+#define INT32_MIN (-2147483647-1)
+#define INT64_MIN (-__INT64_C(9223372036854775807)-1)
+/* Maximum of signed integral types.  */
+#define INT8_MAX (127)
+#define INT16_MAX (32767)
+#define INT32_MAX (2147483647)
+#define INT64_MAX (__INT64_C(9223372036854775807))
+
+/* Maximum of unsigned integral types.  */
+#define UINT8_MAX (255)
+#define UINT16_MAX (65535)
+#define UINT32_MAX (4294967295U)
+#define UINT64_MAX (__UINT64_C(18446744073709551615))
+
+
+/* Minimum of signed integral types having a minimum size.  */
+#define INT_LEAST8_MIN (-128)
+#define INT_LEAST16_MIN (-32767-1)
+#define INT_LEAST32_MIN (-2147483647-1)
+#define INT_LEAST64_MIN (-__INT64_C(9223372036854775807)-1)
+/* Maximum of signed integral types having a minimum size.  */
+#define INT_LEAST8_MAX (127)
+#define INT_LEAST16_MAX (32767)
+#define INT_LEAST32_MAX (2147483647)
+#define INT_LEAST64_MAX (__INT64_C(9223372036854775807))
+
+/* Maximum of unsigned integral types having a minimum size.  */
+#define UINT_LEAST8_MAX (255)
+#define UINT_LEAST16_MAX (65535)
+#define UINT_LEAST32_MAX (4294967295U)
+#define UINT_LEAST64_MAX (__UINT64_C(18446744073709551615))
+
+
+/* Minimum of fast signed integral types having a minimum size.  */
+#define INT_FAST8_MIN (-128)
+
+#define INT_FAST16_MIN (-9223372036854775807L-1)
+#define INT_FAST32_MIN (-9223372036854775807L-1)
+
+
+
+
+#define INT_FAST64_MIN (-__INT64_C(9223372036854775807)-1)
+/* Maximum of fast signed integral types having a minimum size.  */
+#define INT_FAST8_MAX (127)
+
+#define INT_FAST16_MAX (9223372036854775807L)
+#define INT_FAST32_MAX (9223372036854775807L)
+
+
+
+
+#define INT_FAST64_MAX (__INT64_C(9223372036854775807))
+
+/* Maximum of fast unsigned integral types having a minimum size.  */
+#define UINT_FAST8_MAX (255)
+
+#define UINT_FAST16_MAX (18446744073709551615UL)
+#define UINT_FAST32_MAX (18446744073709551615UL)
+
+
+
+
+#define UINT_FAST64_MAX (__UINT64_C(18446744073709551615))
+
+
+/* Values to test for integral types holding `void *' pointer.  */
+
+#define INTPTR_MIN (-9223372036854775807L-1)
+#define INTPTR_MAX (9223372036854775807L)
+#define UINTPTR_MAX (18446744073709551615UL)
+
+
+
+
+
+
+
+/* Minimum for largest signed integral type.  */
+#define INTMAX_MIN (-__INT64_C(9223372036854775807)-1)
+/* Maximum for largest signed integral type.  */
+#define INTMAX_MAX (__INT64_C(9223372036854775807))
+
+/* Maximum for largest unsigned integral type.  */
+#define UINTMAX_MAX (__UINT64_C(18446744073709551615))
+
+
+/* Limits of other integer types.  */
+
+/* Limits of `ptrdiff_t' type.  */
+
+#define PTRDIFF_MIN (-9223372036854775807L-1)
+#define PTRDIFF_MAX (9223372036854775807L)
+# 220 "/usr/include/stdint.h" 3 4
+
+/* Limits of `sig_atomic_t'.  */
+#define SIG_ATOMIC_MIN (-2147483647-1)
+#define SIG_ATOMIC_MAX (2147483647)
+
+/* Limit of `size_t' type.  */
+
+#define SIZE_MAX (18446744073709551615UL)
+
+
+
+
+
+
+
+
+/* Limits of `wchar_t'.  */
+
+/* These constants might also be defined in <wchar.h>.  */
+#define WCHAR_MIN __WCHAR_MIN
+#define WCHAR_MAX __WCHAR_MAX
+
+
+/* Limits of `wint_t'.  */
+#define WINT_MIN (0u)
+#define WINT_MAX (4294967295u)
+
+/* Signed.  */
+#define INT8_C(c) c
+#define INT16_C(c) c
+#define INT32_C(c) c
+
+#define INT64_C(c) c ## L
+
+
+
+
+/* Unsigned.  */
+#define UINT8_C(c) c
+#define UINT16_C(c) c
+#define UINT32_C(c) c ## U
+
+#define UINT64_C(c) c ## UL
+
+
+
+
+/* Maximal type.  */
+
+#define INTMAX_C(c) c ## L
+#define UINTMAX_C(c) c ## UL
+
+
+
+
+
+# 318 "/usr/include/stdint.h" 3 4
+
+# 10 "/usr/lib/gcc/x86_64-linux-gnu/12/include/stdint.h" 2 3 4
+
+
+
+#define _GCC_WRAP_STDINT_H 
+# 38 "utExecutionAndResults/utUnderTest/build/vendor/unity/src/unity_internals.h" 2
 
 
 
@@ -10627,6 +10124,509 @@ void verifyTest(void);
 
 
 
+# 2 "utExecutionAndResults/utUnderTest/test/test_main_1.c" 2
+# 1 "utExecutionAndResults/utUnderTest/src/main.h" 1
+
+#define TEST_MAIN_H 
+
+# 1 "utExecutionAndResults/utUnderTest/src/MyLib.h" 1
+/* MyLib.h */
+
+
+#define MYLIB_H 
+
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/12/include/stdbool.h" 1 3 4
+/* Copyright (C) 1998-2022 Free Software Foundation, Inc.
+
+This file is part of GCC.
+
+GCC is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 3, or (at your option)
+any later version.
+
+GCC is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+Under Section 7 of GPL version 3, you are granted additional
+permissions described in the GCC Runtime Library Exception, version
+3.1, as published by the Free Software Foundation.
+
+You should have received a copy of the GNU General Public License and
+a copy of the GCC Runtime Library Exception along with this program;
+see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
+<http://www.gnu.org/licenses/>.  */
+
+/*
+ * ISO C Standard:  7.16  Boolean type and values  <stdbool.h>
+ */
+
+
+#define _STDBOOL_H 
+
+
+
+#define bool _Bool
+
+
+
+
+#define true 1
+#define false 0
+
+
+
+
+
+
+
+
+
+/* Signal that all the definitions are present.  */
+#define __bool_true_false_are_defined 1
+
+# 7 "utExecutionAndResults/utUnderTest/src/MyLib.h" 2
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/12/include/stddef.h" 1 3 4
+/* Copyright (C) 1989-2022 Free Software Foundation, Inc.
+
+This file is part of GCC.
+
+GCC is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 3, or (at your option)
+any later version.
+
+GCC is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+Under Section 7 of GPL version 3, you are granted additional
+permissions described in the GCC Runtime Library Exception, version
+3.1, as published by the Free Software Foundation.
+
+You should have received a copy of the GNU General Public License and
+a copy of the GCC Runtime Library Exception along with this program;
+see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
+<http://www.gnu.org/licenses/>.  */
+
+/*
+ * ISO C Standard:  7.17  Common definitions  <stddef.h>
+ */
+# 8 "utExecutionAndResults/utUnderTest/src/MyLib.h" 2
+
+
+/* Numeric macros */
+#define MYLIB_MAX_COUNT_U32 (100U)
+#define MYLIB_MULT_VALUE_U8 (5U)
+
+/* Typedef / struct */
+typedef struct {
+  uint16_t id_u16;
+  uint32_t value_u32;
+} MyLib_record_t;
+
+/* Global variables */
+extern uint32_t g_counter_u32;
+extern MyLib_record_t g_record;
+extern bool g_systemReady_b;
+
+/**
+ * @brief Process one record with a bounded accumulation and update module globals.
+ *
+ * @details
+ * **Goal of the function**
+ *
+ * Consume an input record and apply a deterministic accumulation based on
+ * `multiplier_u8`. The accumulation logic is implemented using a switch-case
+ * structure to optimize specific scenarios while keeping execution bounded.
+ *
+ * Processing behavior:
+ * - If `rec_pc == NULL`, the function returns immediately (no side effects).
+ * - Otherwise, a local accumulator (`l_acc_u32`) is computed as follows:
+ *   - `multiplier_u8 == 0U`
+ *       → No accumulation (`l_acc_u32 = 0U`).
+ *   - `multiplier_u8 == 1U`
+ *       → Single direct assignment (`l_acc_u32 = rec_pc->value_u32`).
+ *   - `default`
+ *       → Bounded loop accumulation:
+ *         `l_acc_u32 += rec_pc->value_u32` repeated `multiplier_u8` times.
+ *
+ * After accumulation:
+ * - `g_counter_u32` is incremented by `l_acc_u32`.
+ * - `MyLib_ComputeAdjustedValue_u32()` is invoked.
+ *
+ * Wrap-around on `uint32_t` is permitted by design.
+ *
+ * @par Interface summary
+ *
+ * | Interface                      | In | Out | Type / Signature                        | Param | Factor | Offset | Size | Range              | Unit |
+ * |--------------------------------|----|-----|-----------------------------------------|-------|--------|--------|------|--------------------|------|
+ * | rec_pc                         | X  |     | const MyLib_record_t*                   |   X   |   1    |   0    |   1  | pointer / NULL     | [-]  |
+ * | multiplier_u8                  | X  |     | uint8_t                                 |   X   |   1    |   0    |   1  | 0..255             | [-]  |
+ * | MyLib_ComputeAdjustedValue_u32 | X  |  X  | uint32_t (uint32_t , const uint16_t *)  |       |   1    |   0    |   1  | -                  | [-]  |
+ * | g_counter_u32                  |    |  X  | uint32_t (global)                       |       |   1    |   0    |   1  | 0..(wrap)          | [-]  |
+ * | return val                     |    |     | void                                    |       |   1    |   0    |   1  | -                  | [-]  |
+ *
+ * @par Activity diagram (PlantUML)
+ *
+ * @startuml
+ * start
+ * if (rec_pc == NULL) then (yes)
+ *   :return;
+ * else (no)
+ *   :switch(multiplier_u8);
+ *     case (0U)
+ *       :l_acc_u32 = 0U;
+ *     case (1U)
+ *       :l_acc_u32 = rec_pc->value_u32;
+ *     case (default)
+ *       :for l_i_u8 in [0..multiplier_u8-1];
+ *         :l_acc_u32 += rec_pc->value_u32;
+ *       :endfor;
+ *   :endswitch;
+ *   :g_counter_u32 += l_acc_u32;
+ *   :call MyLib_ComputeAdjustedValue_u32(l_acc_u32, (const uint16_t *)&multiplier_u8);
+ *   :return;
+ * endif
+ * stop
+ * @enduml
+ *
+ * @param rec_pc
+ * Pointer to the input record. If NULL, the function returns immediately.
+ *
+ * @param multiplier_u8
+ * Accumulation selector:
+ * - 0 → no accumulation
+ * - 1 → single accumulation
+ * - >1 → bounded loop accumulation
+ *
+ * @return void
+ * No return value.
+ */
+void MyLib_ProcessRecord(const MyLib_record_t *rec_pc, uint8_t multiplier_u8);
+
+/**
+ * @brief Compute an adjusted value from a base value and an optional delta.
+ *
+ * @details
+ * **Goal of the function**
+ *
+ * Multiply `base_u32` by a delta factor and apply a deterministic internal
+ * post-processing step. If `delta_pc_u16` is NULL, a default delta of `1` is used.
+ *
+ * @par Interface summary
+ *
+ * | Interface           | In | Out | Type / Signature                 | Param | Factor | Offset | Size | Range              | Unit |
+ * |---------------------|----|-----|----------------------------------|-------|--------|--------|------|--------------------|------|
+ * | base_u32            | X  |     | uint32_t                         |   X   |   1    |   0    |   1  | 0..600             | [-]  |
+ * | delta_pc_u16        | X  |     | const uint16_t*                  |   X   |   1    |   0    |   1  | pointer / NULL     | [-]  |
+ * | InternalHelper_u32  | X  |  X  | uint32_t (uint32_t , uint16_t )  |       |   1    |   0    |   1  | -                  | [-]  |
+ * | return val          |    |  X  | uint32_t                         |       |   1    |   0    |   1  | 0..500             | [-]  |
+ *
+ * @par Activity diagram (PlantUML)
+ *
+ * @startuml
+ * start
+ * if (delta_pc_u16 == NULL) then (yes)
+ *   :l_d_u16 = 1;
+ * else (no)
+ *   :l_d_u16 = *delta_pc_u16;
+ * endif
+ * :l_val_u32 = base_u32 * l_d_u16;
+ * :l_val_u32 = InternalHelper_u32(l_val_u32, (uint16_t)MYLIB_MULT_VALUE_U8);
+ * :return l_val_u32;
+ * stop
+ * @enduml
+ *
+ * @param base_u32
+ * Base input value.
+ *
+ * @param delta_pc_u16
+ * Optional pointer to delta factor. If NULL, delta defaults to 1.
+ *
+ * @return uint32_t
+ * Adjusted value after applying delta and internal post-processing.
+ */
+uint32_t MyLib_ComputeAdjustedValue_u32(uint32_t base_u32, const uint16_t *delta_pc_u16);
+
+/**
+ * @brief Scale an array in-place and return the sum of scaled elements.
+ *
+ * @details
+ * **Goal of the function**
+ *
+ * Iterate over `values_pu16` for `len_u32` elements, multiply each element by
+ * `factor_u16`, store the result back into the array, and compute the sum.
+ * If the pointer is NULL or the length is 0, return 0.
+ *
+ * The function also invokes `MyLib_ComputeAdjustedValue_u32()` to trigger a
+ * secondary deterministic computation (its return value is not used).
+ *
+ * @par Interface summary
+ *
+ * | Interface                      | In | Out | Type / Signature                        | Param | Factor | Offset | Size | Range              | Unit |
+ * |--------------------------------|----|-----|-----------------------------------------|-------|--------|--------|------|--------------------|------|
+ * | values_pu16                    | X  |  X  | uint16_t*                               |   X   |   1    |   0    |   1  | pointer / NULL     | [-]  |
+ * | len_u32                        | X  |     | size_t                                  |   X   |   1    |   0    |   1  | 0..600             | [-]  |
+ * | factor_u16                     | X  |     | uint16_t                                |   X   |   1    |   0    |   1  | 0..65535           | [-]  |
+ * | MyLib_ComputeAdjustedValue_u32 | X  |  X  | uint32_t (uint32_t , const uint16_t *)  |       |   1    |   0    |   1  | -                  | [-]  |
+ * | return val                     |    |  X  | uint32_t                                |       |   1    |   0    |   1  | 0..500             | [-]  |
+ *
+ * @par Activity diagram (PlantUML)
+ *
+ * @startuml
+ * start
+ * : l_inNull_b = false;
+ * 
+ * if (values_pu16 == NULL or len_u32 == 0) then (yes)
+ *   : l_inNull_b = true;
+ * endif
+ * :l_sum_u32 = 0;
+ * 
+ * if (l_inNull_b == false) then (process)
+ *   :for l_i_u32 in [0 .. len_u32-1];
+ *     :values_pu16[l_i_u32] = values_pu16[l_i_u32] * factor_u16;
+ *     :l_sum_u32 += values_pu16[l_i_u32];
+ *   :endfor;
+ * 
+ *   :call MyLib_ComputeAdjustedValue_u32(l_sum_u32, NULL);
+ * endif
+ * :return l_sum_u32;
+ * 
+ * stop
+ * @enduml
+ *
+ * @param values_pu16
+ * Pointer to the array to be scaled in-place. If NULL, the function returns 0.
+ *
+ * @param len_u32
+ * Number of elements in the array. If 0, the function returns 0.
+ *
+ * @param factor_u16
+ * Scaling factor applied to each element.
+ *
+ * @return uint32_t
+ * Sum of the scaled array elements (wrap-around possible on overflow).
+ */
+uint32_t MyLib_AnalyzeArray_u32(uint16_t *values_pu16, size_t len_u32, uint16_t factor_u16);
+
+/**
+ * @brief Copy a record into a destination and update module global state.
+ *
+ * @details
+ * **Goal of the function**
+ *
+ * Copy the content of `src_pc` into `dest_p`. On success, mirror the copied
+ * record to the module global record and mark the system as ready.
+ * If any pointer is NULL, the function returns immediately without changes.
+ *
+ * @par Interface summary
+ *
+ * | Interface         | In | Out | Type / Signature       | Param | Factor | Offset | Size | Range              | Unit |
+ * |-------------------|----|-----|------------------------|-------|--------|--------|------|--------------------|------|
+ * | dest_p            | X  |  X  | MyLib_record_t*        |   X   |   1    |   0    |   1  | pointer / NULL     | [-]  |
+ * | src_pc            | X  |     | const MyLib_record_t*  |   X   |   1    |   0    |   1  | pointer / NULL     | [-]  |
+ * | g_record          |    |  X  | MyLib_record_t         |       |   1    |   0    |   1  | -                  | [-]  |
+ * | g_systemReady_b   |    |  X  | bool                   |       |   1    |   0    |   1  | false/true         | [-]  |
+ * | return val        |    |     | void                   |       |   1    |   0    |   1  | -                  | [-]  |
+ *
+ * @par Activity diagram (PlantUML)
+ *
+ * @startuml
+ * start
+ * if (dest_p == NULL or src_pc == NULL) then (yes)
+ *   :return;
+ * else (no)
+ *   :dest_p->id_u16 = src_pc->id_u16;
+ *   :dest_p->value_u32 = src_pc->value_u32;
+ *   :g_record = *dest_p;
+ *   :g_systemReady_b = true;
+ *   :return;
+ * endif
+ * stop
+ * @enduml
+ *
+ * @param dest_p
+ * Destination record pointer. Updated if not NULL and `src_pc` is not NULL.
+ *
+ * @param src_pc
+ * Source record pointer. Read-only. If NULL, nothing is updated.
+ *
+ * @return void
+ * No return value.
+ */
+void MyLib_UpdateGlobalRecord(MyLib_record_t *dest_p, const MyLib_record_t *src_pc);
+
+/**
+ * @brief Run an orchestration sequence and return a combined result.
+ *
+ * @details
+ * **Goal of the function**
+ *
+ * Execute a deterministic sequence:
+ * - Derive a delta (`l_d_u16`) from `delta_pc_u16` (default 0 if NULL)
+ * - Compute a base using an internal helper
+ * - Build a temporary record derived from the base
+ * - Process the record via `MyLib_ProcessRecord()`
+ * - Return `l_base_u32 + g_counter_u32`
+ *
+ * @par Interface summary
+ *
+ * | Interface              | In | Out | Type / Signature                         | Param | Factor | Offset | Size | Range              | Unit |
+ * |------------------------|----|-----|------------------------------------------|-------|--------|--------|------|--------------------|------|
+ * | start_u32              | X  |     | uint32_t                                 |   X   |   1    |   0    |   1  | 0..200             | [-]  |
+ * | delta_pc_u16           | X  |     | const uint16_t*                          |   X   |   1    |   0    |   1  | pointer / NULL     | [-]  |
+ * | InternalHelper_u32     |    |  X  | uint32_t (uint32_t x_u32, uint16_t y_u16)|       |   1    |   0    |   1  | -                  | [-]  |
+ * | MyLib_ProcessRecord    |    |  X  | void (const MyLib_record_t *, uint8_t )  |       |   1    |   0    |   1  | -                  | [-]  |
+ * | g_counter_u32          |    |  X  | uint32_t (global)                        |       |   1    |   0    |   1  | 0..500             | [-]  |
+ * | return val             |    |  X  | uint32_t                                 |       |   1    |   0    |   1  | 0..400             | [-]  |
+ *
+ * @par Activity diagram (PlantUML)
+ *
+ * @startuml
+ * start
+ * if (delta_pc_u16 == NULL) then (yes)
+ *   :l_d_u16 = 0;
+ * else (no)
+ *   :l_d_u16 = *delta_pc_u16;
+ * endif
+ * :l_base_u32 = InternalHelper_u32(start_u32, l_d_u16);
+ * :l_r.id_u16 = (l_base_u32 & 0xFFFF);
+ * :l_r.value_u32 = l_base_u32 / 2;
+ * :call MyLib_ProcessRecord(&l_r, MYLIB_MULT_VALUE_U8);
+ * :return (l_base_u32 + g_counter_u32);
+ * stop
+ * @enduml
+ *
+ * @param start_u32
+ * Input start value used to derive the orchestration base.
+ *
+ * @param delta_pc_u16
+ * Optional pointer to delta. If NULL, delta defaults to 0.
+ *
+ * @return uint32_t
+ * Combined result: computed base plus the current global counter.
+ */
+uint32_t MyLib_Orchestrate_u32(uint32_t start_u32, const uint16_t *delta_pc_u16);
+
+/**
+ * @brief Compute a deterministic accumulated value based on an input seed and loop bound.
+ *
+ * @details
+ * **Goal of the function**
+ *
+ * Provide a small, deterministic arithmetic helper that starts from `x_u32` and
+ * accumulates an even-step sequence for `y_u16` iterations:
+ * - Initialize `l_acc_u32` with `x_u32`
+ * - For each `l_i_u16` in `[0 .. y_u16-1]`, add `(l_i_u16 * 2)` to `l_acc_u32`
+ * - Return the final accumulated value
+ *
+ * This function is typically used as an internal building block to apply a
+ * bounded and predictable post-processing step.
+ *
+ * @par Interface summary
+ *
+ * | Interface   | In | Out | Type / Signature | Param | Factor | Offset | Size | Range      | Unit |
+ * |-------------|----|-----|------------------|-------|--------|--------|------|------------|------|
+ * | x_u32       | X  |     | uint32_t         |   X   |   1    |   0    |   1  | 0..60535   | [-]  |
+ * | y_u16       | X  |     | uint16_t         |   X   |   1    |   0    |   1  | 0..60535   | [-]  |
+ * | return val  |    |  X  | uint32_t         |       |   1    |   0    |   1  | 0..700     | [-]  |
+ *
+ * @par Activity diagram (PlantUML)
+ *
+ * @startuml
+ * start
+ * :l_acc_u32 = x_u32;
+ * :l_i_u16 = 0;
+ * while (l_i_u16 < y_u16) is (yes)
+ *   :l_acc_u32 += (l_i_u16 * 2);
+ *   :l_i_u16++;
+ * endwhile (no)
+ * :return l_acc_u32;
+ * stop
+ * @enduml
+ *
+ * @param x_u32
+ * Seed value used to initialize the accumulator.
+ *
+ * @param y_u16
+ * Number of loop iterations. The accumulation adds `2*l_i_u16` for each
+ * `l_i_u16` from 0 to `y_u16-1`.
+ *
+ * @return uint32_t
+ * Final accumulated value (wrap-around possible on 32-bit overflow).
+ */
+static uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
+
+/**
+ * @brief Update the module global counter with optional saturation handling.
+ *
+ * @details
+ * **Goal of the function**
+ *
+ * Execute a deterministic sequence:
+ * - Increment a function-static cycle counter (`l_CycleCnt_u32`)
+ * - Check module readiness via `g_systemReady_b`
+ *   - If not ready, return error code 1 and perform no update
+ * - Compute a tentative new counter value (`l_new_u32 = g_counter_u32 + add_u32`)
+ * - Apply saturation (if enabled):
+ *   - If `SaturationEn_b == true` and `l_new_u32 > CounterLimit_u32`, clamp `g_counter_u32` and return code 2
+ *   - Otherwise store `l_new_u32` into `g_counter_u32` and return code 0
+ * - Periodically toggle `SaturationEn_b` every 16 calls (when `(l_CycleCnt_u32 & 0x0FU) == 0U`)
+ *
+ * @par Interface summary
+ *
+ * | Interface         | In | Out | Type / Signature           | Param | Factor | Offset | Size | Range              | Unit |
+ * |-------------------|----|-----|----------------------------|-------|--------|--------|------|--------------------|------|
+ * | add_u32           | X  |     | uint32_t                   |   X   |   1    |   0    |   1  | 0..(wrap)          | [-]  |
+ * | g_systemReady_b   |    |  X  | bool                       |       |   1    |   0    |   1  | false/true         | [-]  |
+ * | g_counter_u32     |    |  X  | uint32_t                   |       |   1    |   0    |   1  | 0..(wrap)          | [-]  |
+ * | CounterLimit_u32  |    |  X  | uint32_t                   |       |   1    |   0    |   1  | 0..(wrap)          | [-]  |
+ * | SaturationEn_b    |    |  X  | bool                       |       |   1    |   0    |   1  | false/true         | [-]  |
+ * | return val        |    |  X  | uint8_t                    |       |   1    |   0    |   1  | 0..2               | [-]  |
+ *
+ * @par Activity diagram (PlantUML)
+ *
+ * @startuml
+ * start
+ * :static l_CycleCnt_u32++;
+ * if (g_systemReady_b == false) then (yes)
+ *   :return 1;
+ * else (no)
+ *   :l_new_u32 = g_counter_u32 + add_u32;
+ *   if ((SaturationEn_b == true) && (l_new_u32 > CounterLimit_u32)) then (yes)
+ *     :g_counter_u32 = CounterLimit_u32;
+ *     :l_ret_u8 = 2;
+ *   else (no)
+ *     :g_counter_u32 = l_new_u32;
+ *     :l_ret_u8 = 0;
+ *   endif
+ *   if ((l_CycleCnt_u32 & 0x0F) == 0) then (yes)
+ *     :SaturationEn_b = !SaturationEn_b;
+ *   endif
+ *   :return l_ret_u8;
+ * endif
+ * stop
+ * @enduml
+ *
+ * @param add_u32
+ * Unsigned increment added to `g_counter_u32` (wrap-around may occur before saturation check).
+ *
+ * @return uint8_t
+ * Status code:
+ * - 0: Update applied (no saturation clamp)
+ * - 1: Rejected because `g_systemReady_b == false`
+ * - 2: Saturation applied and `g_counter_u32` clamped to `CounterLimit_u32`
+ */
+uint8_t MyLib_UpdateCounter_u8(uint32_t add_u32);
+
+# 5 "utExecutionAndResults/utUnderTest/src/main.h" 2
+
+int main(void);
+
 # 3 "utExecutionAndResults/utUnderTest/test/test_main_1.c" 2
 
 # 1 "utExecutionAndResults/utUnderTest/build/test/mocks/test_main_1/mock_MyLib.h" 1
@@ -10832,11 +10832,12 @@ void MyLib_UpdateCounter_u8_CMockIgnoreArg_add_u32(UNITY_LINE_TYPE cmock_line);
 
 # 5 "utExecutionAndResults/utUnderTest/test/test_main_1.c" 2
 
-void setUp(void) {}
+void setUp(void) {
+}
 
-void tearDown(void) {}
+void tearDown(void) {
+}
 
-void test_main(void)
-{
-    TEST_IGNORE_MESSAGE("Auto-generated stub test");
+void test_main(void) {
+  TEST_IGNORE_MESSAGE("Auto-generated stub test");
 }

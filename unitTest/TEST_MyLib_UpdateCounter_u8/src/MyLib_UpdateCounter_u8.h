@@ -9,7 +9,6 @@ void SetCounterLimit_u32(uint32_t value);
 bool GetSaturationEn_b(void);
 void SetSaturationEn_b(bool enable);
 
-
 /**
  * @brief Update the module global counter with optional saturation handling.
  *
