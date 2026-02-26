@@ -19,7 +19,8 @@ void setUp(void) {
   SetSaturationEn_b(true);                  /* Saturation enabled by default */
 }
 
-void tearDown(void) { /* Nothing specific needed; setUp will reset for next test */ }
+void tearDown(void) { /* Nothing specific needed; setUp will reset for next test */
+}
 
 /* ============================================================================
  * Test: System Not Ready (g_systemReady_b == false)

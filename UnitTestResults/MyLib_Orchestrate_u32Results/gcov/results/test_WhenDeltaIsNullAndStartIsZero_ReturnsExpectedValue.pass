@@ -1,0 +1,19 @@
+---
+:source:
+  :file: utExecutionAndResults/utUnderTest/test/test_WhenDeltaIsNullAndStartIsZero_ReturnsExpectedValue.c
+  :dirname: utExecutionAndResults/utUnderTest/test
+  :basename: test_WhenDeltaIsNullAndStartIsZero_ReturnsExpectedValue.c
+:successes:
+- :test: test_MyLib_Orchestrate_u32_WhenDeltaIsNullAndStartIsZero_ReturnsExpectedValue
+  :line: 32
+  :message: ''
+  :unity_test_time: 0
+:failures: []
+:ignores: []
+:counts:
+  :total: 1
+  :passed: 1
+  :failed: 0
+  :ignored: 0
+:stdout: []
+:time: 0.0029229630000031648

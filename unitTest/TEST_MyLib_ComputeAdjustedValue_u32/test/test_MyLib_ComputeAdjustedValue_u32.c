@@ -7,9 +7,11 @@
  * ============================================================================
  */
 
-void setUp(void) { /* Reset mock state before each test */ }
+void setUp(void) { /* Reset mock state before each test */
+}
 
-void tearDown(void) { /* Verify all expectations were met */ }
+void tearDown(void) { /* Verify all expectations were met */
+}
 
 /* ============================================================================
  * TEST CASES: MyLib_ComputeAdjustedValue_u32

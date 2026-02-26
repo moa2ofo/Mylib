@@ -21,7 +21,8 @@ void setUp(void) {
 /**
  * @brief Teardown function called after each test
  */
-void tearDown(void) {}
+void tearDown(void) {
+}
 
 /*=============================================================================
  * Test Case 1: NULL pointer - function returns immediately

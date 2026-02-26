@@ -29,7 +29,8 @@ void setUp(void) {
  * @brief Tear down test fixtures after each test
  * Verify all mock expectations were met
  */
-void tearDown(void) { /* CMock will verify that all expectations were met */ }
+void tearDown(void) { /* CMock will verify that all expectations were met */
+}
 
 /* ============================================================================
    TEST GROUP 1: Basic Functionality with Valid Inputs

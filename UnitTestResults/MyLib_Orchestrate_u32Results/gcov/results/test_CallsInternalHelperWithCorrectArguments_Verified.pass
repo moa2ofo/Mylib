@@ -1,0 +1,21 @@
+---
+:source:
+  :file: utExecutionAndResults/utUnderTest/test/test_CallsInternalHelperWithCorrectArguments_Verified.c
+  :dirname: utExecutionAndResults/utUnderTest/test
+  :basename: test_CallsInternalHelperWithCorrectArguments_Verified.c
+:successes:
+- :test: test_MyLib_Orchestrate_u32_CallsInternalHelperWithCorrectArguments_Verified
+  :line: 32
+  :message: ''
+  :unity_test_time: 0
+:failures: []
+:ignores: []
+:counts:
+  :total: 1
+  :passed: 1
+  :failed: 0
+  :ignored: 0
+:stdout:
+- 'test_CallsInternalHelperWithCorrectArguments_Verified.c:49:test_MyLib_Orchestrate_u32_CallsInternalHelperWithCorrectArguments_Verified:INFO:
+  InternalHelper_u32 called with correct arguments'
+:time: 0.005296074999989742

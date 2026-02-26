@@ -1,0 +1,19 @@
+---
+:source:
+  :file: utExecutionAndResults/utUnderTest/test/test_Multiplier0_NoAccumulation.c
+  :dirname: utExecutionAndResults/utUnderTest/test
+  :basename: test_Multiplier0_NoAccumulation.c
+:successes:
+- :test: test_MyLib_ProcessRecord_Multiplier0_NoAccumulation
+  :line: 25
+  :message: ''
+  :unity_test_time: 0
+:failures: []
+:ignores: []
+:counts:
+  :total: 1
+  :passed: 1
+  :failed: 0
+  :ignored: 0
+:stdout: []
+:time: 0.005471506999981557

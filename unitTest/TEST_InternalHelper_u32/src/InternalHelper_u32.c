@@ -18,6 +18,5 @@ uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16) {
   for(uint16_t l_i_u16 = 0U; l_i_u16 < y_u16; l_i_u16++) {
     l_acc_u32 += (uint32_t)(l_i_u16 * 2U);
   }
-
   return l_acc_u32;
 }

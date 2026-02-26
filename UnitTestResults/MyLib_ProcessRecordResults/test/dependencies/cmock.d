@@ -1,4 +1,4 @@
-utExecutionAndResults/utUnderTest/build/gcov/out/test_MyLib_ProcessRecord/cmock.o: \
+utExecutionAndResults/utUnderTest/build/gcov/out/test_WrapAroundAccumulation/cmock.o: \
  utExecutionAndResults/utUnderTest/build/vendor/cmock/src/cmock.c \
  utExecutionAndResults/utUnderTest/build/vendor/cmock/src/cmock.h \
  utExecutionAndResults/utUnderTest/build/vendor/cmock/src/cmock_internals.h \

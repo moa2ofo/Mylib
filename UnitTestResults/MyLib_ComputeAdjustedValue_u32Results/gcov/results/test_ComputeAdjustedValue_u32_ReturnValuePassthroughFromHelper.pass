@@ -1,0 +1,19 @@
+---
+:source:
+  :file: utExecutionAndResults/utUnderTest/test/test_ComputeAdjustedValue_u32_ReturnValuePassthroughFromHelper.c
+  :dirname: utExecutionAndResults/utUnderTest/test
+  :basename: test_ComputeAdjustedValue_u32_ReturnValuePassthroughFromHelper.c
+:successes:
+- :test: test_ComputeAdjustedValue_u32_ReturnValuePassthroughFromHelper
+  :line: 16
+  :message: ''
+  :unity_test_time: 0
+:failures: []
+:ignores: []
+:counts:
+  :total: 1
+  :passed: 1
+  :failed: 0
+  :ignored: 0
+:stdout: []
+:time: 0.005063760999973965

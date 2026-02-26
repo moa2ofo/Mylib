@@ -1,0 +1,21 @@
+---
+:source:
+  :file: utExecutionAndResults/utUnderTest/test/test_CallsProcessRecordWithMultiplierValue_Verified.c
+  :dirname: utExecutionAndResults/utUnderTest/test
+  :basename: test_CallsProcessRecordWithMultiplierValue_Verified.c
+:successes:
+- :test: test_MyLib_Orchestrate_u32_CallsProcessRecordWithMultiplierValue_Verified
+  :line: 32
+  :message: ''
+  :unity_test_time: 0
+:failures: []
+:ignores: []
+:counts:
+  :total: 1
+  :passed: 1
+  :failed: 0
+  :ignored: 0
+:stdout:
+- 'test_CallsProcessRecordWithMultiplierValue_Verified.c:48:test_MyLib_Orchestrate_u32_CallsProcessRecordWithMultiplierValue_Verified:INFO:
+  MyLib_ProcessRecord called with correct multiplier'
+:time: 0.003303380999966521

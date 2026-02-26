@@ -1,4 +1,4 @@
-utExecutionAndResults/utUnderTest/build/gcov/out/test_MyLib_AnalyzeArray_u32/cmock.o: \
+utExecutionAndResults/utUnderTest/build/gcov/out/test_AnalyzeArray_u32_zero_length_returns_zero/cmock.o: \
  utExecutionAndResults/utUnderTest/build/vendor/cmock/src/cmock.c \
  utExecutionAndResults/utUnderTest/build/vendor/cmock/src/cmock.h \
  utExecutionAndResults/utUnderTest/build/vendor/cmock/src/cmock_internals.h \

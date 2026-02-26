@@ -10,7 +10,8 @@ void setUp(void) {
   g_systemReady_b = false;
 }
 
-void tearDown(void) { /* Cleanup after each test if needed */ }
+void tearDown(void) { /* Cleanup after each test if needed */
+}
 
 /* =============================================================================
  * TEST SUITE: InternalHelper_u32 - Deterministic Arithmetic Helper

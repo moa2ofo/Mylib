@@ -20,7 +20,8 @@ void setUp(void) {
   g_systemReady_b = false;
 }
 
-void tearDown(void) { /* Cleanup after each test */ }
+void tearDown(void) { /* Cleanup after each test */
+}
 
 /**
  * @test MyLib_UpdateGlobalRecord_ValidInput_UpdatesDestinationAndGlobals

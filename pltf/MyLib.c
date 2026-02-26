@@ -138,4 +138,6 @@ uint8_t MyLib_UpdateCounter_u8(uint32_t add_u32) {
   return l_ret_u8;
 }
 
-int main() { return 0; }
+int main() {
+  return 0;
+}

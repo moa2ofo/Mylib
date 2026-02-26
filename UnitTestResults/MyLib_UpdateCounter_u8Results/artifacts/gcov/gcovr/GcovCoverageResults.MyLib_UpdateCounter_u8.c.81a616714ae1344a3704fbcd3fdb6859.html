@@ -27,7 +27,7 @@
     </tr>
     <tr>
       <th scope="row">Date:</th>
-      <td>2026-02-12 10:37:33</td>
+      <td>2026-02-26 09:07:39</td>
     </tr>
   </table>
 </div>
@@ -41,9 +41,9 @@
     </tr>
     <tr>
       <th scope="row">Lines:</th>
-      <td>18</td>
-      <td>19</td>
-      <td class="coverage-high">94.7%</td>
+      <td>23</td>
+      <td>25</td>
+      <td class="coverage-high">92.0%</td>
     </tr>
     <tr>
       <th scope="row">Functions:</th>
@@ -86,46 +86,46 @@
     </tr>
     <tr>
       <td>
-        <a href="#l14">GetSaturationEn_b</a>
+        <a href="#l18">GetSaturationEn_b</a>
+      </td>
+      <td>
+        <a href="#l18">18</a>
+      </td>
+      <td>
+        <a href="#l18"> called 131 times</a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="#l29">MyLib_UpdateCounter_u8</a>
+      </td>
+      <td>
+        <a href="#l29">29</a>
+      </td>
+      <td>
+        <a href="#l29"> called 147 times</a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="#l14">SetCounterLimit_u32</a>
       </td>
       <td>
         <a href="#l14">14</a>
       </td>
       <td>
-        <a href="#l14"> called 122 times</a>
+        <a href="#l14"> called 39 times</a>
       </td>
     </tr>
     <tr>
       <td>
-        <a href="#l21">MyLib_UpdateCounter_u8</a>
+        <a href="#l22">SetSaturationEn_b</a>
       </td>
       <td>
-        <a href="#l21">21</a>
+        <a href="#l22">22</a>
       </td>
       <td>
-        <a href="#l21"> called 138 times</a>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <a href="#l12">SetCounterLimit_u32</a>
-      </td>
-      <td>
-        <a href="#l12">12</a>
-      </td>
-      <td>
-        <a href="#l12"> called 39 times</a>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <a href="#l16">SetSaturationEn_b</a>
-      </td>
-      <td>
-        <a href="#l16">16</a>
-      </td>
-      <td>
-        <a href="#l16"> called 42 times</a>
+        <a href="#l22"> called 42 times</a>
       </td>
     </tr>
   </table>
@@ -220,23 +220,23 @@
       <td class="linebranch">
       </td>
       <td class="linecount uncoveredLine">&cross;</td>
-      <td class="src uncoveredLine"><span class="kt">uint32_t</span><span class="w"> </span><span class="nf">GetCounterLimit_u32</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">CounterLimit_u32</span><span class="p">;</span><span class="w"> </span><span class="p">}</span></td>
+      <td class="src uncoveredLine"><span class="kt">uint32_t</span><span class="w"> </span><span class="nf">GetCounterLimit_u32</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span></td>
     </tr>
 
     <tr class="source-line">
       <td class="lineno"><a id="l11" href="#l11">11</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount "></td>
-      <td class="src "></td>
+      <td class="linecount uncoveredLine">&cross;</td>
+      <td class="src uncoveredLine"><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">CounterLimit_u32</span><span class="p">;</span></td>
     </tr>
 
     <tr class="source-line">
       <td class="lineno"><a id="l12" href="#l12">12</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount coveredLine">39</td>
-      <td class="src coveredLine"><span class="kt">void</span><span class="w"> </span><span class="nf">SetCounterLimit_u32</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">CounterLimit_u32</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">value</span><span class="p">;</span><span class="w"> </span><span class="p">}</span></td>
+      <td class="linecount "></td>
+      <td class="src "><span class="p">}</span></td>
     </tr>
 
     <tr class="source-line">
@@ -251,24 +251,24 @@
       <td class="lineno"><a id="l14" href="#l14">14</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount coveredLine">122</td>
-      <td class="src coveredLine"><span class="kt">bool</span><span class="w"> </span><span class="nf">GetSaturationEn_b</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">SaturationEn_b</span><span class="p">;</span><span class="w"> </span><span class="p">}</span></td>
+      <td class="linecount coveredLine">39</td>
+      <td class="src coveredLine"><span class="kt">void</span><span class="w"> </span><span class="nf">SetCounterLimit_u32</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span></td>
     </tr>
 
     <tr class="source-line">
       <td class="lineno"><a id="l15" href="#l15">15</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount "></td>
-      <td class="src "></td>
+      <td class="linecount coveredLine">39</td>
+      <td class="src coveredLine"><span class="w">  </span><span class="n">CounterLimit_u32</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">value</span><span class="p">;</span></td>
     </tr>
 
     <tr class="source-line">
       <td class="lineno"><a id="l16" href="#l16">16</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount coveredLine">42</td>
-      <td class="src coveredLine"><span class="kt">void</span><span class="w"> </span><span class="nf">SetSaturationEn_b</span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="n">enable</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">SaturationEn_b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">enable</span><span class="p">;</span><span class="w"> </span><span class="p">}</span></td>
+      <td class="linecount coveredLine">39</td>
+      <td class="src coveredLine"><span class="p">}</span></td>
     </tr>
 
     <tr class="source-line">
@@ -283,16 +283,16 @@
       <td class="lineno"><a id="l18" href="#l18">18</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount "></td>
-      <td class="src "><span class="cm">/* FUNCTION TO TEST */</span></td>
+      <td class="linecount coveredLine">131</td>
+      <td class="src coveredLine"><span class="kt">bool</span><span class="w"> </span><span class="nf">GetSaturationEn_b</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span></td>
     </tr>
 
     <tr class="source-line">
       <td class="lineno"><a id="l19" href="#l19">19</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount "></td>
-      <td class="src "></td>
+      <td class="linecount coveredLine">131</td>
+      <td class="src coveredLine"><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">SaturationEn_b</span><span class="p">;</span></td>
     </tr>
 
     <tr class="source-line">
@@ -300,35 +300,43 @@
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "></td>
+      <td class="src "><span class="p">}</span></td>
     </tr>
 
     <tr class="source-line">
       <td class="lineno"><a id="l21" href="#l21">21</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount coveredLine">138</td>
-      <td class="src coveredLine"><span class="kt">uint8_t</span><span class="w"> </span><span class="nf">MyLib_UpdateCounter_u8</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">add_u32</span><span class="p">)</span><span class="w"> </span><span class="p">{</span></td>
+      <td class="linecount "></td>
+      <td class="src "></td>
     </tr>
 
     <tr class="source-line">
       <td class="lineno"><a id="l22" href="#l22">22</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="cm">/* Local (function-static) state: tracks how many times this API has been called. */</span></td>
+      <td class="linecount coveredLine">42</td>
+      <td class="src coveredLine"><span class="kt">void</span><span class="w"> </span><span class="nf">SetSaturationEn_b</span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="n">enable</span><span class="p">)</span><span class="w"> </span><span class="p">{</span></td>
     </tr>
 
     <tr class="source-line">
       <td class="lineno"><a id="l23" href="#l23">23</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">l_CycleCnt_u32</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0U</span><span class="p">;</span></td>
+      <td class="linecount coveredLine">42</td>
+      <td class="src coveredLine"><span class="w">  </span><span class="n">SaturationEn_b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">enable</span><span class="p">;</span></td>
     </tr>
 
     <tr class="source-line">
       <td class="lineno"><a id="l24" href="#l24">24</a></td>
+      <td class="linebranch">
+      </td>
+      <td class="linecount coveredLine">42</td>
+      <td class="src coveredLine"><span class="p">}</span></td>
+    </tr>
+
+    <tr class="source-line">
+      <td class="lineno"><a id="l25" href="#l25">25</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
@@ -336,19 +344,11 @@
     </tr>
 
     <tr class="source-line">
-      <td class="lineno"><a id="l25" href="#l25">25</a></td>
-      <td class="linebranch">
-      </td>
-      <td class="linecount coveredLine">138</td>
-      <td class="src coveredLine"><span class="w">  </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">l_ret_u8</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0U</span><span class="p">;</span></td>
-    </tr>
-
-    <tr class="source-line">
       <td class="lineno"><a id="l26" href="#l26">26</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount coveredLine">138</td>
-      <td class="src coveredLine"><span class="w">  </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">l_new_u32</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0U</span><span class="p">;</span></td>
+      <td class="linecount "></td>
+      <td class="src "><span class="cm">/* FUNCTION TO TEST */</span></td>
     </tr>
 
     <tr class="source-line">
@@ -363,39 +363,32 @@
       <td class="lineno"><a id="l28" href="#l28">28</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount coveredLine">138</td>
-      <td class="src coveredLine"><span class="w">  </span><span class="n">l_CycleCnt_u32</span><span class="o">++</span><span class="p">;</span></td>
+      <td class="linecount "></td>
+      <td class="src "></td>
     </tr>
 
     <tr class="source-line">
       <td class="lineno"><a id="l29" href="#l29">29</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount "></td>
-      <td class="src "></td>
+      <td class="linecount coveredLine">147</td>
+      <td class="src coveredLine"><span class="kt">uint8_t</span><span class="w"> </span><span class="nf">MyLib_UpdateCounter_u8</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">add_u32</span><span class="p">)</span><span class="w"> </span><span class="p">{</span></td>
     </tr>
 
     <tr class="source-line">
       <td class="lineno"><a id="l30" href="#l30">30</a></td>
       <td class="linebranch">
-        <details class="linebranchDetails">
-        <summary class="linebranchSummary">2/2</summary>
-        <div class="linebranchContents">
-          <div class="takenBranch">&check; Branch 0 taken 3 times.</div>
-          <div class="takenBranch">&check; Branch 1 taken 135 times.</div>
-        </div>
-        </details>
       </td>
-      <td class="linecount coveredLine">138</td>
-      <td class="src coveredLine"><span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">g_systemReady_b</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">false</span><span class="p">)</span><span class="w"> </span><span class="p">{</span></td>
+      <td class="linecount "></td>
+      <td class="src "><span class="w">  </span><span class="cm">/* Local (function-static) state: tracks how many times this API has been called. */</span></td>
     </tr>
 
     <tr class="source-line">
       <td class="lineno"><a id="l31" href="#l31">31</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount coveredLine">3</td>
-      <td class="src coveredLine"><span class="w">    </span><span class="n">l_ret_u8</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1U</span><span class="p">;</span></td>
+      <td class="linecount "></td>
+      <td class="src "><span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">l_CycleCnt_u32</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0U</span><span class="p">;</span></td>
     </tr>
 
     <tr class="source-line">
@@ -403,19 +396,27 @@
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span></td>
+      <td class="src "></td>
     </tr>
 
     <tr class="source-line">
       <td class="lineno"><a id="l33" href="#l33">33</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount coveredLine">135</td>
-      <td class="src coveredLine"><span class="w">    </span><span class="n">l_new_u32</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g_counter_u32</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">add_u32</span><span class="p">;</span></td>
+      <td class="linecount coveredLine">147</td>
+      <td class="src coveredLine"><span class="w">  </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">l_ret_u8</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0U</span><span class="p">;</span></td>
     </tr>
 
     <tr class="source-line">
       <td class="lineno"><a id="l34" href="#l34">34</a></td>
+      <td class="linebranch">
+      </td>
+      <td class="linecount coveredLine">147</td>
+      <td class="src coveredLine"><span class="w">  </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">l_new_u32</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0U</span><span class="p">;</span></td>
+    </tr>
+
+    <tr class="source-line">
+      <td class="lineno"><a id="l35" href="#l35">35</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
@@ -423,68 +424,58 @@
     </tr>
 
     <tr class="source-line">
-      <td class="lineno"><a id="l35" href="#l35">35</a></td>
-      <td class="linebranch">
-        <details class="linebranchDetails">
-        <summary class="linebranchSummary">4/4</summary>
-        <div class="linebranchContents">
-          <div class="takenBranch">&check; Branch 0 taken 69 times.</div>
-          <div class="takenBranch">&check; Branch 1 taken 66 times.</div>
-          <div class="takenBranch">&check; Branch 2 taken 6 times.</div>
-          <div class="takenBranch">&check; Branch 3 taken 63 times.</div>
-        </div>
-        </details>
-      </td>
-      <td class="linecount coveredLine">135</td>
-      <td class="src coveredLine"><span class="w">    </span><span class="k">if</span><span class="p">((</span><span class="n">SaturationEn_b</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">true</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">(</span><span class="n">l_new_u32</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">CounterLimit_u32</span><span class="p">))</span><span class="w"> </span><span class="p">{</span></td>
-    </tr>
-
-    <tr class="source-line">
       <td class="lineno"><a id="l36" href="#l36">36</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount coveredLine">6</td>
-      <td class="src coveredLine"><span class="w">      </span><span class="n">g_counter_u32</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CounterLimit_u32</span><span class="p">;</span></td>
+      <td class="linecount coveredLine">147</td>
+      <td class="src coveredLine"><span class="w">  </span><span class="n">l_CycleCnt_u32</span><span class="o">++</span><span class="p">;</span></td>
     </tr>
 
     <tr class="source-line">
       <td class="lineno"><a id="l37" href="#l37">37</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount coveredLine">6</td>
-      <td class="src coveredLine"><span class="w">      </span><span class="n">l_ret_u8</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2U</span><span class="p">;</span></td>
+      <td class="linecount "></td>
+      <td class="src "></td>
     </tr>
 
     <tr class="source-line">
       <td class="lineno"><a id="l38" href="#l38">38</a></td>
       <td class="linebranch">
+        <details class="linebranchDetails">
+        <summary class="linebranchSummary">2/2</summary>
+        <div class="linebranchContents">
+          <div class="takenBranch">&check; Branch 0 taken 3 times.</div>
+          <div class="takenBranch">&check; Branch 1 taken 144 times.</div>
+        </div>
+        </details>
       </td>
-      <td class="linecount "></td>
-      <td class="src "><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span></td>
+      <td class="linecount coveredLine">147</td>
+      <td class="src coveredLine"><span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">g_systemReady_b</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">false</span><span class="p">)</span><span class="w"> </span><span class="p">{</span></td>
     </tr>
 
     <tr class="source-line">
       <td class="lineno"><a id="l39" href="#l39">39</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount coveredLine">129</td>
-      <td class="src coveredLine"><span class="w">      </span><span class="n">g_counter_u32</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">l_new_u32</span><span class="p">;</span></td>
+      <td class="linecount coveredLine">3</td>
+      <td class="src coveredLine"><span class="w">    </span><span class="n">l_ret_u8</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1U</span><span class="p">;</span></td>
     </tr>
 
     <tr class="source-line">
       <td class="lineno"><a id="l40" href="#l40">40</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount coveredLine">129</td>
-      <td class="src coveredLine"><span class="w">      </span><span class="n">l_ret_u8</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0U</span><span class="p">;</span></td>
+      <td class="linecount "></td>
+      <td class="src "><span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span></td>
     </tr>
 
     <tr class="source-line">
       <td class="lineno"><a id="l41" href="#l41">41</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount "></td>
-      <td class="src "><span class="w">    </span><span class="p">}</span></td>
+      <td class="linecount coveredLine">144</td>
+      <td class="src coveredLine"><span class="w">    </span><span class="n">l_new_u32</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g_counter_u32</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">add_u32</span><span class="p">;</span></td>
     </tr>
 
     <tr class="source-line">
@@ -498,32 +489,34 @@
     <tr class="source-line">
       <td class="lineno"><a id="l43" href="#l43">43</a></td>
       <td class="linebranch">
+        <details class="linebranchDetails">
+        <summary class="linebranchSummary">4/4</summary>
+        <div class="linebranchContents">
+          <div class="takenBranch">&check; Branch 0 taken 78 times.</div>
+          <div class="takenBranch">&check; Branch 1 taken 66 times.</div>
+          <div class="takenBranch">&check; Branch 2 taken 6 times.</div>
+          <div class="takenBranch">&check; Branch 3 taken 72 times.</div>
+        </div>
+        </details>
       </td>
-      <td class="linecount "></td>
-      <td class="src "><span class="w">    </span><span class="cm">/* Periodically toggle saturation enable to exercise both internal static variables. */</span></td>
+      <td class="linecount coveredLine">144</td>
+      <td class="src coveredLine"><span class="w">    </span><span class="k">if</span><span class="p">((</span><span class="n">SaturationEn_b</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">true</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">(</span><span class="n">l_new_u32</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">CounterLimit_u32</span><span class="p">))</span><span class="w"> </span><span class="p">{</span></td>
     </tr>
 
     <tr class="source-line">
       <td class="lineno"><a id="l44" href="#l44">44</a></td>
       <td class="linebranch">
-        <details class="linebranchDetails">
-        <summary class="linebranchSummary">2/2</summary>
-        <div class="linebranchContents">
-          <div class="takenBranch">&check; Branch 0 taken 8 times.</div>
-          <div class="takenBranch">&check; Branch 1 taken 127 times.</div>
-        </div>
-        </details>
       </td>
-      <td class="linecount coveredLine">135</td>
-      <td class="src coveredLine"><span class="w">    </span><span class="k">if</span><span class="p">((</span><span class="n">l_CycleCnt_u32</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0x0FU</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0U</span><span class="p">)</span><span class="w"> </span><span class="p">{</span></td>
+      <td class="linecount coveredLine">6</td>
+      <td class="src coveredLine"><span class="w">      </span><span class="n">g_counter_u32</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CounterLimit_u32</span><span class="p">;</span></td>
     </tr>
 
     <tr class="source-line">
       <td class="lineno"><a id="l45" href="#l45">45</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount coveredLine">8</td>
-      <td class="src coveredLine"><span class="w">      </span><span class="n">SaturationEn_b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">SaturationEn_b</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">true</span><span class="p">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nb">false</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span></td>
+      <td class="linecount coveredLine">6</td>
+      <td class="src coveredLine"><span class="w">      </span><span class="n">l_ret_u8</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2U</span><span class="p">;</span></td>
     </tr>
 
     <tr class="source-line">
@@ -531,31 +524,31 @@
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">    </span><span class="p">}</span></td>
+      <td class="src "><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span></td>
     </tr>
 
     <tr class="source-line">
       <td class="lineno"><a id="l47" href="#l47">47</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="p">}</span></td>
+      <td class="linecount coveredLine">138</td>
+      <td class="src coveredLine"><span class="w">      </span><span class="n">g_counter_u32</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">l_new_u32</span><span class="p">;</span></td>
     </tr>
 
     <tr class="source-line">
       <td class="lineno"><a id="l48" href="#l48">48</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount "></td>
-      <td class="src "></td>
+      <td class="linecount coveredLine">138</td>
+      <td class="src coveredLine"><span class="w">      </span><span class="n">l_ret_u8</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0U</span><span class="p">;</span></td>
     </tr>
 
     <tr class="source-line">
       <td class="lineno"><a id="l49" href="#l49">49</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount coveredLine">138</td>
-      <td class="src coveredLine"><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">l_ret_u8</span><span class="p">;</span></td>
+      <td class="linecount "></td>
+      <td class="src "><span class="w">    </span><span class="p">}</span></td>
     </tr>
 
     <tr class="source-line">
@@ -563,11 +556,82 @@
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="p">}</span></td>
+      <td class="src "></td>
     </tr>
 
     <tr class="source-line">
       <td class="lineno"><a id="l51" href="#l51">51</a></td>
+      <td class="linebranch">
+      </td>
+      <td class="linecount "></td>
+      <td class="src "><span class="w">    </span><span class="cm">/* Periodically toggle saturation enable to exercise both internal static variables. */</span></td>
+    </tr>
+
+    <tr class="source-line">
+      <td class="lineno"><a id="l52" href="#l52">52</a></td>
+      <td class="linebranch">
+        <details class="linebranchDetails">
+        <summary class="linebranchSummary">2/2</summary>
+        <div class="linebranchContents">
+          <div class="takenBranch">&check; Branch 0 taken 8 times.</div>
+          <div class="takenBranch">&check; Branch 1 taken 136 times.</div>
+        </div>
+        </details>
+      </td>
+      <td class="linecount coveredLine">144</td>
+      <td class="src coveredLine"><span class="w">    </span><span class="k">if</span><span class="p">((</span><span class="n">l_CycleCnt_u32</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0x0FU</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0U</span><span class="p">)</span><span class="w"> </span><span class="p">{</span></td>
+    </tr>
+
+    <tr class="source-line">
+      <td class="lineno"><a id="l53" href="#l53">53</a></td>
+      <td class="linebranch">
+      </td>
+      <td class="linecount coveredLine">8</td>
+      <td class="src coveredLine"><span class="w">      </span><span class="n">SaturationEn_b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">SaturationEn_b</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">true</span><span class="p">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nb">false</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span></td>
+    </tr>
+
+    <tr class="source-line">
+      <td class="lineno"><a id="l54" href="#l54">54</a></td>
+      <td class="linebranch">
+      </td>
+      <td class="linecount "></td>
+      <td class="src "><span class="w">    </span><span class="p">}</span></td>
+    </tr>
+
+    <tr class="source-line">
+      <td class="lineno"><a id="l55" href="#l55">55</a></td>
+      <td class="linebranch">
+      </td>
+      <td class="linecount "></td>
+      <td class="src "><span class="w">  </span><span class="p">}</span></td>
+    </tr>
+
+    <tr class="source-line">
+      <td class="lineno"><a id="l56" href="#l56">56</a></td>
+      <td class="linebranch">
+      </td>
+      <td class="linecount "></td>
+      <td class="src "></td>
+    </tr>
+
+    <tr class="source-line">
+      <td class="lineno"><a id="l57" href="#l57">57</a></td>
+      <td class="linebranch">
+      </td>
+      <td class="linecount coveredLine">147</td>
+      <td class="src coveredLine"><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">l_ret_u8</span><span class="p">;</span></td>
+    </tr>
+
+    <tr class="source-line">
+      <td class="lineno"><a id="l58" href="#l58">58</a></td>
+      <td class="linebranch">
+      </td>
+      <td class="linecount "></td>
+      <td class="src "><span class="p">}</span></td>
+    </tr>
+
+    <tr class="source-line">
+      <td class="lineno"><a id="l59" href="#l59">59</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>

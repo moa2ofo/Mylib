@@ -1,0 +1,19 @@
+---
+:source:
+  :file: utExecutionAndResults/utUnderTest/test/test_main_1.c
+  :dirname: utExecutionAndResults/utUnderTest/test
+  :basename: test_main_1.c
+:successes: []
+:failures: []
+:ignores:
+- :test: test_main
+  :line: 12
+  :message: Auto-generated stub test
+  :unity_test_time: 0
+:counts:
+  :total: 1
+  :passed: 0
+  :failed: 0
+  :ignored: 1
+:stdout: []
+:time: 0.0009333750000450891
