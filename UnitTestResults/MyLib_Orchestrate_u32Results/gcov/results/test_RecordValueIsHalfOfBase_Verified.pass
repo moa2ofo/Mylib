@@ -18,4 +18,4 @@
 :stdout:
 - 'test_RecordValueIsHalfOfBase_Verified.c:48:test_MyLib_Orchestrate_u32_RecordValueIsHalfOfBase_Verified:INFO:
   Record value computation verified through mock'
-:time: 0.004317469999989498
+:time: 0.004566973999999391

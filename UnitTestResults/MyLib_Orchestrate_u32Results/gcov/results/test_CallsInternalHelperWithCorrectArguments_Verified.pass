@@ -18,4 +18,4 @@
 :stdout:
 - 'test_CallsInternalHelperWithCorrectArguments_Verified.c:49:test_MyLib_Orchestrate_u32_CallsInternalHelperWithCorrectArguments_Verified:INFO:
   InternalHelper_u32 called with correct arguments'
-:time: 0.00574669200000244
+:time: 0.005873148999995692

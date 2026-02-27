@@ -1,0 +1,8 @@
+utExecutionAndResults/utUnderTest/build/gcov/out/test_ten_elem_factor_near_max/test_ten_elem_factor_near_max.o: \
+ utExecutionAndResults/utUnderTest/test/test_ten_elem_factor_near_max.c \
+ utExecutionAndResults/utUnderTest/src/MyLib_AnalyzeArray_u32.h \
+ utExecutionAndResults/utUnderTest/src/MyLib.h \
+ utExecutionAndResults/utUnderTest/build/test/mocks/test_ten_elem_factor_near_max/mock_MyLib.h \
+ utExecutionAndResults/utUnderTest/build/vendor/unity/src/unity.h \
+ utExecutionAndResults/utUnderTest/build/vendor/unity/src/unity_internals.h \
+ utExecutionAndResults/utUnderTest/src/MyLib.h
