@@ -2,1023 +2,506 @@
 #include "mock_MyLib.h"
 #include "unity.h"
 #include <string.h>
-
-```c
 #include "MyLib.h"
 #include "MyLib_UpdateCounter_u8.h"
 
-    static uint32_t s_counterLimit_u32;
-static bool s_saturationEn_b;
-
-uint32_t GetCounterLimit_u32(void) {
-  return s_counterLimit_u32;
-}
-
-void SetCounterLimit_u32(uint32_t value) {
-  s_counterLimit_u32 = value;
-}
-
-bool GetSaturationEn_b(void) {
-  return s_saturationEn_b;
-}
-
-void SetSaturationEn_b(bool enable) {
-  s_saturationEn_b = enable;
-}
-
-void setUp(void) {
-  g_counter_u32 = 0U;
-  s_counterLimit_u32 = 255U;
-  s_saturationEn_b = false;
-}
-
-void tearDown(void) {
-}
-
-void test_add_zero_counter_zero_saturation_disabled_limit_255(void) {
-  uint8_t result;
-
-  g_counter_u32 = 0U;
-  SetCounterLimit_u32(255U);
-  SetSaturationEn_b(false);
-
-  result = MyLib_UpdateCounter_u8(0U);
-
-  TEST_ASSERT_EQUAL_UINT32(0U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(0U, result);
-}
-
-void test_add_one_counter_zero_saturation_disabled_limit_255(void) {
-  uint8_t result;
-
-  g_counter_u32 = 0U;
-  SetCounterLimit_u32(255U);
-  SetSaturationEn_b(false);
-
-  result = MyLib_UpdateCounter_u8(1U);
-
-  TEST_ASSERT_EQUAL_UINT32(1U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(1U, result);
-}
-
-void test_add_127_counter_zero_saturation_disabled_limit_255(void) {
-  uint8_t result;
-
-  g_counter_u32 = 0U;
-  SetCounterLimit_u32(255U);
-  SetSaturationEn_b(false);
-
-  result = MyLib_UpdateCounter_u8(127U);
-
-  TEST_ASSERT_EQUAL_UINT32(127U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(127U, result);
-}
-
-void test_add_254_counter_zero_saturation_disabled_limit_255(void) {
-  uint8_t result;
-
-  g_counter_u32 = 0U;
-  SetCounterLimit_u32(255U);
-  SetSaturationEn_b(false);
-
-  result = MyLib_UpdateCounter_u8(254U);
-
-  TEST_ASSERT_EQUAL_UINT32(254U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(254U, result);
-}
-
-void test_add_255_counter_zero_saturation_disabled_limit_255(void) {
-  uint8_t result;
-
-  g_counter_u32 = 0U;
-  SetCounterLimit_u32(255U);
-  SetSaturationEn_b(false);
-
-  result = MyLib_UpdateCounter_u8(255U);
-
-  TEST_ASSERT_EQUAL_UINT32(255U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(255U, result);
-}
-
-void test_add_256_counter_zero_saturation_disabled_limit_255(void) {
-  uint8_t result;
-
-  g_counter_u32 = 0U;
-  SetCounterLimit_u32(255U);
-  SetSaturationEn_b(false);
-
-  result = MyLib_UpdateCounter_u8(256U);
-
-  TEST_ASSERT_EQUAL_UINT32(0U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(0U, result);
-}
-
-void test_add_300_counter_zero_saturation_disabled_limit_255(void) {
-  uint8_t result;
-
-  g_counter_u32 = 0U;
-  SetCounterLimit_u32(255U);
-  SetSaturationEn_b(false);
-
-  result = MyLib_UpdateCounter_u8(300U);
-
-  TEST_ASSERT_EQUAL_UINT32(44U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(44U, result);
-}
-
-void test_add_uint32_max_counter_zero_saturation_disabled_limit_255(void) {
-  uint8_t result;
-  uint8_t expected;
-
-  g_counter_u32 = 0U;
-  SetCounterLimit_u32(255U);
-  SetSaturationEn_b(false);
-
-  expected = (uint8_t)(UINT32_MAX % 256U);
-
-  result = MyLib_UpdateCounter_u8(UINT32_MAX);
-
-  TEST_ASSERT_EQUAL_UINT32(expected, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(expected, result);
-}
-
-void test_add_one_counter_254_saturation_disabled_limit_255(void) {
-  uint8_t result;
-
-  g_counter_u32 = 254U;
-  SetCounterLimit_u32(255U);
-  SetSaturationEn_b(false);
-
-  result = MyLib_UpdateCounter_u8(1U);
-
-  TEST_ASSERT_EQUAL_UINT32(255U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(255U, result);
-}
-
-void test_add_two_counter_254_saturation_disabled_limit_255(void) {
-  uint8_t result;
-
-  g_counter_u32 = 254U;
-  SetCounterLimit_u32(255U);
-  SetSaturationEn_b(false);
-
-  result = MyLib_UpdateCounter_u8(2U);
-
-  TEST_ASSERT_EQUAL_UINT32(0U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(0U, result);
-}
-
-void test_add_ten_counter_250_saturation_disabled_limit_255(void) {
-  uint8_t result;
-
-  g_counter_u32 = 250U;
-  SetCounterLimit_u32(255U);
-  SetSaturationEn_b(false);
-
-  result = MyLib_UpdateCounter_u8(10U);
-
-  TEST_ASSERT_EQUAL_UINT32(4U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(4U, result);
-}
-
-void test_add_one_counter_zero_saturation_enabled_limit_255(void) {
-  uint8_t result;
-
-  g_counter_u32 = 0U;
-  SetCounterLimit_u32(255U);
-  SetSaturationEn_b(true);
-
-  result = MyLib_UpdateCounter_u8(1U);
-
-  TEST_ASSERT_EQUAL_UINT32(1U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(1U, result);
-}
-
-void test_add_127_counter_zero_saturation_enabled_limit_255(void) {
-  uint8_t result;
-
-  g_counter_u32 = 0U;
-  SetCounterLimit_u32(255U);
-  SetSaturationEn_b(true);
-
-  result = MyLib_UpdateCounter_u8(127U);
-
-  TEST_ASSERT_EQUAL_UINT32(127U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(127U, result);
-}
-
-void test_add_255_counter_zero_saturation_enabled_limit_255(void) {
-  uint8_t result;
-
-  g_counter_u32 = 0U;
-  SetCounterLimit_u32(255U);
-  SetSaturationEn_b(true);
-
-  result = MyLib_UpdateCounter_u8(255U);
-
-  TEST_ASSERT_EQUAL_UINT32(255U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(255U, result);
-}
-
-void test_add_256_counter_zero_saturation_enabled_limit_255(void) {
-  uint8_t result;
-
-  g_counter_u32 = 0U;
-  SetCounterLimit_u32(255U);
-  SetSaturationEn_b(true);
-
-  result = MyLib_UpdateCounter_u8(256U);
-
-  TEST_ASSERT_EQUAL_UINT32(255U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(255U, result);
-}
-
-void test_add_300_counter_zero_saturation_enabled_limit_255(void) {
-  uint8_t result;
-
-  g_counter_u32 = 0U;
-  SetCounterLimit_u32(255U);
-  SetSaturationEn_b(true);
-
-  result = MyLib_UpdateCounter_u8(300U);
-
-  TEST_ASSERT_EQUAL_UINT32(255U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(255U, result);
-}
-
-void test_add_uint32_max_counter_zero_saturation_enabled_limit_255(void) {
-  uint8_t result;
-
-  g_counter_u32 = 0U;
-  SetCounterLimit_u32(255U);
-  SetSaturationEn_b(true);
-
-  result = MyLib_UpdateCounter_u8(UINT32_MAX);
-
-  TEST_ASSERT_EQUAL_UINT32(255U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(255U, result);
-}
-
-void test_add_one_counter_254_saturation_enabled_limit_255(void) {
-  uint8_t result;
-
-  g_counter_u32 = 254U;
-  SetCounterLimit_u32(255U);
-  SetSaturationEn_b(true);
-
-  result = MyLib_UpdateCounter_u8(1U);
-
-  TEST_ASSERT_EQUAL_UINT32(255U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(255U, result);
-}
-
-void test_add_two_counter_254_saturation_enabled_limit_255(void) {
-  uint8_t result;
-
-  g_counter_u32 = 254U;
-  SetCounterLimit_u32(255U);
-  SetSaturationEn_b(true);
-
-  result = MyLib_UpdateCounter_u8(2U);
-
-  TEST_ASSERT_EQUAL_UINT32(255U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(255U, result);
-}
-
-void test_add_ten_counter_250_saturation_enabled_limit_255(void) {
-  uint8_t result;
-
-  g_counter_u32 = 250U;
-  SetCounterLimit_u32(255U);
-  SetSaturationEn_b(true);
-
-  result = MyLib_UpdateCounter_u8(10U);
-
-  TEST_ASSERT_EQUAL_UINT32(255U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(255U, result);
-}
-
-void test_add_one_counter_255_saturation_enabled_limit_255(void) {
-  uint8_t result;
-
-  g_counter_u32 = 255U;
-  SetCounterLimit_u32(255U);
-  SetSaturationEn_b(true);
-
-  result = MyLib_UpdateCounter_u8(1U);
-
-  TEST_ASSERT_EQUAL_UINT32(255U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(255U, result);
-}
-
-void test_add_zero_counter_255_saturation_enabled_limit_255(void) {
-  uint8_t result;
-
-  g_counter_u32 = 255U;
-  SetCounterLimit_u32(255U);
-  SetSaturationEn_b(true);
-
-  result = MyLib_UpdateCounter_u8(0U);
-
-  TEST_ASSERT_EQUAL_UINT32(255U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(255U, result);
-}
-
-void test_add_one_counter_zero_saturation_disabled_limit_100(void) {
-  uint8_t result;
-
-  g_counter_u32 = 0U;
-  SetCounterLimit_u32(100U);
-  SetSaturationEn_b(false);
-
-  result = MyLib_UpdateCounter_u8(1U);
-
-  TEST_ASSERT_EQUAL_UINT32(1U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(1U, result);
-}
-
-void test_add_50_counter_zero_saturation_disabled_limit_100(void) {
-  uint8_t result;
-
-  g_counter_u32 = 0U;
-  SetCounterLimit_u32(100U);
-  SetSaturationEn_b(false);
-
-  result = MyLib_UpdateCounter_u8(50U);
-
-  TEST_ASSERT_EQUAL_UINT32(50U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(50U, result);
-}
-
-void test_add_99_counter_zero_saturation_disabled_limit_100(void) {
-  uint8_t result;
-
-  g_counter_u32 = 0U;
-  SetCounterLimit_u32(100U);
-  SetSaturationEn_b(false);
-
-  result = MyLib_UpdateCounter_u8(99U);
-
-  TEST_ASSERT_EQUAL_UINT32(99U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(99U, result);
-}
-
-void test_add_100_counter_zero_saturation_disabled_limit_100(void) {
-  uint8_t result;
-
-  g_counter_u32 = 0U;
-  SetCounterLimit_u32(100U);
-  SetSaturationEn_b(false);
-
-  result = MyLib_UpdateCounter_u8(100U);
-
-  TEST_ASSERT_EQUAL_UINT32(100U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(100U, result);
-}
-
-void test_add_101_counter_zero_saturation_disabled_limit_100(void) {
-  uint8_t result;
-
-  g_counter_u32 = 0U;
-  SetCounterLimit_u32(100U);
-  SetSaturationEn_b(false);
-
-  result = MyLib_UpdateCounter_u8(101U);
-
-  TEST_ASSERT_EQUAL_UINT32(0U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(0U, result);
-}
-
-void test_add_150_counter_zero_saturation_disabled_limit_100(void) {
-  uint8_t result;
-
-  g_counter_u32 = 0U;
-  SetCounterLimit_u32(100U);
-  SetSaturationEn_b(false);
-
-  result = MyLib_UpdateCounter_u8(150U);
-
-  TEST_ASSERT_EQUAL_UINT32(49U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(49U, result);
-}
-
-void test_add_one_counter_99_saturation_disabled_limit_100(void) {
-  uint8_t result;
-
-  g_counter_u32 = 99U;
-  SetCounterLimit_u32(100U);
-  SetSaturationEn_b(false);
-
-  result = MyLib_UpdateCounter_u8(1U);
-
-  TEST_ASSERT_EQUAL_UINT32(100U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(100U, result);
-}
-
-void test_add_two_counter_99_saturation_disabled_limit_100(void) {
-  uint8_t result;
-
-  g_counter_u32 = 99U;
-  SetCounterLimit_u32(100U);
-  SetSaturationEn_b(false);
-
-  result = MyLib_UpdateCounter_u8(2U);
-
-  TEST_ASSERT_EQUAL_UINT32(0U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(0U, result);
-}
-
-void test_add_ten_counter_95_saturation_disabled_limit_100(void) {
-  uint8_t result;
-
-  g_counter_u32 = 95U;
-  SetCounterLimit_u32(100U);
-  SetSaturationEn_b(false);
-
-  result = MyLib_UpdateCounter_u8(10U);
-
-  TEST_ASSERT_EQUAL_UINT32(4U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(4U, result);
-}
-
-void test_add_one_counter_zero_saturation_enabled_limit_100(void) {
-  uint8_t result;
-
-  g_counter_u32 = 0U;
-  SetCounterLimit_u32(100U);
-  SetSaturationEn_b(true);
-
-  result = MyLib_UpdateCounter_u8(1U);
-
-  TEST_ASSERT_EQUAL_UINT32(1U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(1U, result);
-}
-
-void test_add_50_counter_zero_saturation_enabled_limit_100(void) {
-  uint8_t result;
-
-  g_counter_u32 = 0U;
-  SetCounterLimit_u32(100U);
-  SetSaturationEn_b(true);
-
-  result = MyLib_UpdateCounter_u8(50U);
-
-  TEST_ASSERT_EQUAL_UINT32(50U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(50U, result);
-}
-
-void test_add_100_counter_zero_saturation_enabled_limit_100(void) {
-  uint8_t result;
-
-  g_counter_u32 = 0U;
-  SetCounterLimit_u32(100U);
-  SetSaturationEn_b(true);
-
-  result = MyLib_UpdateCounter_u8(100U);
-
-  TEST_ASSERT_EQUAL_UINT32(100U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(100U, result);
-}
-
-void test_add_101_counter_zero_saturation_enabled_limit_100(void) {
-  uint8_t result;
-
-  g_counter_u32 = 0U;
-  SetCounterLimit_u32(100U);
-  SetSaturationEn_b(true);
-
-  result = MyLib_UpdateCounter_u8(101U);
-
-  TEST_ASSERT_EQUAL_UINT32(100U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(100U, result);
-}
-
-void test_add_150_counter_zero_saturation_enabled_limit_100(void) {
-  uint8_t result;
-
-  g_counter_u32 = 0U;
-  SetCounterLimit_u32(100U);
-  SetSaturationEn_b(true);
-
-  result = MyLib_UpdateCounter_u8(150U);
-
-  TEST_ASSERT_EQUAL_UINT32(100U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(100U, result);
-}
-
-void test_add_one_counter_99_saturation_enabled_limit_100(void) {
-  uint8_t result;
-
-  g_counter_u32 = 99U;
-  SetCounterLimit_u32(100U);
-  SetSaturationEn_b(true);
-
-  result = MyLib_UpdateCounter_u8(1U);
-
-  TEST_ASSERT_EQUAL_UINT32(100U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(100U, result);
-}
-
-void test_add_two_counter_99_saturation_enabled_limit_100(void) {
-  uint8_t result;
-
-  g_counter_u32 = 99U;
-  SetCounterLimit_u32(100U);
-  SetSaturationEn_b(true);
-
-  result = MyLib_UpdateCounter_u8(2U);
-
-  TEST_ASSERT_EQUAL_UINT32(100U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(100U, result);
-}
-
-void test_add_ten_counter_95_saturation_enabled_limit_100(void) {
-  uint8_t result;
-
-  g_counter_u32 = 95U;
-  SetCounterLimit_u32(100U);
-  SetSaturationEn_b(true);
-
-  result = MyLib_UpdateCounter_u8(10U);
-
-  TEST_ASSERT_EQUAL_UINT32(100U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(100U, result);
-}
-
-void test_add_one_counter_100_saturation_enabled_limit_100(void) {
-  uint8_t result;
-
-  g_counter_u32 = 100U;
-  SetCounterLimit_u32(100U);
-  SetSaturationEn_b(true);
-
-  result = MyLib_UpdateCounter_u8(1U);
-
-  TEST_ASSERT_EQUAL_UINT32(100U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(100U, result);
-}
-
-void test_add_zero_counter_100_saturation_enabled_limit_100(void) {
-  uint8_t result;
-
-  g_counter_u32 = 100U;
-  SetCounterLimit_u32(100U);
-  SetSaturationEn_b(true);
-
-  result = MyLib_UpdateCounter_u8(0U);
-
-  TEST_ASSERT_EQUAL_UINT32(100U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(100U, result);
-}
-
-void test_add_one_counter_zero_saturation_disabled_limit_0(void) {
-  uint8_t result;
-
-  g_counter_u32 = 0U;
-  SetCounterLimit_u32(0U);
-  SetSaturationEn_b(false);
-
-  result = MyLib_UpdateCounter_u8(1U);
-
-  TEST_ASSERT_EQUAL_UINT32(0U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(0U, result);
-}
-
-void test_add_ten_counter_zero_saturation_disabled_limit_0(void) {
-  uint8_t result;
-
-  g_counter_u32 = 0U;
-  SetCounterLimit_u32(0U);
-  SetSaturationEn_b(false);
-
-  result = MyLib_UpdateCounter_u8(10U);
-
-  TEST_ASSERT_EQUAL_UINT32(0U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(0U, result);
-}
-
-void test_add_one_counter_zero_saturation_enabled_limit_0(void) {
-  uint8_t result;
-
-  g_counter_u32 = 0U;
-  SetCounterLimit_u32(0U);
-  SetSaturationEn_b(true);
-
-  result = MyLib_UpdateCounter_u8(1U);
-
-  TEST_ASSERT_EQUAL_UINT32(0U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(0U, result);
-}
-
-void test_add_ten_counter_zero_saturation_enabled_limit_0(void) {
-  uint8_t result;
-
-  g_counter_u32 = 0U;
-  SetCounterLimit_u32(0U);
-  SetSaturationEn_b(true);
-
-  result = MyLib_UpdateCounter_u8(10U);
-
-  TEST_ASSERT_EQUAL_UINT32(0U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(0U, result);
-}
-
-void test_add_one_counter_zero_saturation_disabled_limit_1(void) {
-  uint8_t result;
-
-  g_counter_u32 = 0U;
-  SetCounterLimit_u32(1U);
-  SetSaturationEn_b(false);
-
-  result = MyLib_UpdateCounter_u8(1U);
-
-  TEST_ASSERT_EQUAL_UINT32(1U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(1U, result);
-}
-
-void test_add_two_counter_zero_saturation_disabled_limit_1(void) {
-  uint8_t result;
-
-  g_counter_u32 = 0U;
-  SetCounterLimit_u32(1U);
-  SetSaturationEn_b(false);
-
-  result = MyLib_UpdateCounter_u8(2U);
-
-  TEST_ASSERT_EQUAL_UINT32(0U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(0U, result);
-}
-
-void test_add_one_counter_zero_saturation_enabled_limit_1(void) {
-  uint8_t result;
-
-  g_counter_u32 = 0U;
-  SetCounterLimit_u32(1U);
-  SetSaturationEn_b(true);
-
-  result = MyLib_UpdateCounter_u8(1U);
-
-  TEST_ASSERT_EQUAL_UINT32(1U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(1U, result);
-}
-
-void test_add_two_counter_zero_saturation_enabled_limit_1(void) {
-  uint8_t result;
-
-  g_counter_u32 = 0U;
-  SetCounterLimit_u32(1U);
-  SetSaturationEn_b(true);
-
-  result = MyLib_UpdateCounter_u8(2U);
-
-  TEST_ASSERT_EQUAL_UINT32(1U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(1U, result);
-}
-
-void test_add_one_counter_zero_saturation_disabled_limit_uint32_max(void) {
-  uint8_t result;
-
-  g_counter_u32 = 0U;
-  SetCounterLimit_u32(UINT32_MAX);
-  SetSaturationEn_b(false);
-
-  result = MyLib_UpdateCounter_u8(1U);
-
-  TEST_ASSERT_EQUAL_UINT32(1U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(1U, result);
-}
-
-void test_add_uint32_max_counter_zero_saturation_disabled_limit_uint32_max(void) {
-  uint8_t result;
-  uint8_t expected;
-
-  g_counter_u32 = 0U;
-  SetCounterLimit_u32(UINT32_MAX);
-  SetSaturationEn_b(false);
-
-  expected = (uint8_t)(UINT32_MAX % 256U);
-
-  result = MyLib_UpdateCounter_u8(UINT32_MAX);
-
-  TEST_ASSERT_EQUAL_UINT32(expected, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(expected, result);
-}
-
-void test_add_one_counter_zero_saturation_enabled_limit_uint32_max(void) {
-  uint8_t result;
-
-  g_counter_u32 = 0U;
-  SetCounterLimit_u32(UINT32_MAX);
-  SetSaturationEn_b(true);
-
-  result = MyLib_UpdateCounter_u8(1U);
-
-  TEST_ASSERT_EQUAL_UINT32(1U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(1U, result);
-}
-
-void test_add_300_counter_zero_saturation_enabled_limit_uint32_max(void) {
-  uint8_t result;
-
-  g_counter_u32 = 0U;
-  SetCounterLimit_u32(UINT32_MAX);
-  SetSaturationEn_b(true);
-
-  result = MyLib_UpdateCounter_u8(300U);
-
-  TEST_ASSERT_EQUAL_UINT32(255U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(255U, result);
-}
-
-void test_multiple_calls_add_ten_counter_zero_saturation_disabled_limit_255(void) {
-  uint8_t result;
-
-  g_counter_u32 = 0U;
-  SetCounterLimit_u32(255U);
-  SetSaturationEn_b(false);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(10U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(10U, result);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(20U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(20U, result);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(30U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(30U, result);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(40U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(40U, result);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(50U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(50U, result);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(60U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(60U, result);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(70U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(70U, result);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(80U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(80U, result);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(90U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(90U, result);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(100U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(100U, result);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(110U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(110U, result);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(120U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(120U, result);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(130U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(130U, result);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(140U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(140U, result);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(150U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(150U, result);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(160U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(160U, result);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(170U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(170U, result);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(180U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(180U, result);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(190U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(190U, result);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(200U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(200U, result);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(210U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(210U, result);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(220U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(220U, result);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(230U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(230U, result);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(240U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(240U, result);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(250U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(250U, result);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(4U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(4U, result);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(14U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(14U, result);
-}
-
-void test_multiple_calls_add_ten_counter_zero_saturation_enabled_limit_255(void) {
-  uint8_t result;
-
-  g_counter_u32 = 0U;
-  SetCounterLimit_u32(255U);
-  SetSaturationEn_b(true);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(10U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(10U, result);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(20U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(20U, result);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(30U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(30U, result);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(40U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(40U, result);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(50U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(50U, result);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(60U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(60U, result);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(70U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(70U, result);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(80U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(80U, result);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(90U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(90U, result);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(100U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(100U, result);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(110U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(110U, result);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(120U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(120U, result);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(130U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(130U, result);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(140U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(140U, result);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(150U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(150U, result);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(160U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(160U, result);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(170U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(170U, result);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(180U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(180U, result);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(190U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(190U, result);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(200U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(200U, result);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(210U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(210U, result);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(220U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(220U, result);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(230U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(230U, result);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(240U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(240U, result);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(250U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(250U, result);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(255U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(255U, result);
-
-  result = MyLib_UpdateCounter_u8(10U);
-  TEST_ASSERT_EQUAL_UINT32(255U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(255U, result);
-}
-
-void test_change_limit_255_to_100_counter_150_add_ten_saturation_disabled(void) {
-  uint8_t result;
-
-  g_counter_u32 = 150U;
-  SetCounterLimit_u32(255U);
-  SetSaturationEn_b(false);
-
-  SetCounterLimit_u32(100U);
-
-  result = MyLib_UpdateCounter_u8(10U);
-
-  TEST_ASSERT_EQUAL_UINT32(59U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(59U, result);
-}
-
-void test_change_limit_255_to_100_counter_150_add_ten_saturation_enabled(void) {
-  uint8_t result;
-
-  g_counter_u32 = 150U;
-  SetCounterLimit_u32(255U);
-  SetSaturationEn_b(true);
-
-  SetCounterLimit_u32(100U);
-
-  result = MyLib_UpdateCounter_u8(10U);
-
-  TEST_ASSERT_EQUAL_UINT32(100U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(100U, result);
-}
-
-void test_toggle_saturation_disabled_to_enabled_counter_200_add_100_limit_255(void) {
-  uint8_t result;
-
-  g_counter_u32 = 200U;
-  SetCounterLimit_u32(255U);
-  SetSaturationEn_b(false);
-
-  SetSaturationEn_b(true);
-
-  result = MyLib_UpdateCounter_u8(100U);
-
-  TEST_ASSERT_EQUAL_UINT32(255U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(255U, result);
-}
-
-void test_toggle_saturation_enabled_to_disabled_counter_200_add_100_limit_255(void) {
-  uint8_t result;
 
-  g_counter_u32 = 200U;
-  SetCounterLimit_u32(255U);
-  SetSaturationEn_b(true);
 
-  SetSaturationEn_b(false);
 
-  result = MyLib_UpdateCounter_u8(100U);
+// ============================================================================
+// CALLBACKS
+// ============================================================================
+
+// No callbacks required for this unit test suite.
+
+// ============================================================================
+// SETUP AND TEARDOWN
+// ============================================================================
+
+void setUp(void)
+{
+    g_counter_u32 = 0U;
+    g_systemReady_b = false;
+    SetCounterLimit_u32(0U);
+    SetSaturationEn_b(false);
+}
+
+void tearDown(void)
+{
+}
+
+// ============================================================================
+// TEST FUNCTIONS
+// ============================================================================
+
+void test_system_not_ready_returns_1(void)
+{
+    uint8_t result;
+    
+    g_systemReady_b = false;
+    g_counter_u32 = 10U;
+    
+    result = MyLib_UpdateCounter_u8(5U);
+    
+    TEST_ASSERT_EQUAL_UINT8(1U, result);
+    TEST_ASSERT_EQUAL_UINT32(10U, g_counter_u32);
+}
+
+void test_ready_sat_disabled_add_zero_returns_0(void)
+{
+    uint8_t result;
+    
+    g_systemReady_b = true;
+    g_counter_u32 = 50U;
+    SetSaturationEn_b(false);
+    SetCounterLimit_u32(100U);
+    
+    result = MyLib_UpdateCounter_u8(0U);
+    
+    TEST_ASSERT_EQUAL_UINT8(0U, result);
+    TEST_ASSERT_EQUAL_UINT32(50U, g_counter_u32);
+}
+
+void test_ready_sat_disabled_add_small_returns_0(void)
+{
+    uint8_t result;
+    
+    g_systemReady_b = true;
+    g_counter_u32 = 10U;
+    SetSaturationEn_b(false);
+    SetCounterLimit_u32(100U);
+    
+    result = MyLib_UpdateCounter_u8(15U);
+    
+    TEST_ASSERT_EQUAL_UINT8(0U, result);
+    TEST_ASSERT_EQUAL_UINT32(25U, g_counter_u32);
+}
+
+void test_ready_sat_disabled_wrap_around_returns_0(void)
+{
+    uint8_t result;
+    
+    g_systemReady_b = true;
+    g_counter_u32 = 0xFFFFFFFEU;
+    SetSaturationEn_b(false);
+    SetCounterLimit_u32(100U);
+    
+    result = MyLib_UpdateCounter_u8(5U);
+    
+    TEST_ASSERT_EQUAL_UINT8(0U, result);
+    TEST_ASSERT_EQUAL_UINT32(3U, g_counter_u32);
+}
+
+void test_ready_sat_enabled_below_limit_returns_0(void)
+{
+    uint8_t result;
+    
+    g_systemReady_b = true;
+    g_counter_u32 = 50U;
+    SetSaturationEn_b(true);
+    SetCounterLimit_u32(100U);
+    
+    result = MyLib_UpdateCounter_u8(20U);
+    
+    TEST_ASSERT_EQUAL_UINT8(0U, result);
+    TEST_ASSERT_EQUAL_UINT32(70U, g_counter_u32);
+}
 
-  TEST_ASSERT_EQUAL_UINT32(44U, g_counter_u32);
-  TEST_ASSERT_EQUAL_UINT8(44U, result);
+void test_ready_sat_enabled_equals_limit_returns_0(void)
+{
+    uint8_t result;
+    
+    g_systemReady_b = true;
+    g_counter_u32 = 80U;
+    SetSaturationEn_b(true);
+    SetCounterLimit_u32(100U);
+    
+    result = MyLib_UpdateCounter_u8(20U);
+    
+    TEST_ASSERT_EQUAL_UINT8(0U, result);
+    TEST_ASSERT_EQUAL_UINT32(100U, g_counter_u32);
+}
+
+void test_ready_sat_enabled_exceeds_by_1_returns_2(void)
+{
+    uint8_t result;
+    
+    g_systemReady_b = true;
+    g_counter_u32 = 100U;
+    SetSaturationEn_b(true);
+    SetCounterLimit_u32(100U);
+    
+    result = MyLib_UpdateCounter_u8(1U);
+    
+    TEST_ASSERT_EQUAL_UINT8(2U, result);
+    TEST_ASSERT_EQUAL_UINT32(100U, g_counter_u32);
+}
+
+void test_ready_sat_enabled_exceeds_large_returns_2(void)
+{
+    uint8_t result;
+    
+    g_systemReady_b = true;
+    g_counter_u32 = 50U;
+    SetSaturationEn_b(true);
+    SetCounterLimit_u32(100U);
+    
+    result = MyLib_UpdateCounter_u8(1000U);
+    
+    TEST_ASSERT_EQUAL_UINT8(2U, result);
+    TEST_ASSERT_EQUAL_UINT32(100U, g_counter_u32);
+}
+
+void test_ready_sat_enabled_at_limit_add_zero_returns_0(void)
+{
+    uint8_t result;
+    
+    g_systemReady_b = true;
+    g_counter_u32 = 100U;
+    SetSaturationEn_b(true);
+    SetCounterLimit_u32(100U);
+    
+    result = MyLib_UpdateCounter_u8(0U);
+    
+    TEST_ASSERT_EQUAL_UINT8(0U, result);
+    TEST_ASSERT_EQUAL_UINT32(100U, g_counter_u32);
+}
+
+void test_ready_sat_enabled_at_limit_add_nonzero_returns_2(void)
+{
+    uint8_t result;
+    
+    g_systemReady_b = true;
+    g_counter_u32 = 100U;
+    SetSaturationEn_b(true);
+    SetCounterLimit_u32(100U);
+    
+    result = MyLib_UpdateCounter_u8(5U);
+    
+    TEST_ASSERT_EQUAL_UINT8(2U, result);
+    TEST_ASSERT_EQUAL_UINT32(100U, g_counter_u32);
+}
+
+void test_ready_sat_enabled_near_max_wrap_exceeds_limit(void)
+{
+    uint8_t result;
+    
+    g_systemReady_b = true;
+    g_counter_u32 = 0xFFFFFFF0U;
+    SetSaturationEn_b(true);
+    SetCounterLimit_u32(100U);
+    
+    result = MyLib_UpdateCounter_u8(20U);
+    
+    TEST_ASSERT_EQUAL_UINT8(2U, result);
+    TEST_ASSERT_EQUAL_UINT32(100U, g_counter_u32);
+}
+
+void test_cycle_toggle_after_16_calls(void)
+{
+    uint8_t i;
+    bool initial_sat;
+    bool final_sat;
+    
+    g_systemReady_b = true;
+    g_counter_u32 = 0U;
+    SetSaturationEn_b(false);
+    SetCounterLimit_u32(1000U);
+    
+    initial_sat = GetSaturationEn_b();
+    
+    for (i = 0U; i < 15U; i++)
+    {
+        MyLib_UpdateCounter_u8(1U);
+    }
+    
+    TEST_ASSERT_EQUAL(initial_sat, GetSaturationEn_b());
+    
+    MyLib_UpdateCounter_u8(1U);
+    
+    final_sat = GetSaturationEn_b();
+    TEST_ASSERT_NOT_EQUAL(initial_sat, final_sat);
+}
+
+void test_cycle_toggle_after_32_calls(void)
+{
+    uint8_t i;
+    bool initial_sat;
+    bool after_16_sat;
+    bool after_32_sat;
+    
+    g_systemReady_b = true;
+    g_counter_u32 = 0U;
+    SetSaturationEn_b(false);
+    SetCounterLimit_u32(1000U);
+    
+    initial_sat = GetSaturationEn_b();
+    
+    for (i = 0U; i < 16U; i++)
+    {
+        MyLib_UpdateCounter_u8(1U);
+    }
+    
+    after_16_sat = GetSaturationEn_b();
+    TEST_ASSERT_NOT_EQUAL(initial_sat, after_16_sat);
+    
+    for (i = 0U; i < 15U; i++)
+    {
+        MyLib_UpdateCounter_u8(1U);
+    }
+    
+    TEST_ASSERT_EQUAL(after_16_sat, GetSaturationEn_b());
+    
+    MyLib_UpdateCounter_u8(1U);
+    
+    after_32_sat = GetSaturationEn_b();
+    TEST_ASSERT_NOT_EQUAL(after_16_sat, after_32_sat);
+    TEST_ASSERT_EQUAL(initial_sat, after_32_sat);
+}
+
+void test_cycle_counter_persistence(void)
+{
+    uint8_t i;
+    
+    g_systemReady_b = true;
+    g_counter_u32 = 0U;
+    SetSaturationEn_b(false);
+    SetCounterLimit_u32(1000U);
+    
+    for (i = 0U; i < 16U; i++)
+    {
+        MyLib_UpdateCounter_u8(1U);
+    }
+    
+    bool sat_after_16 = GetSaturationEn_b();
+    
+    for (i = 0U; i < 16U; i++)
+    {
+        MyLib_UpdateCounter_u8(1U);
+    }
+    
+    bool sat_after_32 = GetSaturationEn_b();
+    
+    TEST_ASSERT_NOT_EQUAL(sat_after_16, sat_after_32);
+}
+
+void test_ready_sat_disabled_max_add_1_wraps_to_0(void)
+{
+    uint8_t result;
+    
+    g_systemReady_b = true;
+    g_counter_u32 = 0xFFFFFFFFU;
+    SetSaturationEn_b(false);
+    SetCounterLimit_u32(100U);
+    
+    result = MyLib_UpdateCounter_u8(1U);
+    
+    TEST_ASSERT_EQUAL_UINT8(0U, result);
+    TEST_ASSERT_EQUAL_UINT32(0U, g_counter_u32);
+}
+
+void test_ready_sat_enabled_limit_0_clamps_to_0(void)
+{
+    uint8_t result;
+    
+    g_systemReady_b = true;
+    g_counter_u32 = 0U;
+    SetSaturationEn_b(true);
+    SetCounterLimit_u32(0U);
+    
+    result = MyLib_UpdateCounter_u8(10U);
+    
+    TEST_ASSERT_EQUAL_UINT8(2U, result);
+    TEST_ASSERT_EQUAL_UINT32(0U, g_counter_u32);
+}
+
+void test_ready_sat_enabled_limit_max_no_wrap_returns_0(void)
+{
+    uint8_t result;
+    
+    g_systemReady_b = true;
+    g_counter_u32 = 100U;
+    SetSaturationEn_b(true);
+    SetCounterLimit_u32(0xFFFFFFFFU);
+    
+    result = MyLib_UpdateCounter_u8(50U);
+    
+    TEST_ASSERT_EQUAL_UINT8(0U, result);
+    TEST_ASSERT_EQUAL_UINT32(150U, g_counter_u32);
+}
+
+void test_ready_sat_enabled_limit_max_at_max_minus_1_add_1(void)
+{
+    uint8_t result;
+    
+    g_systemReady_b = true;
+    g_counter_u32 = 0xFFFFFFFEU;
+    SetSaturationEn_b(true);
+    SetCounterLimit_u32(0xFFFFFFFFU);
+    
+    result = MyLib_UpdateCounter_u8(1U);
+    
+    TEST_ASSERT_EQUAL_UINT8(0U, result);
+    TEST_ASSERT_EQUAL_UINT32(0xFFFFFFFFU, g_counter_u32);
+}
+
+void test_ready_sat_enabled_limit_max_at_max_add_1_wraps(void)
+{
+    uint8_t result;
+    
+    g_systemReady_b = true;
+    g_counter_u32 = 0xFFFFFFFFU;
+    SetSaturationEn_b(true);
+    SetCounterLimit_u32(0xFFFFFFFFU);
+    
+    result = MyLib_UpdateCounter_u8(1U);
+    
+    TEST_ASSERT_EQUAL_UINT8(0U, result);
+    TEST_ASSERT_EQUAL_UINT32(0U, g_counter_u32);
+}
+
+void test_not_ready_then_ready(void)
+{
+    uint8_t result1;
+    uint8_t result2;
+    
+    g_systemReady_b = false;
+    g_counter_u32 = 10U;
+    SetSaturationEn_b(false);
+    SetCounterLimit_u32(100U);
+    
+    result1 = MyLib_UpdateCounter_u8(5U);
+    TEST_ASSERT_EQUAL_UINT8(1U, result1);
+    TEST_ASSERT_EQUAL_UINT32(10U, g_counter_u32);
+    
+    g_systemReady_b = true;
+    
+    result2 = MyLib_UpdateCounter_u8(5U);
+    TEST_ASSERT_EQUAL_UINT8(0U, result2);
+    TEST_ASSERT_EQUAL_UINT32(15U, g_counter_u32);
+}
+
+void test_combo_sat_enabled_mid_limit_exactly_at_limit(void)
+{
+    uint8_t result;
+    
+    g_systemReady_b = true;
+    g_counter_u32 = 200U;
+    SetSaturationEn_b(true);
+    SetCounterLimit_u32(500U);
+    
+    result = MyLib_UpdateCounter_u8(300U);
+    
+    TEST_ASSERT_EQUAL_UINT8(0U, result);
+    TEST_ASSERT_EQUAL_UINT32(500U, g_counter_u32);
+}
+
+void test_combo_sat_enabled_mid_limit_exceeds_limit(void)
+{
+    uint8_t result;
+    
+    g_systemReady_b = true;
+    g_counter_u32 = 200U;
+    SetSaturationEn_b(true);
+    SetCounterLimit_u32(500U);
+    
+    result = MyLib_UpdateCounter_u8(350U);
+    
+    TEST_ASSERT_EQUAL_UINT8(2U, result);
+    TEST_ASSERT_EQUAL_UINT32(500U, g_counter_u32);
+}
+
+void test_combo_sat_disabled_multiple_increments(void)
+{
+    uint8_t result;
+    
+    g_systemReady_b = true;
+    g_counter_u32 = 0U;
+    SetSaturationEn_b(false);
+    SetCounterLimit_u32(1000U);
+    
+    result = MyLib_UpdateCounter_u8(10U);
+    TEST_ASSERT_EQUAL_UINT8(0U, result);
+    TEST_ASSERT_EQUAL_UINT32(10U, g_counter_u32);
+    
+    result = MyLib_UpdateCounter_u8(20U);
+    TEST_ASSERT_EQUAL_UINT8(0U, result);
+    TEST_ASSERT_EQUAL_UINT32(30U, g_counter_u32);
+    
+    result = MyLib_UpdateCounter_u8(30U);
+    TEST_ASSERT_EQUAL_UINT8(0U, result);
+    TEST_ASSERT_EQUAL_UINT32(60U, g_counter_u32);
+}
+
+void test_combo_sat_toggled_via_cycle_count(void)
+{
+    uint8_t i;
+    uint8_t result;
+    
+    g_systemReady_b = true;
+    g_counter_u32 = 0U;
+    SetSaturationEn_b(true);
+    SetCounterLimit_u32(50U);
+    
+    for (i = 0U; i < 15U; i++)
+    {
+        MyLib_UpdateCounter_u8(1U);
+    }
+    
+    TEST_ASSERT_EQUAL(true, GetSaturationEn_b());
+    
+    result = MyLib_UpdateCounter_u8(100U);
+    TEST_ASSERT_EQUAL_UINT8(2U, result);
+    TEST_ASSERT_EQUAL_UINT32(50U, g_counter_u32);
+    
+    TEST_ASSERT_EQUAL(false, GetSaturationEn_b());
+    
+    result = MyLib_UpdateCounter_u8(100U);
+    TEST_ASSERT_EQUAL_UINT8(0U, result);
+    TEST_ASSERT_EQUAL_UINT32(150U, g_counter_u32);
+}
+
+void test_edge_counter_0_sat_limit_0_add_0(void)
+{
+    uint8_t result;
+    
+    g_systemReady_b = true;
+    g_counter_u32 = 0U;
+    SetSaturationEn_b(true);
+    SetCounterLimit_u32(0U);
+    
+    result = MyLib_UpdateCounter_u8(0U);
+    
+    TEST_ASSERT_EQUAL_UINT8(0U, result);
+    TEST_ASSERT_EQUAL_UINT32(0U, g_counter_u32);
+}
+
+void test_edge_counter_0_sat_limit_1_add_1(void)
+{
+    uint8_t result;
+    
+    g_systemReady_b = true;
+    g_counter_u32 = 0U;
+    SetSaturationEn_b(true);
+    SetCounterLimit_u32(1U);
+    
+    result = MyLib_UpdateCounter_u8(1U);
+    
+    TEST_ASSERT_EQUAL_UINT8(0U, result);
+    TEST_ASSERT_EQUAL_UINT32(1U, g_counter_u32);
+}
+
+void test_edge_counter_0_sat_limit_1_add_2(void)
+{
+    uint8_t result;
+    
+    g_systemReady_b = true;
+    g_counter_u32 = 0U;
+    SetSaturationEn_b(true);
+    SetCounterLimit_u32(1U);
+    
+    result = MyLib_UpdateCounter_u8(2U);
+    
+    TEST_ASSERT_EQUAL_UINT8(2U, result);
+    TEST_ASSERT_EQUAL_UINT32(1U, g_counter_u32);
 }
-```
