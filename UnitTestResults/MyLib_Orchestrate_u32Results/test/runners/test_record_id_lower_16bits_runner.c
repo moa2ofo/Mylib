@@ -82,7 +82,7 @@ static void run_test(UnityTestFunction func, const char* name, UNITY_LINE_TYPE l
 int main(void)
 {
   UnityBegin("test_record_id_lower_16bits.c");
-  run_test(test_record_id_lower_16bits, "test_record_id_lower_16bits", 40);
+  run_test(test_record_id_lower_16bits, "test_record_id_lower_16bits", 43);
 
   CMock_Guts_MemFreeFinal();
   return UNITY_END();

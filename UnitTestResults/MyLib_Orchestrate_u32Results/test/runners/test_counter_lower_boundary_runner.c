@@ -82,7 +82,7 @@ static void run_test(UnityTestFunction func, const char* name, UNITY_LINE_TYPE l
 int main(void)
 {
   UnityBegin("test_counter_lower_boundary.c");
-  run_test(test_counter_lower_boundary, "test_counter_lower_boundary", 40);
+  run_test(test_counter_lower_boundary, "test_counter_lower_boundary", 43);
 
   CMock_Guts_MemFreeFinal();
   return UNITY_END();

@@ -82,7 +82,7 @@ static void run_test(UnityTestFunction func, const char* name, UNITY_LINE_TYPE l
 int main(void)
 {
   UnityBegin("test_counter_mid_range.c");
-  run_test(test_counter_mid_range, "test_counter_mid_range", 40);
+  run_test(test_counter_mid_range, "test_counter_mid_range", 43);
 
   CMock_Guts_MemFreeFinal();
   return UNITY_END();

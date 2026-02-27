@@ -10860,47 +10860,52 @@ void MyLib_UpdateCounter_u8_CMockIgnoreArg_add_u32(UNITY_LINE_TYPE cmock_line);
 
 
 
-static uint32_t InternalHelper_u32_fake_retval;
+static uint32_t mock_InternalHelper_result;
+static uint32_t mock_InternalHelper_call_count;
+static uint32_t mock_InternalHelper_last_x;
+static uint16_t mock_InternalHelper_last_y;
 
-static uint32_t InternalHelper_u32_Callback(uint32_t x_u32, uint16_t y_u16, int call_count) {
-  (void)call_count;
-  (void)x_u32;
-  (void)y_u16;
-  return InternalHelper_u32_fake_retval;
+static uint32_t InternalHelper_u32_MockCallback(uint32_t x_u32, uint16_t y_u16, int call_count) {
+  mock_InternalHelper_call_count++;
+  mock_InternalHelper_last_x = x_u32;
+  mock_InternalHelper_last_y = y_u16;
+  return mock_InternalHelper_result;
 }
 
-static MyLib_record_t captured_record;
+static const MyLib_record_t *captured_record_ptr;
 static uint8_t captured_multiplier;
-static int MyLib_ProcessRecord_call_count;
+static uint32_t MyLib_ProcessRecord_call_count;
 
-static void MyLib_ProcessRecord_Callback(const MyLib_record_t *rec_pc, uint8_t multiplier_u8, int call_count) {
-  (void)call_count;
+static void MyLib_ProcessRecord_MockCallback(const MyLib_record_t *rec_pc, uint8_t multiplier_u8, int call_count) {
   MyLib_ProcessRecord_call_count++;
-  captured_record.id_u16 = rec_pc->id_u16;
-  captured_record.value_u32 = rec_pc->value_u32;
+  captured_record_ptr = rec_pc;
   captured_multiplier = multiplier_u8;
 }
 
 void setUp(void) {
-  g_counter_u32 = 0;
-  InternalHelper_u32_fake_retval = 0;
-  captured_record.id_u16 = 0;
-  captured_record.value_u32 = 0;
+  mock_InternalHelper_result = 0;
+  mock_InternalHelper_call_count = 0;
+  mock_InternalHelper_last_x = 0;
+  mock_InternalHelper_last_y = 0;
+  captured_record_ptr = NULL;
   captured_multiplier = 0;
   MyLib_ProcessRecord_call_count = 0;
+  g_counter_u32 = 0;
 }
 
 void tearDown(void) {
 }
 
 void test_record_id_lower_16bits(void) {
-  InternalHelper_u32_fake_retval = 0x12345678;
   g_counter_u32 = 0;
+  mock_InternalHelper_result = 0x12345678;
 
-  InternalHelper_u32_Stub(InternalHelper_u32_Callback);
-  MyLib_ProcessRecord_Stub(MyLib_ProcessRecord_Callback);
+  InternalHelper_u32_CMockStubWithCallback(InternalHelper_u32_MockCallback);
+  MyLib_ProcessRecord_CMockStubWithCallback(MyLib_ProcessRecord_MockCallback);
 
-  MyLib_Orchestrate_u32(0, NULL);
+  uint32_t result = MyLib_Orchestrate_u32(100, NULL);
 
-  TEST_ASSERT_EQUAL_UINT16(0x5678, captured_record.id_u16);
+  TEST_ASSERT_EQUAL_UINT32(1, MyLib_ProcessRecord_call_count);
+  TEST_ASSERT_NOT_NULL(captured_record_ptr);
+  TEST_ASSERT_EQUAL_UINT16(0x5678, captured_record_ptr->id_u16);
 }

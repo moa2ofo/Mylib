@@ -82,7 +82,7 @@ static void run_test(UnityTestFunction func, const char* name, UNITY_LINE_TYPE l
 int main(void)
 {
   UnityBegin("test_start_100_delta_NULL.c");
-  run_test(test_start_100_delta_NULL, "test_start_100_delta_NULL", 40);
+  run_test(test_start_100_delta_NULL, "test_start_100_delta_NULL", 43);
 
   CMock_Guts_MemFreeFinal();
   return UNITY_END();
