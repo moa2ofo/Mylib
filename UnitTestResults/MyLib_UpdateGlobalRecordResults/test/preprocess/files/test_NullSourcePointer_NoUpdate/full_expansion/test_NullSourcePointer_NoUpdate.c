@@ -299,7 +299,7 @@ static uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
 uint8_t MyLib_UpdateCounter_u8(uint32_t add_u32);
 # 5 "utExecutionAndResults/utUnderTest/src/MyLib_UpdateGlobalRecord.h" 2
 # 51 "utExecutionAndResults/utUnderTest/src/MyLib_UpdateGlobalRecord.h"
-void MyLib_UpdateGlobalRecord(MyLib_record_t * dest_p, const MyLib_record_t * src_pc);
+void MyLib_UpdateGlobalRecord(MyLib_record_t *dest_p, const MyLib_record_t *src_pc);
 # 2 "utExecutionAndResults/utUnderTest/test/test_NullSourcePointer_NoUpdate.c" 2
 # 1 "utExecutionAndResults/utUnderTest/build/test/mocks/test_NullSourcePointer_NoUpdate/mock_MyLib.h" 1
 

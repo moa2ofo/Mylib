@@ -299,7 +299,7 @@ static uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
 uint8_t MyLib_UpdateCounter_u8(uint32_t add_u32);
 # 5 "utExecutionAndResults/utUnderTest/src/MyLib_ComputeAdjustedValue_u32.h" 2
 # 48 "utExecutionAndResults/utUnderTest/src/MyLib_ComputeAdjustedValue_u32.h"
-uint32_t MyLib_ComputeAdjustedValue_u32(uint32_t base_u32, const uint16_t * delta_pc_u16);
+uint32_t MyLib_ComputeAdjustedValue_u32(uint32_t base_u32, const uint16_t *delta_pc_u16);
 # 2 "utExecutionAndResults/utUnderTest/test/test_ComputeAdjustedValue_u32_SequentialCallsWithDifferentParameters.c" 2
 # 1 "utExecutionAndResults/utUnderTest/build/test/mocks/test_ComputeAdjustedValue_u32_SequentialCallsWithDifferentParameters/mock_MyLib.h" 1
 

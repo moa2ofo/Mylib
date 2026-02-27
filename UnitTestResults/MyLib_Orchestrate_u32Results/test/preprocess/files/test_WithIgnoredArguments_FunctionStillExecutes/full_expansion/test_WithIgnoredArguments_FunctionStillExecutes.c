@@ -304,7 +304,7 @@ static uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
 uint8_t MyLib_UpdateCounter_u8(uint32_t add_u32);
 # 5 "utExecutionAndResults/utUnderTest/src/MyLib_Orchestrate_u32.h" 2
 # 56 "utExecutionAndResults/utUnderTest/src/MyLib_Orchestrate_u32.h"
-uint32_t MyLib_Orchestrate_u32(uint32_t start_u32, const uint16_t * delta_pc_u16);
+uint32_t MyLib_Orchestrate_u32(uint32_t start_u32, const uint16_t *delta_pc_u16);
 # 7 "utExecutionAndResults/utUnderTest/test/test_WithIgnoredArguments_FunctionStillExecutes.c" 2
 # 1 "utExecutionAndResults/utUnderTest/build/test/mocks/test_WithIgnoredArguments_FunctionStillExecutes/mock_MyLib.h" 1
 
