@@ -1,0 +1,19 @@
+---
+:source:
+  :file: utExecutionAndResults/utUnderTest/test/test_ready_sat_enabled_at_limit_add_nonzero_returns_2.c
+  :dirname: utExecutionAndResults/utUnderTest/test
+  :basename: test_ready_sat_enabled_at_limit_add_nonzero_returns_2.c
+:successes:
+- :test: test_ready_sat_enabled_at_limit_add_nonzero_returns_2
+  :line: 27
+  :message: ''
+  :unity_test_time: 0
+:failures: []
+:ignores: []
+:counts:
+  :total: 1
+  :passed: 1
+  :failed: 0
+  :ignored: 0
+:stdout: []
+:time: 0.004515324000010423

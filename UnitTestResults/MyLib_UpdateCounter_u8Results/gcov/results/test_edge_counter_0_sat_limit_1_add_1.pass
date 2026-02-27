@@ -1,0 +1,19 @@
+---
+:source:
+  :file: utExecutionAndResults/utUnderTest/test/test_edge_counter_0_sat_limit_1_add_1.c
+  :dirname: utExecutionAndResults/utUnderTest/test
+  :basename: test_edge_counter_0_sat_limit_1_add_1.c
+:successes:
+- :test: test_edge_counter_0_sat_limit_1_add_1
+  :line: 27
+  :message: ''
+  :unity_test_time: 0
+:failures: []
+:ignores: []
+:counts:
+  :total: 1
+  :passed: 1
+  :failed: 0
+  :ignored: 0
+:stdout: []
+:time: 0.0044342109999888635

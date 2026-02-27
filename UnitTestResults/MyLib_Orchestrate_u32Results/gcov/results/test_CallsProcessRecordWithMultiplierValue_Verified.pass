@@ -18,4 +18,4 @@
 :stdout:
 - 'test_CallsProcessRecordWithMultiplierValue_Verified.c:48:test_MyLib_Orchestrate_u32_CallsProcessRecordWithMultiplierValue_Verified:INFO:
   MyLib_ProcessRecord called with correct multiplier'
-:time: 0.0035291820000225016
+:time: 0.0035204289999910543
