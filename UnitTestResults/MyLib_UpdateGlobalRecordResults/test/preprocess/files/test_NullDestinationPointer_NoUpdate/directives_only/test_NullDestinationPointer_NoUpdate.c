@@ -826,7 +826,7 @@
 # 1 "utExecutionAndResults/utUnderTest/test/test_NullDestinationPointer_NoUpdate.c"
 # 1 "utExecutionAndResults/utUnderTest/src/MyLib_UpdateGlobalRecord.h" 1
 
-#define MYLIB_UPDATEGLOBALRECORD_H 
+#define TEST_MYLIB_UPDATEGLOBALRECORD_H 
 
 # 1 "utExecutionAndResults/utUnderTest/src/MyLib.h" 1
 /* MyLib.h */
@@ -3459,17 +3459,23 @@ uint32_t MyLib_ComputeAdjustedValue_u32(uint32_t base_u32, const uint16_t *delta
  *
  * @startuml
  * start
+ * : l_inNull_b = false;
+ * 
  * if (values_pu16 == NULL or len_u32 == 0) then (yes)
- *   :return 0;
- * else (no)
- *   :l_sum_u32 = 0;
- *   :for l_i_u32 in [0..len_u32-1];
- *     :values_pu16[l_i_u32] *= factor_u16;
+ *   : l_inNull_b = true;
+ * endif
+ * :l_sum_u32 = 0;
+ * 
+ * if (l_inNull_b == false) then (process)
+ *   :for l_i_u32 in [0 .. len_u32-1];
+ *     :values_pu16[l_i_u32] = values_pu16[l_i_u32] * factor_u16;
  *     :l_sum_u32 += values_pu16[l_i_u32];
  *   :endfor;
+ * 
  *   :call MyLib_ComputeAdjustedValue_u32(l_sum_u32, NULL);
- *   :return l_sum_u32;
  * endif
+ * :return l_sum_u32;
+ * 
  * stop
  * @enduml
  *
@@ -3632,11 +3638,119 @@ uint32_t MyLib_Orchestrate_u32(uint32_t start_u32, const uint16_t *delta_pc_u16)
  * @return uint32_t
  * Final accumulated value (wrap-around possible on 32-bit overflow).
  */
-uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
+static uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
+
+/**
+ * @brief Update the module global counter with optional saturation handling.
+ *
+ * @details
+ * **Goal of the function**
+ *
+ * Execute a deterministic sequence:
+ * - Increment a function-static cycle counter (`l_CycleCnt_u32`)
+ * - Check module readiness via `g_systemReady_b`
+ *   - If not ready, return error code 1 and perform no update
+ * - Compute a tentative new counter value (`l_new_u32 = g_counter_u32 + add_u32`)
+ * - Apply saturation (if enabled):
+ *   - If `SaturationEn_b == true` and `l_new_u32 > CounterLimit_u32`, clamp `g_counter_u32` and return code 2
+ *   - Otherwise store `l_new_u32` into `g_counter_u32` and return code 0
+ * - Periodically toggle `SaturationEn_b` every 16 calls (when `(l_CycleCnt_u32 & 0x0FU) == 0U`)
+ *
+ * @par Interface summary
+ *
+ * | Interface         | In | Out | Type / Signature           | Param | Factor | Offset | Size | Range              | Unit |
+ * |-------------------|----|-----|----------------------------|-------|--------|--------|------|--------------------|------|
+ * | add_u32           | X  |     | uint32_t                   |   X   |   1    |   0    |   1  | 0..(wrap)          | [-]  |
+ * | g_systemReady_b   |    |  X  | bool                       |       |   1    |   0    |   1  | false/true         | [-]  |
+ * | g_counter_u32     |    |  X  | uint32_t                   |       |   1    |   0    |   1  | 0..(wrap)          | [-]  |
+ * | CounterLimit_u32  |    |  X  | uint32_t                   |       |   1    |   0    |   1  | 0..(wrap)          | [-]  |
+ * | SaturationEn_b    |    |  X  | bool                       |       |   1    |   0    |   1  | false/true         | [-]  |
+ * | return val        |    |  X  | uint8_t                    |       |   1    |   0    |   1  | 0..2               | [-]  |
+ *
+ * @par Activity diagram (PlantUML)
+ *
+ * @startuml
+ * start
+ * :static l_CycleCnt_u32++;
+ * if (g_systemReady_b == false) then (yes)
+ *   :return 1;
+ * else (no)
+ *   :l_new_u32 = g_counter_u32 + add_u32;
+ *   if ((SaturationEn_b == true) && (l_new_u32 > CounterLimit_u32)) then (yes)
+ *     :g_counter_u32 = CounterLimit_u32;
+ *     :l_ret_u8 = 2;
+ *   else (no)
+ *     :g_counter_u32 = l_new_u32;
+ *     :l_ret_u8 = 0;
+ *   endif
+ *   if ((l_CycleCnt_u32 & 0x0F) == 0) then (yes)
+ *     :SaturationEn_b = !SaturationEn_b;
+ *   endif
+ *   :return l_ret_u8;
+ * endif
+ * stop
+ * @enduml
+ *
+ * @param add_u32
+ * Unsigned increment added to `g_counter_u32` (wrap-around may occur before saturation check).
+ *
+ * @return uint8_t
+ * Status code:
+ * - 0: Update applied (no saturation clamp)
+ * - 1: Rejected because `g_systemReady_b == false`
+ * - 2: Saturation applied and `g_counter_u32` clamped to `CounterLimit_u32`
+ */
+uint8_t MyLib_UpdateCounter_u8(uint32_t add_u32);
 
 # 5 "utExecutionAndResults/utUnderTest/src/MyLib_UpdateGlobalRecord.h" 2
 
-void MyLib_UpdateGlobalRecord(MyLib_record_t *dest_p, const MyLib_record_t *src_pc);
+/**
+ * @brief Copy a record into a destination and update module global state.
+ *
+ * @details
+ * **Goal of the function**
+ *
+ * Copy the content of `src_pc` into `dest_p`. On success, mirror the copied
+ * record to the module global record and mark the system as ready.
+ * If any pointer is NULL, the function returns immediately without changes.
+ *
+ * @par Interface summary
+ *
+ * | Interface         | In | Out | Type / Signature       | Param | Factor | Offset | Size | Range              | Unit |
+ * |-------------------|----|-----|------------------------|-------|--------|--------|------|--------------------|------|
+ * | dest_p            | X  |  X  | MyLib_record_t*        |   X   |   1    |   0    |   1  | pointer / NULL     | [-]  |
+ * | src_pc            | X  |     | const MyLib_record_t*  |   X   |   1    |   0    |   1  | pointer / NULL     | [-]  |
+ * | g_record          |    |  X  | MyLib_record_t         |       |   1    |   0    |   1  | -                  | [-]  |
+ * | g_systemReady_b   |    |  X  | bool                   |       |   1    |   0    |   1  | false/true         | [-]  |
+ * | return val        |    |     | void                   |       |   1    |   0    |   1  | -                  | [-]  |
+ *
+ * @par Activity diagram (PlantUML)
+ *
+ * @startuml
+ * start
+ * if (dest_p == NULL or src_pc == NULL) then (yes)
+ *   :return;
+ * else (no)
+ *   :dest_p->id_u16 = src_pc->id_u16;
+ *   :dest_p->value_u32 = src_pc->value_u32;
+ *   :g_record = *dest_p;
+ *   :g_systemReady_b = true;
+ *   :return;
+ * endif
+ * stop
+ * @enduml
+ *
+ * @param dest_p
+ * Destination record pointer. Updated if not NULL and `src_pc` is not NULL.
+ *
+ * @param src_pc
+ * Source record pointer. Read-only. If NULL, nothing is updated.
+ *
+ * @return void
+ * No return value.
+ */
+void MyLib_UpdateGlobalRecord(MyLib_record_t * dest_p, const MyLib_record_t * src_pc);
+
 
 # 2 "utExecutionAndResults/utUnderTest/test/test_NullDestinationPointer_NoUpdate.c" 2
 # 1 "utExecutionAndResults/utUnderTest/build/test/mocks/test_NullDestinationPointer_NoUpdate/mock_MyLib.h" 1
@@ -10705,6 +10819,23 @@ void InternalHelper_u32_Stub(CMOCK_InternalHelper_u32_CALLBACK Callback);
 void InternalHelper_u32_CMockIgnoreArg_x_u32(UNITY_LINE_TYPE cmock_line);
 #define InternalHelper_u32_IgnoreArg_y_u16() InternalHelper_u32_CMockIgnoreArg_y_u16(__LINE__)
 void InternalHelper_u32_CMockIgnoreArg_y_u16(UNITY_LINE_TYPE cmock_line);
+#define MyLib_UpdateCounter_u8_Ignore() TEST_FAIL_MESSAGE("MyLib_UpdateCounter_u8 requires _IgnoreAndReturn");
+#define MyLib_UpdateCounter_u8_IgnoreAndReturn(cmock_retval) MyLib_UpdateCounter_u8_CMockIgnoreAndReturn(__LINE__, cmock_retval)
+void MyLib_UpdateCounter_u8_CMockIgnoreAndReturn(UNITY_LINE_TYPE cmock_line, uint8_t cmock_to_return);
+#define MyLib_UpdateCounter_u8_StopIgnore() MyLib_UpdateCounter_u8_CMockStopIgnore()
+void MyLib_UpdateCounter_u8_CMockStopIgnore(void);
+#define MyLib_UpdateCounter_u8_ExpectAnyArgs() TEST_FAIL_MESSAGE("MyLib_UpdateCounter_u8 requires _ExpectAnyArgsAndReturn");
+#define MyLib_UpdateCounter_u8_ExpectAnyArgsAndReturn(cmock_retval) MyLib_UpdateCounter_u8_CMockExpectAnyArgsAndReturn(__LINE__, cmock_retval)
+void MyLib_UpdateCounter_u8_CMockExpectAnyArgsAndReturn(UNITY_LINE_TYPE cmock_line, uint8_t cmock_to_return);
+#define MyLib_UpdateCounter_u8_Expect(add_u32) TEST_FAIL_MESSAGE("MyLib_UpdateCounter_u8 requires _ExpectAndReturn");
+#define MyLib_UpdateCounter_u8_ExpectAndReturn(add_u32,cmock_retval) MyLib_UpdateCounter_u8_CMockExpectAndReturn(__LINE__, add_u32, cmock_retval)
+void MyLib_UpdateCounter_u8_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, uint32_t add_u32, uint8_t cmock_to_return);
+typedef uint8_t (* CMOCK_MyLib_UpdateCounter_u8_CALLBACK)(uint32_t add_u32, int cmock_num_calls);
+void MyLib_UpdateCounter_u8_AddCallback(CMOCK_MyLib_UpdateCounter_u8_CALLBACK Callback);
+void MyLib_UpdateCounter_u8_Stub(CMOCK_MyLib_UpdateCounter_u8_CALLBACK Callback);
+#define MyLib_UpdateCounter_u8_StubWithCallback MyLib_UpdateCounter_u8_Stub
+#define MyLib_UpdateCounter_u8_IgnoreArg_add_u32() MyLib_UpdateCounter_u8_CMockIgnoreArg_add_u32(__LINE__)
+void MyLib_UpdateCounter_u8_CMockIgnoreArg_add_u32(UNITY_LINE_TYPE cmock_line);
 
 
 

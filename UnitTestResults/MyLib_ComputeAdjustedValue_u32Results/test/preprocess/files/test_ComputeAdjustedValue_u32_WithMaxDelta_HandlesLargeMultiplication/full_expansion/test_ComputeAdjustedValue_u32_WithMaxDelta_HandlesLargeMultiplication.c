@@ -285,19 +285,21 @@ extern
       _Bool 
 # 23 "utExecutionAndResults/utUnderTest/src/MyLib.h"
            g_systemReady_b;
-# 97 "utExecutionAndResults/utUnderTest/src/MyLib.h"
+# 98 "utExecutionAndResults/utUnderTest/src/MyLib.h"
 void MyLib_ProcessRecord(const MyLib_record_t *rec_pc, uint8_t multiplier_u8);
-# 194 "utExecutionAndResults/utUnderTest/src/MyLib.h"
+# 202 "utExecutionAndResults/utUnderTest/src/MyLib.h"
 uint32_t MyLib_AnalyzeArray_u32(uint16_t *values_pu16, size_t len_u32, uint16_t factor_u16);
-# 241 "utExecutionAndResults/utUnderTest/src/MyLib.h"
+# 249 "utExecutionAndResults/utUnderTest/src/MyLib.h"
 void MyLib_UpdateGlobalRecord(MyLib_record_t *dest_p, const MyLib_record_t *src_pc);
-# 293 "utExecutionAndResults/utUnderTest/src/MyLib.h"
+# 301 "utExecutionAndResults/utUnderTest/src/MyLib.h"
 uint32_t MyLib_Orchestrate_u32(uint32_t start_u32, const uint16_t *delta_pc_u16);
-# 342 "utExecutionAndResults/utUnderTest/src/MyLib.h"
-uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
+# 350 "utExecutionAndResults/utUnderTest/src/MyLib.h"
+static uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
+# 412 "utExecutionAndResults/utUnderTest/src/MyLib.h"
+uint8_t MyLib_UpdateCounter_u8(uint32_t add_u32);
 # 5 "utExecutionAndResults/utUnderTest/src/MyLib_ComputeAdjustedValue_u32.h" 2
-
-uint32_t MyLib_ComputeAdjustedValue_u32(uint32_t base_u32, const uint16_t *delta_pc_u16);
+# 48 "utExecutionAndResults/utUnderTest/src/MyLib_ComputeAdjustedValue_u32.h"
+uint32_t MyLib_ComputeAdjustedValue_u32(uint32_t base_u32, const uint16_t * delta_pc_u16);
 # 2 "utExecutionAndResults/utUnderTest/test/test_ComputeAdjustedValue_u32_WithMaxDelta_HandlesLargeMultiplication.c" 2
 # 1 "utExecutionAndResults/utUnderTest/build/test/mocks/test_ComputeAdjustedValue_u32_WithMaxDelta_HandlesLargeMultiplication/mock_MyLib.h" 1
 
@@ -2351,6 +2353,23 @@ void InternalHelper_u32_Stub(CMOCK_InternalHelper_u32_CALLBACK Callback);
 void InternalHelper_u32_CMockIgnoreArg_x_u32(UNITY_UINT cmock_line);
 
 void InternalHelper_u32_CMockIgnoreArg_y_u16(UNITY_UINT cmock_line);
+
+
+void MyLib_UpdateCounter_u8_CMockIgnoreAndReturn(UNITY_UINT cmock_line, uint8_t cmock_to_return);
+
+void MyLib_UpdateCounter_u8_CMockStopIgnore(void);
+
+
+void MyLib_UpdateCounter_u8_CMockExpectAnyArgsAndReturn(UNITY_UINT cmock_line, uint8_t cmock_to_return);
+
+
+void MyLib_UpdateCounter_u8_CMockExpectAndReturn(UNITY_UINT cmock_line, uint32_t add_u32, uint8_t cmock_to_return);
+typedef uint8_t (* CMOCK_MyLib_UpdateCounter_u8_CALLBACK)(uint32_t add_u32, int cmock_num_calls);
+void MyLib_UpdateCounter_u8_AddCallback(CMOCK_MyLib_UpdateCounter_u8_CALLBACK Callback);
+void MyLib_UpdateCounter_u8_Stub(CMOCK_MyLib_UpdateCounter_u8_CALLBACK Callback);
+
+
+void MyLib_UpdateCounter_u8_CMockIgnoreArg_add_u32(UNITY_UINT cmock_line);
 
 
 

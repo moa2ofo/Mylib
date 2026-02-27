@@ -9,7 +9,9 @@ static const char* CMockString_InternalHelper_u32 = "InternalHelper_u32";
 static const char* CMockString_MyLib_AnalyzeArray_u32 = "MyLib_AnalyzeArray_u32";
 static const char* CMockString_MyLib_ComputeAdjustedValue_u32 = "MyLib_ComputeAdjustedValue_u32";
 static const char* CMockString_MyLib_Orchestrate_u32 = "MyLib_Orchestrate_u32";
+static const char* CMockString_MyLib_UpdateCounter_u8 = "MyLib_UpdateCounter_u8";
 static const char* CMockString_MyLib_UpdateGlobalRecord = "MyLib_UpdateGlobalRecord";
+static const char* CMockString_add_u32 = "add_u32";
 static const char* CMockString_base_u32 = "base_u32";
 static const char* CMockString_delta_pc_u16 = "delta_pc_u16";
 static const char* CMockString_dest_p = "dest_p";
@@ -98,6 +100,17 @@ typedef struct _CMOCK_InternalHelper_u32_CALL_INSTANCE
 
 } CMOCK_InternalHelper_u32_CALL_INSTANCE;
 
+typedef struct _CMOCK_MyLib_UpdateCounter_u8_CALL_INSTANCE
+{
+  UNITY_LINE_TYPE LineNumber;
+  char ExpectAnyArgsBool;
+  uint8_t ReturnVal;
+  int CallOrder;
+  uint32_t Expected_add_u32;
+  char IgnoreArg_add_u32;
+
+} CMOCK_MyLib_UpdateCounter_u8_CALL_INSTANCE;
+
 static struct mock_MyLibInstance
 {
   char MyLib_ComputeAdjustedValue_u32_IgnoreBool;
@@ -129,6 +142,12 @@ static struct mock_MyLibInstance
   CMOCK_InternalHelper_u32_CALLBACK InternalHelper_u32_CallbackFunctionPointer;
   int InternalHelper_u32_CallbackCalls;
   CMOCK_MEM_INDEX_TYPE InternalHelper_u32_CallInstance;
+  char MyLib_UpdateCounter_u8_IgnoreBool;
+  uint8_t MyLib_UpdateCounter_u8_FinalReturn;
+  char MyLib_UpdateCounter_u8_CallbackBool;
+  CMOCK_MyLib_UpdateCounter_u8_CALLBACK MyLib_UpdateCounter_u8_CallbackFunctionPointer;
+  int MyLib_UpdateCounter_u8_CallbackCalls;
+  CMOCK_MEM_INDEX_TYPE MyLib_UpdateCounter_u8_CallInstance;
 } Mock;
 
 extern int GlobalExpectCount;
@@ -199,6 +218,19 @@ void mock_MyLib_Verify(void)
     UNITY_TEST_FAIL(cmock_line, CMockStringCalledLess);
   }
   if (Mock.InternalHelper_u32_CallbackFunctionPointer != NULL)
+  {
+    call_instance = CMOCK_GUTS_NONE;
+    (void)call_instance;
+  }
+  call_instance = Mock.MyLib_UpdateCounter_u8_CallInstance;
+  if (Mock.MyLib_UpdateCounter_u8_IgnoreBool)
+    call_instance = CMOCK_GUTS_NONE;
+  if (CMOCK_GUTS_NONE != call_instance)
+  {
+    UNITY_SET_DETAIL(CMockString_MyLib_UpdateCounter_u8);
+    UNITY_TEST_FAIL(cmock_line, CMockStringCalledLess);
+  }
+  if (Mock.MyLib_UpdateCounter_u8_CallbackFunctionPointer != NULL)
   {
     call_instance = CMOCK_GUTS_NONE;
     (void)call_instance;
@@ -1010,5 +1042,128 @@ void InternalHelper_u32_CMockIgnoreArg_y_u16(UNITY_LINE_TYPE cmock_line)
   CMOCK_InternalHelper_u32_CALL_INSTANCE* cmock_call_instance = (CMOCK_InternalHelper_u32_CALL_INSTANCE*)CMock_Guts_GetAddressFor(CMock_Guts_MemEndOfChain(Mock.InternalHelper_u32_CallInstance));
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringIgnPreExp);
   cmock_call_instance->IgnoreArg_y_u16 = 1;
+}
+
+uint8_t MyLib_UpdateCounter_u8(uint32_t add_u32)
+{
+  UNITY_LINE_TYPE cmock_line = TEST_LINE_NUM;
+  CMOCK_MyLib_UpdateCounter_u8_CALL_INSTANCE* cmock_call_instance;
+  UNITY_SET_DETAIL(CMockString_MyLib_UpdateCounter_u8);
+  cmock_call_instance = (CMOCK_MyLib_UpdateCounter_u8_CALL_INSTANCE*)CMock_Guts_GetAddressFor(Mock.MyLib_UpdateCounter_u8_CallInstance);
+  Mock.MyLib_UpdateCounter_u8_CallInstance = CMock_Guts_MemNext(Mock.MyLib_UpdateCounter_u8_CallInstance);
+  if (Mock.MyLib_UpdateCounter_u8_IgnoreBool)
+  {
+    UNITY_CLR_DETAILS();
+    if (cmock_call_instance == NULL)
+      return Mock.MyLib_UpdateCounter_u8_FinalReturn;
+    Mock.MyLib_UpdateCounter_u8_FinalReturn = cmock_call_instance->ReturnVal;
+    return cmock_call_instance->ReturnVal;
+  }
+  if (!Mock.MyLib_UpdateCounter_u8_CallbackBool &&
+      Mock.MyLib_UpdateCounter_u8_CallbackFunctionPointer != NULL)
+  {
+    uint8_t cmock_cb_ret = Mock.MyLib_UpdateCounter_u8_CallbackFunctionPointer(add_u32, Mock.MyLib_UpdateCounter_u8_CallbackCalls++);
+    UNITY_CLR_DETAILS();
+    return cmock_cb_ret;
+  }
+  UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringCalledMore);
+  cmock_line = cmock_call_instance->LineNumber;
+  if (cmock_call_instance->CallOrder > ++GlobalVerifyOrder)
+    UNITY_TEST_FAIL(cmock_line, CMockStringCalledEarly);
+  if (cmock_call_instance->CallOrder < GlobalVerifyOrder)
+    UNITY_TEST_FAIL(cmock_line, CMockStringCalledLate);
+  if (!cmock_call_instance->ExpectAnyArgsBool)
+  {
+  if (!cmock_call_instance->IgnoreArg_add_u32)
+  {
+    UNITY_SET_DETAILS(CMockString_MyLib_UpdateCounter_u8,CMockString_add_u32);
+    UNITY_TEST_ASSERT_EQUAL_HEX32(cmock_call_instance->Expected_add_u32, add_u32, cmock_line, CMockStringMismatch);
+  }
+  }
+  if (Mock.MyLib_UpdateCounter_u8_CallbackFunctionPointer != NULL)
+  {
+    cmock_call_instance->ReturnVal = Mock.MyLib_UpdateCounter_u8_CallbackFunctionPointer(add_u32, Mock.MyLib_UpdateCounter_u8_CallbackCalls++);
+  }
+  UNITY_CLR_DETAILS();
+  return cmock_call_instance->ReturnVal;
+}
+
+void CMockExpectParameters_MyLib_UpdateCounter_u8(CMOCK_MyLib_UpdateCounter_u8_CALL_INSTANCE* cmock_call_instance, uint32_t add_u32);
+void CMockExpectParameters_MyLib_UpdateCounter_u8(CMOCK_MyLib_UpdateCounter_u8_CALL_INSTANCE* cmock_call_instance, uint32_t add_u32)
+{
+  cmock_call_instance->Expected_add_u32 = add_u32;
+  cmock_call_instance->IgnoreArg_add_u32 = 0;
+}
+
+void MyLib_UpdateCounter_u8_CMockIgnoreAndReturn(UNITY_LINE_TYPE cmock_line, uint8_t cmock_to_return)
+{
+  CMOCK_MEM_INDEX_TYPE cmock_guts_index = CMock_Guts_MemNew(sizeof(CMOCK_MyLib_UpdateCounter_u8_CALL_INSTANCE));
+  CMOCK_MyLib_UpdateCounter_u8_CALL_INSTANCE* cmock_call_instance = (CMOCK_MyLib_UpdateCounter_u8_CALL_INSTANCE*)CMock_Guts_GetAddressFor(cmock_guts_index);
+  UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringOutOfMemory);
+  memset(cmock_call_instance, 0, sizeof(*cmock_call_instance));
+  Mock.MyLib_UpdateCounter_u8_CallInstance = CMock_Guts_MemChain(Mock.MyLib_UpdateCounter_u8_CallInstance, cmock_guts_index);
+  Mock.MyLib_UpdateCounter_u8_IgnoreBool = (char)0;
+  cmock_call_instance->LineNumber = cmock_line;
+  cmock_call_instance->ExpectAnyArgsBool = (char)0;
+  cmock_call_instance->ReturnVal = cmock_to_return;
+  Mock.MyLib_UpdateCounter_u8_IgnoreBool = (char)1;
+}
+
+void MyLib_UpdateCounter_u8_CMockStopIgnore(void)
+{
+  if(Mock.MyLib_UpdateCounter_u8_IgnoreBool)
+    Mock.MyLib_UpdateCounter_u8_CallInstance = CMock_Guts_MemNext(Mock.MyLib_UpdateCounter_u8_CallInstance);
+  Mock.MyLib_UpdateCounter_u8_IgnoreBool = (char)0;
+}
+
+void MyLib_UpdateCounter_u8_CMockExpectAnyArgsAndReturn(UNITY_LINE_TYPE cmock_line, uint8_t cmock_to_return)
+{
+  CMOCK_MEM_INDEX_TYPE cmock_guts_index = CMock_Guts_MemNew(sizeof(CMOCK_MyLib_UpdateCounter_u8_CALL_INSTANCE));
+  CMOCK_MyLib_UpdateCounter_u8_CALL_INSTANCE* cmock_call_instance = (CMOCK_MyLib_UpdateCounter_u8_CALL_INSTANCE*)CMock_Guts_GetAddressFor(cmock_guts_index);
+  UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringOutOfMemory);
+  memset(cmock_call_instance, 0, sizeof(*cmock_call_instance));
+  Mock.MyLib_UpdateCounter_u8_CallInstance = CMock_Guts_MemChain(Mock.MyLib_UpdateCounter_u8_CallInstance, cmock_guts_index);
+  Mock.MyLib_UpdateCounter_u8_IgnoreBool = (char)0;
+  cmock_call_instance->LineNumber = cmock_line;
+  cmock_call_instance->CallOrder = ++GlobalExpectCount;
+  cmock_call_instance->ExpectAnyArgsBool = (char)0;
+  cmock_call_instance->ReturnVal = cmock_to_return;
+  cmock_call_instance->ExpectAnyArgsBool = (char)1;
+}
+
+void MyLib_UpdateCounter_u8_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, uint32_t add_u32, uint8_t cmock_to_return)
+{
+  CMOCK_MEM_INDEX_TYPE cmock_guts_index = CMock_Guts_MemNew(sizeof(CMOCK_MyLib_UpdateCounter_u8_CALL_INSTANCE));
+  CMOCK_MyLib_UpdateCounter_u8_CALL_INSTANCE* cmock_call_instance = (CMOCK_MyLib_UpdateCounter_u8_CALL_INSTANCE*)CMock_Guts_GetAddressFor(cmock_guts_index);
+  UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringOutOfMemory);
+  memset(cmock_call_instance, 0, sizeof(*cmock_call_instance));
+  Mock.MyLib_UpdateCounter_u8_CallInstance = CMock_Guts_MemChain(Mock.MyLib_UpdateCounter_u8_CallInstance, cmock_guts_index);
+  Mock.MyLib_UpdateCounter_u8_IgnoreBool = (char)0;
+  cmock_call_instance->LineNumber = cmock_line;
+  cmock_call_instance->CallOrder = ++GlobalExpectCount;
+  cmock_call_instance->ExpectAnyArgsBool = (char)0;
+  CMockExpectParameters_MyLib_UpdateCounter_u8(cmock_call_instance, add_u32);
+  cmock_call_instance->ReturnVal = cmock_to_return;
+}
+
+void MyLib_UpdateCounter_u8_AddCallback(CMOCK_MyLib_UpdateCounter_u8_CALLBACK Callback)
+{
+  Mock.MyLib_UpdateCounter_u8_IgnoreBool = (char)0;
+  Mock.MyLib_UpdateCounter_u8_CallbackBool = (char)1;
+  Mock.MyLib_UpdateCounter_u8_CallbackFunctionPointer = Callback;
+}
+
+void MyLib_UpdateCounter_u8_Stub(CMOCK_MyLib_UpdateCounter_u8_CALLBACK Callback)
+{
+  Mock.MyLib_UpdateCounter_u8_IgnoreBool = (char)0;
+  Mock.MyLib_UpdateCounter_u8_CallbackBool = (char)0;
+  Mock.MyLib_UpdateCounter_u8_CallbackFunctionPointer = Callback;
+}
+
+void MyLib_UpdateCounter_u8_CMockIgnoreArg_add_u32(UNITY_LINE_TYPE cmock_line)
+{
+  CMOCK_MyLib_UpdateCounter_u8_CALL_INSTANCE* cmock_call_instance = (CMOCK_MyLib_UpdateCounter_u8_CALL_INSTANCE*)CMock_Guts_GetAddressFor(CMock_Guts_MemEndOfChain(Mock.MyLib_UpdateCounter_u8_CallInstance));
+  UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringIgnPreExp);
+  cmock_call_instance->IgnoreArg_add_u32 = 1;
 }
 

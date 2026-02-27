@@ -282,11 +282,13 @@ extern
            g_systemReady_b;
 # 141 "utExecutionAndResults/utUnderTest/src/MyLib.h"
 uint32_t MyLib_ComputeAdjustedValue_u32(uint32_t base_u32, const uint16_t *delta_pc_u16);
-# 196 "utExecutionAndResults/utUnderTest/src/MyLib.h"
+# 202 "utExecutionAndResults/utUnderTest/src/MyLib.h"
 uint32_t MyLib_AnalyzeArray_u32(uint16_t *values_pu16, size_t len_u32, uint16_t factor_u16);
-# 243 "utExecutionAndResults/utUnderTest/src/MyLib.h"
+# 249 "utExecutionAndResults/utUnderTest/src/MyLib.h"
 void MyLib_UpdateGlobalRecord(MyLib_record_t *dest_p, const MyLib_record_t *src_pc);
-# 294 "utExecutionAndResults/utUnderTest/src/MyLib.h"
+# 301 "utExecutionAndResults/utUnderTest/src/MyLib.h"
 uint32_t MyLib_Orchestrate_u32(uint32_t start_u32, const uint16_t *delta_pc_u16);
-# 343 "utExecutionAndResults/utUnderTest/src/MyLib.h"
-uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
+# 350 "utExecutionAndResults/utUnderTest/src/MyLib.h"
+static uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
+# 412 "utExecutionAndResults/utUnderTest/src/MyLib.h"
+uint8_t MyLib_UpdateCounter_u8(uint32_t add_u32);

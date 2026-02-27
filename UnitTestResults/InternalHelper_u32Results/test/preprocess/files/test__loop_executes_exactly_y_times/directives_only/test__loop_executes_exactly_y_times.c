@@ -826,7 +826,7 @@
 # 1 "utExecutionAndResults/utUnderTest/test/test__loop_executes_exactly_y_times.c"
 # 1 "utExecutionAndResults/utUnderTest/src/InternalHelper_u32.h" 1
 
-#define INTERNALHELPER_U32_H 
+#define TEST_INTERNALHELPER_U32_H 
 
 # 1 "utExecutionAndResults/utUnderTest/src/MyLib.h" 1
 /* MyLib.h */
@@ -3459,17 +3459,23 @@ uint32_t MyLib_ComputeAdjustedValue_u32(uint32_t base_u32, const uint16_t *delta
  *
  * @startuml
  * start
+ * : l_inNull_b = false;
+ * 
  * if (values_pu16 == NULL or len_u32 == 0) then (yes)
- *   :return 0;
- * else (no)
- *   :l_sum_u32 = 0;
- *   :for l_i_u32 in [0..len_u32-1];
- *     :values_pu16[l_i_u32] *= factor_u16;
+ *   : l_inNull_b = true;
+ * endif
+ * :l_sum_u32 = 0;
+ * 
+ * if (l_inNull_b == false) then (process)
+ *   :for l_i_u32 in [0 .. len_u32-1];
+ *     :values_pu16[l_i_u32] = values_pu16[l_i_u32] * factor_u16;
  *     :l_sum_u32 += values_pu16[l_i_u32];
  *   :endfor;
+ * 
  *   :call MyLib_ComputeAdjustedValue_u32(l_sum_u32, NULL);
- *   :return l_sum_u32;
  * endif
+ * :return l_sum_u32;
+ * 
  * stop
  * @enduml
  *
@@ -3567,6 +3573,7 @@ void MyLib_UpdateGlobalRecord(MyLib_record_t *dest_p, const MyLib_record_t *src_
  * else (no)
  *   :l_d_u16 = *delta_pc_u16;
  * endif
+ * :l_base_u32 = InternalHelper_u32(start_u32, l_d_u16);
  * :l_r.id_u16 = (l_base_u32 & 0xFFFF);
  * :l_r.value_u32 = l_base_u32 / 2;
  * :call MyLib_ProcessRecord(&l_r, MYLIB_MULT_VALUE_U8);
@@ -3697,7 +3704,55 @@ uint8_t MyLib_UpdateCounter_u8(uint32_t add_u32);
 
 # 5 "utExecutionAndResults/utUnderTest/src/InternalHelper_u32.h" 2
 
+/**
+ * @brief Compute a deterministic accumulated value based on an input seed and loop bound.
+ *
+ * @details
+ * **Goal of the function**
+ *
+ * Provide a small, deterministic arithmetic helper that starts from `x_u32` and
+ * accumulates an even-step sequence for `y_u16` iterations:
+ * - Initialize `l_acc_u32` with `x_u32`
+ * - For each `l_i_u16` in `[0 .. y_u16-1]`, add `(l_i_u16 * 2)` to `l_acc_u32`
+ * - Return the final accumulated value
+ *
+ * This function is typically used as an internal building block to apply a
+ * bounded and predictable post-processing step.
+ *
+ * @par Interface summary
+ *
+ * | Interface   | In | Out | Type / Signature | Param | Factor | Offset | Size | Range      | Unit |
+ * |-------------|----|-----|------------------|-------|--------|--------|------|------------|------|
+ * | x_u32       | X  |     | uint32_t         |   X   |   1    |   0    |   1  | 0..60535   | [-]  |
+ * | y_u16       | X  |     | uint16_t         |   X   |   1    |   0    |   1  | 0..60535   | [-]  |
+ * | return val  |    |  X  | uint32_t         |       |   1    |   0    |   1  | 0..700     | [-]  |
+ *
+ * @par Activity diagram (PlantUML)
+ *
+ * @startuml
+ * start
+ * :l_acc_u32 = x_u32;
+ * :l_i_u16 = 0;
+ * while (l_i_u16 < y_u16) is (yes)
+ *   :l_acc_u32 += (l_i_u16 * 2);
+ *   :l_i_u16++;
+ * endwhile (no)
+ * :return l_acc_u32;
+ * stop
+ * @enduml
+ *
+ * @param x_u32
+ * Seed value used to initialize the accumulator.
+ *
+ * @param y_u16
+ * Number of loop iterations. The accumulation adds `2*l_i_u16` for each
+ * `l_i_u16` from 0 to `y_u16-1`.
+ *
+ * @return uint32_t
+ * Final accumulated value (wrap-around possible on 32-bit overflow).
+ */
 uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
+
 
 # 2 "utExecutionAndResults/utUnderTest/test/test__loop_executes_exactly_y_times.c" 2
 # 1 "utExecutionAndResults/utUnderTest/build/vendor/unity/src/unity.h" 1

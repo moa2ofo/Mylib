@@ -3455,17 +3455,23 @@ uint32_t MyLib_ComputeAdjustedValue_u32(uint32_t base_u32, const uint16_t *delta
  *
  * @startuml
  * start
+ * : l_inNull_b = false;
+ * 
  * if (values_pu16 == NULL or len_u32 == 0) then (yes)
- *   :return 0;
- * else (no)
- *   :l_sum_u32 = 0;
- *   :for l_i_u32 in [0..len_u32-1];
- *     :values_pu16[l_i_u32] *= factor_u16;
+ *   : l_inNull_b = true;
+ * endif
+ * :l_sum_u32 = 0;
+ * 
+ * if (l_inNull_b == false) then (process)
+ *   :for l_i_u32 in [0 .. len_u32-1];
+ *     :values_pu16[l_i_u32] = values_pu16[l_i_u32] * factor_u16;
  *     :l_sum_u32 += values_pu16[l_i_u32];
  *   :endfor;
+ * 
  *   :call MyLib_ComputeAdjustedValue_u32(l_sum_u32, NULL);
- *   :return l_sum_u32;
  * endif
+ * :return l_sum_u32;
+ * 
  * stop
  * @enduml
  *
@@ -3629,7 +3635,7 @@ uint32_t MyLib_Orchestrate_u32(uint32_t start_u32, const uint16_t *delta_pc_u16)
  * @return uint32_t
  * Final accumulated value (wrap-around possible on 32-bit overflow).
  */
-uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
+static uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
 
 /**
  * @brief Update the module global counter with optional saturation handling.
@@ -3695,18 +3701,12 @@ uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
 # 2 "utExecutionAndResults/utUnderTest/test/test_ready_sat_enabled_limit_0_clamps_to_0.c" 2
 # 1 "utExecutionAndResults/utUnderTest/src/MyLib_UpdateCounter_u8.h" 1
 
-#define MYLIB_UPDATECOUNTER_U8_H 
+#define TEST_MYLIB_UPDATECOUNTER_U8_H 
 
 # 1 "utExecutionAndResults/utUnderTest/src/MyLib.h" 1
 /* MyLib.h */
 
 # 5 "utExecutionAndResults/utUnderTest/src/MyLib_UpdateCounter_u8.h" 2
-
-uint32_t GetCounterLimit_u32(void);
-void SetCounterLimit_u32(uint32_t value);
-
-bool GetSaturationEn_b(void);
-void SetSaturationEn_b(bool enable);
 
 /**
  * @brief Update the module global counter with optional saturation handling.
@@ -3769,6 +3769,11 @@ void SetSaturationEn_b(bool enable);
  * - 2: Saturation applied and `g_counter_u32` clamped to `CounterLimit_u32`
  */
 uint8_t MyLib_UpdateCounter_u8(uint32_t add_u32);
+
+uint32_t get_CounterLimit_u32(void);
+void set_CounterLimit_u32(uint32_t val);
+_Bool get_SaturationEn_b(void);
+void set_SaturationEn_b(_Bool val);
 
 # 3 "utExecutionAndResults/utUnderTest/test/test_ready_sat_enabled_limit_0_clamps_to_0.c" 2
 # 1 "utExecutionAndResults/utUnderTest/build/test/mocks/test_ready_sat_enabled_limit_0_clamps_to_0/mock_MyLib.h" 1

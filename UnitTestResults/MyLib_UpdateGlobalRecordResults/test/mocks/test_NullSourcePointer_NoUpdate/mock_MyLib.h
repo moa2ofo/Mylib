@@ -141,6 +141,23 @@ void InternalHelper_u32_Stub(CMOCK_InternalHelper_u32_CALLBACK Callback);
 void InternalHelper_u32_CMockIgnoreArg_x_u32(UNITY_LINE_TYPE cmock_line);
 #define InternalHelper_u32_IgnoreArg_y_u16() InternalHelper_u32_CMockIgnoreArg_y_u16(__LINE__)
 void InternalHelper_u32_CMockIgnoreArg_y_u16(UNITY_LINE_TYPE cmock_line);
+#define MyLib_UpdateCounter_u8_Ignore() TEST_FAIL_MESSAGE("MyLib_UpdateCounter_u8 requires _IgnoreAndReturn");
+#define MyLib_UpdateCounter_u8_IgnoreAndReturn(cmock_retval) MyLib_UpdateCounter_u8_CMockIgnoreAndReturn(__LINE__, cmock_retval)
+void MyLib_UpdateCounter_u8_CMockIgnoreAndReturn(UNITY_LINE_TYPE cmock_line, uint8_t cmock_to_return);
+#define MyLib_UpdateCounter_u8_StopIgnore() MyLib_UpdateCounter_u8_CMockStopIgnore()
+void MyLib_UpdateCounter_u8_CMockStopIgnore(void);
+#define MyLib_UpdateCounter_u8_ExpectAnyArgs() TEST_FAIL_MESSAGE("MyLib_UpdateCounter_u8 requires _ExpectAnyArgsAndReturn");
+#define MyLib_UpdateCounter_u8_ExpectAnyArgsAndReturn(cmock_retval) MyLib_UpdateCounter_u8_CMockExpectAnyArgsAndReturn(__LINE__, cmock_retval)
+void MyLib_UpdateCounter_u8_CMockExpectAnyArgsAndReturn(UNITY_LINE_TYPE cmock_line, uint8_t cmock_to_return);
+#define MyLib_UpdateCounter_u8_Expect(add_u32) TEST_FAIL_MESSAGE("MyLib_UpdateCounter_u8 requires _ExpectAndReturn");
+#define MyLib_UpdateCounter_u8_ExpectAndReturn(add_u32, cmock_retval) MyLib_UpdateCounter_u8_CMockExpectAndReturn(__LINE__, add_u32, cmock_retval)
+void MyLib_UpdateCounter_u8_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, uint32_t add_u32, uint8_t cmock_to_return);
+typedef uint8_t (* CMOCK_MyLib_UpdateCounter_u8_CALLBACK)(uint32_t add_u32, int cmock_num_calls);
+void MyLib_UpdateCounter_u8_AddCallback(CMOCK_MyLib_UpdateCounter_u8_CALLBACK Callback);
+void MyLib_UpdateCounter_u8_Stub(CMOCK_MyLib_UpdateCounter_u8_CALLBACK Callback);
+#define MyLib_UpdateCounter_u8_StubWithCallback MyLib_UpdateCounter_u8_Stub
+#define MyLib_UpdateCounter_u8_IgnoreArg_add_u32() MyLib_UpdateCounter_u8_CMockIgnoreArg_add_u32(__LINE__)
+void MyLib_UpdateCounter_u8_CMockIgnoreArg_add_u32(UNITY_LINE_TYPE cmock_line);
 
 #ifdef __cplusplus
 }

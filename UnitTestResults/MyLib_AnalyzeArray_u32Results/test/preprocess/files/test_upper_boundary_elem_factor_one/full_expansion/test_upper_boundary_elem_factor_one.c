@@ -298,8 +298,8 @@ static uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
 # 412 "utExecutionAndResults/utUnderTest/src/MyLib.h"
 uint8_t MyLib_UpdateCounter_u8(uint32_t add_u32);
 # 5 "utExecutionAndResults/utUnderTest/src/MyLib_AnalyzeArray_u32.h" 2
-
-uint32_t MyLib_AnalyzeArray_u32(uint16_t *values_pu16, size_t len_u32, uint16_t factor_u16);
+# 65 "utExecutionAndResults/utUnderTest/src/MyLib_AnalyzeArray_u32.h"
+uint32_t MyLib_AnalyzeArray_u32(uint16_t * values_pu16, size_t len_u32, uint16_t factor_u16);
 # 2 "utExecutionAndResults/utUnderTest/test/test_upper_boundary_elem_factor_one.c" 2
 # 1 "utExecutionAndResults/utUnderTest/build/test/mocks/test_upper_boundary_elem_factor_one/mock_MyLib.h" 1
 

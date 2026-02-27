@@ -285,14 +285,14 @@ extern
 void MyLib_ProcessRecord(const MyLib_record_t *rec_pc, uint8_t multiplier_u8);
 # 142 "utExecutionAndResults/utUnderTest/src/MyLib.h"
 uint32_t MyLib_ComputeAdjustedValue_u32(uint32_t base_u32, const uint16_t *delta_pc_u16);
-# 197 "utExecutionAndResults/utUnderTest/src/MyLib.h"
+# 203 "utExecutionAndResults/utUnderTest/src/MyLib.h"
 uint32_t MyLib_AnalyzeArray_u32(uint16_t *values_pu16, size_t len_u32, uint16_t factor_u16);
-# 244 "utExecutionAndResults/utUnderTest/src/MyLib.h"
+# 250 "utExecutionAndResults/utUnderTest/src/MyLib.h"
 void MyLib_UpdateGlobalRecord(MyLib_record_t *dest_p, const MyLib_record_t *src_pc);
-# 296 "utExecutionAndResults/utUnderTest/src/MyLib.h"
+# 302 "utExecutionAndResults/utUnderTest/src/MyLib.h"
 uint32_t MyLib_Orchestrate_u32(uint32_t start_u32, const uint16_t *delta_pc_u16);
-# 345 "utExecutionAndResults/utUnderTest/src/MyLib.h"
-uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
+# 351 "utExecutionAndResults/utUnderTest/src/MyLib.h"
+static uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
 # 2 "utExecutionAndResults/utUnderTest/test/test_ready_sat_enabled_exceeds_by_1_returns_2.c" 2
 # 1 "utExecutionAndResults/utUnderTest/src/MyLib_UpdateCounter_u8.h" 1
 
@@ -300,22 +300,13 @@ uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
 
 # 1 "utExecutionAndResults/utUnderTest/src/MyLib.h" 1
 # 5 "utExecutionAndResults/utUnderTest/src/MyLib_UpdateCounter_u8.h" 2
-
-uint32_t GetCounterLimit_u32(void);
-void SetCounterLimit_u32(uint32_t value);
-
-
-# 9 "utExecutionAndResults/utUnderTest/src/MyLib_UpdateCounter_u8.h" 3 4
-_Bool 
-# 9 "utExecutionAndResults/utUnderTest/src/MyLib_UpdateCounter_u8.h"
-    GetSaturationEn_b(void);
-void SetSaturationEn_b(
-# 10 "utExecutionAndResults/utUnderTest/src/MyLib_UpdateCounter_u8.h" 3 4
-                      _Bool 
-# 10 "utExecutionAndResults/utUnderTest/src/MyLib_UpdateCounter_u8.h"
-                           enable);
-# 72 "utExecutionAndResults/utUnderTest/src/MyLib_UpdateCounter_u8.h"
+# 66 "utExecutionAndResults/utUnderTest/src/MyLib_UpdateCounter_u8.h"
 uint8_t MyLib_UpdateCounter_u8(uint32_t add_u32);
+
+uint32_t get_CounterLimit_u32(void);
+void set_CounterLimit_u32(uint32_t val);
+_Bool get_SaturationEn_b(void);
+void set_SaturationEn_b(_Bool val);
 # 3 "utExecutionAndResults/utUnderTest/test/test_ready_sat_enabled_exceeds_by_1_returns_2.c" 2
 # 1 "utExecutionAndResults/utUnderTest/build/test/mocks/test_ready_sat_enabled_exceeds_by_1_returns_2/mock_MyLib.h" 1
 
