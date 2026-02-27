@@ -1,8 +1,8 @@
-utExecutionAndResults/utUnderTest/build/gcov/out/test_WhenDeltaIsNotNullAndStartIsNonZero_UsesCorrectDelta/mock_MyLib.o: \
- utExecutionAndResults/utUnderTest/build/test/mocks/test_WhenDeltaIsNotNullAndStartIsNonZero_UsesCorrectDelta/mock_MyLib.c \
+utExecutionAndResults/utUnderTest/build/gcov/out/test_start_200_delta_NULL/mock_MyLib.o: \
+ utExecutionAndResults/utUnderTest/build/test/mocks/test_start_200_delta_NULL/mock_MyLib.c \
  utExecutionAndResults/utUnderTest/build/vendor/cmock/src/cmock.h \
  utExecutionAndResults/utUnderTest/build/vendor/cmock/src/cmock_internals.h \
  utExecutionAndResults/utUnderTest/build/vendor/unity/src/unity.h \
  utExecutionAndResults/utUnderTest/build/vendor/unity/src/unity_internals.h \
- utExecutionAndResults/utUnderTest/build/test/mocks/test_WhenDeltaIsNotNullAndStartIsNonZero_UsesCorrectDelta/mock_MyLib.h \
+ utExecutionAndResults/utUnderTest/build/test/mocks/test_start_200_delta_NULL/mock_MyLib.h \
  utExecutionAndResults/utUnderTest/src/MyLib.h
