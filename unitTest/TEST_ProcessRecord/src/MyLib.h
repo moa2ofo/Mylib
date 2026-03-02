@@ -276,8 +276,6 @@ uint32_t MyLib_ComputeAdjustedValue_u32(uint32_t base_u32, const uint16_t *delta
  */
 uint32_t MyLib_AnalyzeArray_u32(uint16_t *values_pu16, size_t len_u32, uint16_t factor_u16);
 
-
-
 /**
  * @brief Scale an array in-place and return the sum of scaled elements.
  *
@@ -544,7 +542,6 @@ static uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
  * - 2: Saturation applied and `g_counter_u32` clamped to `CounterLimit_u32`
  */
 uint8_t MyLib_UpdateCounter_u8(uint32_t add_u32);
-
 
 /**
  * @brief Update the module global counter with optional saturation handling.

@@ -47,9 +47,9 @@ uint8_t MyLib_UpdateCounter_u8(uint32_t add_u32) {
       l_ret_u8 = 0U;
     }
 
-    /* Periodically toggle saturation enable to exercise both internal static variables. */
+    /* Periodically toggle saturation enable every 16 calls. */
     if((l_CycleCnt_u32 & 0x0FU) == 0U) {
-      SaturationEn_b = (SaturationEn_b == true) ? false : true;
+      SaturationEn_b = !SaturationEn_b;
     }
   }
 

@@ -1,12 +1,13 @@
-#include <AnalyzeArray_u32.h>
 #include "unity.h"
+#include <AnalyzeArray_u32.h>
 
 #include "mock_MyLib.h"
 
-void setUp(void) {}
-void tearDown(void) {}
+void setUp(void) {
+}
+void tearDown(void) {
+}
 
-void test_AnalyzeArray_u32(void)
-{
-    TEST_IGNORE_MESSAGE("Auto-generated stub test");
+void test_AnalyzeArray_u32(void) {
+  TEST_IGNORE_MESSAGE("Auto-generated stub test");
 }

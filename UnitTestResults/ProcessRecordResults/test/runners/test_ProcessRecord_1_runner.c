@@ -81,7 +81,7 @@ static void run_test(UnityTestFunction func, const char* name, UNITY_LINE_TYPE l
 int main(void)
 {
   UnityBegin("test_ProcessRecord_1.c");
-  run_test(test_ProcessRecord, "test_ProcessRecord", 10);
+  run_test(test_ProcessRecord, "test_ProcessRecord", 12);
 
   CMock_Guts_MemFreeFinal();
   return UNITY_END();
