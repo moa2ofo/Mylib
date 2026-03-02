@@ -94,7 +94,10 @@ void MyLib_UpdateGlobalRecord(MyLib_record_t *dest_p, const MyLib_record_t *src_
   g_systemReady_b = true;
 }
 uint32_t MyLib_Orchestrate_u32(uint32_t start_u32, const uint16_t *delta_pc_u16) {
-  uint16_t l_d_u16 = (delta_pc_u16 != NULL) ? *delta_pc_u16 : 0U;
+  uint16_t l_d_u16 = 0U;
+  if (delta_pc_u16 != NULL) {
+    l_d_u16 = *delta_pc_u16;
+  }
 
   uint32_t l_base_u32 = InternalHelper_u32(start_u32, l_d_u16);
 
@@ -106,7 +109,6 @@ uint32_t MyLib_Orchestrate_u32(uint32_t start_u32, const uint16_t *delta_pc_u16)
 
   return (l_base_u32 + g_counter_u32);
 }
-
 uint8_t MyLib_UpdateCounter_u8(uint32_t add_u32) {
   /* Local (function-static) state: tracks how many times this API has been called. */
   static uint32_t l_CycleCnt_u32 = 0U;
