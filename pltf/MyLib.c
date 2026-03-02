@@ -60,7 +60,6 @@ uint32_t MyLib_ComputeAdjustedValue_u32(uint32_t base_u32, const uint16_t *delta
 
   return l_val_u32;
 }
-
 uint32_t MyLib_AnalyzeArray_u32(uint16_t *values_pu16, size_t len_u32, uint16_t factor_u16) {
   bool l_inNull_b = false;
   if ((values_pu16 == NULL) || (len_u32 == 0U)) {
