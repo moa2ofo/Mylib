@@ -83,15 +83,20 @@ uint32_t MyLib_AnalyzeArray_u32(uint16_t *values_pu16, size_t len_u32, uint16_t 
 }
 
 void MyLib_UpdateGlobalRecord(MyLib_record_t *dest_p, const MyLib_record_t *src_pc) {
-  if((dest_p == NULL) || (src_pc == NULL)) {
-    return;
-  }
+    /* Check for NULL pointers to avoid invalid memory access */
+    if ((dest_p == NULL) || (src_pc == NULL)) {
+        return;
+    }
 
-  dest_p->id_u16 = src_pc->id_u16;
-  dest_p->value_u32 = src_pc->value_u32;
+    /* Copy the content from source to destination record */
+    dest_p->id_u16 = src_pc->id_u16;
+    dest_p->value_u32 = src_pc->value_u32;
 
-  g_record = *dest_p;
-  g_systemReady_b = true;
+    /* Update the global record to mirror the destination record */
+    g_record = *dest_p;
+
+    /* Mark the system as ready */
+    g_systemReady_b = true;
 }
 uint32_t MyLib_Orchestrate_u32(uint32_t start_u32, const uint16_t *delta_pc_u16) {
   uint16_t l_d_u16 = 0U;
