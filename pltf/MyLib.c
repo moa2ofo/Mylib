@@ -147,22 +147,22 @@ int main() {
 void ProcessRecord(const MyLib_record_t *rec_pc, uint8_t multiplier_u8) {
   uint32_t l_acc_u32 = 0U;
 
-  if(rec_pc == NULL) {
+  if (rec_pc == NULL) {
     return;
   }
 
-  switch(multiplier_u8) {
-  case 0U:
-    l_acc_u32 = 0U;
-    break;
-  case 1U:
-    l_acc_u32 = rec_pc->value_u32;
-    break;
-  default:
-    for(uint8_t l_i_u8 = 0U; l_i_u8 < multiplier_u8; l_i_u8++) {
-      l_acc_u32 += rec_pc->value_u32;
-    }
-    break;
+  switch (multiplier_u8) {
+    case 0U:
+      l_acc_u32 = 0U;
+      break;
+    case 1U:
+      l_acc_u32 = rec_pc->value_u32;
+      break;
+    default:
+      for (uint8_t l_i_u8 = 0U; l_i_u8 < multiplier_u8; l_i_u8++) {
+        l_acc_u32 += rec_pc->value_u32;
+      }
+      break;
   }
 
   g_counter_u32 += l_acc_u32;
