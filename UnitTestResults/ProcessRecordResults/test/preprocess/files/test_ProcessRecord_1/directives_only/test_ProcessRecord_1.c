@@ -10885,7 +10885,8 @@ uint8_t UpdateCounter_u8(uint32_t add_u32);
  * @return void
  * No return value.
  */
-void ProcessRecord(const MyLib_record_t *rec_pc, uint8_t multiplier_u8);
+void ProcessRecord(const MyLib_record_t * rec_pc, uint8_t multiplier_u8);
+
 
 # 3 "utExecutionAndResults/utUnderTest/test/test_ProcessRecord_1.c" 2
 
