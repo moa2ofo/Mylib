@@ -83,7 +83,7 @@ uint32_t MyLib_AnalyzeArray_u32(uint16_t *values_pu16, size_t len_u32, uint16_t 
 }
 void MyLib_UpdateGlobalRecord(MyLib_record_t *dest_p, const MyLib_record_t *src_pc) {
   /* Check for NULL pointers to avoid invalid memory access */
-  if((dest_p == NULL) || (src_pc == NULL)) {
+  if ((dest_p == NULL) || (src_pc == NULL)) {
     return;
   }
 
