@@ -305,7 +305,7 @@ uint8_t MyLib_UpdateCounter_u8(uint32_t add_u32);
 uint8_t UpdateCounter_u8(uint32_t add_u32);
 # 5 "utExecutionAndResults/utUnderTest/src/MyLib_ProcessRecord.h" 2
 # 79 "utExecutionAndResults/utUnderTest/src/MyLib_ProcessRecord.h"
-void MyLib_ProcessRecord(const MyLib_record_t *rec_pc, uint8_t multiplier_u8);
+void MyLib_ProcessRecord(const MyLib_record_t * rec_pc, uint8_t multiplier_u8);
 # 2 "utExecutionAndResults/utUnderTest/test/test_rec_pc_NULL_returns_immediately_no_side_effects.c" 2
 # 1 "utExecutionAndResults/utUnderTest/build/test/mocks/test_rec_pc_NULL_returns_immediately_no_side_effects/mock_MyLib.h" 1
 

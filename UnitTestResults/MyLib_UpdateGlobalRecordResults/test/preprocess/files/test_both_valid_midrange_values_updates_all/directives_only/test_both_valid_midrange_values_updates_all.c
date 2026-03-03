@@ -3937,7 +3937,8 @@ uint8_t UpdateCounter_u8(uint32_t add_u32);
  * @return void
  * No return value.
  */
-void MyLib_UpdateGlobalRecord(MyLib_record_t *dest_p, const MyLib_record_t *src_pc);
+void MyLib_UpdateGlobalRecord(MyLib_record_t * dest_p, const MyLib_record_t * src_pc);
+
 
 # 2 "utExecutionAndResults/utUnderTest/test/test_both_valid_midrange_values_updates_all.c" 2
 # 1 "utExecutionAndResults/utUnderTest/build/test/mocks/test_both_valid_midrange_values_updates_all/mock_MyLib.h" 1

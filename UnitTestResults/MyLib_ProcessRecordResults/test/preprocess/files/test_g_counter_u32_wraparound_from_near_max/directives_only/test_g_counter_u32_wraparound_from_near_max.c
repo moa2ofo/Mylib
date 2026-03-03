@@ -3965,7 +3965,8 @@ uint8_t UpdateCounter_u8(uint32_t add_u32);
  * @return void
  * No return value.
  */
-void MyLib_ProcessRecord(const MyLib_record_t *rec_pc, uint8_t multiplier_u8);
+void MyLib_ProcessRecord(const MyLib_record_t * rec_pc, uint8_t multiplier_u8);
+
 
 # 2 "utExecutionAndResults/utUnderTest/test/test_g_counter_u32_wraparound_from_near_max.c" 2
 # 1 "utExecutionAndResults/utUnderTest/build/test/mocks/test_g_counter_u32_wraparound_from_near_max/mock_MyLib.h" 1

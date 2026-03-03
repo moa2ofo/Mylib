@@ -3965,7 +3965,8 @@ uint8_t UpdateCounter_u8(uint32_t add_u32);
  * @return void
  * No return value.
  */
-void MyLib_ProcessRecord(const MyLib_record_t *rec_pc, uint8_t multiplier_u8);
+void MyLib_ProcessRecord(const MyLib_record_t * rec_pc, uint8_t multiplier_u8);
+
 
 # 2 "utExecutionAndResults/utUnderTest/test/test_multiplier_255_upper_boundary.c" 2
 # 1 "utExecutionAndResults/utUnderTest/build/test/mocks/test_multiplier_255_upper_boundary/mock_MyLib.h" 1

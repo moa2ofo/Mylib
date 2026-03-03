@@ -3951,7 +3951,8 @@ uint8_t UpdateCounter_u8(uint32_t add_u32);
  * @return uint32_t
  * Sum of the scaled array elements (wrap-around possible on overflow).
  */
-uint32_t MyLib_AnalyzeArray_u32(uint16_t *values_pu16, size_t len_u32, uint16_t factor_u16);
+uint32_t MyLib_AnalyzeArray_u32(uint16_t * values_pu16, size_t len_u32, uint16_t factor_u16);
+
 
 # 2 "utExecutionAndResults/utUnderTest/test/test_ValidArray_Len1_Factor65535.c" 2
 # 1 "utExecutionAndResults/utUnderTest/build/test/mocks/test_ValidArray_Len1_Factor65535/mock_MyLib.h" 1
