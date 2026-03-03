@@ -4,17 +4,6 @@
 #include "utExecutionAndResults/utUnderTest/build/vendor/unity/src/unity.h"
 #include "mock_MyLib.h"
 
-SECTION 1  Mock callbacks
-
-    static uint32_t
-    InternalHelper_u32_Callback(uint32_t x_u32, uint16_t y_u16, int call_count)
-{
-  (void)call_count;
-  return x_u32 + y_u16;
-}
-
-SECTION 2  setUp() and tearDown()
-
 void setUp(void)
 {
   g_counter_u32 = 0U;
@@ -30,16 +19,16 @@ void tearDown(void)
 
 void test_MyLib_ComputeAdjustedValue_u32_base_600_delta_0(void)
 {
-  uint32_t result_u32;
-  uint16_t delta_u16 = 0U;
-  uint32_t expected_intermediate_u32 = 600U * 0U;
-  uint32_t expected_result_u32 = expected_intermediate_u32 + (5U);
+  uint32_t l_val_u32;
+  uint32_t l_expected_u32;
+  uint16_t l_delta_u16 = 0U;
 
-  InternalHelper_u32_Stub(InternalHelper_u32_Callback);
+  l_val_u32 = 600U * 0U;
+  l_expected_u32 = 0U;
 
-  result_u32 = MyLib_ComputeAdjustedValue_u32(600U, &delta_u16);
+  InternalHelper_u32_CMockExpectAndReturn(27, l_val_u32, (uint16_t)(5U), l_expected_u32);
 
-  UnityAssertEqualNumber((UNITY_INT)(UNITY_UINT32)((expected_result_u32)), (UNITY_INT)(UNITY_UINT32)((result_u32)), (
+  UnityAssertEqualNumber((UNITY_INT)(UNITY_UINT32)((l_expected_u32)), (UNITY_INT)(UNITY_UINT32)((MyLib_ComputeAdjustedValue_u32(600U, &l_delta_u16))), (
  ((void *)0)
- ), (UNITY_UINT)(35), UNITY_DISPLAY_STYLE_UINT32);
+ ), (UNITY_UINT)(29), UNITY_DISPLAY_STYLE_UINT32);
 }

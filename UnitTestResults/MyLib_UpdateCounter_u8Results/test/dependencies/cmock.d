@@ -1,4 +1,4 @@
-utExecutionAndResults/utUnderTest/build/gcov/out/test_system_ready_saturation_enabled_exceeds_limit_by_one/cmock.o: \
+utExecutionAndResults/utUnderTest/build/gcov/out/test_system_ready_saturation_enabled_wraparound_before_check/cmock.o: \
  utExecutionAndResults/utUnderTest/build/vendor/cmock/src/cmock.c \
  utExecutionAndResults/utUnderTest/build/vendor/cmock/src/cmock.h \
  utExecutionAndResults/utUnderTest/build/vendor/cmock/src/cmock_internals.h \

@@ -11105,15 +11105,9 @@ void UpdateCounter_u8_CMockIgnoreArg_add_u32(UNITY_LINE_TYPE cmock_line);
 # 3 "utExecutionAndResults/utUnderTest/test/test_base_300_delta_0.c" 2
 
 
-SECTION 1 — Mock callbacks
+/* SECTION 1 — Mock callbacks */
 
-    static uint32_t
-    InternalHelper_u32_Callback(uint32_t x_u32, uint16_t y_u16, int call_count) {
-  (void)call_count;
-  return x_u32 + y_u16;
-}
-
-SECTION 2 — setUp() and tearDown()
+/* SECTION 2 — setUp() and tearDown() */
 
 void setUp(void) {
   g_counter_u32 = 0U;
@@ -11126,14 +11120,14 @@ void tearDown(void) {
 }
 
 void test_MyLib_ComputeAdjustedValue_u32_base_300_delta_0(void) {
-  uint32_t result_u32;
-  uint16_t delta_u16 = 0U;
-  uint32_t expected_intermediate_u32 = 300U * 0U;
-  uint32_t expected_result_u32 = expected_intermediate_u32 + MYLIB_MULT_VALUE_U8;
+  uint32_t l_val_u32;
+  uint32_t l_expected_u32;
+  uint16_t l_delta_u16 = 0U;
 
-  InternalHelper_u32_Stub(InternalHelper_u32_Callback);
+  l_val_u32 = 300U * 0U;
+  l_expected_u32 = 0U;
 
-  result_u32 = MyLib_ComputeAdjustedValue_u32(300U, &delta_u16);
+  InternalHelper_u32_ExpectAndReturn(l_val_u32, (uint16_t)MYLIB_MULT_VALUE_U8, l_expected_u32);
 
-  TEST_ASSERT_EQUAL_UINT32(expected_result_u32, result_u32);
+  TEST_ASSERT_EQUAL_UINT32(l_expected_u32, MyLib_ComputeAdjustedValue_u32(300U, &l_delta_u16));
 }
