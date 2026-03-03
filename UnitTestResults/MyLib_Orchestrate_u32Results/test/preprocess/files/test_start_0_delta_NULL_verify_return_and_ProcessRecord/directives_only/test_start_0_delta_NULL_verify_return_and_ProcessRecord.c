@@ -3770,7 +3770,7 @@ void MyLib_UpdateGlobalRecord(MyLib_record_t *dest_p, const MyLib_record_t *src_
  * @return uint32_t
  * Final accumulated value (wrap-around possible on 32-bit overflow).
  */
-static uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
+uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
 
 /**
  * @brief Update the module global counter with optional saturation handling.

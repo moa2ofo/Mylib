@@ -304,7 +304,7 @@ uint8_t MyLib_UpdateCounter_u8(uint32_t add_u32);
 # 600 "utExecutionAndResults/utUnderTest/src/MyLib.h"
 uint8_t UpdateCounter_u8(uint32_t add_u32);
 # 5 "utExecutionAndResults/utUnderTest/src/InternalHelper_u32.h" 2
-# 53 "utExecutionAndResults/utUnderTest/src/InternalHelper_u32.h"
+
 uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
 # 2 "utExecutionAndResults/utUnderTest/test/test__x_is_250_y_is_ten.c" 2
 # 1 "utExecutionAndResults/utUnderTest/build/vendor/unity/src/unity.h" 1

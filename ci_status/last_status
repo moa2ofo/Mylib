@@ -1,6 +1,6 @@
-GIT ACTION PERFORMED
-Run: https://github.com/moa2ofo/Mylib/actions/runs/22627615760
+GIT ACTION FAILED
+Run: https://github.com/moa2ofo/Mylib/actions/runs/22628369602
 docker info: performed
-swCmpBuildCheck: performed
+swCmpBuildCheck: failed
 unit tests: performed
-Timestamp (UTC): 2026-03-03T14:36:13Z
+Timestamp (UTC): 2026-03-03T14:54:13Z
