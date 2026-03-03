@@ -183,12 +183,12 @@ uint32_t AnalyzeArray_u32(uint16_t *values_pu16, size_t len_u32, uint16_t factor
   uint8_t l_inNull_b = 0U;
 
   /* Check for NULL pointer or zero length */
-  if((values_pu16 == NULL) || (len_u32 == 0U)) {
+  if ((values_pu16 == NULL) || (len_u32 == 0U)) {
     l_inNull_b = 1U;
   }
 
-  if(l_inNull_b == 0U) {
-    for(l_i_u32 = 0U; l_i_u32 < len_u32; l_i_u32++) {
+  if (l_inNull_b == 0U) {
+    for (l_i_u32 = 0U; l_i_u32 < len_u32; l_i_u32++) {
       /* Scale each element in-place */
       values_pu16[l_i_u32] = (uint16_t)(values_pu16[l_i_u32] * factor_u16);
       /* Accumulate the sum of scaled elements */
