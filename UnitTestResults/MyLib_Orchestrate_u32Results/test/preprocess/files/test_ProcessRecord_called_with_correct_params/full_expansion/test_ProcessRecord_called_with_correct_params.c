@@ -305,7 +305,7 @@ uint8_t MyLib_UpdateCounter_u8(uint32_t add_u32);
 uint8_t UpdateCounter_u8(uint32_t add_u32);
 # 5 "utExecutionAndResults/utUnderTest/src/MyLib_Orchestrate_u32.h" 2
 # 56 "utExecutionAndResults/utUnderTest/src/MyLib_Orchestrate_u32.h"
-uint32_t MyLib_Orchestrate_u32(uint32_t start_u32, const uint16_t * delta_pc_u16);
+uint32_t MyLib_Orchestrate_u32(uint32_t start_u32, const uint16_t *delta_pc_u16);
 # 2 "utExecutionAndResults/utUnderTest/test/test_ProcessRecord_called_with_correct_params.c" 2
 # 1 "utExecutionAndResults/utUnderTest/build/test/mocks/test_ProcessRecord_called_with_correct_params/mock_MyLib.h" 1
 
