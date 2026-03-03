@@ -2,296 +2,264 @@
 #include "mock_MyLib.h"
 #include "unity.h"
 
-/* Test fixtures */
-static MyLib_record_t test_record;
-static uint32_t initial_counter;
+
+
+
+/* ========================================================================
+ * SECTION 1 — Mock callbacks
+ * ======================================================================== */
+
+/* No mock callbacks required for this test suite. */
+
+/* ========================================================================
+ * SECTION 2 — setUp() and tearDown()
+ * ======================================================================== */
+
+void setUp(void)
+{
+    g_counter_u32 = 0U;
+    g_record.id_u16 = 0U;
+    g_record.value_u32 = 0U;
+    g_systemReady_b = false;
+}
+
+void tearDown(void)
+{
+}
+
+/* ========================================================================
+ * SECTION 3 — Test functions
+ * ======================================================================== */
 
 /**
- * @brief Setup function called before each test
+ * @brief Test: rec_pc is NULL – function returns immediately with no side effects on g_counter_u32 or invocation of MyLib_ComputeAdjustedValue_u32.
  */
-void setUp(void) {
-  /* Initialize test record */
-  test_record.id_u16 = 0U;
-  test_record.value_u32 = 0U;
+void test_MyLib_ProcessRecord_rec_pc_NULL_returns_immediately_no_side_effects(void)
+{
+    uint32_t initial_counter = g_counter_u32;
 
-  /* Save initial counter value */
-  initial_counter = g_counter_u32;
+    MyLib_ProcessRecord(NULL, 5U);
+
+    TEST_ASSERT_EQUAL_UINT32(initial_counter, g_counter_u32);
 }
 
 /**
- * @brief Teardown function called after each test
+ * @brief Test: rec_pc valid, multiplier_u8 = 0 – l_acc_u32 is 0, g_counter_u32 unchanged, MyLib_ComputeAdjustedValue_u32 called with l_acc_u32=0.
  */
-void tearDown(void) {
+void test_MyLib_ProcessRecord_multiplier_0_no_accumulation_counter_unchanged(void)
+{
+    MyLib_record_t rec;
+    rec.id_u16 = 1U;
+    rec.value_u32 = 100U;
+
+    uint32_t initial_counter = g_counter_u32;
+
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(0U, (const uint16_t *)&(uint8_t){0U}, 0U);
+    MyLib_ComputeAdjustedValue_u32_IgnoreArg_delta_pc_u16();
+
+    MyLib_ProcessRecord(&rec, 0U);
+
+    TEST_ASSERT_EQUAL_UINT32(initial_counter, g_counter_u32);
 }
 
-/*=============================================================================
- * Test Case 1: NULL pointer - function returns immediately
- *=============================================================================*/
-
 /**
- * @brief Verify that MyLib_ProcessRecord handles NULL pointer gracefully
- *
- * Expected behavior:
- * - Function returns immediately
- * - No mocked functions are called
- * - Global counter is unchanged
+ * @brief Test: rec_pc valid, multiplier_u8 = 1 – l_acc_u32 equals rec_pc->value_u32, g_counter_u32 incremented by that value, MyLib_ComputeAdjustedValue_u32 called with l_acc_u32.
  */
-void test_MyLib_ProcessRecord_NullPointer_ReturnsWithoutSideEffects(void) {
-  /* Setup: No expectations on mocked functions */
+void test_MyLib_ProcessRecord_multiplier_1_single_accumulation(void)
+{
+    MyLib_record_t rec;
+    rec.id_u16 = 2U;
+    rec.value_u32 = 50U;
 
-  /* Execute: Call with NULL pointer */
-  MyLib_ProcessRecord(NULL, 5U);
+    uint32_t initial_counter = g_counter_u32;
+    uint32_t expected_acc = rec.value_u32;
 
-  /* Verify: Global counter should be unchanged */
-  TEST_ASSERT_EQUAL_UINT32(initial_counter, g_counter_u32);
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_acc, (const uint16_t *)&(uint8_t){1U}, 0U);
+    MyLib_ComputeAdjustedValue_u32_IgnoreArg_delta_pc_u16();
+
+    MyLib_ProcessRecord(&rec, 1U);
+
+    TEST_ASSERT_EQUAL_UINT32(initial_counter + expected_acc, g_counter_u32);
 }
 
-/*=============================================================================
- * Test Case 2: Multiplier = 0 - no accumulation
- *=============================================================================*/
-
 /**
- * @brief Verify behavior when multiplier is 0 (no accumulation)
- *
- * Expected behavior:
- * - Accumulator is 0
- * - Counter is incremented by 0 (remains unchanged)
- * - MyLib_ComputeAdjustedValue_u32 is called with (0, address of 0)
+ * @brief Test: rec_pc valid, multiplier_u8 = 2 – l_acc_u32 equals 2 * rec_pc->value_u32, g_counter_u32 incremented accordingly, MyLib_ComputeAdjustedValue_u32 called with l_acc_u32.
  */
-void test_MyLib_ProcessRecord_Multiplier0_NoAccumulation(void) {
-  /* Setup: Initialize test record */
-  test_record.id_u16 = 100U;
-  test_record.value_u32 = 1000U;
+void test_MyLib_ProcessRecord_multiplier_2_bounded_loop_accumulation(void)
+{
+    MyLib_record_t rec;
+    rec.id_u16 = 3U;
+    rec.value_u32 = 75U;
 
-  /* Setup CMock expectation: Function is called with 0 accumulation */
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(0U, NULL, 0U);
-  MyLib_ComputeAdjustedValue_u32_IgnoreArg_delta_pc_u16();
+    uint32_t initial_counter = g_counter_u32;
+    uint32_t expected_acc = 2U * rec.value_u32;
 
-  /* Execute */
-  MyLib_ProcessRecord(&test_record, 0U);
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_acc, (const uint16_t *)&(uint8_t){2U}, 0U);
+    MyLib_ComputeAdjustedValue_u32_IgnoreArg_delta_pc_u16();
 
-  /* Verify: Counter unchanged (0 was added) */
-  TEST_ASSERT_EQUAL_UINT32(initial_counter, g_counter_u32);
+    MyLib_ProcessRecord(&rec, 2U);
+
+    TEST_ASSERT_EQUAL_UINT32(initial_counter + expected_acc, g_counter_u32);
 }
 
-/*=============================================================================
- * Test Case 3: Multiplier = 1 - single accumulation
- *=============================================================================*/
-
 /**
- * @brief Verify behavior when multiplier is 1 (single value assignment)
- *
- * Expected behavior:
- * - Accumulator = record->value_u32
- * - Counter incremented by record->value_u32
- * - MyLib_ComputeAdjustedValue_u32 called with the record value
+ * @brief Test: rec_pc valid, multiplier_u8 = 255 (upper boundary) – l_acc_u32 equals 255 * rec_pc->value_u32, g_counter_u32 incremented accordingly, MyLib_ComputeAdjustedValue_u32 called with l_acc_u32.
  */
-void test_MyLib_ProcessRecord_Multiplier1_SingleAccumulation(void) {
-  /* Setup: Initialize test record with known value */
-  test_record.id_u16 = 42U;
-  test_record.value_u32 = 500U;
-  uint32_t expected_counter = initial_counter + 500U;
+void test_MyLib_ProcessRecord_multiplier_255_upper_boundary(void)
+{
+    MyLib_record_t rec;
+    rec.id_u16 = 4U;
+    rec.value_u32 = 10U;
 
-  /* Setup CMock expectation */
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(500U, NULL, 42U);
-  MyLib_ComputeAdjustedValue_u32_IgnoreArg_delta_pc_u16();
+    uint32_t initial_counter = g_counter_u32;
+    uint32_t expected_acc = 255U * rec.value_u32;
 
-  /* Execute */
-  MyLib_ProcessRecord(&test_record, 1U);
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_acc, (const uint16_t *)&(uint8_t){255U}, 0U);
+    MyLib_ComputeAdjustedValue_u32_IgnoreArg_delta_pc_u16();
 
-  /* Verify: Counter incremented by value */
-  TEST_ASSERT_EQUAL_UINT32(expected_counter, g_counter_u32);
+    MyLib_ProcessRecord(&rec, 255U);
+
+    TEST_ASSERT_EQUAL_UINT32(initial_counter + expected_acc, g_counter_u32);
 }
 
-/*=============================================================================
- * Test Case 4: Multiplier = 5 - bounded loop accumulation
- *=============================================================================*/
-
 /**
- * @brief Verify behavior with loop accumulation (multiplier > 1)
- *
- * Expected behavior:
- * - Accumulator = value_u32 * multiplier_u8
- * - Counter incremented by accumulated value
- * - MyLib_ComputeAdjustedValue_u32 called once with accumulated value
+ * @brief Test: rec_pc valid, multiplier_u8 = 128 (mid-range default case) – l_acc_u32 equals 128 * rec_pc->value_u32, g_counter_u32 incremented accordingly, MyLib_ComputeAdjustedValue_u32 called with l_acc_u32.
  */
-void test_MyLib_ProcessRecord_Multiplier5_LoopAccumulation(void) {
-  /* Setup: Initialize test record */
-  test_record.id_u16 = 200U;
-  test_record.value_u32 = 100U;
+void test_MyLib_ProcessRecord_multiplier_128_mid_range_default_case(void)
+{
+    MyLib_record_t rec;
+    rec.id_u16 = 5U;
+    rec.value_u32 = 20U;
 
-  uint32_t expected_accumulation = 100U * 5U; /* 500U */
-  uint32_t expected_counter = initial_counter + expected_accumulation;
+    uint32_t initial_counter = g_counter_u32;
+    uint32_t expected_acc = 128U * rec.value_u32;
 
-  /* Setup CMock expectation */
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_accumulation, NULL, 99U);
-  MyLib_ComputeAdjustedValue_u32_IgnoreArg_delta_pc_u16();
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_acc, (const uint16_t *)&(uint8_t){128U}, 0U);
+    MyLib_ComputeAdjustedValue_u32_IgnoreArg_delta_pc_u16();
 
-  /* Execute */
-  MyLib_ProcessRecord(&test_record, 5U);
+    MyLib_ProcessRecord(&rec, 128U);
 
-  /* Verify: Counter incremented by accumulated value */
-  TEST_ASSERT_EQUAL_UINT32(expected_counter, g_counter_u32);
+    TEST_ASSERT_EQUAL_UINT32(initial_counter + expected_acc, g_counter_u32);
 }
 
-/*=============================================================================
- * Test Case 5: Multiplier = 255 (max uint8_t) - boundary case
- *=============================================================================*/
-
 /**
- * @brief Verify behavior with maximum multiplier value
- *
- * Expected behavior:
- * - Accumulator = value_u32 * 255
- * - Counter properly incremented
- * - No overflow issues in the loop
+ * @brief Test: rec_pc valid with value_u32 = 0, multiplier_u8 = 10 – l_acc_u32 is 0, g_counter_u32 unchanged, MyLib_ComputeAdjustedValue_u32 called with l_acc_u32=0.
  */
-void test_MyLib_ProcessRecord_MultiplierMax_BoundaryCase(void) {
-  /* Setup: Initialize test record with small value to avoid overflow */
-  test_record.id_u16 = 1U;
-  test_record.value_u32 = 10U;
+void test_MyLib_ProcessRecord_value_u32_zero_multiplier_10_accumulation_zero(void)
+{
+    MyLib_record_t rec;
+    rec.id_u16 = 6U;
+    rec.value_u32 = 0U;
 
-  uint32_t expected_accumulation = 10U * 255U; /* 2550U */
-  uint32_t expected_counter = initial_counter + expected_accumulation;
+    uint32_t initial_counter = g_counter_u32;
+    uint32_t expected_acc = 0U;
 
-  /* Setup CMock expectation */
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_accumulation, NULL, 0U);
-  MyLib_ComputeAdjustedValue_u32_IgnoreArg_delta_pc_u16();
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_acc, (const uint16_t *)&(uint8_t){10U}, 0U);
+    MyLib_ComputeAdjustedValue_u32_IgnoreArg_delta_pc_u16();
 
-  /* Execute */
-  MyLib_ProcessRecord(&test_record, 255U);
+    MyLib_ProcessRecord(&rec, 10U);
 
-  /* Verify: Counter properly incremented */
-  TEST_ASSERT_EQUAL_UINT32(expected_counter, g_counter_u32);
+    TEST_ASSERT_EQUAL_UINT32(initial_counter, g_counter_u32);
 }
 
-/*=============================================================================
- * Test Case 6: Accumulation with wrap-around on uint32_t
- *=============================================================================*/
-
 /**
- * @brief Verify wrap-around behavior when accumulation exceeds UINT32_MAX
- *
- * Expected behavior:
- * - Accumulation wraps around (by design per documentation)
- * - Counter is updated with wrapped value
+ * @brief Test: rec_pc valid with value_u32 = UINT32_MAX, multiplier_u8 = 1 – l_acc_u32 equals UINT32_MAX, g_counter_u32 incremented by UINT32_MAX, MyLib_ComputeAdjustedValue_u32 called with l_acc_u32.
  */
-void test_MyLib_ProcessRecord_WrapAroundAccumulation(void) {
-  /* Setup: Large initial counter value */
-  g_counter_u32 = UINT32_MAX - 100U;
-  initial_counter = g_counter_u32;
+void test_MyLib_ProcessRecord_value_u32_max_multiplier_1(void)
+{
+    MyLib_record_t rec;
+    rec.id_u16 = 7U;
+    rec.value_u32 = UINT32_MAX;
 
-  /* Setup: Record with large value */
-  test_record.id_u16 = 10U;
-  test_record.value_u32 = 200U;
+    uint32_t initial_counter = g_counter_u32;
+    uint32_t expected_acc = UINT32_MAX;
 
-  uint32_t expected_accumulation = 200U * 5U;              /* 1000U */
-  uint32_t expected_counter = (UINT32_MAX - 100U) + 1000U; /* Wraps around */
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_acc, (const uint16_t *)&(uint8_t){1U}, 0U);
+    MyLib_ComputeAdjustedValue_u32_IgnoreArg_delta_pc_u16();
 
-  /* Setup CMock expectation */
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_accumulation, NULL, 0U);
-  MyLib_ComputeAdjustedValue_u32_IgnoreArg_delta_pc_u16();
+    MyLib_ProcessRecord(&rec, 1U);
 
-  /* Execute */
-  MyLib_ProcessRecord(&test_record, 5U);
-
-  /* Verify: Wrap-around behavior */
-  TEST_ASSERT_EQUAL_UINT32(expected_counter, g_counter_u32);
+    TEST_ASSERT_EQUAL_UINT32(initial_counter + expected_acc, g_counter_u32);
 }
 
-/*=============================================================================
- * Test Case 7: Multiple sequential calls - state consistency
- *=============================================================================*/
-
 /**
- * @brief Verify correct behavior with multiple sequential calls
- *
- * Expected behavior:
- * - Each call correctly accumulates and updates global counter
- * - Counter is cumulative across calls
+ * @brief Test: rec_pc valid with value_u32 = UINT32_MAX, multiplier_u8 = 2 – l_acc_u32 wraps around (2 * UINT32_MAX mod 2^32), g_counter_u32 incremented by wrapped value, MyLib_ComputeAdjustedValue_u32 called with wrapped l_acc_u32.
  */
-void test_MyLib_ProcessRecord_SequentialCalls_StateConsistency(void) {
-  /* Setup: First call - multiplier = 2 */
-  test_record.id_u16 = 1U;
-  test_record.value_u32 = 100U;
+void test_MyLib_ProcessRecord_value_u32_max_multiplier_2_wraparound(void)
+{
+    MyLib_record_t rec;
+    rec.id_u16 = 8U;
+    rec.value_u32 = UINT32_MAX;
 
-  uint32_t first_accumulation = 100U * 2U; /* 200U */
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(first_accumulation, NULL, 0U);
-  MyLib_ComputeAdjustedValue_u32_IgnoreArg_delta_pc_u16();
+    uint32_t initial_counter = g_counter_u32;
+    uint32_t expected_acc = (uint32_t)(2ULL * UINT32_MAX);
 
-  MyLib_ProcessRecord(&test_record, 2U);
-  uint32_t counter_after_first = g_counter_u32;
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_acc, (const uint16_t *)&(uint8_t){2U}, 0U);
+    MyLib_ComputeAdjustedValue_u32_IgnoreArg_delta_pc_u16();
 
-  /* Verify first call */
-  TEST_ASSERT_EQUAL_UINT32(initial_counter + 200U, counter_after_first);
+    MyLib_ProcessRecord(&rec, 2U);
 
-  /* Setup: Second call - multiplier = 3 */
-  test_record.value_u32 = 50U;
-  uint32_t second_accumulation = 50U * 3U; /* 150U */
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(second_accumulation, NULL, 0U);
-  MyLib_ComputeAdjustedValue_u32_IgnoreArg_delta_pc_u16();
-
-  MyLib_ProcessRecord(&test_record, 3U);
-
-  /* Verify cumulative behavior */
-  TEST_ASSERT_EQUAL_UINT32(counter_after_first + 150U, g_counter_u32);
+    TEST_ASSERT_EQUAL_UINT32(initial_counter + expected_acc, g_counter_u32);
 }
 
-/*=============================================================================
- * Test Case 8: Record with maximum value_u32
- *=============================================================================*/
-
 /**
- * @brief Verify behavior with maximum record value
- *
- * Expected behavior:
- * - Correctly handles large uint32_t value
- * - Accumulation and counter update work correctly
+ * @brief Test: rec_pc valid with value_u32 causing g_counter_u32 to wrap around from near UINT32_MAX – verify wrap-around behavior is correct and MyLib_ComputeAdjustedValue_u32 is invoked.
  */
-void test_MyLib_ProcessRecord_MaxRecordValue(void) {
-  /* Setup: Record with maximum value */
-  test_record.id_u16 = 65535U;
-  test_record.value_u32 = UINT32_MAX;
+void test_MyLib_ProcessRecord_g_counter_u32_wraparound_from_near_max(void)
+{
+    MyLib_record_t rec;
+    rec.id_u16 = 9U;
+    rec.value_u32 = 100U;
 
-  uint32_t expected_accumulation = UINT32_MAX; /* multiplier = 1 */
-  uint32_t expected_counter = initial_counter + expected_accumulation;
+    g_counter_u32 = UINT32_MAX - 50U;
+    uint32_t initial_counter = g_counter_u32;
+    uint32_t expected_acc = rec.value_u32;
 
-  /* Setup CMock expectation */
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_accumulation, NULL, 0U);
-  MyLib_ComputeAdjustedValue_u32_IgnoreArg_delta_pc_u16();
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_acc, (const uint16_t *)&(uint8_t){1U}, 0U);
+    MyLib_ComputeAdjustedValue_u32_IgnoreArg_delta_pc_u16();
 
-  /* Execute */
-  MyLib_ProcessRecord(&test_record, 1U);
+    MyLib_ProcessRecord(&rec, 1U);
 
-  /* Verify: Counter properly updated */
-  TEST_ASSERT_EQUAL_UINT32(expected_counter, g_counter_u32);
+    TEST_ASSERT_EQUAL_UINT32(initial_counter + expected_acc, g_counter_u32);
 }
 
-/*=============================================================================
- * Test Case 9: Verify mock function is called with correct multiplier address
- *=============================================================================*/
+/**
+ * @brief Test: rec_pc valid, multiplier_u8 = 1, g_counter_u32 initially non-zero – verify g_counter_u32 is incremented correctly and MyLib_ComputeAdjustedValue_u32 is called.
+ */
+void test_MyLib_ProcessRecord_multiplier_1_g_counter_u32_initially_non_zero(void)
+{
+    MyLib_record_t rec;
+    rec.id_u16 = 10U;
+    rec.value_u32 = 200U;
+
+    g_counter_u32 = 500U;
+    uint32_t initial_counter = g_counter_u32;
+    uint32_t expected_acc = rec.value_u32;
+
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_acc, (const uint16_t *)&(uint8_t){1U}, 0U);
+    MyLib_ComputeAdjustedValue_u32_IgnoreArg_delta_pc_u16();
+
+    MyLib_ProcessRecord(&rec, 1U);
+
+    TEST_ASSERT_EQUAL_UINT32(initial_counter + expected_acc, g_counter_u32);
+}
 
 /**
- * @brief Verify that MyLib_ComputeAdjustedValue_u32 receives pointer to multiplier_u8
- *
- * Expected behavior:
- * - Mock function called with correct params
- * - Demonstrates proper parameter passing
+ * @brief Test: rec_pc valid, multiplier_u8 = 0, g_counter_u32 initially non-zero – verify g_counter_u32 remains unchanged and MyLib_ComputeAdjustedValue_u32 is called with l_acc_u32=0.
  */
-void test_MyLib_ProcessRecord_MockFunctionCalledWithCorrectParams(void) {
-  /* Setup: Initialize test record */
-  test_record.id_u16 = 100U;
-  test_record.value_u32 = 300U;
+void test_MyLib_ProcessRecord_multiplier_0_g_counter_u32_initially_non_zero(void)
+{
+    MyLib_record_t rec;
+    rec.id_u16 = 11U;
+    rec.value_u32 = 300U;
 
-  uint32_t expected_accumulation = 300U * 3U;
+    g_counter_u32 = 1000U;
+    uint32_t initial_counter = g_counter_u32;
 
-  /* Setup CMock expectation - verify all exactly */
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_accumulation, NULL, 55U);
-  MyLib_ComputeAdjustedValue_u32_IgnoreArg_delta_pc_u16();
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(0U, (const uint16_t *)&(uint8_t){0U}, 0U);
+    MyLib_ComputeAdjustedValue_u32_IgnoreArg_delta_pc_u16();
 
-  /* Execute */
-  MyLib_ProcessRecord(&test_record, 3U);
+    MyLib_ProcessRecord(&rec, 0U);
 
-  /* Verification is implicit through CMock_Verify in tearDown */
-  TEST_ASSERT_TRUE(true);
+    TEST_ASSERT_EQUAL_UINT32(initial_counter, g_counter_u32);
 }
