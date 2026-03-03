@@ -305,7 +305,7 @@ uint8_t MyLib_UpdateCounter_u8(uint32_t add_u32);
 uint8_t UpdateCounter_u8(uint32_t add_u32);
 # 5 "utExecutionAndResults/utUnderTest/src/MyLib_AnalyzeArray_u32.h" 2
 # 65 "utExecutionAndResults/utUnderTest/src/MyLib_AnalyzeArray_u32.h"
-uint32_t MyLib_AnalyzeArray_u32(uint16_t * values_pu16, size_t len_u32, uint16_t factor_u16);
+uint32_t MyLib_AnalyzeArray_u32(uint16_t *values_pu16, size_t len_u32, uint16_t factor_u16);
 # 2 "utExecutionAndResults/utUnderTest/test/test_ValidArray_AllZeros_Len10_Factor100.c" 2
 # 1 "utExecutionAndResults/utUnderTest/build/test/mocks/test_ValidArray_AllZeros_Len10_Factor100/mock_MyLib.h" 1
 

@@ -3965,8 +3965,7 @@ uint8_t UpdateCounter_u8(uint32_t add_u32);
  * @return void
  * No return value.
  */
-void MyLib_ProcessRecord(const MyLib_record_t * rec_pc, uint8_t multiplier_u8);
-
+void MyLib_ProcessRecord(const MyLib_record_t *rec_pc, uint8_t multiplier_u8);
 
 # 2 "utExecutionAndResults/utUnderTest/test/test_value_u32_zero_multiplier_10_accumulation_zero.c" 2
 # 1 "utExecutionAndResults/utUnderTest/build/test/mocks/test_value_u32_zero_multiplier_10_accumulation_zero/mock_MyLib.h" 1

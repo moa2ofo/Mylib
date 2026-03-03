@@ -305,7 +305,7 @@ uint8_t MyLib_UpdateCounter_u8(uint32_t add_u32);
 uint8_t UpdateCounter_u8(uint32_t add_u32);
 # 5 "utExecutionAndResults/utUnderTest/src/MyLib_UpdateGlobalRecord.h" 2
 # 51 "utExecutionAndResults/utUnderTest/src/MyLib_UpdateGlobalRecord.h"
-void MyLib_UpdateGlobalRecord(MyLib_record_t * dest_p, const MyLib_record_t * src_pc);
+void MyLib_UpdateGlobalRecord(MyLib_record_t *dest_p, const MyLib_record_t *src_pc);
 # 2 "utExecutionAndResults/utUnderTest/test/test_both_valid_midrange_values_updates_all.c" 2
 # 1 "utExecutionAndResults/utUnderTest/build/test/mocks/test_both_valid_midrange_values_updates_all/mock_MyLib.h" 1
 
