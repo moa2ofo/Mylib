@@ -3386,6 +3386,81 @@ extern bool g_systemReady_b;
  * @return void
  * No return value.
  */
+void ProcessRecord(const MyLib_record_t *rec_pc, uint8_t multiplier_u8);
+
+/**
+ * @brief Process one record with a bounded accumulation and update module globals.
+ *
+ * @details
+ * **Goal of the function**
+ *
+ * Consume an input record and apply a deterministic accumulation based on
+ * `multiplier_u8`. The accumulation logic is implemented using a switch-case
+ * structure to optimize specific scenarios while keeping execution bounded.
+ *
+ * Processing behavior:
+ * - If `rec_pc == NULL`, the function returns immediately (no side effects).
+ * - Otherwise, a local accumulator (`l_acc_u32`) is computed as follows:
+ *   - `multiplier_u8 == 0U`
+ *       → No accumulation (`l_acc_u32 = 0U`).
+ *   - `multiplier_u8 == 1U`
+ *       → Single direct assignment (`l_acc_u32 = rec_pc->value_u32`).
+ *   - `default`
+ *       → Bounded loop accumulation:
+ *         `l_acc_u32 += rec_pc->value_u32` repeated `multiplier_u8` times.
+ *
+ * After accumulation:
+ * - `g_counter_u32` is incremented by `l_acc_u32`.
+ * - `MyLib_ComputeAdjustedValue_u32()` is invoked.
+ *
+ * Wrap-around on `uint32_t` is permitted by design.
+ *
+ * @par Interface summary
+ *
+ * | Interface                      | In | Out | Type / Signature                        | Param | Factor | Offset | Size | Range              | Unit |
+ * |--------------------------------|----|-----|-----------------------------------------|-------|--------|--------|------|--------------------|------|
+ * | rec_pc                         | X  |     | const MyLib_record_t*                   |   X   |   1    |   0    |   1  | pointer / NULL     | [-]  |
+ * | multiplier_u8                  | X  |     | uint8_t                                 |   X   |   1    |   0    |   1  | 0..255             | [-]  |
+ * | MyLib_ComputeAdjustedValue_u32 | X  |  X  | uint32_t (uint32_t , const uint16_t *)  |       |   1    |   0    |   1  | -                  | [-]  |
+ * | g_counter_u32                  |    |  X  | uint32_t (global)                       |       |   1    |   0    |   1  | 0..(wrap)          | [-]  |
+ * | return val                     |    |     | void                                    |       |   1    |   0    |   1  | -                  | [-]  |
+ *
+ * @par Activity diagram (PlantUML)
+ *
+ * @startuml
+ * start
+ * if (rec_pc == NULL) then (yes)
+ *   :return;
+ * else (no)
+ *   :switch(multiplier_u8);
+ *     case (0U)
+ *       :l_acc_u32 = 0U;
+ *     case (1U)
+ *       :l_acc_u32 = rec_pc->value_u32;
+ *     case (default)
+ *       :for l_i_u8 in [0..multiplier_u8-1];
+ *         :l_acc_u32 += rec_pc->value_u32;
+ *       :endfor;
+ *   :endswitch;
+ *   :g_counter_u32 += l_acc_u32;
+ *   :call MyLib_ComputeAdjustedValue_u32(l_acc_u32, (const uint16_t *)&multiplier_u8);
+ *   :return;
+ * endif
+ * stop
+ * @enduml
+ *
+ * @param rec_pc
+ * Pointer to the input record. If NULL, the function returns immediately.
+ *
+ * @param multiplier_u8
+ * Accumulation selector:
+ * - 0 → no accumulation
+ * - 1 → single accumulation
+ * - >1 → bounded loop accumulation
+ *
+ * @return void
+ * No return value.
+ */
 void MyLib_ProcessRecord(const MyLib_record_t *rec_pc, uint8_t multiplier_u8);
 
 /**
@@ -3491,6 +3566,63 @@ uint32_t MyLib_ComputeAdjustedValue_u32(uint32_t base_u32, const uint16_t *delta
  * @return uint32_t
  * Sum of the scaled array elements (wrap-around possible on overflow).
  */
+
+/**
+ * @brief Scale an array in-place and return the sum of scaled elements.
+ *
+ * @details
+ * **Goal of the function**
+ *
+ * It checks whether the input list is valid, then (if so) multiplies each item, 
+ * sums them up, performs an internal adjustment, and finally returns the total.
+ *
+ * @par Interface summary
+ *
+ * | Interface                      | In | Out | Type / Signature                        | Param | Factor | Offset | Size | Range              | Unit |
+ * |--------------------------------|----|-----|-----------------------------------------|-------|--------|--------|------|--------------------|------|
+ * | values_pu16                    | X  |  X  | uint16_t*                               |   X   |   1    |   0    |   1  | pointer / NULL     | [-]  |
+ * | len_u32                        | X  |     | size_t                                  |   X   |   1    |   0    |   1  | 0..600             | [-]  |
+ * | factor_u16                     | X  |     | uint16_t                                |   X   |   1    |   0    |   1  | 0..65535           | [-]  |
+ * | MyLib_ComputeAdjustedValue_u32 | X  |  X  | uint32_t (uint32_t , const uint16_t *)  |       |   1    |   0    |   1  | -                  | [-]  |
+ * | return val                     |    |  X  | uint32_t                                |       |   1    |   0    |   1  | 0..500             | [-]  |
+ *
+ * @par Activity diagram (PlantUML)
+ *
+ * @startuml
+ * start
+ * : l_inNull_b = false;
+ * 
+ * if (values_pu16 == NULL or len_u32 == 0) then (yes)
+ *   : l_inNull_b = true;
+ * endif
+ * :l_sum_u32 = 0;
+ * 
+ * if (l_inNull_b == false) then (process)
+ *   :for l_i_u32 in [0 .. len_u32-1];
+ *     :values_pu16[l_i_u32] = values_pu16[l_i_u32] * factor_u16;
+ *     :l_sum_u32 += values_pu16[l_i_u32];
+ *   :endfor;
+ * 
+ *   :call MyLib_ComputeAdjustedValue_u32(l_sum_u32, NULL);
+ * endif
+ * :return l_sum_u32;
+ * 
+ * stop
+ * @enduml
+ *
+ * @param values_pu16
+ * Pointer to the array to be scaled in-place. If NULL, the function returns 0.
+ *
+ * @param len_u32
+ * Number of elements in the array. If 0, the function returns 0.
+ *
+ * @param factor_u16
+ * Scaling factor applied to each element.
+ *
+ * @return uint32_t
+ * Sum of the scaled array elements (wrap-around possible on overflow).
+ */
+uint32_t AnalyzeArray_u32(uint16_t *values_pu16, size_t len_u32, uint16_t factor_u16);
 
 /**
  * @brief Copy a record into a destination and update module global state.
@@ -3702,6 +3834,62 @@ static uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
  */
 uint8_t MyLib_UpdateCounter_u8(uint32_t add_u32);
 
+/**
+ * @brief Update the module global counter with optional saturation handling.
+ *
+ * @details
+ * **Goal of the function**
+ *
+ * Executes a deterministic update: increments a static cycle counter, 
+ * checks system readiness, computes a new counter with optional saturation, updates `g_counter_u32` accordingly, and returns a status code.
+ * Toggles `SaturationEn_b` every 16 cycles and clamps the counter when enabled and limits are exceeded.
+ *
+ * @par Interface summary
+ *
+ * | Interface         | In | Out | Type / Signature           | Param | Factor | Offset | Size | Range              | Unit |
+ * |-------------------|----|-----|----------------------------|-------|--------|--------|------|--------------------|------|
+ * | add_u32           | X  |     | uint32_t                   |   X   |   1    |   0    |   1  | 0..(wrap)          | [-]  |
+ * | g_systemReady_b   |    |  X  | bool                       |       |   1    |   0    |   1  | false/true         | [-]  |
+ * | g_counter_u32     |    |  X  | uint32_t                   |       |   1    |   0    |   1  | 0..(wrap)          | [-]  |
+ * | CounterLimit_u32  |    |  X  | uint32_t                   |       |   1    |   0    |   1  | 0..(wrap)          | [-]  |
+ * | SaturationEn_b    |    |  X  | bool                       |       |   1    |   0    |   1  | false/true         | [-]  |
+ * | return val        |    |  X  | uint8_t                    |       |   1    |   0    |   1  | 0..2               | [-]  |
+ *
+ * @par Activity diagram (PlantUML)
+ *
+ * @startuml
+ * start
+ * :l_CycleCnt_u32++;
+ * if (g_systemReady_b == false) then (yes)
+ *   :return 1;
+ * else (no)
+ *   :l_new_u32 = g_counter_u32 + add_u32;
+ *   if ((SaturationEn_b == true) && (l_new_u32 > CounterLimit_u32)) then (yes)
+ *     :g_counter_u32 = CounterLimit_u32;
+ *     :l_ret_u8 = 2;
+ *   else (no)
+ *     :g_counter_u32 = l_new_u32;
+ *     :l_ret_u8 = 0;
+ *   endif
+ *   if ((l_CycleCnt_u32 & 0x0F) == 0) then (yes)
+ *     :SaturationEn_b = !SaturationEn_b;
+ *   endif
+ *   :return l_ret_u8;
+ * endif
+ * stop
+ * @enduml
+ *
+ * @param add_u32
+ * Unsigned increment added to `g_counter_u32` (wrap-around may occur before saturation check).
+ *
+ * @return uint8_t
+ * Status code:
+ * - 0: Update applied (no saturation clamp)
+ * - 1: Rejected because `g_systemReady_b == false`
+ * - 2: Saturation applied and `g_counter_u32` clamped to `CounterLimit_u32`
+ */
+uint8_t UpdateCounter_u8(uint32_t add_u32);
+
 # 5 "utExecutionAndResults/utUnderTest/src/MyLib_AnalyzeArray_u32.h" 2
 
 /**
@@ -3763,7 +3951,8 @@ uint8_t MyLib_UpdateCounter_u8(uint32_t add_u32);
  * @return uint32_t
  * Sum of the scaled array elements (wrap-around possible on overflow).
  */
-uint32_t MyLib_AnalyzeArray_u32(uint16_t *values_pu16, size_t len_u32, uint16_t factor_u16);
+uint32_t MyLib_AnalyzeArray_u32(uint16_t * values_pu16, size_t len_u32, uint16_t factor_u16);
+
 
 # 2 "utExecutionAndResults/utUnderTest/test/test_NullPtr_Len600_Factor100.c" 2
 # 1 "utExecutionAndResults/utUnderTest/build/test/mocks/test_NullPtr_Len600_Factor100/mock_MyLib.h" 1
@@ -10719,6 +10908,28 @@ void mock_MyLib_Verify(void);
 
 
 
+#define ProcessRecord_IgnoreAndReturn(cmock_retval) TEST_FAIL_MESSAGE("ProcessRecord requires _Ignore (not AndReturn)");
+#define ProcessRecord_Ignore() ProcessRecord_CMockIgnore()
+void ProcessRecord_CMockIgnore(void);
+#define ProcessRecord_StopIgnore() ProcessRecord_CMockStopIgnore()
+void ProcessRecord_CMockStopIgnore(void);
+#define ProcessRecord_ExpectAnyArgsAndReturn(cmock_retval) TEST_FAIL_MESSAGE("ProcessRecord requires _ExpectAnyArgs (not AndReturn)");
+#define ProcessRecord_ExpectAnyArgs() ProcessRecord_CMockExpectAnyArgs(__LINE__)
+void ProcessRecord_CMockExpectAnyArgs(UNITY_LINE_TYPE cmock_line);
+#define ProcessRecord_ExpectAndReturn(rec_pc,multiplier_u8,cmock_retval) TEST_FAIL_MESSAGE("ProcessRecord requires _Expect (not AndReturn)");
+#define ProcessRecord_Expect(rec_pc,multiplier_u8) ProcessRecord_CMockExpect(__LINE__, rec_pc, multiplier_u8)
+void ProcessRecord_CMockExpect(UNITY_LINE_TYPE cmock_line, const MyLib_record_t* rec_pc, uint8_t multiplier_u8);
+typedef void (* CMOCK_ProcessRecord_CALLBACK)(const MyLib_record_t* rec_pc, uint8_t multiplier_u8, int cmock_num_calls);
+void ProcessRecord_AddCallback(CMOCK_ProcessRecord_CALLBACK Callback);
+void ProcessRecord_Stub(CMOCK_ProcessRecord_CALLBACK Callback);
+#define ProcessRecord_StubWithCallback ProcessRecord_Stub
+#define ProcessRecord_ExpectWithArrayAndReturn(rec_pc,rec_pc_Depth,multiplier_u8,cmock_retval) TEST_FAIL_MESSAGE("ProcessRecord requires _ExpectWithArray (not AndReturn)");
+#define ProcessRecord_ExpectWithArray(rec_pc,rec_pc_Depth,multiplier_u8) ProcessRecord_CMockExpectWithArray(__LINE__, rec_pc, (rec_pc_Depth), multiplier_u8)
+void ProcessRecord_CMockExpectWithArray(UNITY_LINE_TYPE cmock_line, const MyLib_record_t* rec_pc, int rec_pc_Depth, uint8_t multiplier_u8);
+#define ProcessRecord_IgnoreArg_rec_pc() ProcessRecord_CMockIgnoreArg_rec_pc(__LINE__)
+void ProcessRecord_CMockIgnoreArg_rec_pc(UNITY_LINE_TYPE cmock_line);
+#define ProcessRecord_IgnoreArg_multiplier_u8() ProcessRecord_CMockIgnoreArg_multiplier_u8(__LINE__)
+void ProcessRecord_CMockIgnoreArg_multiplier_u8(UNITY_LINE_TYPE cmock_line);
 #define MyLib_ProcessRecord_IgnoreAndReturn(cmock_retval) TEST_FAIL_MESSAGE("MyLib_ProcessRecord requires _Ignore (not AndReturn)");
 #define MyLib_ProcessRecord_Ignore() MyLib_ProcessRecord_CMockIgnore()
 void MyLib_ProcessRecord_CMockIgnore(void);
@@ -10763,6 +10974,34 @@ void MyLib_ComputeAdjustedValue_u32_CMockExpectWithArrayAndReturn(UNITY_LINE_TYP
 void MyLib_ComputeAdjustedValue_u32_CMockIgnoreArg_base_u32(UNITY_LINE_TYPE cmock_line);
 #define MyLib_ComputeAdjustedValue_u32_IgnoreArg_delta_pc_u16() MyLib_ComputeAdjustedValue_u32_CMockIgnoreArg_delta_pc_u16(__LINE__)
 void MyLib_ComputeAdjustedValue_u32_CMockIgnoreArg_delta_pc_u16(UNITY_LINE_TYPE cmock_line);
+#define AnalyzeArray_u32_Ignore() TEST_FAIL_MESSAGE("AnalyzeArray_u32 requires _IgnoreAndReturn");
+#define AnalyzeArray_u32_IgnoreAndReturn(cmock_retval) AnalyzeArray_u32_CMockIgnoreAndReturn(__LINE__, cmock_retval)
+void AnalyzeArray_u32_CMockIgnoreAndReturn(UNITY_LINE_TYPE cmock_line, uint32_t cmock_to_return);
+#define AnalyzeArray_u32_StopIgnore() AnalyzeArray_u32_CMockStopIgnore()
+void AnalyzeArray_u32_CMockStopIgnore(void);
+#define AnalyzeArray_u32_ExpectAnyArgs() TEST_FAIL_MESSAGE("AnalyzeArray_u32 requires _ExpectAnyArgsAndReturn");
+#define AnalyzeArray_u32_ExpectAnyArgsAndReturn(cmock_retval) AnalyzeArray_u32_CMockExpectAnyArgsAndReturn(__LINE__, cmock_retval)
+void AnalyzeArray_u32_CMockExpectAnyArgsAndReturn(UNITY_LINE_TYPE cmock_line, uint32_t cmock_to_return);
+#define AnalyzeArray_u32_Expect(values_pu16,len_u32,factor_u16) TEST_FAIL_MESSAGE("AnalyzeArray_u32 requires _ExpectAndReturn");
+#define AnalyzeArray_u32_ExpectAndReturn(values_pu16,len_u32,factor_u16,cmock_retval) AnalyzeArray_u32_CMockExpectAndReturn(__LINE__, values_pu16, len_u32, factor_u16, cmock_retval)
+void AnalyzeArray_u32_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, uint16_t* values_pu16, size_t len_u32, uint16_t factor_u16, uint32_t cmock_to_return);
+typedef uint32_t (* CMOCK_AnalyzeArray_u32_CALLBACK)(uint16_t* values_pu16, size_t len_u32, uint16_t factor_u16, int cmock_num_calls);
+void AnalyzeArray_u32_AddCallback(CMOCK_AnalyzeArray_u32_CALLBACK Callback);
+void AnalyzeArray_u32_Stub(CMOCK_AnalyzeArray_u32_CALLBACK Callback);
+#define AnalyzeArray_u32_StubWithCallback AnalyzeArray_u32_Stub
+#define AnalyzeArray_u32_ExpectWithArray(values_pu16,values_pu16_Depth,len_u32,factor_u16) TEST_FAIL_MESSAGE("AnalyzeArray_u32 requires _ExpectWithArrayAndReturn");
+#define AnalyzeArray_u32_ExpectWithArrayAndReturn(values_pu16,values_pu16_Depth,len_u32,factor_u16,cmock_retval) AnalyzeArray_u32_CMockExpectWithArrayAndReturn(__LINE__, values_pu16, (values_pu16_Depth), len_u32, factor_u16, cmock_retval)
+void AnalyzeArray_u32_CMockExpectWithArrayAndReturn(UNITY_LINE_TYPE cmock_line, uint16_t* values_pu16, int values_pu16_Depth, size_t len_u32, uint16_t factor_u16, uint32_t cmock_to_return);
+#define AnalyzeArray_u32_ReturnThruPtr_values_pu16(values_pu16) AnalyzeArray_u32_CMockReturnMemThruPtr_values_pu16(__LINE__, values_pu16, sizeof(uint16_t))
+#define AnalyzeArray_u32_ReturnArrayThruPtr_values_pu16(values_pu16,cmock_len) AnalyzeArray_u32_CMockReturnMemThruPtr_values_pu16(__LINE__, values_pu16, (cmock_len * sizeof(*values_pu16)))
+#define AnalyzeArray_u32_ReturnMemThruPtr_values_pu16(values_pu16,cmock_size) AnalyzeArray_u32_CMockReturnMemThruPtr_values_pu16(__LINE__, values_pu16, (cmock_size))
+void AnalyzeArray_u32_CMockReturnMemThruPtr_values_pu16(UNITY_LINE_TYPE cmock_line, uint16_t const* values_pu16, size_t cmock_size);
+#define AnalyzeArray_u32_IgnoreArg_values_pu16() AnalyzeArray_u32_CMockIgnoreArg_values_pu16(__LINE__)
+void AnalyzeArray_u32_CMockIgnoreArg_values_pu16(UNITY_LINE_TYPE cmock_line);
+#define AnalyzeArray_u32_IgnoreArg_len_u32() AnalyzeArray_u32_CMockIgnoreArg_len_u32(__LINE__)
+void AnalyzeArray_u32_CMockIgnoreArg_len_u32(UNITY_LINE_TYPE cmock_line);
+#define AnalyzeArray_u32_IgnoreArg_factor_u16() AnalyzeArray_u32_CMockIgnoreArg_factor_u16(__LINE__)
+void AnalyzeArray_u32_CMockIgnoreArg_factor_u16(UNITY_LINE_TYPE cmock_line);
 #define MyLib_UpdateGlobalRecord_IgnoreAndReturn(cmock_retval) TEST_FAIL_MESSAGE("MyLib_UpdateGlobalRecord requires _Ignore (not AndReturn)");
 #define MyLib_UpdateGlobalRecord_Ignore() MyLib_UpdateGlobalRecord_CMockIgnore()
 void MyLib_UpdateGlobalRecord_CMockIgnore(void);
@@ -10847,6 +11086,23 @@ void MyLib_UpdateCounter_u8_Stub(CMOCK_MyLib_UpdateCounter_u8_CALLBACK Callback)
 #define MyLib_UpdateCounter_u8_StubWithCallback MyLib_UpdateCounter_u8_Stub
 #define MyLib_UpdateCounter_u8_IgnoreArg_add_u32() MyLib_UpdateCounter_u8_CMockIgnoreArg_add_u32(__LINE__)
 void MyLib_UpdateCounter_u8_CMockIgnoreArg_add_u32(UNITY_LINE_TYPE cmock_line);
+#define UpdateCounter_u8_Ignore() TEST_FAIL_MESSAGE("UpdateCounter_u8 requires _IgnoreAndReturn");
+#define UpdateCounter_u8_IgnoreAndReturn(cmock_retval) UpdateCounter_u8_CMockIgnoreAndReturn(__LINE__, cmock_retval)
+void UpdateCounter_u8_CMockIgnoreAndReturn(UNITY_LINE_TYPE cmock_line, uint8_t cmock_to_return);
+#define UpdateCounter_u8_StopIgnore() UpdateCounter_u8_CMockStopIgnore()
+void UpdateCounter_u8_CMockStopIgnore(void);
+#define UpdateCounter_u8_ExpectAnyArgs() TEST_FAIL_MESSAGE("UpdateCounter_u8 requires _ExpectAnyArgsAndReturn");
+#define UpdateCounter_u8_ExpectAnyArgsAndReturn(cmock_retval) UpdateCounter_u8_CMockExpectAnyArgsAndReturn(__LINE__, cmock_retval)
+void UpdateCounter_u8_CMockExpectAnyArgsAndReturn(UNITY_LINE_TYPE cmock_line, uint8_t cmock_to_return);
+#define UpdateCounter_u8_Expect(add_u32) TEST_FAIL_MESSAGE("UpdateCounter_u8 requires _ExpectAndReturn");
+#define UpdateCounter_u8_ExpectAndReturn(add_u32,cmock_retval) UpdateCounter_u8_CMockExpectAndReturn(__LINE__, add_u32, cmock_retval)
+void UpdateCounter_u8_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, uint32_t add_u32, uint8_t cmock_to_return);
+typedef uint8_t (* CMOCK_UpdateCounter_u8_CALLBACK)(uint32_t add_u32, int cmock_num_calls);
+void UpdateCounter_u8_AddCallback(CMOCK_UpdateCounter_u8_CALLBACK Callback);
+void UpdateCounter_u8_Stub(CMOCK_UpdateCounter_u8_CALLBACK Callback);
+#define UpdateCounter_u8_StubWithCallback UpdateCounter_u8_Stub
+#define UpdateCounter_u8_IgnoreArg_add_u32() UpdateCounter_u8_CMockIgnoreArg_add_u32(__LINE__)
+void UpdateCounter_u8_CMockIgnoreArg_add_u32(UNITY_LINE_TYPE cmock_line);
 
 
 

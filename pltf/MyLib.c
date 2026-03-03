@@ -22,14 +22,14 @@ static uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16) {
   return l_acc_u32;
 }
 void MyLib_ProcessRecord(const MyLib_record_t *rec_pc, uint8_t multiplier_u8) {
-  if (rec_pc == NULL) {
+  if(rec_pc == NULL) {
     return;
   }
 
   uint32_t l_acc_u32 = 0U;
 
   /* Fast paths / special cases for deterministic and efficient execution. */
-  switch (multiplier_u8) {
+  switch(multiplier_u8) {
   case 0U:
     /* No accumulation requested. */
     l_acc_u32 = 0U;
@@ -42,7 +42,7 @@ void MyLib_ProcessRecord(const MyLib_record_t *rec_pc, uint8_t multiplier_u8) {
 
   default:
     /* Bounded accumulation: wrap-around is acceptable by design. */
-    for (uint8_t l_i_u8 = 0U; l_i_u8 < multiplier_u8; l_i_u8++) {
+    for(uint8_t l_i_u8 = 0U; l_i_u8 < multiplier_u8; l_i_u8++) {
       l_acc_u32 += rec_pc->value_u32;
     }
     break;
@@ -63,13 +63,13 @@ uint32_t MyLib_ComputeAdjustedValue_u32(uint32_t base_u32, const uint16_t *delta
 }
 uint32_t MyLib_AnalyzeArray_u32(uint16_t *values_pu16, size_t len_u32, uint16_t factor_u16) {
   /* Check for NULL pointer or zero length input */
-  if ((values_pu16 == NULL) || (len_u32 == 0U)) {
+  if((values_pu16 == NULL) || (len_u32 == 0U)) {
     return 0U;
   }
 
   uint32_t l_sum_u32 = 0U;
 
-  for (size_t l_i_u32 = 0U; l_i_u32 < len_u32; l_i_u32++) {
+  for(size_t l_i_u32 = 0U; l_i_u32 < len_u32; l_i_u32++) {
     values_pu16[l_i_u32] = (uint16_t)(values_pu16[l_i_u32] * factor_u16);
     l_sum_u32 += values_pu16[l_i_u32];
   }
@@ -81,7 +81,7 @@ uint32_t MyLib_AnalyzeArray_u32(uint16_t *values_pu16, size_t len_u32, uint16_t 
 }
 void MyLib_UpdateGlobalRecord(MyLib_record_t *dest_p, const MyLib_record_t *src_pc) {
   /* Check for NULL pointers to avoid invalid memory access */
-  if ((dest_p == NULL) || (src_pc == NULL)) {
+  if((dest_p == NULL) || (src_pc == NULL)) {
     return;
   }
 
@@ -97,7 +97,7 @@ void MyLib_UpdateGlobalRecord(MyLib_record_t *dest_p, const MyLib_record_t *src_
 }
 uint32_t MyLib_Orchestrate_u32(uint32_t start_u32, const uint16_t *delta_pc_u16) {
   uint16_t l_d_u16 = 0U;
-  if (delta_pc_u16 != NULL) {
+  if(delta_pc_u16 != NULL) {
     l_d_u16 = *delta_pc_u16;
   }
 
@@ -120,12 +120,12 @@ uint8_t MyLib_UpdateCounter_u8(uint32_t add_u32) {
 
   l_CycleCnt_u32++;
 
-  if (g_systemReady_b == false) {
+  if(g_systemReady_b == false) {
     l_ret_u8 = 1U;
   } else {
     l_new_u32 = g_counter_u32 + add_u32;
 
-    if ((SaturationEn_b == true) && (l_new_u32 > CounterLimit_u32)) {
+    if((SaturationEn_b == true) && (l_new_u32 > CounterLimit_u32)) {
       g_counter_u32 = CounterLimit_u32;
       l_ret_u8 = 2U;
     } else {
@@ -134,7 +134,7 @@ uint8_t MyLib_UpdateCounter_u8(uint32_t add_u32) {
     }
 
     /* Periodically toggle saturation enable every 16 calls. */
-    if ((l_CycleCnt_u32 & 0x0FU) == 0U) {
+    if((l_CycleCnt_u32 & 0x0FU) == 0U) {
       SaturationEn_b = !SaturationEn_b;
     }
   }
@@ -147,22 +147,22 @@ int main() {
 void ProcessRecord(const MyLib_record_t *rec_pc, uint8_t multiplier_u8) {
   uint32_t l_acc_u32 = 0U;
 
-  if (rec_pc == NULL) {
+  if(rec_pc == NULL) {
     return;
   }
 
-  switch (multiplier_u8) {
-    case 0U:
-      l_acc_u32 = 0U;
-      break;
-    case 1U:
-      l_acc_u32 = rec_pc->value_u32;
-      break;
-    default:
-      for (uint8_t l_i_u8 = 0U; l_i_u8 < multiplier_u8; l_i_u8++) {
-        l_acc_u32 += rec_pc->value_u32;
-      }
-      break;
+  switch(multiplier_u8) {
+  case 0U:
+    l_acc_u32 = 0U;
+    break;
+  case 1U:
+    l_acc_u32 = rec_pc->value_u32;
+    break;
+  default:
+    for(uint8_t l_i_u8 = 0U; l_i_u8 < multiplier_u8; l_i_u8++) {
+      l_acc_u32 += rec_pc->value_u32;
+    }
+    break;
   }
 
   g_counter_u32 += l_acc_u32;
@@ -182,12 +182,12 @@ uint32_t AnalyzeArray_u32(uint16_t *values_pu16, size_t len_u32, uint16_t factor
   uint8_t l_inNull_b = 0U;
 
   /* Check for NULL pointer or zero length */
-  if ((values_pu16 == NULL) || (len_u32 == 0U)) {
+  if((values_pu16 == NULL) || (len_u32 == 0U)) {
     l_inNull_b = 1U;
   }
 
-  if (l_inNull_b == 0U) {
-    for (l_i_u32 = 0U; l_i_u32 < len_u32; l_i_u32++) {
+  if(l_inNull_b == 0U) {
+    for(l_i_u32 = 0U; l_i_u32 < len_u32; l_i_u32++) {
       /* Scale each element in-place */
       values_pu16[l_i_u32] = (uint16_t)(values_pu16[l_i_u32] * factor_u16);
       /* Accumulate the sum of scaled elements */
@@ -207,13 +207,13 @@ uint8_t UpdateCounter_u8(uint32_t add_u32) {
 
   l_CycleCnt_u32++;
 
-  if (g_systemReady_b == false) {
+  if(g_systemReady_b == false) {
     return 1u;
   }
 
   l_new_u32 = g_counter_u32 + add_u32;
 
-  if ((SaturationEn_b == true) && (l_new_u32 > CounterLimit_u32)) {
+  if((SaturationEn_b == true) && (l_new_u32 > CounterLimit_u32)) {
     g_counter_u32 = CounterLimit_u32;
     l_ret_u8 = 2u;
   } else {
@@ -221,7 +221,7 @@ uint8_t UpdateCounter_u8(uint32_t add_u32) {
     l_ret_u8 = 0u;
   }
 
-  if ((l_CycleCnt_u32 & 0x0Fu) == 0u) {
+  if((l_CycleCnt_u32 & 0x0Fu) == 0u) {
     SaturationEn_b = !SaturationEn_b;
   }
 
