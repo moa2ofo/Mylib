@@ -22,14 +22,14 @@ static uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16) {
   return l_acc_u32;
 }
 void MyLib_ProcessRecord(const MyLib_record_t *rec_pc, uint8_t multiplier_u8) {
-  if(rec_pc == NULL) {
+  if (rec_pc == NULL) {
     return;
   }
 
   uint32_t l_acc_u32 = 0U;
 
   /* Fast paths / special cases for deterministic and efficient execution. */
-  switch(multiplier_u8) {
+  switch (multiplier_u8) {
   case 0U:
     /* No accumulation requested. */
     l_acc_u32 = 0U;
@@ -42,7 +42,7 @@ void MyLib_ProcessRecord(const MyLib_record_t *rec_pc, uint8_t multiplier_u8) {
 
   default:
     /* Bounded accumulation: wrap-around is acceptable by design. */
-    for(uint8_t l_i_u8 = 0U; l_i_u8 < multiplier_u8; l_i_u8++) {
+    for (uint8_t l_i_u8 = 0U; l_i_u8 < multiplier_u8; l_i_u8++) {
       l_acc_u32 += rec_pc->value_u32;
     }
     break;
