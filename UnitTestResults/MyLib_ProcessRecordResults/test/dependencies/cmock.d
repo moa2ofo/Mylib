@@ -1,4 +1,4 @@
-utExecutionAndResults/utUnderTest/build/gcov/out/test_WrapAroundAccumulation/cmock.o: \
+utExecutionAndResults/utUnderTest/build/gcov/out/test_value_u32_zero_multiplier_10_accumulation_zero/cmock.o: \
  utExecutionAndResults/utUnderTest/build/vendor/cmock/src/cmock.c \
  utExecutionAndResults/utUnderTest/build/vendor/cmock/src/cmock.h \
  utExecutionAndResults/utUnderTest/build/vendor/cmock/src/cmock_internals.h \
