@@ -121,12 +121,12 @@ uint8_t MyLib_UpdateCounter_u8(uint32_t add_u32) {
 
   l_CycleCnt_u32++;
 
-  if(g_systemReady_b == false) {
+  if (g_systemReady_b == false) {
     l_ret_u8 = 1U;
   } else {
     l_new_u32 = g_counter_u32 + add_u32;
 
-    if((SaturationEn_b == true) && (l_new_u32 > CounterLimit_u32)) {
+    if ((SaturationEn_b == true) && (l_new_u32 > CounterLimit_u32)) {
       g_counter_u32 = CounterLimit_u32;
       l_ret_u8 = 2U;
     } else {
@@ -135,7 +135,7 @@ uint8_t MyLib_UpdateCounter_u8(uint32_t add_u32) {
     }
 
     /* Periodically toggle saturation enable every 16 calls. */
-    if((l_CycleCnt_u32 & 0x0FU) == 0U) {
+    if ((l_CycleCnt_u32 & 0x0FU) == 0U) {
       SaturationEn_b = !SaturationEn_b;
     }
   }
