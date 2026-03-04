@@ -12076,19 +12076,13 @@ void tearDown(void) {
 
 void test_MyLib_UpdateCounter_u8_system_not_ready_returns_1_no_update(void) {
   uint8_t result_u8;
-  uint32_t initial_counter_u32;
+  uint32_t initial_counter_u32 = 42U;
 
-  /* Preconditions */
   g_systemReady_b = false;
-  g_counter_u32 = 50U;
-  initial_counter_u32 = g_counter_u32;
+  g_counter_u32 = initial_counter_u32;
 
-  /* Execute */
   result_u8 = MyLib_UpdateCounter_u8(10U);
 
-  /* Verify return code */
   TEST_ASSERT_EQUAL_UINT8(1U, result_u8);
-
-  /* Verify counter unchanged */
   TEST_ASSERT_EQUAL_UINT32(initial_counter_u32, g_counter_u32);
 }

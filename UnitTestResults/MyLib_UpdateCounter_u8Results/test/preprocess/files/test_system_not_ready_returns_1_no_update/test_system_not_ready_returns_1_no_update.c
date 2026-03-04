@@ -24,21 +24,19 @@ void tearDown(void)
 void test_MyLib_UpdateCounter_u8_system_not_ready_returns_1_no_update(void)
 {
   uint8_t result_u8;
-  uint32_t initial_counter_u32;
+  uint32_t initial_counter_u32 = 42U;
 
   g_systemReady_b =
                    0
 
-  g_counter_u32 = 50U;
-  initial_counter_u32 = g_counter_u32;
+  g_counter_u32 = initial_counter_u32;
 
   result_u8 = MyLib_UpdateCounter_u8(10U);
 
   UnityAssertEqualNumber((UNITY_INT)(UNITY_UINT8 )((1U)), (UNITY_INT)(UNITY_UINT8 )((result_u8)), (
  ((void *)0)
- ), (UNITY_UINT)(44), UNITY_DISPLAY_STYLE_UINT8);
-
+ ), (UNITY_UINT)(40), UNITY_DISPLAY_STYLE_UINT8);
   UnityAssertEqualNumber((UNITY_INT)(UNITY_UINT32)((initial_counter_u32)), (UNITY_INT)(UNITY_UINT32)((g_counter_u32)), (
  ((void *)0)
- ), (UNITY_UINT)(47), UNITY_DISPLAY_STYLE_UINT32);
+ ), (UNITY_UINT)(41), UNITY_DISPLAY_STYLE_UINT32);
 }
