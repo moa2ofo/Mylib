@@ -2452,42 +2452,40 @@ void UpdateCounter_u8_CMockIgnoreArg_add_u32(UNITY_UINT cmock_line);
 
 #pragma GCC diagnostic pop
 # 3 "utExecutionAndResults/utUnderTest/test/test_base_1_delta_NULL.c" 2
-
-
-
-
-
-
+# 15 "utExecutionAndResults/utUnderTest/test/test_base_1_delta_NULL.c"
 void setUp(void) {
+
   g_counter_u32 = 0U;
   g_record.id_u16 = 0U;
   g_record.value_u32 = 0U;
   g_systemReady_b = 
-# 13 "utExecutionAndResults/utUnderTest/test/test_base_1_delta_NULL.c" 3 4
+# 20 "utExecutionAndResults/utUnderTest/test/test_base_1_delta_NULL.c" 3 4
                    0
-# 13 "utExecutionAndResults/utUnderTest/test/test_base_1_delta_NULL.c"
+# 20 "utExecutionAndResults/utUnderTest/test/test_base_1_delta_NULL.c"
                         ;
 }
 
 void tearDown(void) {
+
 }
 
 void test_MyLib_ComputeAdjustedValue_u32_base_1_delta_NULL(void) {
-  uint32_t l_val_u32;
-  uint32_t l_expected_u32;
+  uint32_t base_u32 = 1U;
+  const uint16_t *delta_pc_u16 = 
+# 29 "utExecutionAndResults/utUnderTest/test/test_base_1_delta_NULL.c" 3 4
+                                ((void *)0)
+# 29 "utExecutionAndResults/utUnderTest/test/test_base_1_delta_NULL.c"
+                                    ;
+  uint32_t expected_intermediate = 1U * 1U;
+  uint32_t expected_result = 43U;
 
-  l_val_u32 = 1U * 1U;
-  l_expected_u32 = 43U;
+  InternalHelper_u32_CMockExpectAndReturn(33, expected_intermediate, (uint16_t)(5U), expected_result);
 
-  InternalHelper_u32_CMockExpectAndReturn(26, l_val_u32, (uint16_t)(5U), l_expected_u32);
+  uint32_t result = MyLib_ComputeAdjustedValue_u32(base_u32, delta_pc_u16);
 
-  UnityAssertEqualNumber((UNITY_INT)(UNITY_UINT32)((l_expected_u32)), (UNITY_INT)(UNITY_UINT32)((MyLib_ComputeAdjustedValue_u32(1U, 
-# 28 "utExecutionAndResults/utUnderTest/test/test_base_1_delta_NULL.c" 3 4
+  UnityAssertEqualNumber((UNITY_INT)(UNITY_UINT32)((expected_result)), (UNITY_INT)(UNITY_UINT32)((result)), (
+# 37 "utExecutionAndResults/utUnderTest/test/test_base_1_delta_NULL.c" 3 4
  ((void *)0)
-# 28 "utExecutionAndResults/utUnderTest/test/test_base_1_delta_NULL.c"
- ))), (
-# 28 "utExecutionAndResults/utUnderTest/test/test_base_1_delta_NULL.c" 3 4
- ((void *)0)
-# 28 "utExecutionAndResults/utUnderTest/test/test_base_1_delta_NULL.c"
- ), (UNITY_UINT)(28), UNITY_DISPLAY_STYLE_UINT32);
+# 37 "utExecutionAndResults/utUnderTest/test/test_base_1_delta_NULL.c"
+ ), (UNITY_UINT)(37), UNITY_DISPLAY_STYLE_UINT32);
 }

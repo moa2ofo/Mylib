@@ -5,7 +5,7 @@
   :basename: test_base_0_delta_0.c
 :successes:
 - :test: test_MyLib_ComputeAdjustedValue_u32_base_0_delta_0
-  :line: 19
+  :line: 27
   :message: ''
   :unity_test_time: 0
 :failures: []
@@ -16,4 +16,4 @@
   :failed: 0
   :ignored: 0
 :stdout: []
-:time: 0.005465566999987459
+:time: 0.005620501000009881

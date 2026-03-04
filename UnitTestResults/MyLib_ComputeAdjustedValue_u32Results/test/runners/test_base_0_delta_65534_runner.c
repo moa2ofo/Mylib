@@ -82,7 +82,7 @@ static void run_test(UnityTestFunction func, const char* name, UNITY_LINE_TYPE l
 int main(void)
 {
   UnityBegin("test_base_0_delta_65534.c");
-  run_test(test_MyLib_ComputeAdjustedValue_u32_base_0_delta_65534, "test_MyLib_ComputeAdjustedValue_u32_base_0_delta_65534", 19);
+  run_test(test_MyLib_ComputeAdjustedValue_u32_base_0_delta_65534, "test_MyLib_ComputeAdjustedValue_u32_base_0_delta_65534", 27);
 
   CMock_Guts_MemFreeFinal();
   return UNITY_END();

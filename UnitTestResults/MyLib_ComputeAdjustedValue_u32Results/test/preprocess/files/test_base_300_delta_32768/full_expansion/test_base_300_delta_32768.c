@@ -2452,39 +2452,37 @@ void UpdateCounter_u8_CMockIgnoreArg_add_u32(UNITY_UINT cmock_line);
 
 #pragma GCC diagnostic pop
 # 3 "utExecutionAndResults/utUnderTest/test/test_base_300_delta_32768.c" 2
-
-
-
-
-
-
+# 15 "utExecutionAndResults/utUnderTest/test/test_base_300_delta_32768.c"
 void setUp(void) {
+
   g_counter_u32 = 0U;
   g_record.id_u16 = 0U;
   g_record.value_u32 = 0U;
   g_systemReady_b = 
-# 13 "utExecutionAndResults/utUnderTest/test/test_base_300_delta_32768.c" 3 4
+# 20 "utExecutionAndResults/utUnderTest/test/test_base_300_delta_32768.c" 3 4
                    0
-# 13 "utExecutionAndResults/utUnderTest/test/test_base_300_delta_32768.c"
+# 20 "utExecutionAndResults/utUnderTest/test/test_base_300_delta_32768.c"
                         ;
 }
 
 void tearDown(void) {
+
 }
 
 void test_MyLib_ComputeAdjustedValue_u32_base_300_delta_32768(void) {
-  uint32_t l_val_u32;
-  uint32_t l_expected_u32;
-  uint16_t l_delta_u16 = 32768U;
+  uint32_t base_u32 = 300U;
+  uint16_t delta_u16 = 32768U;
+  const uint16_t *delta_pc_u16 = &delta_u16;
+  uint32_t expected_intermediate = 300U * 32768U;
+  uint32_t expected_result = 9830400U;
 
-  l_val_u32 = 300U * 32768U;
-  l_expected_u32 = 49152000U;
+  InternalHelper_u32_CMockExpectAndReturn(34, expected_intermediate, (uint16_t)(5U), expected_result);
 
-  InternalHelper_u32_CMockExpectAndReturn(27, l_val_u32, (uint16_t)(5U), l_expected_u32);
+  uint32_t result = MyLib_ComputeAdjustedValue_u32(base_u32, delta_pc_u16);
 
-  UnityAssertEqualNumber((UNITY_INT)(UNITY_UINT32)((l_expected_u32)), (UNITY_INT)(UNITY_UINT32)((MyLib_ComputeAdjustedValue_u32(300U, &l_delta_u16))), (
-# 29 "utExecutionAndResults/utUnderTest/test/test_base_300_delta_32768.c" 3 4
+  UnityAssertEqualNumber((UNITY_INT)(UNITY_UINT32)((expected_result)), (UNITY_INT)(UNITY_UINT32)((result)), (
+# 38 "utExecutionAndResults/utUnderTest/test/test_base_300_delta_32768.c" 3 4
  ((void *)0)
-# 29 "utExecutionAndResults/utUnderTest/test/test_base_300_delta_32768.c"
- ), (UNITY_UINT)(29), UNITY_DISPLAY_STYLE_UINT32);
+# 38 "utExecutionAndResults/utUnderTest/test/test_base_300_delta_32768.c"
+ ), (UNITY_UINT)(38), UNITY_DISPLAY_STYLE_UINT32);
 }

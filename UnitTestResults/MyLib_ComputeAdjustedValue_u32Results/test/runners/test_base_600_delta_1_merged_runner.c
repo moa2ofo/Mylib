@@ -14,7 +14,7 @@ char* GlobalOrderError;
 /*=======External Functions This Runner Calls=====*/
 extern void setUp(void);
 extern void tearDown(void);
-extern void test_MyLib_ComputeAdjustedValue_u32_base_0_delta_1_duplicate(void);
+extern void test_MyLib_ComputeAdjustedValue_u32_base_600_delta_1_merged(void);
 
 
 /*=======Mock Management=====*/
@@ -81,8 +81,8 @@ static void run_test(UnityTestFunction func, const char* name, UNITY_LINE_TYPE l
 /*=======MAIN=====*/
 int main(void)
 {
-  UnityBegin("test_base_0_delta_1_duplicate.c");
-  run_test(test_MyLib_ComputeAdjustedValue_u32_base_0_delta_1_duplicate, "test_MyLib_ComputeAdjustedValue_u32_base_0_delta_1_duplicate", 19);
+  UnityBegin("test_base_600_delta_1_merged.c");
+  run_test(test_MyLib_ComputeAdjustedValue_u32_base_600_delta_1_merged, "test_MyLib_ComputeAdjustedValue_u32_base_600_delta_1_merged", 27);
 
   CMock_Guts_MemFreeFinal();
   return UNITY_END();

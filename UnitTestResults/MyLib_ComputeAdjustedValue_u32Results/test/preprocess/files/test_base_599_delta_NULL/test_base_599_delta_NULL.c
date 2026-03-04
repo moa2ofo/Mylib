@@ -19,17 +19,18 @@ void tearDown(void)
 
 void test_MyLib_ComputeAdjustedValue_u32_base_599_delta_NULL(void)
 {
-  uint32_t l_val_u32;
-  uint32_t l_expected_u32;
+  uint32_t base_u32 = 599U;
+  const uint16_t *delta_pc_u16 =
+                                ((void *)0)
 
-  l_val_u32 = 599U * 1U;
-  l_expected_u32 = 2995U;
+  uint32_t expected_intermediate = 599U * 1U;
+  uint32_t expected_result = 649U;
 
-  InternalHelper_u32_CMockExpectAndReturn(26, l_val_u32, (uint16_t)(5U), l_expected_u32);
+  InternalHelper_u32_CMockExpectAndReturn(33, expected_intermediate, (uint16_t)(5U), expected_result);
 
-  UnityAssertEqualNumber((UNITY_INT)(UNITY_UINT32)((l_expected_u32)), (UNITY_INT)(UNITY_UINT32)((MyLib_ComputeAdjustedValue_u32(599U,
+  uint32_t result = MyLib_ComputeAdjustedValue_u32(base_u32, delta_pc_u16);
+
+  UnityAssertEqualNumber((UNITY_INT)(UNITY_UINT32)((expected_result)), (UNITY_INT)(UNITY_UINT32)((result)), (
  ((void *)0)
- ))), (
- ((void *)0)
- ), (UNITY_UINT)(28), UNITY_DISPLAY_STYLE_UINT32);
+ ), (UNITY_UINT)(37), UNITY_DISPLAY_STYLE_UINT32);
 }
