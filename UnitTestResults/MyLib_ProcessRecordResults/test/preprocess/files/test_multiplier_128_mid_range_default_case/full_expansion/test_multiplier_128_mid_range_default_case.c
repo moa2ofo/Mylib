@@ -2452,15 +2452,15 @@ void UpdateCounter_u8_CMockIgnoreArg_add_u32(UNITY_UINT cmock_line);
 
 #pragma GCC diagnostic pop
 # 3 "utExecutionAndResults/utUnderTest/test/test_multiplier_128_mid_range_default_case.c" 2
-# 15 "utExecutionAndResults/utUnderTest/test/test_multiplier_128_mid_range_default_case.c"
+# 11 "utExecutionAndResults/utUnderTest/test/test_multiplier_128_mid_range_default_case.c"
 void setUp(void) {
   g_counter_u32 = 0U;
   g_record.id_u16 = 0U;
   g_record.value_u32 = 0U;
   g_systemReady_b = 
-# 19 "utExecutionAndResults/utUnderTest/test/test_multiplier_128_mid_range_default_case.c" 3 4
+# 15 "utExecutionAndResults/utUnderTest/test/test_multiplier_128_mid_range_default_case.c" 3 4
                    0
-# 19 "utExecutionAndResults/utUnderTest/test/test_multiplier_128_mid_range_default_case.c"
+# 15 "utExecutionAndResults/utUnderTest/test/test_multiplier_128_mid_range_default_case.c"
                         ;
 }
 
@@ -2468,21 +2468,23 @@ void tearDown(void) {
 }
 
 void test_MyLib_ProcessRecord_multiplier_128_mid_range_default_case(void) {
-  MyLib_record_t rec;
-  rec.id_u16 = 5U;
-  rec.value_u32 = 20U;
+  MyLib_record_t record;
+  record.id_u16 = 5U;
+  record.value_u32 = 200U;
 
-  uint32_t initial_counter = g_counter_u32;
-  uint32_t expected_acc = 128U * rec.value_u32;
+  uint32_t initial_counter = 1000U;
+  g_counter_u32 = initial_counter;
 
-  MyLib_ComputeAdjustedValue_u32_CMockExpectAndReturn(33, expected_acc, (const uint16_t *)&(uint8_t){128U}, 0U);
-  MyLib_ComputeAdjustedValue_u32_CMockIgnoreArg_delta_pc_u16(34);
+  uint32_t expected_acc = 128U * 200U;
 
-  MyLib_ProcessRecord(&rec, 128U);
+  MyLib_ComputeAdjustedValue_u32_CMockExpectAndReturn(31, expected_acc, (const uint16_t *)&(uint8_t){128U}, 0U);
+  MyLib_ComputeAdjustedValue_u32_CMockIgnoreArg_delta_pc_u16(32);
+
+  MyLib_ProcessRecord(&record, 128U);
 
   UnityAssertEqualNumber((UNITY_INT)(UNITY_UINT32)((initial_counter + expected_acc)), (UNITY_INT)(UNITY_UINT32)((g_counter_u32)), (
-# 38 "utExecutionAndResults/utUnderTest/test/test_multiplier_128_mid_range_default_case.c" 3 4
+# 36 "utExecutionAndResults/utUnderTest/test/test_multiplier_128_mid_range_default_case.c" 3 4
  ((void *)0)
-# 38 "utExecutionAndResults/utUnderTest/test/test_multiplier_128_mid_range_default_case.c"
- ), (UNITY_UINT)(38), UNITY_DISPLAY_STYLE_UINT32);
+# 36 "utExecutionAndResults/utUnderTest/test/test_multiplier_128_mid_range_default_case.c"
+ ), (UNITY_UINT)(36), UNITY_DISPLAY_STYLE_UINT32);
 }

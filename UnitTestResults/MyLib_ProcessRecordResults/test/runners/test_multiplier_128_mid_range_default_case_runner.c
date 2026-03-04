@@ -82,7 +82,7 @@ static void run_test(UnityTestFunction func, const char* name, UNITY_LINE_TYPE l
 int main(void)
 {
   UnityBegin("test_multiplier_128_mid_range_default_case.c");
-  run_test(test_MyLib_ProcessRecord_multiplier_128_mid_range_default_case, "test_MyLib_ProcessRecord_multiplier_128_mid_range_default_case", 25);
+  run_test(test_MyLib_ProcessRecord_multiplier_128_mid_range_default_case, "test_MyLib_ProcessRecord_multiplier_128_mid_range_default_case", 21);
 
   CMock_Guts_MemFreeFinal();
   return UNITY_END();

@@ -11136,15 +11136,11 @@ void UpdateCounter_u8_CMockIgnoreArg_add_u32(UNITY_LINE_TYPE cmock_line);
 # 3 "utExecutionAndResults/utUnderTest/test/test_multiplier_255_upper_boundary.c" 2
 
 
-/* ========================================================================
- * SECTION 1 — Mock callbacks
- * ======================================================================== */
+/* SECTION 1 — Mock callbacks */
 
-/* No mock callbacks required for this test suite. */
+/* No mock callbacks required for this test suite */
 
-/* ========================================================================
- * SECTION 2 — setUp() and tearDown()
- * ======================================================================== */
+/* SECTION 2 — setUp() and tearDown() */
 
 void setUp(void) {
   g_counter_u32 = 0U;
@@ -11157,17 +11153,19 @@ void tearDown(void) {
 }
 
 void test_MyLib_ProcessRecord_multiplier_255_upper_boundary(void) {
-  MyLib_record_t rec;
-  rec.id_u16 = 4U;
-  rec.value_u32 = 10U;
+  MyLib_record_t record;
+  record.id_u16 = 4U;
+  record.value_u32 = 1000U;
 
-  uint32_t initial_counter = g_counter_u32;
-  uint32_t expected_acc = 255U * rec.value_u32;
+  uint32_t initial_counter = 500U;
+  g_counter_u32 = initial_counter;
+
+  uint32_t expected_acc = 255U * 1000U;
 
   MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_acc, (const uint16_t *)&(uint8_t){255U}, 0U);
   MyLib_ComputeAdjustedValue_u32_IgnoreArg_delta_pc_u16();
 
-  MyLib_ProcessRecord(&rec, 255U);
+  MyLib_ProcessRecord(&record, 255U);
 
   TEST_ASSERT_EQUAL_UINT32(initial_counter + expected_acc, g_counter_u32);
 }

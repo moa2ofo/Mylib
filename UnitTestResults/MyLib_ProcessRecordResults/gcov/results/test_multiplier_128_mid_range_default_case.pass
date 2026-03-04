@@ -5,7 +5,7 @@
   :basename: test_multiplier_128_mid_range_default_case.c
 :successes:
 - :test: test_MyLib_ProcessRecord_multiplier_128_mid_range_default_case
-  :line: 25
+  :line: 21
   :message: ''
   :unity_test_time: 0
 :failures: []
@@ -16,4 +16,4 @@
   :failed: 0
   :ignored: 0
 :stdout: []
-:time: 0.003477289999977984
+:time: 0.004651238000008107
