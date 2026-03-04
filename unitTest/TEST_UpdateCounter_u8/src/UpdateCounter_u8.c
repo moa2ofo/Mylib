@@ -25,7 +25,6 @@ void set_SaturationEn_b(_Bool val) {
 
 /* FUNCTION TO TEST */
 
-
 uint8_t UpdateCounter_u8(uint32_t add_u32) {
   static uint32_t l_CycleCnt_u32 = 0u;
   uint32_t l_new_u32;
