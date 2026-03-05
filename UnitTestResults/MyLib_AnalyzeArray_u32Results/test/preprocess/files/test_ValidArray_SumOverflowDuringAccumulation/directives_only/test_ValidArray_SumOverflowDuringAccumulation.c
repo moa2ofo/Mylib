@@ -3770,7 +3770,7 @@ uint32_t MyLib_Orchestrate_u32(uint32_t start_u32, const uint16_t *delta_pc_u16)
  * @return uint32_t
  * Final accumulated value (wrap-around possible on 32-bit overflow).
  */
- uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
+uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
 
 /**
  * @brief Update the module global counter with optional saturation handling.
@@ -3951,8 +3951,7 @@ uint8_t UpdateCounter_u8(uint32_t add_u32);
  * @return uint32_t
  * Sum of the scaled array elements (wrap-around possible on overflow).
  */
-uint32_t MyLib_AnalyzeArray_u32(uint16_t * values_pu16, size_t len_u32, uint16_t factor_u16);
-
+uint32_t MyLib_AnalyzeArray_u32(uint16_t *values_pu16, size_t len_u32, uint16_t factor_u16);
 
 # 2 "utExecutionAndResults/utUnderTest/test/test_ValidArray_SumOverflowDuringAccumulation.c" 2
 # 1 "utExecutionAndResults/utUnderTest/build/test/mocks/test_ValidArray_SumOverflowDuringAccumulation/mock_MyLib.h" 1

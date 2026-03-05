@@ -296,7 +296,7 @@ void MyLib_UpdateGlobalRecord(MyLib_record_t *dest_p, const MyLib_record_t *src_
 # 434 "utExecutionAndResults/utUnderTest/src/MyLib.h"
 uint32_t MyLib_Orchestrate_u32(uint32_t start_u32, const uint16_t *delta_pc_u16);
 # 483 "utExecutionAndResults/utUnderTest/src/MyLib.h"
- uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
+uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
 # 600 "utExecutionAndResults/utUnderTest/src/MyLib.h"
 uint8_t UpdateCounter_u8(uint32_t add_u32);
 # 2 "utExecutionAndResults/utUnderTest/test/test_system_not_ready_returns_1_no_update.c" 2

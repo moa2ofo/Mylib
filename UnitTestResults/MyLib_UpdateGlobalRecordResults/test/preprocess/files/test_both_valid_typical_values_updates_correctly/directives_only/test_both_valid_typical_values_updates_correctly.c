@@ -3770,7 +3770,7 @@ uint32_t MyLib_Orchestrate_u32(uint32_t start_u32, const uint16_t *delta_pc_u16)
  * @return uint32_t
  * Final accumulated value (wrap-around possible on 32-bit overflow).
  */
- uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
+uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
 
 /**
  * @brief Update the module global counter with optional saturation handling.
@@ -3937,8 +3937,7 @@ uint8_t UpdateCounter_u8(uint32_t add_u32);
  * @return void
  * No return value.
  */
-void MyLib_UpdateGlobalRecord(MyLib_record_t * dest_p, const MyLib_record_t * src_pc);
-
+void MyLib_UpdateGlobalRecord(MyLib_record_t *dest_p, const MyLib_record_t *src_pc);
 
 # 2 "utExecutionAndResults/utUnderTest/test/test_both_valid_typical_values_updates_correctly.c" 2
 # 1 "utExecutionAndResults/utUnderTest/build/test/mocks/test_both_valid_typical_values_updates_correctly/mock_MyLib.h" 1

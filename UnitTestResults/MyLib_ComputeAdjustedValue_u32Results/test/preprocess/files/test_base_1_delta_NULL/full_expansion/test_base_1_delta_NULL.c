@@ -298,14 +298,14 @@ void MyLib_UpdateGlobalRecord(MyLib_record_t *dest_p, const MyLib_record_t *src_
 # 433 "utExecutionAndResults/utUnderTest/src/MyLib.h"
 uint32_t MyLib_Orchestrate_u32(uint32_t start_u32, const uint16_t *delta_pc_u16);
 # 482 "utExecutionAndResults/utUnderTest/src/MyLib.h"
- uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
+uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
 # 544 "utExecutionAndResults/utUnderTest/src/MyLib.h"
 uint8_t MyLib_UpdateCounter_u8(uint32_t add_u32);
 # 600 "utExecutionAndResults/utUnderTest/src/MyLib.h"
 uint8_t UpdateCounter_u8(uint32_t add_u32);
 # 5 "utExecutionAndResults/utUnderTest/src/MyLib_ComputeAdjustedValue_u32.h" 2
 # 48 "utExecutionAndResults/utUnderTest/src/MyLib_ComputeAdjustedValue_u32.h"
-uint32_t MyLib_ComputeAdjustedValue_u32(uint32_t base_u32, const uint16_t * delta_pc_u16);
+uint32_t MyLib_ComputeAdjustedValue_u32(uint32_t base_u32, const uint16_t *delta_pc_u16);
 # 2 "utExecutionAndResults/utUnderTest/test/test_base_1_delta_NULL.c" 2
 # 1 "utExecutionAndResults/utUnderTest/build/test/mocks/test_base_1_delta_NULL/mock_MyLib.h" 1
 

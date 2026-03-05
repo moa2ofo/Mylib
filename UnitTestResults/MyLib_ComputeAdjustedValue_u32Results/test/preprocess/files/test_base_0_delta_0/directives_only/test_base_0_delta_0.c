@@ -3770,7 +3770,7 @@ uint32_t MyLib_Orchestrate_u32(uint32_t start_u32, const uint16_t *delta_pc_u16)
  * @return uint32_t
  * Final accumulated value (wrap-around possible on 32-bit overflow).
  */
- uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
+uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
 
 /**
  * @brief Update the module global counter with optional saturation handling.
@@ -3934,8 +3934,7 @@ uint8_t UpdateCounter_u8(uint32_t add_u32);
  * @return uint32_t
  * Adjusted value after applying delta and internal post-processing.
  */
-uint32_t MyLib_ComputeAdjustedValue_u32(uint32_t base_u32, const uint16_t * delta_pc_u16);
-
+uint32_t MyLib_ComputeAdjustedValue_u32(uint32_t base_u32, const uint16_t *delta_pc_u16);
 
 # 2 "utExecutionAndResults/utUnderTest/test/test_base_0_delta_0.c" 2
 # 1 "utExecutionAndResults/utUnderTest/build/test/mocks/test_base_0_delta_0/mock_MyLib.h" 1
