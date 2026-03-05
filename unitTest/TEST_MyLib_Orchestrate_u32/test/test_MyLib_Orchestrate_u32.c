@@ -4,593 +4,710 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-static uint32_t stub_base_value;
-static uint16_t stub_delta_value;
-static int InternalHelper_call_count;
 
-static uint32_t InternalHelper_u32_Callback(uint32_t x_u32, uint16_t y_u16, int call_count) {
-  InternalHelper_call_count = call_count;
-  stub_delta_value = y_u16;
-  return stub_base_value;
+
+
+/* SECTION 1 — setUp() and tearDown() */
+
+void setUp(void)
+{
+    g_counter_u32 = 0U;
+    g_record.id_u16 = 0U;
+    g_record.value_u32 = 0U;
+    g_systemReady_b = false;
 }
 
-void setUp(void) {
-  stub_base_value = 0;
-  stub_delta_value = 0;
-  InternalHelper_call_count = 0;
-  g_counter_u32 = 0;
+void tearDown(void)
+{
 }
 
-void tearDown(void) {
+/* SECTION 2 — Test functions */
+
+/**
+ * @brief Test: start_u32 at lower boundary (0) with NULL delta_pc_u16, verify return value equals InternalHelper_u32(0,0) + g_counter_u32 and ProcessRecord called with correct derived record.
+ */
+void test_start_at_lower_boundary_0_with_NULL_delta(void)
+{
+    uint32_t start_u32 = 0U;
+    const uint16_t *delta_pc_u16 = NULL;
+    uint32_t l_base_u32 = 50U;
+    uint32_t expected_return;
+    uint32_t actual_return;
+    MyLib_record_t expected_record;
+
+    g_counter_u32 = 10U;
+
+    InternalHelper_u32_ExpectAndReturn(start_u32, 0U, l_base_u32);
+
+    expected_record.id_u16 = (uint16_t)(l_base_u32 & 0xFFFFU);
+    expected_record.value_u32 = l_base_u32 / 2U;
+
+    MyLib_ProcessRecord_Expect(&expected_record, MYLIB_MULT_VALUE_U8);
+    MyLib_ProcessRecord_IgnoreArg_rec_pc();
+
+    expected_return = l_base_u32 + g_counter_u32;
+
+    actual_return = MyLib_Orchestrate_u32(start_u32, delta_pc_u16);
+
+    TEST_ASSERT_EQUAL_UINT32(expected_return, actual_return);
 }
 
-void test_start_0_delta_NULL_verify_return_and_ProcessRecord(void) {
-  uint32_t result;
-  MyLib_record_t expected_rec;
+/**
+ * @brief Test: start_u32 at lower boundary (0) with valid delta_pc_u16 pointing to 0, verify return value equals InternalHelper_u32(0,0) + g_counter_u32 and ProcessRecord called with correct derived record.
+ */
+void test_start_at_lower_boundary_0_with_delta_pointing_to_0(void)
+{
+    uint32_t start_u32 = 0U;
+    uint16_t delta_value = 0U;
+    const uint16_t *delta_pc_u16 = &delta_value;
+    uint32_t l_base_u32 = 50U;
+    uint32_t expected_return;
+    uint32_t actual_return;
+    MyLib_record_t expected_record;
 
-  stub_base_value = 42;
-  g_counter_u32 = 10;
+    g_counter_u32 = 10U;
 
-  InternalHelper_u32_Stub(InternalHelper_u32_Callback);
+    InternalHelper_u32_ExpectAndReturn(start_u32, delta_value, l_base_u32);
 
-  expected_rec.id_u16 = (uint16_t)(stub_base_value & 0xFFFF);
-  expected_rec.value_u32 = stub_base_value / 2;
+    expected_record.id_u16 = (uint16_t)(l_base_u32 & 0xFFFFU);
+    expected_record.value_u32 = l_base_u32 / 2U;
 
-  MyLib_ProcessRecord_Expect(&expected_rec, MYLIB_MULT_VALUE_U8);
-  MyLib_ProcessRecord_IgnoreArg_rec_pc();
+    MyLib_ProcessRecord_Expect(&expected_record, MYLIB_MULT_VALUE_U8);
+    MyLib_ProcessRecord_IgnoreArg_rec_pc();
 
-  result = MyLib_Orchestrate_u32(0, NULL);
+    expected_return = l_base_u32 + g_counter_u32;
 
-  TEST_ASSERT_EQUAL_UINT32(stub_base_value + g_counter_u32, result);
-  TEST_ASSERT_EQUAL_UINT16(0, stub_delta_value);
+    actual_return = MyLib_Orchestrate_u32(start_u32, delta_pc_u16);
+
+    TEST_ASSERT_EQUAL_UINT32(expected_return, actual_return);
 }
 
-void test_start_0_delta_valid_0_verify_return_and_ProcessRecord(void) {
-  uint32_t result;
-  uint16_t delta = 0;
-  MyLib_record_t expected_rec;
+/**
+ * @brief Test: start_u32 at lower boundary (0) with valid delta_pc_u16 pointing to mid-range value (100), verify return value equals InternalHelper_u32(0,100) + g_counter_u32 and ProcessRecord called with correct derived record.
+ */
+void test_start_at_lower_boundary_0_with_delta_pointing_to_100(void)
+{
+    uint32_t start_u32 = 0U;
+    uint16_t delta_value = 100U;
+    const uint16_t *delta_pc_u16 = &delta_value;
+    uint32_t l_base_u32 = 150U;
+    uint32_t expected_return;
+    uint32_t actual_return;
+    MyLib_record_t expected_record;
 
-  stub_base_value = 50;
-  g_counter_u32 = 20;
+    g_counter_u32 = 20U;
 
-  InternalHelper_u32_Stub(InternalHelper_u32_Callback);
+    InternalHelper_u32_ExpectAndReturn(start_u32, delta_value, l_base_u32);
 
-  expected_rec.id_u16 = (uint16_t)(stub_base_value & 0xFFFF);
-  expected_rec.value_u32 = stub_base_value / 2;
+    expected_record.id_u16 = (uint16_t)(l_base_u32 & 0xFFFFU);
+    expected_record.value_u32 = l_base_u32 / 2U;
 
-  MyLib_ProcessRecord_Expect(&expected_rec, MYLIB_MULT_VALUE_U8);
-  MyLib_ProcessRecord_IgnoreArg_rec_pc();
+    MyLib_ProcessRecord_Expect(&expected_record, MYLIB_MULT_VALUE_U8);
+    MyLib_ProcessRecord_IgnoreArg_rec_pc();
 
-  result = MyLib_Orchestrate_u32(0, &delta);
+    expected_return = l_base_u32 + g_counter_u32;
 
-  TEST_ASSERT_EQUAL_UINT32(stub_base_value + g_counter_u32, result);
-  TEST_ASSERT_EQUAL_UINT16(0, stub_delta_value);
+    actual_return = MyLib_Orchestrate_u32(start_u32, delta_pc_u16);
+
+    TEST_ASSERT_EQUAL_UINT32(expected_return, actual_return);
 }
 
-void test_start_1_delta_NULL_verify_return_and_ProcessRecord(void) {
-  uint32_t result;
-  MyLib_record_t expected_rec;
+/**
+ * @brief Test: start_u32 at lower boundary (0) with valid delta_pc_u16 pointing to maximum representable uint16_t (65535), verify return value equals InternalHelper_u32(0,65535) + g_counter_u32 and ProcessRecord called with correct derived record.
+ */
+void test_start_at_lower_boundary_0_with_delta_pointing_to_65535(void)
+{
+    uint32_t start_u32 = 0U;
+    uint16_t delta_value = 65535U;
+    const uint16_t *delta_pc_u16 = &delta_value;
+    uint32_t l_base_u32 = 70000U;
+    uint32_t expected_return;
+    uint32_t actual_return;
+    MyLib_record_t expected_record;
 
-  stub_base_value = 100;
-  g_counter_u32 = 30;
+    g_counter_u32 = 30U;
 
-  InternalHelper_u32_Stub(InternalHelper_u32_Callback);
+    InternalHelper_u32_ExpectAndReturn(start_u32, delta_value, l_base_u32);
 
-  expected_rec.id_u16 = (uint16_t)(stub_base_value & 0xFFFF);
-  expected_rec.value_u32 = stub_base_value / 2;
+    expected_record.id_u16 = (uint16_t)(l_base_u32 & 0xFFFFU);
+    expected_record.value_u32 = l_base_u32 / 2U;
 
-  MyLib_ProcessRecord_Expect(&expected_rec, MYLIB_MULT_VALUE_U8);
-  MyLib_ProcessRecord_IgnoreArg_rec_pc();
+    MyLib_ProcessRecord_Expect(&expected_record, MYLIB_MULT_VALUE_U8);
+    MyLib_ProcessRecord_IgnoreArg_rec_pc();
 
-  result = MyLib_Orchestrate_u32(1, NULL);
+    expected_return = l_base_u32 + g_counter_u32;
 
-  TEST_ASSERT_EQUAL_UINT32(stub_base_value + g_counter_u32, result);
-  TEST_ASSERT_EQUAL_UINT16(0, stub_delta_value);
+    actual_return = MyLib_Orchestrate_u32(start_u32, delta_pc_u16);
+
+    TEST_ASSERT_EQUAL_UINT32(expected_return, actual_return);
 }
 
-void test_start_100_delta_NULL_verify_return_and_ProcessRecord(void) {
-  uint32_t result;
-  MyLib_record_t expected_rec;
+/**
+ * @brief Test: start_u32 just inside lower boundary (1) with NULL delta_pc_u16, verify return value equals InternalHelper_u32(1,0) + g_counter_u32 and ProcessRecord called with correct derived record.
+ */
+void test_start_just_inside_lower_boundary_1_with_NULL_delta(void)
+{
+    uint32_t start_u32 = 1U;
+    const uint16_t *delta_pc_u16 = NULL;
+    uint32_t l_base_u32 = 60U;
+    uint32_t expected_return;
+    uint32_t actual_return;
+    MyLib_record_t expected_record;
 
-  stub_base_value = 150;
-  g_counter_u32 = 50;
+    g_counter_u32 = 15U;
 
-  InternalHelper_u32_Stub(InternalHelper_u32_Callback);
+    InternalHelper_u32_ExpectAndReturn(start_u32, 0U, l_base_u32);
 
-  expected_rec.id_u16 = (uint16_t)(stub_base_value & 0xFFFF);
-  expected_rec.value_u32 = stub_base_value / 2;
+    expected_record.id_u16 = (uint16_t)(l_base_u32 & 0xFFFFU);
+    expected_record.value_u32 = l_base_u32 / 2U;
 
-  MyLib_ProcessRecord_Expect(&expected_rec, MYLIB_MULT_VALUE_U8);
-  MyLib_ProcessRecord_IgnoreArg_rec_pc();
+    MyLib_ProcessRecord_Expect(&expected_record, MYLIB_MULT_VALUE_U8);
+    MyLib_ProcessRecord_IgnoreArg_rec_pc();
 
-  result = MyLib_Orchestrate_u32(100, NULL);
+    expected_return = l_base_u32 + g_counter_u32;
 
-  TEST_ASSERT_EQUAL_UINT32(stub_base_value + g_counter_u32, result);
-  TEST_ASSERT_EQUAL_UINT16(0, stub_delta_value);
+    actual_return = MyLib_Orchestrate_u32(start_u32, delta_pc_u16);
+
+    TEST_ASSERT_EQUAL_UINT32(expected_return, actual_return);
 }
 
-void test_start_199_delta_NULL_verify_return_and_ProcessRecord(void) {
-  uint32_t result;
-  MyLib_record_t expected_rec;
+/**
+ * @brief Test: start_u32 just inside lower boundary (1) with valid delta_pc_u16 pointing to mid-range value (100), verify return value equals InternalHelper_u32(1,100) + g_counter_u32 and ProcessRecord called with correct derived record.
+ */
+void test_start_just_inside_lower_boundary_1_with_delta_pointing_to_100(void)
+{
+    uint32_t start_u32 = 1U;
+    uint16_t delta_value = 100U;
+    const uint16_t *delta_pc_u16 = &delta_value;
+    uint32_t l_base_u32 = 160U;
+    uint32_t expected_return;
+    uint32_t actual_return;
+    MyLib_record_t expected_record;
 
-  stub_base_value = 199;
-  g_counter_u32 = 100;
+    g_counter_u32 = 25U;
 
-  InternalHelper_u32_Stub(InternalHelper_u32_Callback);
+    InternalHelper_u32_ExpectAndReturn(start_u32, delta_value, l_base_u32);
 
-  expected_rec.id_u16 = (uint16_t)(stub_base_value & 0xFFFF);
-  expected_rec.value_u32 = stub_base_value / 2;
+    expected_record.id_u16 = (uint16_t)(l_base_u32 & 0xFFFFU);
+    expected_record.value_u32 = l_base_u32 / 2U;
 
-  MyLib_ProcessRecord_Expect(&expected_rec, MYLIB_MULT_VALUE_U8);
-  MyLib_ProcessRecord_IgnoreArg_rec_pc();
+    MyLib_ProcessRecord_Expect(&expected_record, MYLIB_MULT_VALUE_U8);
+    MyLib_ProcessRecord_IgnoreArg_rec_pc();
 
-  result = MyLib_Orchestrate_u32(199, NULL);
+    expected_return = l_base_u32 + g_counter_u32;
 
-  TEST_ASSERT_EQUAL_UINT32(stub_base_value + g_counter_u32, result);
-  TEST_ASSERT_EQUAL_UINT16(0, stub_delta_value);
+    actual_return = MyLib_Orchestrate_u32(start_u32, delta_pc_u16);
+
+    TEST_ASSERT_EQUAL_UINT32(expected_return, actual_return);
 }
 
-void test_start_200_delta_NULL_verify_return_and_ProcessRecord(void) {
-  uint32_t result;
-  MyLib_record_t expected_rec;
+/**
+ * @brief Test: start_u32 at mid-range (100) with NULL delta_pc_u16, verify return value equals InternalHelper_u32(100,0) + g_counter_u32 and ProcessRecord called with correct derived record.
+ */
+void test_start_at_mid_range_100_with_NULL_delta(void)
+{
+    uint32_t start_u32 = 100U;
+    const uint16_t *delta_pc_u16 = NULL;
+    uint32_t l_base_u32 = 200U;
+    uint32_t expected_return;
+    uint32_t actual_return;
+    MyLib_record_t expected_record;
 
-  stub_base_value = 200;
-  g_counter_u32 = 150;
+    g_counter_u32 = 50U;
 
-  InternalHelper_u32_Stub(InternalHelper_u32_Callback);
+    InternalHelper_u32_ExpectAndReturn(start_u32, 0U, l_base_u32);
 
-  expected_rec.id_u16 = (uint16_t)(stub_base_value & 0xFFFF);
-  expected_rec.value_u32 = stub_base_value / 2;
+    expected_record.id_u16 = (uint16_t)(l_base_u32 & 0xFFFFU);
+    expected_record.value_u32 = l_base_u32 / 2U;
 
-  MyLib_ProcessRecord_Expect(&expected_rec, MYLIB_MULT_VALUE_U8);
-  MyLib_ProcessRecord_IgnoreArg_rec_pc();
+    MyLib_ProcessRecord_Expect(&expected_record, MYLIB_MULT_VALUE_U8);
+    MyLib_ProcessRecord_IgnoreArg_rec_pc();
 
-  result = MyLib_Orchestrate_u32(200, NULL);
+    expected_return = l_base_u32 + g_counter_u32;
 
-  TEST_ASSERT_EQUAL_UINT32(stub_base_value + g_counter_u32, result);
-  TEST_ASSERT_EQUAL_UINT16(0, stub_delta_value);
+    actual_return = MyLib_Orchestrate_u32(start_u32, delta_pc_u16);
+
+    TEST_ASSERT_EQUAL_UINT32(expected_return, actual_return);
 }
 
-void test_start_0_delta_0_verify_return_and_ProcessRecord(void) {
-  uint32_t result;
-  uint16_t delta = 0;
-  MyLib_record_t expected_rec;
+/**
+ * @brief Test: start_u32 at mid-range (100) with valid delta_pc_u16 pointing to mid-range value (100), verify return value equals InternalHelper_u32(100,100) + g_counter_u32 and ProcessRecord called with correct derived record.
+ */
+void test_start_at_mid_range_100_with_delta_pointing_to_100(void)
+{
+    uint32_t start_u32 = 100U;
+    uint16_t delta_value = 100U;
+    const uint16_t *delta_pc_u16 = &delta_value;
+    uint32_t l_base_u32 = 300U;
+    uint32_t expected_return;
+    uint32_t actual_return;
+    MyLib_record_t expected_record;
 
-  stub_base_value = 80;
-  g_counter_u32 = 40;
+    g_counter_u32 = 75U;
 
-  InternalHelper_u32_Stub(InternalHelper_u32_Callback);
+    InternalHelper_u32_ExpectAndReturn(start_u32, delta_value, l_base_u32);
 
-  expected_rec.id_u16 = (uint16_t)(stub_base_value & 0xFFFF);
-  expected_rec.value_u32 = stub_base_value / 2;
+    expected_record.id_u16 = (uint16_t)(l_base_u32 & 0xFFFFU);
+    expected_record.value_u32 = l_base_u32 / 2U;
 
-  MyLib_ProcessRecord_Expect(&expected_rec, MYLIB_MULT_VALUE_U8);
-  MyLib_ProcessRecord_IgnoreArg_rec_pc();
+    MyLib_ProcessRecord_Expect(&expected_record, MYLIB_MULT_VALUE_U8);
+    MyLib_ProcessRecord_IgnoreArg_rec_pc();
 
-  result = MyLib_Orchestrate_u32(0, &delta);
+    expected_return = l_base_u32 + g_counter_u32;
 
-  TEST_ASSERT_EQUAL_UINT32(stub_base_value + g_counter_u32, result);
-  TEST_ASSERT_EQUAL_UINT16(0, stub_delta_value);
+    actual_return = MyLib_Orchestrate_u32(start_u32, delta_pc_u16);
+
+    TEST_ASSERT_EQUAL_UINT32(expected_return, actual_return);
 }
 
-void test_start_0_delta_1_verify_return_and_ProcessRecord(void) {
-  uint32_t result;
-  uint16_t delta = 1;
-  MyLib_record_t expected_rec;
+/**
+ * @brief Test: start_u32 just inside upper boundary (199) with NULL delta_pc_u16, verify return value equals InternalHelper_u32(199,0) + g_counter_u32 and ProcessRecord called with correct derived record.
+ */
+void test_start_just_inside_upper_boundary_199_with_NULL_delta(void)
+{
+    uint32_t start_u32 = 199U;
+    const uint16_t *delta_pc_u16 = NULL;
+    uint32_t l_base_u32 = 350U;
+    uint32_t expected_return;
+    uint32_t actual_return;
+    MyLib_record_t expected_record;
 
-  stub_base_value = 90;
-  g_counter_u32 = 60;
+    g_counter_u32 = 40U;
 
-  InternalHelper_u32_Stub(InternalHelper_u32_Callback);
+    InternalHelper_u32_ExpectAndReturn(start_u32, 0U, l_base_u32);
 
-  expected_rec.id_u16 = (uint16_t)(stub_base_value & 0xFFFF);
-  expected_rec.value_u32 = stub_base_value / 2;
+    expected_record.id_u16 = (uint16_t)(l_base_u32 & 0xFFFFU);
+    expected_record.value_u32 = l_base_u32 / 2U;
 
-  MyLib_ProcessRecord_Expect(&expected_rec, MYLIB_MULT_VALUE_U8);
-  MyLib_ProcessRecord_IgnoreArg_rec_pc();
+    MyLib_ProcessRecord_Expect(&expected_record, MYLIB_MULT_VALUE_U8);
+    MyLib_ProcessRecord_IgnoreArg_rec_pc();
 
-  result = MyLib_Orchestrate_u32(0, &delta);
+    expected_return = l_base_u32 + g_counter_u32;
 
-  TEST_ASSERT_EQUAL_UINT32(stub_base_value + g_counter_u32, result);
-  TEST_ASSERT_EQUAL_UINT16(1, stub_delta_value);
+    actual_return = MyLib_Orchestrate_u32(start_u32, delta_pc_u16);
+
+    TEST_ASSERT_EQUAL_UINT32(expected_return, actual_return);
 }
 
-void test_start_0_delta_32767_verify_return_and_ProcessRecord(void) {
-  uint32_t result;
-  uint16_t delta = 32767;
-  MyLib_record_t expected_rec;
+/**
+ * @brief Test: start_u32 just inside upper boundary (199) with valid delta_pc_u16 pointing to mid-range value (100), verify return value equals InternalHelper_u32(199,100) + g_counter_u32 and ProcessRecord called with correct derived record.
+ */
+void test_start_just_inside_upper_boundary_199_with_delta_pointing_to_100(void)
+{
+    uint32_t start_u32 = 199U;
+    uint16_t delta_value = 100U;
+    const uint16_t *delta_pc_u16 = &delta_value;
+    uint32_t l_base_u32 = 450U;
+    uint32_t expected_return;
+    uint32_t actual_return;
+    MyLib_record_t expected_record;
 
-  stub_base_value = 120;
-  g_counter_u32 = 70;
+    g_counter_u32 = 60U;
 
-  InternalHelper_u32_Stub(InternalHelper_u32_Callback);
+    InternalHelper_u32_ExpectAndReturn(start_u32, delta_value, l_base_u32);
 
-  expected_rec.id_u16 = (uint16_t)(stub_base_value & 0xFFFF);
-  expected_rec.value_u32 = stub_base_value / 2;
+    expected_record.id_u16 = (uint16_t)(l_base_u32 & 0xFFFFU);
+    expected_record.value_u32 = l_base_u32 / 2U;
 
-  MyLib_ProcessRecord_Expect(&expected_rec, MYLIB_MULT_VALUE_U8);
-  MyLib_ProcessRecord_IgnoreArg_rec_pc();
+    MyLib_ProcessRecord_Expect(&expected_record, MYLIB_MULT_VALUE_U8);
+    MyLib_ProcessRecord_IgnoreArg_rec_pc();
 
-  result = MyLib_Orchestrate_u32(0, &delta);
+    expected_return = l_base_u32 + g_counter_u32;
 
-  TEST_ASSERT_EQUAL_UINT32(stub_base_value + g_counter_u32, result);
-  TEST_ASSERT_EQUAL_UINT16(32767, stub_delta_value);
+    actual_return = MyLib_Orchestrate_u32(start_u32, delta_pc_u16);
+
+    TEST_ASSERT_EQUAL_UINT32(expected_return, actual_return);
 }
 
-void test_start_0_delta_65534_verify_return_and_ProcessRecord(void) {
-  uint32_t result;
-  uint16_t delta = 65534;
-  MyLib_record_t expected_rec;
+/**
+ * @brief Test: start_u32 at upper boundary (200) with NULL delta_pc_u16, verify return value equals InternalHelper_u32(200,0) + g_counter_u32 and ProcessRecord called with correct derived record.
+ */
+void test_start_at_upper_boundary_200_with_NULL_delta(void)
+{
+    uint32_t start_u32 = 200U;
+    const uint16_t *delta_pc_u16 = NULL;
+    uint32_t l_base_u32 = 400U;
+    uint32_t expected_return;
+    uint32_t actual_return;
+    MyLib_record_t expected_record;
 
-  stub_base_value = 130;
-  g_counter_u32 = 80;
+    g_counter_u32 = 0U;
 
-  InternalHelper_u32_Stub(InternalHelper_u32_Callback);
+    InternalHelper_u32_ExpectAndReturn(start_u32, 0U, l_base_u32);
 
-  expected_rec.id_u16 = (uint16_t)(stub_base_value & 0xFFFF);
-  expected_rec.value_u32 = stub_base_value / 2;
+    expected_record.id_u16 = (uint16_t)(l_base_u32 & 0xFFFFU);
+    expected_record.value_u32 = l_base_u32 / 2U;
 
-  MyLib_ProcessRecord_Expect(&expected_rec, MYLIB_MULT_VALUE_U8);
-  MyLib_ProcessRecord_IgnoreArg_rec_pc();
+    MyLib_ProcessRecord_Expect(&expected_record, MYLIB_MULT_VALUE_U8);
+    MyLib_ProcessRecord_IgnoreArg_rec_pc();
 
-  result = MyLib_Orchestrate_u32(0, &delta);
+    expected_return = l_base_u32 + g_counter_u32;
 
-  TEST_ASSERT_EQUAL_UINT32(stub_base_value + g_counter_u32, result);
-  TEST_ASSERT_EQUAL_UINT16(65534, stub_delta_value);
+    actual_return = MyLib_Orchestrate_u32(start_u32, delta_pc_u16);
+
+    TEST_ASSERT_EQUAL_UINT32(expected_return, actual_return);
 }
 
-void test_start_0_delta_65535_verify_return_and_ProcessRecord(void) {
-  uint32_t result;
-  uint16_t delta = 65535;
-  MyLib_record_t expected_rec;
+/**
+ * @brief Test: start_u32 at upper boundary (200) with valid delta_pc_u16 pointing to mid-range value (100), verify return value equals InternalHelper_u32(200,100) + g_counter_u32 and ProcessRecord called with correct derived record.
+ */
+void test_start_at_upper_boundary_200_with_delta_pointing_to_100(void)
+{
+    uint32_t start_u32 = 200U;
+    uint16_t delta_value = 100U;
+    const uint16_t *delta_pc_u16 = &delta_value;
+    uint32_t l_base_u32 = 500U;
+    uint32_t expected_return;
+    uint32_t actual_return;
+    MyLib_record_t expected_record;
 
-  stub_base_value = 140;
-  g_counter_u32 = 90;
+    g_counter_u32 = 80U;
 
-  InternalHelper_u32_Stub(InternalHelper_u32_Callback);
+    InternalHelper_u32_ExpectAndReturn(start_u32, delta_value, l_base_u32);
 
-  expected_rec.id_u16 = (uint16_t)(stub_base_value & 0xFFFF);
-  expected_rec.value_u32 = stub_base_value / 2;
+    expected_record.id_u16 = (uint16_t)(l_base_u32 & 0xFFFFU);
+    expected_record.value_u32 = l_base_u32 / 2U;
 
-  MyLib_ProcessRecord_Expect(&expected_rec, MYLIB_MULT_VALUE_U8);
-  MyLib_ProcessRecord_IgnoreArg_rec_pc();
+    MyLib_ProcessRecord_Expect(&expected_record, MYLIB_MULT_VALUE_U8);
+    MyLib_ProcessRecord_IgnoreArg_rec_pc();
 
-  result = MyLib_Orchestrate_u32(0, &delta);
+    expected_return = l_base_u32 + g_counter_u32;
 
-  TEST_ASSERT_EQUAL_UINT32(stub_base_value + g_counter_u32, result);
-  TEST_ASSERT_EQUAL_UINT16(65535, stub_delta_value);
+    actual_return = MyLib_Orchestrate_u32(start_u32, delta_pc_u16);
+
+    TEST_ASSERT_EQUAL_UINT32(expected_return, actual_return);
 }
 
-void test_start_200_delta_0_verify_return_and_ProcessRecord(void) {
-  uint32_t result;
-  uint16_t delta = 0;
-  MyLib_record_t expected_rec;
+/**
+ * @brief Test: start_u32 at upper boundary (200) with valid delta_pc_u16 pointing to maximum representable uint16_t (65535), verify return value equals InternalHelper_u32(200,65535) + g_counter_u32 and ProcessRecord called with correct derived record.
+ */
+void test_start_at_upper_boundary_200_with_delta_pointing_to_65535(void)
+{
+    uint32_t start_u32 = 200U;
+    uint16_t delta_value = 65535U;
+    const uint16_t *delta_pc_u16 = &delta_value;
+    uint32_t l_base_u32 = 80000U;
+    uint32_t expected_return;
+    uint32_t actual_return;
+    MyLib_record_t expected_record;
 
-  stub_base_value = 160;
-  g_counter_u32 = 110;
+    g_counter_u32 = 100U;
 
-  InternalHelper_u32_Stub(InternalHelper_u32_Callback);
+    InternalHelper_u32_ExpectAndReturn(start_u32, delta_value, l_base_u32);
 
-  expected_rec.id_u16 = (uint16_t)(stub_base_value & 0xFFFF);
-  expected_rec.value_u32 = stub_base_value / 2;
+    expected_record.id_u16 = (uint16_t)(l_base_u32 & 0xFFFFU);
+    expected_record.value_u32 = l_base_u32 / 2U;
 
-  MyLib_ProcessRecord_Expect(&expected_rec, MYLIB_MULT_VALUE_U8);
-  MyLib_ProcessRecord_IgnoreArg_rec_pc();
+    MyLib_ProcessRecord_Expect(&expected_record, MYLIB_MULT_VALUE_U8);
+    MyLib_ProcessRecord_IgnoreArg_rec_pc();
 
-  result = MyLib_Orchestrate_u32(200, &delta);
+    expected_return = l_base_u32 + g_counter_u32;
 
-  TEST_ASSERT_EQUAL_UINT32(stub_base_value + g_counter_u32, result);
-  TEST_ASSERT_EQUAL_UINT16(0, stub_delta_value);
+    actual_return = MyLib_Orchestrate_u32(start_u32, delta_pc_u16);
+
+    TEST_ASSERT_EQUAL_UINT32(expected_return, actual_return);
 }
 
-void test_start_200_delta_65535_verify_return_and_ProcessRecord(void) {
-  uint32_t result;
-  uint16_t delta = 65535;
-  MyLib_record_t expected_rec;
+/**
+ * @brief Test: start_u32 just outside upper boundary (201) with NULL delta_pc_u16, verify behavior (return value equals InternalHelper_u32(201,0) + g_counter_u32 and ProcessRecord called with correct derived record).
+ */
+void test_start_just_outside_upper_boundary_201_with_NULL_delta(void)
+{
+    uint32_t start_u32 = 201U;
+    const uint16_t *delta_pc_u16 = NULL;
+    uint32_t l_base_u32 = 410U;
+    uint32_t expected_return;
+    uint32_t actual_return;
+    MyLib_record_t expected_record;
 
-  stub_base_value = 170;
-  g_counter_u32 = 120;
+    g_counter_u32 = 90U;
 
-  InternalHelper_u32_Stub(InternalHelper_u32_Callback);
+    InternalHelper_u32_ExpectAndReturn(start_u32, 0U, l_base_u32);
 
-  expected_rec.id_u16 = (uint16_t)(stub_base_value & 0xFFFF);
-  expected_rec.value_u32 = stub_base_value / 2;
+    expected_record.id_u16 = (uint16_t)(l_base_u32 & 0xFFFFU);
+    expected_record.value_u32 = l_base_u32 / 2U;
 
-  MyLib_ProcessRecord_Expect(&expected_rec, MYLIB_MULT_VALUE_U8);
-  MyLib_ProcessRecord_IgnoreArg_rec_pc();
+    MyLib_ProcessRecord_Expect(&expected_record, MYLIB_MULT_VALUE_U8);
+    MyLib_ProcessRecord_IgnoreArg_rec_pc();
 
-  result = MyLib_Orchestrate_u32(200, &delta);
+    expected_return = l_base_u32 + g_counter_u32;
 
-  TEST_ASSERT_EQUAL_UINT32(stub_base_value + g_counter_u32, result);
-  TEST_ASSERT_EQUAL_UINT16(65535, stub_delta_value);
+    actual_return = MyLib_Orchestrate_u32(start_u32, delta_pc_u16);
+
+    TEST_ASSERT_EQUAL_UINT32(expected_return, actual_return);
 }
 
-void test_start_100_delta_32767_verify_return_and_ProcessRecord(void) {
-  uint32_t result;
-  uint16_t delta = 32767;
-  MyLib_record_t expected_rec;
+/**
+ * @brief Test: start_u32 just outside upper boundary (201) with valid delta_pc_u16 pointing to mid-range value (100), verify behavior (return value equals InternalHelper_u32(201,100) + g_counter_u32 and ProcessRecord called with correct derived record).
+ */
+void test_start_just_outside_upper_boundary_201_with_delta_pointing_to_100(void)
+{
+    uint32_t start_u32 = 201U;
+    uint16_t delta_value = 100U;
+    const uint16_t *delta_pc_u16 = &delta_value;
+    uint32_t l_base_u32 = 510U;
+    uint32_t expected_return;
+    uint32_t actual_return;
+    MyLib_record_t expected_record;
 
-  stub_base_value = 180;
-  g_counter_u32 = 130;
+    g_counter_u32 = 95U;
 
-  InternalHelper_u32_Stub(InternalHelper_u32_Callback);
+    InternalHelper_u32_ExpectAndReturn(start_u32, delta_value, l_base_u32);
 
-  expected_rec.id_u16 = (uint16_t)(stub_base_value & 0xFFFF);
-  expected_rec.value_u32 = stub_base_value / 2;
+    expected_record.id_u16 = (uint16_t)(l_base_u32 & 0xFFFFU);
+    expected_record.value_u32 = l_base_u32 / 2U;
 
-  MyLib_ProcessRecord_Expect(&expected_rec, MYLIB_MULT_VALUE_U8);
-  MyLib_ProcessRecord_IgnoreArg_rec_pc();
+    MyLib_ProcessRecord_Expect(&expected_record, MYLIB_MULT_VALUE_U8);
+    MyLib_ProcessRecord_IgnoreArg_rec_pc();
 
-  result = MyLib_Orchestrate_u32(100, &delta);
+    expected_return = l_base_u32 + g_counter_u32;
 
-  TEST_ASSERT_EQUAL_UINT32(stub_base_value + g_counter_u32, result);
-  TEST_ASSERT_EQUAL_UINT16(32767, stub_delta_value);
+    actual_return = MyLib_Orchestrate_u32(start_u32, delta_pc_u16);
+
+    TEST_ASSERT_EQUAL_UINT32(expected_return, actual_return);
 }
 
-void test_NULL_delta_branch_coverage_start_50(void) {
-  uint32_t result;
-  MyLib_record_t expected_rec;
+/**
+ * @brief Test: g_counter_u32 at lower boundary (0), start_u32 at mid-range (100) with NULL delta_pc_u16, verify return value equals InternalHelper_u32(100,0) + 0.
+ */
+void test_g_counter_at_lower_boundary_0_start_100_NULL_delta(void)
+{
+    uint32_t start_u32 = 100U;
+    const uint16_t *delta_pc_u16 = NULL;
+    uint32_t l_base_u32 = 200U;
+    uint32_t expected_return;
+    uint32_t actual_return;
+    MyLib_record_t expected_record;
 
-  stub_base_value = 75;
-  g_counter_u32 = 25;
+    g_counter_u32 = 0U;
 
-  InternalHelper_u32_Stub(InternalHelper_u32_Callback);
+    InternalHelper_u32_ExpectAndReturn(start_u32, 0U, l_base_u32);
 
-  expected_rec.id_u16 = (uint16_t)(stub_base_value & 0xFFFF);
-  expected_rec.value_u32 = stub_base_value / 2;
+    expected_record.id_u16 = (uint16_t)(l_base_u32 & 0xFFFFU);
+    expected_record.value_u32 = l_base_u32 / 2U;
 
-  MyLib_ProcessRecord_Expect(&expected_rec, MYLIB_MULT_VALUE_U8);
-  MyLib_ProcessRecord_IgnoreArg_rec_pc();
+    MyLib_ProcessRecord_Expect(&expected_record, MYLIB_MULT_VALUE_U8);
+    MyLib_ProcessRecord_IgnoreArg_rec_pc();
 
-  result = MyLib_Orchestrate_u32(50, NULL);
+    expected_return = l_base_u32 + 0U;
 
-  TEST_ASSERT_EQUAL_UINT32(stub_base_value + g_counter_u32, result);
-  TEST_ASSERT_EQUAL_UINT16(0, stub_delta_value);
+    actual_return = MyLib_Orchestrate_u32(start_u32, delta_pc_u16);
+
+    TEST_ASSERT_EQUAL_UINT32(expected_return, actual_return);
 }
 
-void test_non_NULL_delta_branch_coverage_start_50_delta_100(void) {
-  uint32_t result;
-  uint16_t delta = 100;
-  MyLib_record_t expected_rec;
+/**
+ * @brief Test: g_counter_u32 at mid-range (250), start_u32 at mid-range (100) with NULL delta_pc_u16, verify return value equals InternalHelper_u32(100,0) + 250.
+ */
+void test_g_counter_at_mid_range_250_start_100_NULL_delta(void)
+{
+    uint32_t start_u32 = 100U;
+    const uint16_t *delta_pc_u16 = NULL;
+    uint32_t l_base_u32 = 200U;
+    uint32_t expected_return;
+    uint32_t actual_return;
+    MyLib_record_t expected_record;
 
-  stub_base_value = 85;
-  g_counter_u32 = 35;
+    g_counter_u32 = 250U;
 
-  InternalHelper_u32_Stub(InternalHelper_u32_Callback);
+    InternalHelper_u32_ExpectAndReturn(start_u32, 0U, l_base_u32);
 
-  expected_rec.id_u16 = (uint16_t)(stub_base_value & 0xFFFF);
-  expected_rec.value_u32 = stub_base_value / 2;
+    expected_record.id_u16 = (uint16_t)(l_base_u32 & 0xFFFFU);
+    expected_record.value_u32 = l_base_u32 / 2U;
 
-  MyLib_ProcessRecord_Expect(&expected_rec, MYLIB_MULT_VALUE_U8);
-  MyLib_ProcessRecord_IgnoreArg_rec_pc();
+    MyLib_ProcessRecord_Expect(&expected_record, MYLIB_MULT_VALUE_U8);
+    MyLib_ProcessRecord_IgnoreArg_rec_pc();
 
-  result = MyLib_Orchestrate_u32(50, &delta);
+    expected_return = l_base_u32 + 250U;
 
-  TEST_ASSERT_EQUAL_UINT32(stub_base_value + g_counter_u32, result);
-  TEST_ASSERT_EQUAL_UINT16(100, stub_delta_value);
+    actual_return = MyLib_Orchestrate_u32(start_u32, delta_pc_u16);
+
+    TEST_ASSERT_EQUAL_UINT32(expected_return, actual_return);
 }
 
-void test_id_u16_mask_base_0x12345678(void) {
-  uint32_t result;
-  MyLib_record_t expected_rec;
+/**
+ * @brief Test: g_counter_u32 at upper boundary (500), start_u32 at mid-range (100) with NULL delta_pc_u16, verify return value equals InternalHelper_u32(100,0) + 500.
+ */
+void test_g_counter_at_upper_boundary_500_start_100_NULL_delta(void)
+{
+    uint32_t start_u32 = 100U;
+    const uint16_t *delta_pc_u16 = NULL;
+    uint32_t l_base_u32 = 200U;
+    uint32_t expected_return;
+    uint32_t actual_return;
+    MyLib_record_t expected_record;
 
-  stub_base_value = 0x12345678;
-  g_counter_u32 = 0;
+    g_counter_u32 = 500U;
 
-  InternalHelper_u32_Stub(InternalHelper_u32_Callback);
+    InternalHelper_u32_ExpectAndReturn(start_u32, 0U, l_base_u32);
 
-  expected_rec.id_u16 = 0x5678;
-  expected_rec.value_u32 = stub_base_value / 2;
+    expected_record.id_u16 = (uint16_t)(l_base_u32 & 0xFFFFU);
+    expected_record.value_u32 = l_base_u32 / 2U;
 
-  MyLib_ProcessRecord_Expect(&expected_rec, MYLIB_MULT_VALUE_U8);
-  MyLib_ProcessRecord_IgnoreArg_rec_pc();
+    MyLib_ProcessRecord_Expect(&expected_record, MYLIB_MULT_VALUE_U8);
+    MyLib_ProcessRecord_IgnoreArg_rec_pc();
 
-  result = MyLib_Orchestrate_u32(0, NULL);
+    expected_return = l_base_u32 + 500U;
 
-  TEST_ASSERT_EQUAL_UINT32(stub_base_value + g_counter_u32, result);
+    actual_return = MyLib_Orchestrate_u32(start_u32, delta_pc_u16);
+
+    TEST_ASSERT_EQUAL_UINT32(expected_return, actual_return);
 }
 
-void test_value_u32_division_base_100(void) {
-  uint32_t result;
-  MyLib_record_t expected_rec;
+/**
+ * @brief Test: Verify MyLib_ProcessRecord is called with l_r.id_u16 = (l_base_u32 & 0xFFFF) and l_r.value_u32 = l_base_u32 / 2 when l_base_u32 is even (start_u32=100, delta NULL).
+ */
+void test_ProcessRecord_called_with_correct_record_even_base(void)
+{
+    uint32_t start_u32 = 100U;
+    const uint16_t *delta_pc_u16 = NULL;
+    uint32_t l_base_u32 = 200U;
+    uint32_t actual_return;
+    MyLib_record_t expected_record;
 
-  stub_base_value = 100;
-  g_counter_u32 = 0;
+    g_counter_u32 = 50U;
 
-  InternalHelper_u32_Stub(InternalHelper_u32_Callback);
+    InternalHelper_u32_ExpectAndReturn(start_u32, 0U, l_base_u32);
 
-  expected_rec.id_u16 = (uint16_t)(stub_base_value & 0xFFFF);
-  expected_rec.value_u32 = 50;
+    expected_record.id_u16 = (uint16_t)(l_base_u32 & 0xFFFFU);
+    expected_record.value_u32 = l_base_u32 / 2U;
 
-  MyLib_ProcessRecord_Expect(&expected_rec, MYLIB_MULT_VALUE_U8);
-  MyLib_ProcessRecord_IgnoreArg_rec_pc();
+    MyLib_ProcessRecord_Expect(&expected_record, MYLIB_MULT_VALUE_U8);
+    MyLib_ProcessRecord_IgnoreArg_rec_pc();
 
-  result = MyLib_Orchestrate_u32(0, NULL);
+    actual_return = MyLib_Orchestrate_u32(start_u32, delta_pc_u16);
 
-  TEST_ASSERT_EQUAL_UINT32(stub_base_value + g_counter_u32, result);
+    TEST_ASSERT_EQUAL_UINT32(l_base_u32 + g_counter_u32, actual_return);
 }
 
-void test_value_u32_division_base_101_odd(void) {
-  uint32_t result;
-  MyLib_record_t expected_rec;
+/**
+ * @brief Test: Verify MyLib_ProcessRecord is called with l_r.id_u16 = (l_base_u32 & 0xFFFF) and l_r.value_u32 = l_base_u32 / 2 when l_base_u32 is odd (start_u32=101, delta NULL), ensuring integer division behavior.
+ */
+void test_ProcessRecord_called_with_correct_record_odd_base(void)
+{
+    uint32_t start_u32 = 101U;
+    const uint16_t *delta_pc_u16 = NULL;
+    uint32_t l_base_u32 = 201U;
+    uint32_t actual_return;
+    MyLib_record_t expected_record;
 
-  stub_base_value = 101;
-  g_counter_u32 = 0;
+    g_counter_u32 = 50U;
 
-  InternalHelper_u32_Stub(InternalHelper_u32_Callback);
+    InternalHelper_u32_ExpectAndReturn(start_u32, 0U, l_base_u32);
 
-  expected_rec.id_u16 = (uint16_t)(stub_base_value & 0xFFFF);
-  expected_rec.value_u32 = 50;
+    expected_record.id_u16 = (uint16_t)(l_base_u32 & 0xFFFFU);
+    expected_record.value_u32 = l_base_u32 / 2U;
 
-  MyLib_ProcessRecord_Expect(&expected_rec, MYLIB_MULT_VALUE_U8);
-  MyLib_ProcessRecord_IgnoreArg_rec_pc();
+    MyLib_ProcessRecord_Expect(&expected_record, MYLIB_MULT_VALUE_U8);
+    MyLib_ProcessRecord_IgnoreArg_rec_pc();
 
-  result = MyLib_Orchestrate_u32(0, NULL);
+    actual_return = MyLib_Orchestrate_u32(start_u32, delta_pc_u16);
 
-  TEST_ASSERT_EQUAL_UINT32(stub_base_value + g_counter_u32, result);
+    TEST_ASSERT_EQUAL_UINT32(l_base_u32 + g_counter_u32, actual_return);
 }
 
-void test_ProcessRecord_called_with_correct_params(void) {
-  uint32_t result;
-  MyLib_record_t expected_rec;
+/**
+ * @brief Test: Verify MyLib_ProcessRecord is called with second parameter MYLIB_MULT_VALUE_U8 (start_u32=100, delta NULL).
+ */
+void test_ProcessRecord_called_with_MYLIB_MULT_VALUE_U8(void)
+{
+    uint32_t start_u32 = 100U;
+    const uint16_t *delta_pc_u16 = NULL;
+    uint32_t l_base_u32 = 200U;
+    uint32_t actual_return;
 
-  stub_base_value = 200;
-  g_counter_u32 = 50;
+    g_counter_u32 = 50U;
 
-  InternalHelper_u32_Stub(InternalHelper_u32_Callback);
+    InternalHelper_u32_ExpectAndReturn(start_u32, 0U, l_base_u32);
 
-  expected_rec.id_u16 = (uint16_t)(stub_base_value & 0xFFFF);
-  expected_rec.value_u32 = stub_base_value / 2;
+    MyLib_ProcessRecord_ExpectAnyArgsAndReturn();
 
-  MyLib_ProcessRecord_Expect(&expected_rec, MYLIB_MULT_VALUE_U8);
-  MyLib_ProcessRecord_IgnoreArg_rec_pc();
+    actual_return = MyLib_Orchestrate_u32(start_u32, delta_pc_u16);
 
-  result = MyLib_Orchestrate_u32(0, NULL);
-
-  TEST_ASSERT_EQUAL_UINT32(stub_base_value + g_counter_u32, result);
+    TEST_ASSERT_EQUAL_UINT32(l_base_u32 + g_counter_u32, actual_return);
 }
 
-void test_return_lower_boundary_base_0_counter_0(void) {
-  uint32_t result;
-  MyLib_record_t expected_rec;
+/**
+ * @brief Test: Verify correct record derivation when l_base_u32 exceeds 16-bit range (start_u32=200, delta pointing to 65535), ensuring id_u16 wraps correctly via bitwise AND and value_u32 computed correctly.
+ */
+void test_record_derivation_when_base_exceeds_16bit_range(void)
+{
+    uint32_t start_u32 = 200U;
+    uint16_t delta_value = 65535U;
+    const uint16_t *delta_pc_u16 = &delta_value;
+    uint32_t l_base_u32 = 80000U;
+    uint32_t actual_return;
+    MyLib_record_t expected_record;
 
-  stub_base_value = 0;
-  g_counter_u32 = 0;
+    g_counter_u32 = 100U;
 
-  InternalHelper_u32_Stub(InternalHelper_u32_Callback);
+    InternalHelper_u32_ExpectAndReturn(start_u32, delta_value, l_base_u32);
 
-  expected_rec.id_u16 = (uint16_t)(stub_base_value & 0xFFFF);
-  expected_rec.value_u32 = stub_base_value / 2;
+    expected_record.id_u16 = (uint16_t)(l_base_u32 & 0xFFFFU);
+    expected_record.value_u32 = l_base_u32 / 2U;
 
-  MyLib_ProcessRecord_Expect(&expected_rec, MYLIB_MULT_VALUE_U8);
-  MyLib_ProcessRecord_IgnoreArg_rec_pc();
+    MyLib_ProcessRecord_Expect(&expected_record, MYLIB_MULT_VALUE_U8);
+    MyLib_ProcessRecord_IgnoreArg_rec_pc();
 
-  result = MyLib_Orchestrate_u32(0, NULL);
+    actual_return = MyLib_Orchestrate_u32(start_u32, delta_pc_u16);
 
-  TEST_ASSERT_EQUAL_UINT32(0, result);
+    TEST_ASSERT_EQUAL_UINT32(l_base_u32 + g_counter_u32, actual_return);
 }
 
-void test_return_upper_boundary_base_200_counter_200(void) {
-  uint32_t result;
-  MyLib_record_t expected_rec;
+/**
+ * @brief Test: Verify return value at lower boundary of expected range (0) when InternalHelper_u32 returns 0 and g_counter_u32 is 0.
+ */
+void test_return_value_at_lower_boundary_0(void)
+{
+    uint32_t start_u32 = 0U;
+    const uint16_t *delta_pc_u16 = NULL;
+    uint32_t l_base_u32 = 0U;
+    uint32_t expected_return;
+    uint32_t actual_return;
+    MyLib_record_t expected_record;
 
-  stub_base_value = 200;
-  g_counter_u32 = 200;
+    g_counter_u32 = 0U;
 
-  InternalHelper_u32_Stub(InternalHelper_u32_Callback);
+    InternalHelper_u32_ExpectAndReturn(start_u32, 0U, l_base_u32);
 
-  expected_rec.id_u16 = (uint16_t)(stub_base_value & 0xFFFF);
-  expected_rec.value_u32 = stub_base_value / 2;
+    expected_record.id_u16 = (uint16_t)(l_base_u32 & 0xFFFFU);
+    expected_record.value_u32 = l_base_u32 / 2U;
 
-  MyLib_ProcessRecord_Expect(&expected_rec, MYLIB_MULT_VALUE_U8);
-  MyLib_ProcessRecord_IgnoreArg_rec_pc();
+    MyLib_ProcessRecord_Expect(&expected_record, MYLIB_MULT_VALUE_U8);
+    MyLib_ProcessRecord_IgnoreArg_rec_pc();
 
-  result = MyLib_Orchestrate_u32(0, NULL);
+    expected_return = 0U;
 
-  TEST_ASSERT_EQUAL_UINT32(400, result);
+    actual_return = MyLib_Orchestrate_u32(start_u32, delta_pc_u16);
+
+    TEST_ASSERT_EQUAL_UINT32(expected_return, actual_return);
 }
 
-void test_return_base_150_counter_250(void) {
-  uint32_t result;
-  MyLib_record_t expected_rec;
+/**
+ * @brief Test: Verify return value at upper boundary of expected range (400) when InternalHelper_u32 and g_counter_u32 sum to 400.
+ */
+void test_return_value_at_upper_boundary_400(void)
+{
+    uint32_t start_u32 = 100U;
+    const uint16_t *delta_pc_u16 = NULL;
+    uint32_t l_base_u32 = 300U;
+    uint32_t expected_return;
+    uint32_t actual_return;
+    MyLib_record_t expected_record;
 
-  stub_base_value = 150;
-  g_counter_u32 = 250;
+    g_counter_u32 = 100U;
 
-  InternalHelper_u32_Stub(InternalHelper_u32_Callback);
+    InternalHelper_u32_ExpectAndReturn(start_u32, 0U, l_base_u32);
 
-  expected_rec.id_u16 = (uint16_t)(stub_base_value & 0xFFFF);
-  expected_rec.value_u32 = stub_base_value / 2;
+    expected_record.id_u16 = (uint16_t)(l_base_u32 & 0xFFFFU);
+    expected_record.value_u32 = l_base_u32 / 2U;
 
-  MyLib_ProcessRecord_Expect(&expected_rec, MYLIB_MULT_VALUE_U8);
-  MyLib_ProcessRecord_IgnoreArg_rec_pc();
+    MyLib_ProcessRecord_Expect(&expected_record, MYLIB_MULT_VALUE_U8);
+    MyLib_ProcessRecord_IgnoreArg_rec_pc();
 
-  result = MyLib_Orchestrate_u32(0, NULL);
+    expected_return = 400U;
 
-  TEST_ASSERT_EQUAL_UINT32(400, result);
-}
+    actual_return = MyLib_Orchestrate_u32(start_u32, delta_pc_u16);
 
-void test_return_base_100_counter_100(void) {
-  uint32_t result;
-  MyLib_record_t expected_rec;
-
-  stub_base_value = 100;
-  g_counter_u32 = 100;
-
-  InternalHelper_u32_Stub(InternalHelper_u32_Callback);
-
-  expected_rec.id_u16 = (uint16_t)(stub_base_value & 0xFFFF);
-  expected_rec.value_u32 = stub_base_value / 2;
-
-  MyLib_ProcessRecord_Expect(&expected_rec, MYLIB_MULT_VALUE_U8);
-  MyLib_ProcessRecord_IgnoreArg_rec_pc();
-
-  result = MyLib_Orchestrate_u32(0, NULL);
-
-  TEST_ASSERT_EQUAL_UINT32(200, result);
-}
-
-void test_combo_start_0_delta_NULL_counter_0(void) {
-  uint32_t result;
-  MyLib_record_t expected_rec;
-
-  stub_base_value = 0;
-  g_counter_u32 = 0;
-
-  InternalHelper_u32_Stub(InternalHelper_u32_Callback);
-
-  expected_rec.id_u16 = (uint16_t)(stub_base_value & 0xFFFF);
-  expected_rec.value_u32 = stub_base_value / 2;
-
-  MyLib_ProcessRecord_Expect(&expected_rec, MYLIB_MULT_VALUE_U8);
-  MyLib_ProcessRecord_IgnoreArg_rec_pc();
-
-  result = MyLib_Orchestrate_u32(0, NULL);
-
-  TEST_ASSERT_EQUAL_UINT32(0, result);
-  TEST_ASSERT_EQUAL_UINT16(0, stub_delta_value);
-}
-
-void test_combo_start_200_delta_65535_counter_500(void) {
-  uint32_t result;
-  uint16_t delta = 65535;
-  MyLib_record_t expected_rec;
-
-  stub_base_value = 100;
-  g_counter_u32 = 500;
-
-  InternalHelper_u32_Stub(InternalHelper_u32_Callback);
-
-  expected_rec.id_u16 = (uint16_t)(stub_base_value & 0xFFFF);
-  expected_rec.value_u32 = stub_base_value / 2;
-
-  MyLib_ProcessRecord_Expect(&expected_rec, MYLIB_MULT_VALUE_U8);
-  MyLib_ProcessRecord_IgnoreArg_rec_pc();
-
-  result = MyLib_Orchestrate_u32(200, &delta);
-
-  TEST_ASSERT_LESS_OR_EQUAL_UINT32(400, result);
-  TEST_ASSERT_EQUAL_UINT16(65535, stub_delta_value);
-}
-
-void test_combo_start_100_delta_1000_counter_250(void) {
-  uint32_t result;
-  uint16_t delta = 1000;
-  MyLib_record_t expected_rec;
-
-  stub_base_value = 125;
-  g_counter_u32 = 250;
-
-  InternalHelper_u32_Stub(InternalHelper_u32_Callback);
-
-  expected_rec.id_u16 = (uint16_t)(stub_base_value & 0xFFFF);
-  expected_rec.value_u32 = stub_base_value / 2;
-
-  MyLib_ProcessRecord_Expect(&expected_rec, MYLIB_MULT_VALUE_U8);
-  MyLib_ProcessRecord_IgnoreArg_rec_pc();
-
-  result = MyLib_Orchestrate_u32(100, &delta);
-
-  TEST_ASSERT_EQUAL_UINT32(stub_base_value + g_counter_u32, result);
-  TEST_ASSERT_EQUAL_UINT16(1000, stub_delta_value);
+    TEST_ASSERT_EQUAL_UINT32(expected_return, actual_return);
 }
