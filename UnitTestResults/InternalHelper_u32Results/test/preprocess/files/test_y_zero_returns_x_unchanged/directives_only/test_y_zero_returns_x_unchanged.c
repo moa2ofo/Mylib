@@ -10882,5 +10882,5 @@ void test_y_zero_returns_x_unchanged(void) {
 
   result = InternalHelper_u32(seed, iterations);
 
-  TEST_ASSERT_EQUAL_UINT32(seed, result);
+  TEST_ASSERT_EQUAL_UINT32(12345U, result);
 }

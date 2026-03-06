@@ -2235,7 +2235,7 @@ void test_y_zero_returns_x_unchanged(void) {
 
   result = InternalHelper_u32(seed, iterations);
 
-  UnityAssertEqualNumber((UNITY_INT)(UNITY_UINT32)((seed)), (UNITY_INT)(UNITY_UINT32)((result)), (
+  UnityAssertEqualNumber((UNITY_INT)(UNITY_UINT32)((12345U)), (UNITY_INT)(UNITY_UINT32)((result)), (
 # 23 "utExecutionAndResults/utUnderTest/test/test_y_zero_returns_x_unchanged.c" 3 4
  ((void *)0)
 # 23 "utExecutionAndResults/utUnderTest/test/test_y_zero_returns_x_unchanged.c"
