@@ -4036,7 +4036,6 @@ uint8_t MyLib_RunStateMachine_u8(const MyLib_record_t *rec_pc, uint32_t add_u32,
  */
 uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
 
-
 # 2 "utExecutionAndResults/utUnderTest/test/test_y_one_below_upper_boundary.c" 2
 # 1 "utExecutionAndResults/utUnderTest/build/vendor/unity/src/unity.h" 1
 /* =========================================================================

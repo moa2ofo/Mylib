@@ -3770,7 +3770,7 @@ uint32_t MyLib_Orchestrate_u32(uint32_t start_u32, const uint16_t *delta_pc_u16)
  * @return uint32_t
  * Final accumulated value (wrap-around possible on 32-bit overflow).
  */
- uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
+uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
 
 /**
  * @brief Update the module global counter with optional saturation handling.
@@ -4060,8 +4060,7 @@ uint8_t MyLib_RunStateMachine_u8(const MyLib_record_t *rec_pc, uint32_t add_u32,
  * @return void
  * No return value.
  */
-void MyLib_ProcessRecord(const MyLib_record_t * rec_pc, uint8_t multiplier_u8);
-
+void MyLib_ProcessRecord(const MyLib_record_t *rec_pc, uint8_t multiplier_u8);
 
 # 2 "utExecutionAndResults/utUnderTest/test/test_multiplier_128_mid_range_default_case.c" 2
 # 1 "utExecutionAndResults/utUnderTest/build/test/mocks/test_multiplier_128_mid_range_default_case/mock_MyLib.h" 1

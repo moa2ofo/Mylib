@@ -298,7 +298,7 @@ uint32_t AnalyzeArray_u32(uint16_t *values_pu16, size_t len_u32, uint16_t factor
 # 433 "utExecutionAndResults/utUnderTest/src/MyLib.h"
 uint32_t MyLib_Orchestrate_u32(uint32_t start_u32, const uint16_t *delta_pc_u16);
 # 482 "utExecutionAndResults/utUnderTest/src/MyLib.h"
- uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
+uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
 # 544 "utExecutionAndResults/utUnderTest/src/MyLib.h"
 uint8_t MyLib_UpdateCounter_u8(uint32_t add_u32);
 # 600 "utExecutionAndResults/utUnderTest/src/MyLib.h"
@@ -307,7 +307,7 @@ uint8_t UpdateCounter_u8(uint32_t add_u32);
 uint8_t MyLib_RunStateMachine_u8(const MyLib_record_t *rec_pc, uint32_t add_u32, const uint16_t *delta_pc_u16);
 # 5 "utExecutionAndResults/utUnderTest/src/MyLib_UpdateGlobalRecord.h" 2
 # 51 "utExecutionAndResults/utUnderTest/src/MyLib_UpdateGlobalRecord.h"
-void MyLib_UpdateGlobalRecord(MyLib_record_t * dest_p, const MyLib_record_t * src_pc);
+void MyLib_UpdateGlobalRecord(MyLib_record_t *dest_p, const MyLib_record_t *src_pc);
 # 2 "utExecutionAndResults/utUnderTest/test/test_both_valid_near_max_values_updates_correctly.c" 2
 # 1 "utExecutionAndResults/utUnderTest/build/test/mocks/test_both_valid_near_max_values_updates_correctly/mock_MyLib.h" 1
 

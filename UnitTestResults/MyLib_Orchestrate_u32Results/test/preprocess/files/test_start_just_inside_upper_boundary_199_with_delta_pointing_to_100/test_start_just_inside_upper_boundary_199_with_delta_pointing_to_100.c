@@ -1,20 +1,24 @@
 // CEEDLING NOTICE: This generated file only to be consumed for test runner creation
 
-#include "mock_MyLib.h"
-#include "utExecutionAndResults/utUnderTest/build/vendor/unity/src/unity.h"
 #include "utExecutionAndResults/utUnderTest/src/MyLib_Orchestrate_u32.h"
+#include "utExecutionAndResults/utUnderTest/build/vendor/unity/src/unity.h"
+#include "mock_MyLib.h"
 
-void setUp(void) {
+void setUp(void)
+{
   g_counter_u32 = 0U;
   g_record.id_u16 = 0U;
   g_record.value_u32 = 0U;
-  g_systemReady_b = 0
+  g_systemReady_b =
+                   0
 }
 
-void tearDown(void) {
+void tearDown(void)
+{
 }
 
-void test_start_just_inside_upper_boundary_199_with_delta_pointing_to_100(void) {
+void test_start_just_inside_upper_boundary_199_with_delta_pointing_to_100(void)
+{
   uint32_t start_u32 = 199U;
   uint16_t delta_value = 100U;
   const uint16_t *delta_pc_u16 = &delta_value;
@@ -37,5 +41,7 @@ void test_start_just_inside_upper_boundary_199_with_delta_pointing_to_100(void) 
 
   actual_return = MyLib_Orchestrate_u32(start_u32, delta_pc_u16);
 
-  UnityAssertEqualNumber((UNITY_INT)(UNITY_UINT32)((expected_return)), (UNITY_INT)(UNITY_UINT32)((actual_return)), (((void *)0)), (UNITY_UINT)(42), UNITY_DISPLAY_STYLE_UINT32);
+  UnityAssertEqualNumber((UNITY_INT)(UNITY_UINT32)((expected_return)), (UNITY_INT)(UNITY_UINT32)((actual_return)), (
+ ((void *)0)
+ ), (UNITY_UINT)(42), UNITY_DISPLAY_STYLE_UINT32);
 }

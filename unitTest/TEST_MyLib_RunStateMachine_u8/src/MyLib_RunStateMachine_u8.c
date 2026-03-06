@@ -8,10 +8,12 @@ MyLib_record_t g_record = {0U, 0U};
 bool g_systemReady_b = false;
 
 /* FUNCTION TO TEST */
+
+
 uint8_t MyLib_RunStateMachine_u8(const MyLib_record_t *rec_pc, uint32_t add_u32, const uint16_t *delta_pc_u16) {
-   uint8_t l_State_u8 = 0U;
-   MyLib_record_t l_LastRecord = {0U, 0U};
-   uint32_t l_LastAdjusted_u32 = 0U;
+  static uint8_t l_State_u8 = 0U;
+  static MyLib_record_t l_LastRecord = {0U, 0U};
+  static uint32_t l_LastAdjusted_u32 = 0U;
 
   uint8_t l_ret_u8 = 0U;
   uint32_t l_UpdateValue_u32 = 0U;
