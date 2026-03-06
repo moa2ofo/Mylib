@@ -1,0 +1,19 @@
+---
+:source:
+  :file: utExecutionAndResults/utUnderTest/test/test_NullPointer_NonZeroLen_NonZeroFactor.c
+  :dirname: utExecutionAndResults/utUnderTest/test
+  :basename: test_NullPointer_NonZeroLen_NonZeroFactor.c
+:successes:
+- :test: test_NullPointer_NonZeroLen_NonZeroFactor
+  :line: 21
+  :message: ''
+  :unity_test_time: 0
+:failures: []
+:ignores: []
+:counts:
+  :total: 1
+  :passed: 1
+  :failed: 0
+  :ignored: 0
+:stdout: []
+:time: 0.006971673999998984

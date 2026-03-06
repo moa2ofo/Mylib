@@ -600,7 +600,6 @@ uint8_t MyLib_UpdateCounter_u8(uint32_t add_u32);
  */
 uint8_t UpdateCounter_u8(uint32_t add_u32);
 
-
 /**
  * @brief Execute one step of an internal state machine operating on a record and updating the module counter.
  *
@@ -691,8 +690,6 @@ uint8_t UpdateCounter_u8(uint32_t add_u32);
  * - 2: Counter update routine reported saturation
  * - 3: Internal state recovery executed (invalid state detected)
  */
-uint8_t MyLib_RunStateMachine_u8(const MyLib_record_t *rec_pc,
-                                 uint32_t add_u32,
-                                 const uint16_t *delta_pc_u16);
+uint8_t MyLib_RunStateMachine_u8(const MyLib_record_t *rec_pc, uint32_t add_u32, const uint16_t *delta_pc_u16);
 
 #endif /* MYLIB_H */
