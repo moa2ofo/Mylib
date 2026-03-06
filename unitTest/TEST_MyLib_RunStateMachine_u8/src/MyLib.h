@@ -480,7 +480,7 @@ uint32_t MyLib_Orchestrate_u32(uint32_t start_u32, const uint16_t *delta_pc_u16)
  * @return uint32_t
  * Final accumulated value (wrap-around possible on 32-bit overflow).
  */
- uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
+uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
 
 /**
  * @brief Update the module global counter with optional saturation handling.
@@ -599,7 +599,6 @@ uint8_t MyLib_UpdateCounter_u8(uint32_t add_u32);
  * - 2: Saturation applied and `g_counter_u32` clamped to `CounterLimit_u32`
  */
 uint8_t UpdateCounter_u8(uint32_t add_u32);
-
 
 /**
  * @brief Execute one step of an internal state machine operating on a record and updating the module counter.
