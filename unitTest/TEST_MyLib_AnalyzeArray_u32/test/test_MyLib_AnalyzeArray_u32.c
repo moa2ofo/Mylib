@@ -6,400 +6,353 @@
 #include <stdint.h>
 #include <string.h>
 
-/* ========================================================================== */
-/* CALLBACKS                                                                  */
-/* ========================================================================== */
 
-/* No callbacks required for this test suite */
 
-/* ========================================================================== */
-/* SETUP AND TEARDOWN                                                         */
-/* ========================================================================== */
 
-void setUp(void) {
-  /* Initialize test environment before each test */
+/* SECTION 1 — setUp() and tearDown() */
+
+void setUp(void)
+{
+    g_counter_u32 = 0U;
+    g_record.id_u16 = 0U;
+    g_record.value_u32 = 0U;
+    g_systemReady_b = false;
 }
 
-void tearDown(void) {
-  /* Clean up after each test */
+void tearDown(void)
+{
 }
 
-/* ========================================================================== */
-/* TEST FUNCTIONS                                                             */
-/* ========================================================================== */
+/* SECTION 2 — Test functions */
 
-void test_NullPtr_Len0_Factor0(void) {
-  uint32_t result;
+/**
+ * @brief Test: NULL pointer with len_u32 = 0 and factor_u16 = 0 → return 0, no processing
+ */
+void test_NullPointer_ZeroLen_ZeroFactor(void)
+{
+    uint32_t result;
 
-  result = MyLib_AnalyzeArray_u32(NULL, 0, 0);
+    result = MyLib_AnalyzeArray_u32(NULL, 0U, 0U);
 
-  TEST_ASSERT_EQUAL_UINT32(0, result);
+    TEST_ASSERT_EQUAL_UINT32(0U, result);
 }
 
-void test_NullPtr_Len1_Factor1(void) {
-  uint32_t result;
+/**
+ * @brief Test: NULL pointer with len_u32 = 1 and factor_u16 = 1 → return 0, no processing
+ */
+void test_NullPointer_NonZeroLen_NonZeroFactor(void)
+{
+    uint32_t result;
 
-  result = MyLib_AnalyzeArray_u32(NULL, 1, 1);
+    result = MyLib_AnalyzeArray_u32(NULL, 1U, 1U);
 
-  TEST_ASSERT_EQUAL_UINT32(0, result);
+    TEST_ASSERT_EQUAL_UINT32(0U, result);
 }
 
-void test_NullPtr_Len600_Factor100(void) {
-  uint32_t result;
+/**
+ * @brief Test: Valid pointer with len_u32 = 0 and factor_u16 = 1 → return 0, array unchanged
+ */
+void test_ValidPointer_ZeroLen(void)
+{
+    uint16_t array[1] = {100U};
+    uint32_t result;
 
-  result = MyLib_AnalyzeArray_u32(NULL, 600, 100);
+    result = MyLib_AnalyzeArray_u32(array, 0U, 1U);
 
-  TEST_ASSERT_EQUAL_UINT32(0, result);
+    TEST_ASSERT_EQUAL_UINT32(0U, result);
+    TEST_ASSERT_EQUAL_UINT16(100U, array[0]);
 }
 
-void test_ValidPtr_Len0_Factor1(void) {
-  uint16_t array[1] = {42};
-  uint32_t result;
+/**
+ * @brief Test: Valid pointer with len_u32 = 1, factor_u16 = 0, initial value = 100 → array[0] = 0, return 0
+ */
+void test_SingleElement_ZeroFactor(void)
+{
+    uint16_t array[1] = {100U};
+    uint32_t result;
 
-  result = MyLib_AnalyzeArray_u32(array, 0, 1);
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(0U, NULL, 0U);
 
-  TEST_ASSERT_EQUAL_UINT32(0, result);
-  TEST_ASSERT_EQUAL_UINT16(42, array[0]);
+    result = MyLib_AnalyzeArray_u32(array, 1U, 0U);
+
+    TEST_ASSERT_EQUAL_UINT32(0U, result);
+    TEST_ASSERT_EQUAL_UINT16(0U, array[0]);
 }
 
-void test_ValidPtr_Len0_Factor65535(void) {
-  uint16_t array[1] = {100};
-  uint32_t result;
+/**
+ * @brief Test: Valid pointer with len_u32 = 1, factor_u16 = 1, initial value = 50 → array[0] = 50, return 50
+ */
+void test_SingleElement_FactorOne_Value50(void)
+{
+    uint16_t array[1] = {50U};
+    uint32_t result;
 
-  result = MyLib_AnalyzeArray_u32(array, 0, 65535);
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(50U, NULL, 0U);
 
-  TEST_ASSERT_EQUAL_UINT32(0, result);
-  TEST_ASSERT_EQUAL_UINT16(100, array[0]);
+    result = MyLib_AnalyzeArray_u32(array, 1U, 1U);
+
+    TEST_ASSERT_EQUAL_UINT32(50U, result);
+    TEST_ASSERT_EQUAL_UINT16(50U, array[0]);
 }
 
-void test_ValidArray_Len1_Factor0(void) {
-  uint16_t array[1] = {123};
-  uint32_t result;
+/**
+ * @brief Test: Valid pointer with len_u32 = 1, factor_u16 = 2, initial value = 100 → array[0] = 200, return 200
+ */
+void test_SingleElement_FactorTwo_Value100(void)
+{
+    uint16_t array[1] = {100U};
+    uint32_t result;
 
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(0, NULL, 0);
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(200U, NULL, 0U);
 
-  result = MyLib_AnalyzeArray_u32(array, 1, 0);
+    result = MyLib_AnalyzeArray_u32(array, 1U, 2U);
 
-  TEST_ASSERT_EQUAL_UINT32(0, result);
-  TEST_ASSERT_EQUAL_UINT16(0, array[0]);
+    TEST_ASSERT_EQUAL_UINT32(200U, result);
+    TEST_ASSERT_EQUAL_UINT16(200U, array[0]);
 }
 
-void test_ValidArray_Len1_Factor1(void) {
-  uint16_t array[1] = {50};
-  uint32_t result;
+/**
+ * @brief Test: Valid pointer with len_u32 = 1, factor_u16 = 65535, initial value = 1 → array[0] = 65535, return 65535
+ */
+void test_SingleElement_MaxFactor_Value1(void)
+{
+    uint16_t array[1] = {1U};
+    uint32_t result;
 
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(50, NULL, 0);
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(65535U, NULL, 0U);
 
-  result = MyLib_AnalyzeArray_u32(array, 1, 1);
+    result = MyLib_AnalyzeArray_u32(array, 1U, 65535U);
 
-  TEST_ASSERT_EQUAL_UINT32(50, result);
-  TEST_ASSERT_EQUAL_UINT16(50, array[0]);
+    TEST_ASSERT_EQUAL_UINT32(65535U, result);
+    TEST_ASSERT_EQUAL_UINT16(65535U, array[0]);
 }
 
-void test_ValidArray_Len1_Factor65535(void) {
-  uint16_t array[1] = {2};
-  uint32_t result;
-  uint32_t expected_scaled = (uint16_t)(2 * 65535);
+/**
+ * @brief Test: Valid pointer with len_u32 = 2, factor_u16 = 1, initial values = {10, 20} → array = {10, 20}, return 30
+ */
+void test_TwoElements_FactorOne(void)
+{
+    uint16_t array[2] = {10U, 20U};
+    uint32_t result;
 
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_scaled, NULL, 0);
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(30U, NULL, 0U);
 
-  result = MyLib_AnalyzeArray_u32(array, 1, 65535);
+    result = MyLib_AnalyzeArray_u32(array, 2U, 1U);
 
-  TEST_ASSERT_EQUAL_UINT32(expected_scaled, result);
-  TEST_ASSERT_EQUAL_UINT16(expected_scaled, array[0]);
+    TEST_ASSERT_EQUAL_UINT32(30U, result);
+    TEST_ASSERT_EQUAL_UINT16(10U, array[0]);
+    TEST_ASSERT_EQUAL_UINT16(20U, array[1]);
 }
 
-void test_ValidArray_Len1_Elem65535_Factor2_Wraparound(void) {
-  uint16_t array[1] = {65535};
-  uint32_t result;
-  uint16_t expected_elem = (uint16_t)(65535 * 2);
+/**
+ * @brief Test: Valid pointer with len_u32 = 2, factor_u16 = 3, initial values = {5, 10} → array = {15, 30}, return 45
+ */
+void test_TwoElements_FactorThree(void)
+{
+    uint16_t array[2] = {5U, 10U};
+    uint32_t result;
 
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_elem, NULL, 0);
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(45U, NULL, 0U);
 
-  result = MyLib_AnalyzeArray_u32(array, 1, 2);
+    result = MyLib_AnalyzeArray_u32(array, 2U, 3U);
 
-  TEST_ASSERT_EQUAL_UINT32(expected_elem, result);
-  TEST_ASSERT_EQUAL_UINT16(expected_elem, array[0]);
+    TEST_ASSERT_EQUAL_UINT32(45U, result);
+    TEST_ASSERT_EQUAL_UINT16(15U, array[0]);
+    TEST_ASSERT_EQUAL_UINT16(30U, array[1]);
 }
 
-void test_ValidArray_Len2_Factor1(void) {
-  uint16_t array[2] = {10, 20};
-  uint32_t result;
+/**
+ * @brief Test: Valid pointer with len_u32 = 599, factor_u16 = 1, all elements = 1 → all elements remain 1, return 599
+ */
+void test_599Elements_FactorOne_AllOnes(void)
+{
+    uint16_t array[599];
+    uint32_t result;
+    size_t i;
 
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(30, NULL, 0);
+    for (i = 0U; i < 599U; i++)
+    {
+        array[i] = 1U;
+    }
 
-  result = MyLib_AnalyzeArray_u32(array, 2, 1);
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(599U, NULL, 0U);
 
-  TEST_ASSERT_EQUAL_UINT32(30, result);
-  TEST_ASSERT_EQUAL_UINT16(10, array[0]);
-  TEST_ASSERT_EQUAL_UINT16(20, array[1]);
+    result = MyLib_AnalyzeArray_u32(array, 599U, 1U);
+
+    TEST_ASSERT_EQUAL_UINT32(599U, result);
+    for (i = 0U; i < 599U; i++)
+    {
+        TEST_ASSERT_EQUAL_UINT16(1U, array[i]);
+    }
 }
 
-void test_ValidArray_Len2_Factor10(void) {
-  uint16_t array[2] = {5, 15};
-  uint32_t result;
+/**
+ * @brief Test: Valid pointer with len_u32 = 600 (upper boundary), factor_u16 = 1, all elements = 1 → all elements remain 1, return 600
+ */
+void test_600Elements_FactorOne_AllOnes(void)
+{
+    uint16_t array[600];
+    uint32_t result;
+    size_t i;
 
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(200, NULL, 0);
+    for (i = 0U; i < 600U; i++)
+    {
+        array[i] = 1U;
+    }
 
-  result = MyLib_AnalyzeArray_u32(array, 2, 10);
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(600U, NULL, 0U);
 
-  TEST_ASSERT_EQUAL_UINT32(200, result);
-  TEST_ASSERT_EQUAL_UINT16(50, array[0]);
-  TEST_ASSERT_EQUAL_UINT16(150, array[1]);
+    result = MyLib_AnalyzeArray_u32(array, 600U, 1U);
+
+    TEST_ASSERT_EQUAL_UINT32(600U, result);
+    for (i = 0U; i < 600U; i++)
+    {
+        TEST_ASSERT_EQUAL_UINT16(1U, array[i]);
+    }
 }
 
-void test_ValidArray_Len2_ElemOverflow(void) {
-  uint16_t array[2] = {40000, 50000};
-  uint32_t result;
-  uint16_t expected_elem0 = (uint16_t)(40000 * 2);
-  uint16_t expected_elem1 = (uint16_t)(50000 * 2);
-  uint32_t expected_sum = (uint32_t)expected_elem0 + (uint32_t)expected_elem1;
+/**
+ * @brief Test: Valid pointer with len_u32 = 3, factor_u16 = 2, initial values = {100, 200, 300} → array = {200, 400, 600}, return 1200
+ */
+void test_ThreeElements_FactorTwo(void)
+{
+    uint16_t array[3] = {100U, 200U, 300U};
+    uint32_t result;
 
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_sum, NULL, 0);
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(1200U, NULL, 0U);
 
-  result = MyLib_AnalyzeArray_u32(array, 2, 2);
+    result = MyLib_AnalyzeArray_u32(array, 3U, 2U);
 
-  TEST_ASSERT_EQUAL_UINT32(expected_sum, result);
-  TEST_ASSERT_EQUAL_UINT16(expected_elem0, array[0]);
-  TEST_ASSERT_EQUAL_UINT16(expected_elem1, array[1]);
+    TEST_ASSERT_EQUAL_UINT32(1200U, result);
+    TEST_ASSERT_EQUAL_UINT16(200U, array[0]);
+    TEST_ASSERT_EQUAL_UINT16(400U, array[1]);
+    TEST_ASSERT_EQUAL_UINT16(600U, array[2]);
 }
 
-void test_ValidArray_Len2_SumOverflow(void) {
-  uint16_t array[2] = {65535, 65535};
-  uint32_t result;
-  uint16_t expected_elem = (uint16_t)(65535 * 65535);
-  uint32_t expected_sum = (uint32_t)expected_elem + (uint32_t)expected_elem;
+/**
+ * @brief Test: Valid pointer with len_u32 = 2, factor_u16 = 65535, initial values = {1, 1} → array = {65535, 65535}, return 131070
+ */
+void test_TwoElements_MaxFactor_AllOnes(void)
+{
+    uint16_t array[2] = {1U, 1U};
+    uint32_t result;
 
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_sum, NULL, 0);
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(131070U, NULL, 0U);
 
-  result = MyLib_AnalyzeArray_u32(array, 2, 65535);
+    result = MyLib_AnalyzeArray_u32(array, 2U, 65535U);
 
-  TEST_ASSERT_EQUAL_UINT32(expected_sum, result);
-  TEST_ASSERT_EQUAL_UINT16(expected_elem, array[0]);
-  TEST_ASSERT_EQUAL_UINT16(expected_elem, array[1]);
+    TEST_ASSERT_EQUAL_UINT32(131070U, result);
+    TEST_ASSERT_EQUAL_UINT16(65535U, array[0]);
+    TEST_ASSERT_EQUAL_UINT16(65535U, array[1]);
 }
 
-void test_ValidArray_Len300_Factor1(void) {
-  uint16_t array[300];
-  uint32_t result;
-  uint32_t expected_sum = 0;
-  size_t i;
+/**
+ * @brief Test: Valid pointer with len_u32 = 3, factor_u16 = 10000, initial values = {5, 6, 7} → verify wrap-around behavior on uint16_t multiplication and uint32_t sum
+ */
+void test_ThreeElements_LargeFactor_WrapAround(void)
+{
+    uint16_t array[3] = {5U, 6U, 7U};
+    uint32_t result;
+    uint16_t expected_0 = (uint16_t)(5U * 10000U);
+    uint16_t expected_1 = (uint16_t)(6U * 10000U);
+    uint16_t expected_2 = (uint16_t)(7U * 10000U);
+    uint32_t expected_sum = (uint32_t)expected_0 + (uint32_t)expected_1 + (uint32_t)expected_2;
 
-  for(i = 0; i < 300; i++) {
-    array[i] = (uint16_t)(i + 1);
-    expected_sum += (i + 1);
-  }
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_sum, NULL, 0U);
 
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_sum, NULL, 0);
+    result = MyLib_AnalyzeArray_u32(array, 3U, 10000U);
 
-  result = MyLib_AnalyzeArray_u32(array, 300, 1);
-
-  TEST_ASSERT_EQUAL_UINT32(expected_sum, result);
-  for(i = 0; i < 300; i++) {
-    TEST_ASSERT_EQUAL_UINT16((uint16_t)(i + 1), array[i]);
-  }
+    TEST_ASSERT_EQUAL_UINT32(expected_sum, result);
+    TEST_ASSERT_EQUAL_UINT16(expected_0, array[0]);
+    TEST_ASSERT_EQUAL_UINT16(expected_1, array[1]);
+    TEST_ASSERT_EQUAL_UINT16(expected_2, array[2]);
 }
 
-void test_ValidArray_Len300_Factor100(void) {
-  uint16_t array[300];
-  uint32_t result;
-  uint32_t expected_sum = 0;
-  size_t i;
+/**
+ * @brief Test: Valid pointer with len_u32 = 10, factor_u16 = 100, initial values = {100, 200, 300, 400, 500, 600, 700, 800, 900, 1000} → verify correct in-place scaling and sum computation
+ */
+void test_TenElements_Factor100(void)
+{
+    uint16_t array[10] = {100U, 200U, 300U, 400U, 500U, 600U, 700U, 800U, 900U, 1000U};
+    uint32_t result;
+    uint16_t expected[10];
+    uint32_t expected_sum = 0U;
+    size_t i;
 
-  for(i = 0; i < 300; i++) {
-    array[i] = (uint16_t)(i + 1);
-  }
+    for (i = 0U; i < 10U; i++)
+    {
+        expected[i] = (uint16_t)(array[i] * 100U);
+        expected_sum += (uint32_t)expected[i];
+    }
 
-  for(i = 0; i < 300; i++) {
-    uint16_t scaled = (uint16_t)((i + 1) * 100);
-    expected_sum += scaled;
-  }
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_sum, NULL, 0U);
 
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_sum, NULL, 0);
+    result = MyLib_AnalyzeArray_u32(array, 10U, 100U);
 
-  result = MyLib_AnalyzeArray_u32(array, 300, 100);
-
-  TEST_ASSERT_EQUAL_UINT32(expected_sum, result);
-  for(i = 0; i < 300; i++) {
-    TEST_ASSERT_EQUAL_UINT16((uint16_t)((i + 1) * 100), array[i]);
-  }
+    TEST_ASSERT_EQUAL_UINT32(expected_sum, result);
+    for (i = 0U; i < 10U; i++)
+    {
+        TEST_ASSERT_EQUAL_UINT16(expected[i], array[i]);
+    }
 }
 
-void test_ValidArray_Len600_Factor1(void) {
-  uint16_t array[600];
-  uint32_t result;
-  uint32_t expected_sum = 0;
-  size_t i;
+/**
+ * @brief Test: Valid pointer with len_u32 = 1, factor_u16 = 65535, initial value = 65535 → verify uint16_t overflow wraps to 1 (65535*65535 mod 65536), return 1
+ */
+void test_SingleElement_MaxFactor_MaxValue_Overflow(void)
+{
+    uint16_t array[1] = {65535U};
+    uint32_t result;
+    uint16_t expected = (uint16_t)(65535U * 65535U);
 
-  for(i = 0; i < 600; i++) {
-    array[i] = (uint16_t)(i % 100);
-    expected_sum += (i % 100);
-  }
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn((uint32_t)expected, NULL, 0U);
 
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_sum, NULL, 0);
+    result = MyLib_AnalyzeArray_u32(array, 1U, 65535U);
 
-  result = MyLib_AnalyzeArray_u32(array, 600, 1);
-
-  TEST_ASSERT_EQUAL_UINT32(expected_sum, result);
-  for(i = 0; i < 600; i++) {
-    TEST_ASSERT_EQUAL_UINT16((uint16_t)(i % 100), array[i]);
-  }
+    TEST_ASSERT_EQUAL_UINT32((uint32_t)expected, result);
+    TEST_ASSERT_EQUAL_UINT16(expected, array[0]);
 }
 
-void test_ValidArray_Len600_Factor10(void) {
-  uint16_t array[600];
-  uint32_t result;
-  uint32_t expected_sum = 0;
-  size_t i;
+/**
+ * @brief Test: Valid pointer with len_u32 = 5, factor_u16 = 1, initial values = {0, 1, 32767, 32768, 65535} → array unchanged, return 131071
+ */
+void test_FiveElements_FactorOne_BoundaryValues(void)
+{
+    uint16_t array[5] = {0U, 1U, 32767U, 32768U, 65535U};
+    uint32_t result;
 
-  for(i = 0; i < 600; i++) {
-    array[i] = (uint16_t)(i % 100);
-  }
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(131071U, NULL, 0U);
 
-  for(i = 0; i < 600; i++) {
-    uint16_t scaled = (uint16_t)((i % 100) * 10);
-    expected_sum += scaled;
-  }
+    result = MyLib_AnalyzeArray_u32(array, 5U, 1U);
 
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_sum, NULL, 0);
-
-  result = MyLib_AnalyzeArray_u32(array, 600, 10);
-
-  TEST_ASSERT_EQUAL_UINT32(expected_sum, result);
-  for(i = 0; i < 600; i++) {
-    TEST_ASSERT_EQUAL_UINT16((uint16_t)((i % 100) * 10), array[i]);
-  }
+    TEST_ASSERT_EQUAL_UINT32(131071U, result);
+    TEST_ASSERT_EQUAL_UINT16(0U, array[0]);
+    TEST_ASSERT_EQUAL_UINT16(1U, array[1]);
+    TEST_ASSERT_EQUAL_UINT16(32767U, array[2]);
+    TEST_ASSERT_EQUAL_UINT16(32768U, array[3]);
+    TEST_ASSERT_EQUAL_UINT16(65535U, array[4]);
 }
 
-void test_ValidArray_Len599_Factor2(void) {
-  uint16_t array[599];
-  uint32_t result;
-  uint32_t expected_sum = 0;
-  size_t i;
+/**
+ * @brief Test: Valid pointer with len_u32 = 4, factor_u16 = 2, initial values = {0, 1, 32767, 32768} → array = {0, 2, 65534, 0 (wrap)}, return 65536
+ */
+void test_FourElements_FactorTwo_BoundaryWrap(void)
+{
+    uint16_t array[4] = {0U, 1U, 32767U, 32768U};
+    uint32_t result;
+    uint16_t expected_0 = (uint16_t)(0U * 2U);
+    uint16_t expected_1 = (uint16_t)(1U * 2U);
+    uint16_t expected_2 = (uint16_t)(32767U * 2U);
+    uint16_t expected_3 = (uint16_t)(32768U * 2U);
+    uint32_t expected_sum = (uint32_t)expected_0 + (uint32_t)expected_1 + (uint32_t)expected_2 + (uint32_t)expected_3;
 
-  for(i = 0; i < 599; i++) {
-    array[i] = (uint16_t)(i % 50);
-  }
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_sum, NULL, 0U);
 
-  for(i = 0; i < 599; i++) {
-    uint16_t scaled = (uint16_t)((i % 50) * 2);
-    expected_sum += scaled;
-  }
+    result = MyLib_AnalyzeArray_u32(array, 4U, 2U);
 
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_sum, NULL, 0);
-
-  result = MyLib_AnalyzeArray_u32(array, 599, 2);
-
-  TEST_ASSERT_EQUAL_UINT32(expected_sum, result);
-  for(i = 0; i < 599; i++) {
-    TEST_ASSERT_EQUAL_UINT16((uint16_t)((i % 50) * 2), array[i]);
-  }
-}
-
-void test_ValidArray_Len1_LowerBoundary_Factor1(void) {
-  uint16_t array[1] = {77};
-  uint32_t result;
-
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(77, NULL, 0);
-
-  result = MyLib_AnalyzeArray_u32(array, 1, 1);
-
-  TEST_ASSERT_EQUAL_UINT32(77, result);
-  TEST_ASSERT_EQUAL_UINT16(77, array[0]);
-}
-
-void test_ValidArray_AllZeros_Len10_Factor100(void) {
-  uint16_t array[10] = {0};
-  uint32_t result;
-  size_t i;
-
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(0, NULL, 0);
-
-  result = MyLib_AnalyzeArray_u32(array, 10, 100);
-
-  TEST_ASSERT_EQUAL_UINT32(0, result);
-  for(i = 0; i < 10; i++) {
-    TEST_ASSERT_EQUAL_UINT16(0, array[i]);
-  }
-}
-
-void test_ValidArray_AllMax_Len3_Factor1(void) {
-  uint16_t array[3] = {65535, 65535, 65535};
-  uint32_t result;
-  uint32_t expected_sum = 3 * 65535;
-
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_sum, NULL, 0);
-
-  result = MyLib_AnalyzeArray_u32(array, 3, 1);
-
-  TEST_ASSERT_EQUAL_UINT32(expected_sum, result);
-  TEST_ASSERT_EQUAL_UINT16(65535, array[0]);
-  TEST_ASSERT_EQUAL_UINT16(65535, array[1]);
-  TEST_ASSERT_EQUAL_UINT16(65535, array[2]);
-}
-
-void test_ValidArray_MixedValues_Len5_Factor3(void) {
-  uint16_t array[5] = {10, 20, 30, 40, 50};
-  uint32_t result;
-  uint32_t expected_sum = 30 + 60 + 90 + 120 + 150;
-
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_sum, NULL, 0);
-
-  result = MyLib_AnalyzeArray_u32(array, 5, 3);
-
-  TEST_ASSERT_EQUAL_UINT32(expected_sum, result);
-  TEST_ASSERT_EQUAL_UINT16(30, array[0]);
-  TEST_ASSERT_EQUAL_UINT16(60, array[1]);
-  TEST_ASSERT_EQUAL_UINT16(90, array[2]);
-  TEST_ASSERT_EQUAL_UINT16(120, array[3]);
-  TEST_ASSERT_EQUAL_UINT16(150, array[4]);
-}
-
-void test_ValidArray_Len10_Factor0_AllZero(void) {
-  uint16_t array[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-  uint32_t result;
-  size_t i;
-
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(0, NULL, 0);
-
-  result = MyLib_AnalyzeArray_u32(array, 10, 0);
-
-  TEST_ASSERT_EQUAL_UINT32(0, result);
-  for(i = 0; i < 10; i++) {
-    TEST_ASSERT_EQUAL_UINT16(0, array[i]);
-  }
-}
-
-void test_ValidArray_SumOverflowDuringAccumulation(void) {
-  uint16_t array[100];
-  uint32_t result;
-  uint32_t expected_sum = 0;
-  size_t i;
-
-  for(i = 0; i < 100; i++) {
-    array[i] = 65535;
-  }
-
-  for(i = 0; i < 100; i++) {
-    uint16_t scaled = (uint16_t)(65535 * 100);
-    expected_sum += scaled;
-  }
-
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_sum, NULL, 0);
-
-  result = MyLib_AnalyzeArray_u32(array, 100, 100);
-
-  TEST_ASSERT_EQUAL_UINT32(expected_sum, result);
-}
-
-void test_ComputeAdjustedValueCalled_ValidArray(void) {
-  uint16_t array[3] = {100, 200, 300};
-  uint32_t result;
-  uint32_t expected_sum = 200 + 400 + 600;
-
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_sum, NULL, 0);
-
-  result = MyLib_AnalyzeArray_u32(array, 3, 2);
-
-  TEST_ASSERT_EQUAL_UINT32(expected_sum, result);
+    TEST_ASSERT_EQUAL_UINT32(expected_sum, result);
+    TEST_ASSERT_EQUAL_UINT16(expected_0, array[0]);
+    TEST_ASSERT_EQUAL_UINT16(expected_1, array[1]);
+    TEST_ASSERT_EQUAL_UINT16(expected_2, array[2]);
+    TEST_ASSERT_EQUAL_UINT16(expected_3, array[3]);
 }
