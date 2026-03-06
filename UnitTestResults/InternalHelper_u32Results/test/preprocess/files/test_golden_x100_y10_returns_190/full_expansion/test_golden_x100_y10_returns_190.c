@@ -303,6 +303,8 @@ uint32_t MyLib_Orchestrate_u32(uint32_t start_u32, const uint16_t *delta_pc_u16)
 uint8_t MyLib_UpdateCounter_u8(uint32_t add_u32);
 # 600 "utExecutionAndResults/utUnderTest/src/MyLib.h"
 uint8_t UpdateCounter_u8(uint32_t add_u32);
+# 695 "utExecutionAndResults/utUnderTest/src/MyLib.h"
+uint8_t MyLib_RunStateMachine_u8(const MyLib_record_t *rec_pc, uint32_t add_u32, const uint16_t *delta_pc_u16);
 # 5 "utExecutionAndResults/utUnderTest/src/InternalHelper_u32.h" 2
 # 53 "utExecutionAndResults/utUnderTest/src/InternalHelper_u32.h"
 uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);

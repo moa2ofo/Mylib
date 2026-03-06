@@ -10692,7 +10692,7 @@ uint32_t MyLib_Orchestrate_u32(uint32_t start_u32, const uint16_t *delta_pc_u16)
  * @return uint32_t
  * Final accumulated value (wrap-around possible on 32-bit overflow).
  */
-uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
+ uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
 
 /**
  * @brief Update the module global counter with optional saturation handling.
@@ -11269,7 +11269,8 @@ void UpdateCounter_u8_CMockIgnoreArg_add_u32(UNITY_LINE_TYPE cmock_line);
  * - 2: Counter update routine reported saturation
  * - 3: Internal state recovery executed (invalid state detected)
  */
-uint8_t MyLib_RunStateMachine_u8(const MyLib_record_t *rec_pc, uint32_t add_u32, const uint16_t *delta_pc_u16);
+uint8_t MyLib_RunStateMachine_u8(const MyLib_record_t * rec_pc, uint32_t add_u32, const uint16_t * delta_pc_u16);
+
 
 # 4 "utExecutionAndResults/utUnderTest/test/test_State2_AddZero_AdjustedZero_Return0_StateTransitionsTo0.c" 2
 

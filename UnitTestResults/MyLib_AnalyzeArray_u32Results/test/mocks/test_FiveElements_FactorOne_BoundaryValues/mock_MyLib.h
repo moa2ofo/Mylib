@@ -223,6 +223,30 @@ void UpdateCounter_u8_Stub(CMOCK_UpdateCounter_u8_CALLBACK Callback);
 #define UpdateCounter_u8_StubWithCallback UpdateCounter_u8_Stub
 #define UpdateCounter_u8_IgnoreArg_add_u32() UpdateCounter_u8_CMockIgnoreArg_add_u32(__LINE__)
 void UpdateCounter_u8_CMockIgnoreArg_add_u32(UNITY_LINE_TYPE cmock_line);
+#define MyLib_RunStateMachine_u8_Ignore() TEST_FAIL_MESSAGE("MyLib_RunStateMachine_u8 requires _IgnoreAndReturn");
+#define MyLib_RunStateMachine_u8_IgnoreAndReturn(cmock_retval) MyLib_RunStateMachine_u8_CMockIgnoreAndReturn(__LINE__, cmock_retval)
+void MyLib_RunStateMachine_u8_CMockIgnoreAndReturn(UNITY_LINE_TYPE cmock_line, uint8_t cmock_to_return);
+#define MyLib_RunStateMachine_u8_StopIgnore() MyLib_RunStateMachine_u8_CMockStopIgnore()
+void MyLib_RunStateMachine_u8_CMockStopIgnore(void);
+#define MyLib_RunStateMachine_u8_ExpectAnyArgs() TEST_FAIL_MESSAGE("MyLib_RunStateMachine_u8 requires _ExpectAnyArgsAndReturn");
+#define MyLib_RunStateMachine_u8_ExpectAnyArgsAndReturn(cmock_retval) MyLib_RunStateMachine_u8_CMockExpectAnyArgsAndReturn(__LINE__, cmock_retval)
+void MyLib_RunStateMachine_u8_CMockExpectAnyArgsAndReturn(UNITY_LINE_TYPE cmock_line, uint8_t cmock_to_return);
+#define MyLib_RunStateMachine_u8_Expect(rec_pc, add_u32, delta_pc_u16) TEST_FAIL_MESSAGE("MyLib_RunStateMachine_u8 requires _ExpectAndReturn");
+#define MyLib_RunStateMachine_u8_ExpectAndReturn(rec_pc, add_u32, delta_pc_u16, cmock_retval) MyLib_RunStateMachine_u8_CMockExpectAndReturn(__LINE__, rec_pc, add_u32, delta_pc_u16, cmock_retval)
+void MyLib_RunStateMachine_u8_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, const MyLib_record_t* rec_pc, uint32_t add_u32, const uint16_t* delta_pc_u16, uint8_t cmock_to_return);
+typedef uint8_t (* CMOCK_MyLib_RunStateMachine_u8_CALLBACK)(const MyLib_record_t* rec_pc, uint32_t add_u32, const uint16_t* delta_pc_u16, int cmock_num_calls);
+void MyLib_RunStateMachine_u8_AddCallback(CMOCK_MyLib_RunStateMachine_u8_CALLBACK Callback);
+void MyLib_RunStateMachine_u8_Stub(CMOCK_MyLib_RunStateMachine_u8_CALLBACK Callback);
+#define MyLib_RunStateMachine_u8_StubWithCallback MyLib_RunStateMachine_u8_Stub
+#define MyLib_RunStateMachine_u8_ExpectWithArray(rec_pc, rec_pc_Depth, add_u32, delta_pc_u16, delta_pc_u16_Depth) TEST_FAIL_MESSAGE("MyLib_RunStateMachine_u8 requires _ExpectWithArrayAndReturn");
+#define MyLib_RunStateMachine_u8_ExpectWithArrayAndReturn(rec_pc, rec_pc_Depth, add_u32, delta_pc_u16, delta_pc_u16_Depth, cmock_retval) MyLib_RunStateMachine_u8_CMockExpectWithArrayAndReturn(__LINE__, rec_pc, (rec_pc_Depth), add_u32, delta_pc_u16, (delta_pc_u16_Depth), cmock_retval)
+void MyLib_RunStateMachine_u8_CMockExpectWithArrayAndReturn(UNITY_LINE_TYPE cmock_line, const MyLib_record_t* rec_pc, int rec_pc_Depth, uint32_t add_u32, const uint16_t* delta_pc_u16, int delta_pc_u16_Depth, uint8_t cmock_to_return);
+#define MyLib_RunStateMachine_u8_IgnoreArg_rec_pc() MyLib_RunStateMachine_u8_CMockIgnoreArg_rec_pc(__LINE__)
+void MyLib_RunStateMachine_u8_CMockIgnoreArg_rec_pc(UNITY_LINE_TYPE cmock_line);
+#define MyLib_RunStateMachine_u8_IgnoreArg_add_u32() MyLib_RunStateMachine_u8_CMockIgnoreArg_add_u32(__LINE__)
+void MyLib_RunStateMachine_u8_CMockIgnoreArg_add_u32(UNITY_LINE_TYPE cmock_line);
+#define MyLib_RunStateMachine_u8_IgnoreArg_delta_pc_u16() MyLib_RunStateMachine_u8_CMockIgnoreArg_delta_pc_u16(__LINE__)
+void MyLib_RunStateMachine_u8_CMockIgnoreArg_delta_pc_u16(UNITY_LINE_TYPE cmock_line);
 
 #ifdef __cplusplus
 }

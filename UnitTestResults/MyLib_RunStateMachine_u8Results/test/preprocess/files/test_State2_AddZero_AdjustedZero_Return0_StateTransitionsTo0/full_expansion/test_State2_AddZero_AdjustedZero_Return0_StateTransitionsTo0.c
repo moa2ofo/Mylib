@@ -2205,7 +2205,7 @@ void MyLib_UpdateGlobalRecord(MyLib_record_t *dest_p, const MyLib_record_t *src_
 # 434 "utExecutionAndResults/utUnderTest/src/MyLib.h"
 uint32_t MyLib_Orchestrate_u32(uint32_t start_u32, const uint16_t *delta_pc_u16);
 # 483 "utExecutionAndResults/utUnderTest/src/MyLib.h"
-uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
+ uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
 # 545 "utExecutionAndResults/utUnderTest/src/MyLib.h"
 uint8_t MyLib_UpdateCounter_u8(uint32_t add_u32);
 # 601 "utExecutionAndResults/utUnderTest/src/MyLib.h"
@@ -2475,7 +2475,7 @@ void UpdateCounter_u8_CMockIgnoreArg_add_u32(UNITY_UINT cmock_line);
 # 1 "utExecutionAndResults/utUnderTest/src/MyLib.h" 1
 # 5 "utExecutionAndResults/utUnderTest/src/MyLib_RunStateMachine_u8.h" 2
 # 99 "utExecutionAndResults/utUnderTest/src/MyLib_RunStateMachine_u8.h"
-uint8_t MyLib_RunStateMachine_u8(const MyLib_record_t *rec_pc, uint32_t add_u32, const uint16_t *delta_pc_u16);
+uint8_t MyLib_RunStateMachine_u8(const MyLib_record_t * rec_pc, uint32_t add_u32, const uint16_t * delta_pc_u16);
 # 4 "utExecutionAndResults/utUnderTest/test/test_State2_AddZero_AdjustedZero_Return0_StateTransitionsTo0.c" 2
 
 
