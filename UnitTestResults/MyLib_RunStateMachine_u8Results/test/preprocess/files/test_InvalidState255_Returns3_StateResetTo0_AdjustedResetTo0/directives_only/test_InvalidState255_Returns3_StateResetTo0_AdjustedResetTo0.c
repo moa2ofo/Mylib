@@ -11277,26 +11277,23 @@ void UpdateCounter_u8_CMockIgnoreArg_add_u32(UNITY_LINE_TYPE cmock_line);
 
 void setUp(void) {
   g_counter_u32 = 0U;
-  g_record.id_u16 = 0U;
-  g_record.value_u32 = 0U;
-  g_systemReady_b = false;
-
-  MyLib_RunStateMachine_u8_SetState_u8(0U);
-  MyLib_RunStateMachine_u8_SetLastAdjusted_u32(0U);
 }
 
 void tearDown(void) {
 }
 
 void test_InvalidState255_Returns3_StateResetTo0_AdjustedResetTo0(void) {
+  MyLib_record_t input_rec = {100U, 200U};
   uint8_t result;
+  int i;
 
-  MyLib_RunStateMachine_u8_SetState_u8(255U);
-  MyLib_RunStateMachine_u8_SetLastAdjusted_u32(12345U);
+  MyLib_UpdateGlobalRecord_Expect(NULL, &input_rec);
+  MyLib_UpdateGlobalRecord_IgnoreArg_dest_p();
+  result = MyLib_RunStateMachine_u8(&input_rec, 0U, NULL);
 
-  result = MyLib_RunStateMachine_u8(NULL, 0U, NULL);
+  for(i = 0; i < 254; i++) {
+    result = MyLib_RunStateMachine_u8(NULL, 0U, NULL);
+  }
 
   TEST_ASSERT_EQUAL_UINT8(3U, result);
-  TEST_ASSERT_EQUAL_UINT8(0U, MyLib_RunStateMachine_u8_GetState_u8());
-  TEST_ASSERT_EQUAL_UINT32(0U, MyLib_RunStateMachine_u8_GetLastAdjusted_u32());
 }

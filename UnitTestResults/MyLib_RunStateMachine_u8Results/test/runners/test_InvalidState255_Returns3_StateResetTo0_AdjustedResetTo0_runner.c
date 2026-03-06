@@ -82,7 +82,7 @@ static void run_test(UnityTestFunction func, const char* name, UNITY_LINE_TYPE l
 int main(void)
 {
   UnityBegin("test_InvalidState255_Returns3_StateResetTo0_AdjustedResetTo0.c");
-  run_test(test_InvalidState255_Returns3_StateResetTo0_AdjustedResetTo0, "test_InvalidState255_Returns3_StateResetTo0_AdjustedResetTo0", 20);
+  run_test(test_InvalidState255_Returns3_StateResetTo0_AdjustedResetTo0, "test_InvalidState255_Returns3_StateResetTo0_AdjustedResetTo0", 14);
 
   CMock_Guts_MemFreeFinal();
   return UNITY_END();
