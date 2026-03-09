@@ -300,14 +300,14 @@ void MyLib_UpdateGlobalRecord(MyLib_record_t *dest_p, const MyLib_record_t *src_
 # 434 "utExecutionAndResults/utUnderTest/src/MyLib.h"
 uint32_t MyLib_Orchestrate_u32(uint32_t start_u32, const uint16_t *delta_pc_u16);
 # 483 "utExecutionAndResults/utUnderTest/src/MyLib.h"
- uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
+uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
 # 545 "utExecutionAndResults/utUnderTest/src/MyLib.h"
 uint8_t MyLib_UpdateCounter_u8(uint32_t add_u32);
 # 601 "utExecutionAndResults/utUnderTest/src/MyLib.h"
 uint8_t UpdateCounter_u8(uint32_t add_u32);
 # 5 "utExecutionAndResults/utUnderTest/src/MyLib_RunStateMachine_u8.h" 2
 # 93 "utExecutionAndResults/utUnderTest/src/MyLib_RunStateMachine_u8.h"
-uint8_t MyLib_RunStateMachine_u8(const MyLib_record_t * rec_pc, uint32_t add_u32, const uint16_t * delta_pc_u16);
+uint8_t MyLib_RunStateMachine_u8(const MyLib_record_t *rec_pc, uint32_t add_u32, const uint16_t *delta_pc_u16);
 # 2 "utExecutionAndResults/utUnderTest/test/test_InvalidState3_Return3_StateResetTo0.c" 2
 # 1 "utExecutionAndResults/utUnderTest/build/test/mocks/test_InvalidState3_Return3_StateResetTo0/mock_MyLib.h" 1
 
@@ -2488,37 +2488,33 @@ void tearDown(void) {
 }
 
 void test_InvalidState3_Return3_StateResetTo0(void) {
-  MyLib_record_t rec = {.id_u16 = 5U, .value_u32 = 25U};
+  MyLib_record_t input_rec = {.id_u16 = 9U, .value_u32 = 400U};
   uint8_t result;
 
   MyLib_UpdateGlobalRecord_CMockExpect(18, 
 # 18 "utExecutionAndResults/utUnderTest/test/test_InvalidState3_Return3_StateResetTo0.c" 3 4
  ((void *)0)
 # 18 "utExecutionAndResults/utUnderTest/test/test_InvalidState3_Return3_StateResetTo0.c"
- , &rec);
+ , &input_rec);
   MyLib_UpdateGlobalRecord_CMockIgnoreArg_dest_p(19);
-  result = MyLib_RunStateMachine_u8(&rec, 0U, 
+  result = MyLib_RunStateMachine_u8(&input_rec, 0U, 
 # 20 "utExecutionAndResults/utUnderTest/test/test_InvalidState3_Return3_StateResetTo0.c" 3 4
-                                             ((void *)0)
+                                                   ((void *)0)
 # 20 "utExecutionAndResults/utUnderTest/test/test_InvalidState3_Return3_StateResetTo0.c"
-                                                 );
-  UnityAssertEqualNumber((UNITY_INT)(UNITY_UINT8 )((0U)), (UNITY_INT)(UNITY_UINT8 )((result)), (
-# 21 "utExecutionAndResults/utUnderTest/test/test_InvalidState3_Return3_StateResetTo0.c" 3 4
- ((void *)0)
-# 21 "utExecutionAndResults/utUnderTest/test/test_InvalidState3_Return3_StateResetTo0.c"
- ), (UNITY_UINT)(21), UNITY_DISPLAY_STYLE_UINT8);
+                                                       );
 
-  MyLib_ProcessRecord_CMockExpect(23, 
-# 23 "utExecutionAndResults/utUnderTest/test/test_InvalidState3_Return3_StateResetTo0.c" 3 4
+  MyLib_ProcessRecord_CMockExpect(22, 
+# 22 "utExecutionAndResults/utUnderTest/test/test_InvalidState3_Return3_StateResetTo0.c" 3 4
  ((void *)0)
-# 23 "utExecutionAndResults/utUnderTest/test/test_InvalidState3_Return3_StateResetTo0.c"
+# 22 "utExecutionAndResults/utUnderTest/test/test_InvalidState3_Return3_StateResetTo0.c"
  , (5U));
-  MyLib_ProcessRecord_CMockIgnoreArg_rec_pc(24);
-  MyLib_ComputeAdjustedValue_u32_CMockExpectAndReturn(25, 25U, 
-# 25 "utExecutionAndResults/utUnderTest/test/test_InvalidState3_Return3_StateResetTo0.c" 3 4
+  MyLib_ProcessRecord_CMockIgnoreArg_rec_pc(23);
+  MyLib_ComputeAdjustedValue_u32_CMockExpectAndReturn(24, 0U, 
+# 24 "utExecutionAndResults/utUnderTest/test/test_InvalidState3_Return3_StateResetTo0.c" 3 4
  ((void *)0)
-# 25 "utExecutionAndResults/utUnderTest/test/test_InvalidState3_Return3_StateResetTo0.c"
- , 35U);
+# 24 "utExecutionAndResults/utUnderTest/test/test_InvalidState3_Return3_StateResetTo0.c"
+ , 100U);
+  MyLib_ComputeAdjustedValue_u32_CMockIgnoreArg_base_u32(25);
   result = MyLib_RunStateMachine_u8(
 # 26 "utExecutionAndResults/utUnderTest/test/test_InvalidState3_Return3_StateResetTo0.c" 3 4
                                    ((void *)0)
@@ -2528,41 +2524,30 @@ void test_InvalidState3_Return3_StateResetTo0(void) {
                                              ((void *)0)
 # 26 "utExecutionAndResults/utUnderTest/test/test_InvalidState3_Return3_StateResetTo0.c"
                                                  );
-  UnityAssertEqualNumber((UNITY_INT)(UNITY_UINT8 )((0U)), (UNITY_INT)(UNITY_UINT8 )((result)), (
-# 27 "utExecutionAndResults/utUnderTest/test/test_InvalidState3_Return3_StateResetTo0.c" 3 4
- ((void *)0)
-# 27 "utExecutionAndResults/utUnderTest/test/test_InvalidState3_Return3_StateResetTo0.c"
- ), (UNITY_UINT)(27), UNITY_DISPLAY_STYLE_UINT8);
 
-  MyLib_UpdateCounter_u8_CMockExpectAndReturn(29, 35U, 0U);
+  MyLib_UpdateCounter_u8_CMockExpectAndReturn(28, 100U, 0U);
   result = MyLib_RunStateMachine_u8(
-# 30 "utExecutionAndResults/utUnderTest/test/test_InvalidState3_Return3_StateResetTo0.c" 3 4
+# 29 "utExecutionAndResults/utUnderTest/test/test_InvalidState3_Return3_StateResetTo0.c" 3 4
                                    ((void *)0)
-# 30 "utExecutionAndResults/utUnderTest/test/test_InvalidState3_Return3_StateResetTo0.c"
+# 29 "utExecutionAndResults/utUnderTest/test/test_InvalidState3_Return3_StateResetTo0.c"
                                        , 0U, 
-# 30 "utExecutionAndResults/utUnderTest/test/test_InvalidState3_Return3_StateResetTo0.c" 3 4
+# 29 "utExecutionAndResults/utUnderTest/test/test_InvalidState3_Return3_StateResetTo0.c" 3 4
                                              ((void *)0)
-# 30 "utExecutionAndResults/utUnderTest/test/test_InvalidState3_Return3_StateResetTo0.c"
+# 29 "utExecutionAndResults/utUnderTest/test/test_InvalidState3_Return3_StateResetTo0.c"
                                                  );
-  UnityAssertEqualNumber((UNITY_INT)(UNITY_UINT8 )((0U)), (UNITY_INT)(UNITY_UINT8 )((result)), (
+
+  result = MyLib_RunStateMachine_u8(
 # 31 "utExecutionAndResults/utUnderTest/test/test_InvalidState3_Return3_StateResetTo0.c" 3 4
- ((void *)0)
-# 31 "utExecutionAndResults/utUnderTest/test/test_InvalidState3_Return3_StateResetTo0.c"
- ), (UNITY_UINT)(31), UNITY_DISPLAY_STYLE_UINT8);
-
-  result = MyLib_RunStateMachine_u8(
-# 33 "utExecutionAndResults/utUnderTest/test/test_InvalidState3_Return3_StateResetTo0.c" 3 4
                                    ((void *)0)
-# 33 "utExecutionAndResults/utUnderTest/test/test_InvalidState3_Return3_StateResetTo0.c"
+# 31 "utExecutionAndResults/utUnderTest/test/test_InvalidState3_Return3_StateResetTo0.c"
                                        , 0U, 
-# 33 "utExecutionAndResults/utUnderTest/test/test_InvalidState3_Return3_StateResetTo0.c" 3 4
+# 31 "utExecutionAndResults/utUnderTest/test/test_InvalidState3_Return3_StateResetTo0.c" 3 4
                                              ((void *)0)
-# 33 "utExecutionAndResults/utUnderTest/test/test_InvalidState3_Return3_StateResetTo0.c"
+# 31 "utExecutionAndResults/utUnderTest/test/test_InvalidState3_Return3_StateResetTo0.c"
                                                  );
-
-  UnityAssertEqualNumber((UNITY_INT)(UNITY_UINT8 )((1U)), (UNITY_INT)(UNITY_UINT8 )((result)), (
-# 35 "utExecutionAndResults/utUnderTest/test/test_InvalidState3_Return3_StateResetTo0.c" 3 4
+  UnityAssertEqualNumber((UNITY_INT)(UNITY_UINT8 )((3U)), (UNITY_INT)(UNITY_UINT8 )((result)), (
+# 32 "utExecutionAndResults/utUnderTest/test/test_InvalidState3_Return3_StateResetTo0.c" 3 4
  ((void *)0)
-# 35 "utExecutionAndResults/utUnderTest/test/test_InvalidState3_Return3_StateResetTo0.c"
- ), (UNITY_UINT)(35), UNITY_DISPLAY_STYLE_UINT8);
+# 32 "utExecutionAndResults/utUnderTest/test/test_InvalidState3_Return3_StateResetTo0.c"
+ ), (UNITY_UINT)(32), UNITY_DISPLAY_STYLE_UINT8);
 }

@@ -6,8 +6,8 @@
 :successes: []
 :failures:
 - :test: test_InvalidState3_Return3_StateResetTo0
-  :line: 21
-  :message: Expected 0 Was 1
+  :line: 32
+  :message: Expected 3 Was 1
   :unity_test_time: 0
 :ignores: []
 :counts:
@@ -16,4 +16,4 @@
   :failed: 1
   :ignored: 0
 :stdout: []
-:time: 0.0033428719999619716
+:time: 0.003914106000024731

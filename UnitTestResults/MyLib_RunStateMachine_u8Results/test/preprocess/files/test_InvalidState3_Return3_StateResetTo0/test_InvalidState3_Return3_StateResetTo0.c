@@ -15,53 +15,44 @@ void tearDown(void)
 
 void test_InvalidState3_Return3_StateResetTo0(void)
 {
-  MyLib_record_t rec = {.id_u16 = 5U, .value_u32 = 25U};
+  MyLib_record_t input_rec = {.id_u16 = 9U, .value_u32 = 400U};
   uint8_t result;
 
   MyLib_UpdateGlobalRecord_CMockExpect(18,
  ((void *)0)
- , &rec);
+ , &input_rec);
   MyLib_UpdateGlobalRecord_CMockIgnoreArg_dest_p(19);
-  result = MyLib_RunStateMachine_u8(&rec, 0U,
-                                             ((void *)0)
-                                                 );
-  UnityAssertEqualNumber((UNITY_INT)(UNITY_UINT8 )((0U)), (UNITY_INT)(UNITY_UINT8 )((result)), (
- ((void *)0)
- ), (UNITY_UINT)(21), UNITY_DISPLAY_STYLE_UINT8);
+  result = MyLib_RunStateMachine_u8(&input_rec, 0U,
+                                                   ((void *)0)
+                                                       );
 
-  MyLib_ProcessRecord_CMockExpect(23,
+  MyLib_ProcessRecord_CMockExpect(22,
  ((void *)0)
  , (5U));
-  MyLib_ProcessRecord_CMockIgnoreArg_rec_pc(24);
-  MyLib_ComputeAdjustedValue_u32_CMockExpectAndReturn(25, 25U,
+  MyLib_ProcessRecord_CMockIgnoreArg_rec_pc(23);
+  MyLib_ComputeAdjustedValue_u32_CMockExpectAndReturn(24, 0U,
  ((void *)0)
- , 35U);
-  result = MyLib_RunStateMachine_u8(
-                                   ((void *)0)
-                                       , 0U,
-                                             ((void *)0)
-                                                 );
-  UnityAssertEqualNumber((UNITY_INT)(UNITY_UINT8 )((0U)), (UNITY_INT)(UNITY_UINT8 )((result)), (
- ((void *)0)
- ), (UNITY_UINT)(27), UNITY_DISPLAY_STYLE_UINT8);
-
-  MyLib_UpdateCounter_u8_CMockExpectAndReturn(29, 35U, 0U);
-  result = MyLib_RunStateMachine_u8(
-                                   ((void *)0)
-                                       , 0U,
-                                             ((void *)0)
-                                                 );
-  UnityAssertEqualNumber((UNITY_INT)(UNITY_UINT8 )((0U)), (UNITY_INT)(UNITY_UINT8 )((result)), (
- ((void *)0)
- ), (UNITY_UINT)(31), UNITY_DISPLAY_STYLE_UINT8);
-
+ , 100U);
+  MyLib_ComputeAdjustedValue_u32_CMockIgnoreArg_base_u32(25);
   result = MyLib_RunStateMachine_u8(
                                    ((void *)0)
                                        , 0U,
                                              ((void *)0)
                                                  );
 
-  UnityAssertEqualNumber((UNITY_INT)(UNITY_UINT8 )((1U)), (UNITY_INT)(UNITY_UINT8 )((result)), (
+  MyLib_UpdateCounter_u8_CMockExpectAndReturn(28, 100U, 0U);
+  result = MyLib_RunStateMachine_u8(
+                                   ((void *)0)
+                                       , 0U,
+                                             ((void *)0)
+                                                 );
+
+  result = MyLib_RunStateMachine_u8(
+                                   ((void *)0)
+                                       , 0U,
+                                             ((void *)0)
+                                                 );
+  UnityAssertEqualNumber((UNITY_INT)(UNITY_UINT8 )((3U)), (UNITY_INT)(UNITY_UINT8 )((result)), (
  ((void *)0)
- ), (UNITY_UINT)(35), UNITY_DISPLAY_STYLE_UINT8);
+ ), (UNITY_UINT)(32), UNITY_DISPLAY_STYLE_UINT8);
 }

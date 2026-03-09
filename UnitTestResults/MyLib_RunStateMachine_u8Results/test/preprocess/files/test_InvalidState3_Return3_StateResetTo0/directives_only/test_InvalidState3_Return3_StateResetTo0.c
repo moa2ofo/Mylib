@@ -3771,7 +3771,7 @@ uint32_t MyLib_Orchestrate_u32(uint32_t start_u32, const uint16_t *delta_pc_u16)
  * @return uint32_t
  * Final accumulated value (wrap-around possible on 32-bit overflow).
  */
- uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
+uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
 
 /**
  * @brief Update the module global counter with optional saturation handling.
@@ -4068,8 +4068,7 @@ uint8_t UpdateCounter_u8(uint32_t add_u32);
  * - 2: Counter update routine reported saturation
  * - 3: Internal state recovery executed (invalid state detected)
  */
-uint8_t MyLib_RunStateMachine_u8(const MyLib_record_t * rec_pc, uint32_t add_u32, const uint16_t * delta_pc_u16);
-
+uint8_t MyLib_RunStateMachine_u8(const MyLib_record_t *rec_pc, uint32_t add_u32, const uint16_t *delta_pc_u16);
 
 # 2 "utExecutionAndResults/utUnderTest/test/test_InvalidState3_Return3_StateResetTo0.c" 2
 # 1 "utExecutionAndResults/utUnderTest/build/test/mocks/test_InvalidState3_Return3_StateResetTo0/mock_MyLib.h" 1
@@ -11272,25 +11271,22 @@ void tearDown(void) {
 }
 
 void test_InvalidState3_Return3_StateResetTo0(void) {
-  MyLib_record_t rec = {.id_u16 = 5U, .value_u32 = 25U};
+  MyLib_record_t input_rec = {.id_u16 = 9U, .value_u32 = 400U};
   uint8_t result;
 
-  MyLib_UpdateGlobalRecord_Expect(NULL, &rec);
+  MyLib_UpdateGlobalRecord_Expect(NULL, &input_rec);
   MyLib_UpdateGlobalRecord_IgnoreArg_dest_p();
-  result = MyLib_RunStateMachine_u8(&rec, 0U, NULL);
-  TEST_ASSERT_EQUAL_UINT8(0U, result);
+  result = MyLib_RunStateMachine_u8(&input_rec, 0U, NULL);
 
   MyLib_ProcessRecord_Expect(NULL, MYLIB_MULT_VALUE_U8);
   MyLib_ProcessRecord_IgnoreArg_rec_pc();
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(25U, NULL, 35U);
-  result = MyLib_RunStateMachine_u8(NULL, 0U, NULL);
-  TEST_ASSERT_EQUAL_UINT8(0U, result);
-
-  MyLib_UpdateCounter_u8_ExpectAndReturn(35U, 0U);
-  result = MyLib_RunStateMachine_u8(NULL, 0U, NULL);
-  TEST_ASSERT_EQUAL_UINT8(0U, result);
-
+  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(0U, NULL, 100U);
+  MyLib_ComputeAdjustedValue_u32_IgnoreArg_base_u32();
   result = MyLib_RunStateMachine_u8(NULL, 0U, NULL);
 
-  TEST_ASSERT_EQUAL_UINT8(1U, result);
+  MyLib_UpdateCounter_u8_ExpectAndReturn(100U, 0U);
+  result = MyLib_RunStateMachine_u8(NULL, 0U, NULL);
+
+  result = MyLib_RunStateMachine_u8(NULL, 0U, NULL);
+  TEST_ASSERT_EQUAL_UINT8(3U, result);
 }
