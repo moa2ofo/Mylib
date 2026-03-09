@@ -262,3 +262,4 @@ uint8_t MyLib_RunStateMachine_u8(const MyLib_record_t *rec_pc, uint32_t add_u32,
 
     return l_ret_u8;
   }
+  }
