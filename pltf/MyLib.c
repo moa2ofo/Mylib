@@ -259,7 +259,7 @@ uint8_t MyLib_RunStateMachine_u8(const MyLib_record_t *rec_pc, uint32_t add_u32,
     l_ret_u8 = MyLib_UpdateCounter_u8(l_UpdateValue_u32);
     l_State_u8 = 0U;
     break;
-
-    return l_ret_u8;
   }
+    return l_ret_u8;
+  
 }

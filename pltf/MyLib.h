@@ -619,7 +619,6 @@ uint8_t UpdateCounter_u8(uint32_t add_u32);
  * | rec_pc                         | X  |     | const MyLib_record_t*                            |   X   |   1    |   0    |   1  | pointer / NULL       | [-]  |
  * | add_u32                        | X  |     | uint32_t                                         |   X   |   1    |   0    |   1  | 0..(wrap)            | [-]  |
  * | delta_pc_u16                   | X  |     | const uint16_t*                                  |   X   |   1    |   0    |   1  | pointer / NULL       | [-]  |
- * | g_counter_u32                  |    |  X  | uint32_t                                         |       |   1    |   0    |   1  | 0..(wrap)            | [-]  |
  * | MyLib_UpdateGlobalRecord       |    |  X  | void (MyLib_record_t*, const MyLib_record_t*)    |       |   1    |   0    |   1  | -                    | [-]  |
  * | MyLib_ProcessRecord            |    |  X  | void (MyLib_record_t*, uint8_t)                  |       |   1    |   0    |   1  | -                    | [-]  |
  * | MyLib_ComputeAdjustedValue_u32 |    |  X  | uint32_t (uint32_t, const uint16_t*)             |       |   1    |   0    |   1  | 0..(wrap)            | [-]  |
@@ -685,7 +684,6 @@ uint8_t UpdateCounter_u8(uint32_t add_u32);
  * - 0: Step executed successfully
  * - 1: Initialization rejected because `rec_pc == NULL`
  * - 2: Counter update routine reported saturation
- * - 3: Internal state recovery executed (invalid state detected)
  */
 uint8_t MyLib_RunStateMachine_u8(const MyLib_record_t *rec_pc, uint32_t add_u32, const uint16_t *delta_pc_u16);
 
