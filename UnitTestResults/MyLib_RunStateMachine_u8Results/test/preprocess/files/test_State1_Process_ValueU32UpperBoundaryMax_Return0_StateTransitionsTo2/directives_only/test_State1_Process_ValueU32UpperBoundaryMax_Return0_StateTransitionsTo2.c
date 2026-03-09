@@ -3771,7 +3771,7 @@ uint32_t MyLib_Orchestrate_u32(uint32_t start_u32, const uint16_t *delta_pc_u16)
  * @return uint32_t
  * Final accumulated value (wrap-around possible on 32-bit overflow).
  */
-uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
+ uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
 
 /**
  * @brief Update the module global counter with optional saturation handling.
@@ -3954,12 +3954,6 @@ uint8_t UpdateCounter_u8(uint32_t add_u32);
  *   :l_State_u8 = 0;
  *   break
  *
- * case (default)
- *   :l_State_u8 = 0;
- *   :l_LastAdjusted_u32 = 0;
- *   :l_ret_u8 = 3;
- *   break
- *
  * endswitch
  *
  * :return l_ret_u8;
@@ -4050,12 +4044,6 @@ uint8_t UpdateCounter_u8(uint32_t add_u32);
  *   :l_State_u8 = 0;
  *   break
  *
- * case (default)
- *   :l_State_u8 = 0;
- *   :l_LastAdjusted_u32 = 0;
- *   :l_ret_u8 = 3;
- *   break
- *
  * endswitch
  *
  * :return l_ret_u8;
@@ -4080,7 +4068,8 @@ uint8_t UpdateCounter_u8(uint32_t add_u32);
  * - 2: Counter update routine reported saturation
  * - 3: Internal state recovery executed (invalid state detected)
  */
-uint8_t MyLib_RunStateMachine_u8(const MyLib_record_t *rec_pc, uint32_t add_u32, const uint16_t *delta_pc_u16);
+uint8_t MyLib_RunStateMachine_u8(const MyLib_record_t * rec_pc, uint32_t add_u32, const uint16_t * delta_pc_u16);
+
 
 # 2 "utExecutionAndResults/utUnderTest/test/test_State1_Process_ValueU32UpperBoundaryMax_Return0_StateTransitionsTo2.c" 2
 # 1 "utExecutionAndResults/utUnderTest/build/test/mocks/test_State1_Process_ValueU32UpperBoundaryMax_Return0_StateTransitionsTo2/mock_MyLib.h" 1
