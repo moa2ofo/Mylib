@@ -25,6 +25,7 @@ void set_SaturationEn_b(_Bool val) {
 
 /* FUNCTION TO TEST */
 
+
 uint8_t MyLib_UpdateCounter_u8(uint32_t add_u32) {
   /* Local (function-static) state: tracks how many times this API has been called. */
   static uint32_t l_CycleCnt_u32 = 0U;

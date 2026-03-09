@@ -9,6 +9,7 @@ bool g_systemReady_b = false;
 
 /* FUNCTION TO TEST */
 
+
 uint32_t AnalyzeArray_u32(uint16_t *values_pu16, size_t len_u32, uint16_t factor_u16) {
   uint32_t l_sum_u32 = 0U;
   uint32_t l_i_u32;

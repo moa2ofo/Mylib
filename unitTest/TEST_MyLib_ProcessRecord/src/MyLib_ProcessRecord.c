@@ -9,6 +9,7 @@ bool g_systemReady_b = false;
 
 /* FUNCTION TO TEST */
 
+
 void MyLib_ProcessRecord(const MyLib_record_t *rec_pc, uint8_t multiplier_u8) {
   if(rec_pc == NULL) {
     return;

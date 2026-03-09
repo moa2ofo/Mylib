@@ -1,0 +1,19 @@
+---
+:source:
+  :file: utExecutionAndResults/utUnderTest/test/test_ValidPointer_ZeroLen.c
+  :dirname: utExecutionAndResults/utUnderTest/test
+  :basename: test_ValidPointer_ZeroLen.c
+:successes:
+- :test: test_ValidPointer_ZeroLen
+  :line: 21
+  :message: ''
+  :unity_test_time: 0
+:failures: []
+:ignores: []
+:counts:
+  :total: 1
+  :passed: 1
+  :failed: 0
+  :ignored: 0
+:stdout: []
+:time: 0.0023563450000096964

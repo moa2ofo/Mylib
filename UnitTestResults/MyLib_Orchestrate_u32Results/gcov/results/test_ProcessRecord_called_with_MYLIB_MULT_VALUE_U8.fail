@@ -1,0 +1,19 @@
+---
+:source:
+  :file: utExecutionAndResults/utUnderTest/test/test_ProcessRecord_called_with_MYLIB_MULT_VALUE_U8.c
+  :dirname: utExecutionAndResults/utUnderTest/test
+  :basename: test_ProcessRecord_called_with_MYLIB_MULT_VALUE_U8.c
+:successes: []
+:failures:
+- :test: test_ProcessRecord_called_with_MYLIB_MULT_VALUE_U8
+  :line: 29
+  :message: MyLib_ProcessRecord requires _ExpectAnyArgs (not AndReturn)
+  :unity_test_time: 0
+:ignores: []
+:counts:
+  :total: 1
+  :passed: 0
+  :failed: 1
+  :ignored: 0
+:stdout: []
+:time: 0.0035907769999994343

@@ -9,6 +9,7 @@ bool g_systemReady_b = false;
 
 /* FUNCTION TO TEST */
 
+
 uint32_t MyLib_Orchestrate_u32(uint32_t start_u32, const uint16_t *delta_pc_u16) {
   uint16_t l_d_u16 = 0U;
   if(delta_pc_u16 != NULL) {
