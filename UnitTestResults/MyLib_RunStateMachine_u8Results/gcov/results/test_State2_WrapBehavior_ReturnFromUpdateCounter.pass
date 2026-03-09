@@ -3,17 +3,17 @@
   :file: utExecutionAndResults/utUnderTest/test/test_State2_WrapBehavior_ReturnFromUpdateCounter.c
   :dirname: utExecutionAndResults/utUnderTest/test
   :basename: test_State2_WrapBehavior_ReturnFromUpdateCounter.c
-:successes: []
-:failures:
+:successes:
 - :test: test_State2_WrapBehavior_ReturnFromUpdateCounter
-  :line: 30
-  :message: Expected 0 Was 1
+  :line: 14
+  :message: ''
   :unity_test_time: 0
+:failures: []
 :ignores: []
 :counts:
   :total: 1
-  :passed: 0
-  :failed: 1
+  :passed: 1
+  :failed: 0
   :ignored: 0
 :stdout: []
-:time: 0.0028185340000277392
+:time: 0.002741268000022501

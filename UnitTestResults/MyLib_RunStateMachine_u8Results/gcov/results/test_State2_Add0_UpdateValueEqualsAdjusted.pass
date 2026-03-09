@@ -3,17 +3,17 @@
   :file: utExecutionAndResults/utUnderTest/test/test_State2_Add0_UpdateValueEqualsAdjusted.c
   :dirname: utExecutionAndResults/utUnderTest/test
   :basename: test_State2_Add0_UpdateValueEqualsAdjusted.c
-:successes: []
-:failures:
+:successes:
 - :test: test_State2_Add0_UpdateValueEqualsAdjusted
-  :line: 30
-  :message: Expected 0 Was 1
+  :line: 14
+  :message: ''
   :unity_test_time: 0
+:failures: []
 :ignores: []
 :counts:
   :total: 1
-  :passed: 0
-  :failed: 1
+  :passed: 1
+  :failed: 0
   :ignored: 0
 :stdout: []
-:time: 0.002861456999994516
+:time: 0.00461788699999488
