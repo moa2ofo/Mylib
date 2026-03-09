@@ -1,0 +1,19 @@
+---
+:source:
+  :file: utExecutionAndResults/utUnderTest/test/test_saturation_enabled_at_limit_zero_increment_returns_0_at_limit.c
+  :dirname: utExecutionAndResults/utUnderTest/test
+  :basename: test_saturation_enabled_at_limit_zero_increment_returns_0_at_limit.c
+:successes:
+- :test: test_MyLib_UpdateCounter_u8_saturation_enabled_at_limit_zero_increment_returns_0_at_limit
+  :line: 31
+  :message: ''
+  :unity_test_time: 0
+:failures: []
+:ignores: []
+:counts:
+  :total: 1
+  :passed: 1
+  :failed: 0
+  :ignored: 0
+:stdout: []
+:time: 0.0025511600000527324
