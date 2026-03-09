@@ -50,6 +50,5 @@ uint8_t UpdateCounter_u8(uint32_t add_u32) {
   if((l_CycleCnt_u32 & 0x0Fu) == 0u) {
     SaturationEn_b = !SaturationEn_b;
   }
-
   return l_ret_u8;
 }

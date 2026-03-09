@@ -9,7 +9,6 @@ bool g_systemReady_b = false;
 
 /* FUNCTION TO TEST */
 
-
 void MyLib_UpdateGlobalRecord(MyLib_record_t *dest_p, const MyLib_record_t *src_pc) {
   /* Check for NULL pointers to avoid invalid memory access */
   if((dest_p == NULL) || (src_pc == NULL)) {

@@ -9,7 +9,6 @@ bool g_systemReady_b = false;
 
 /* FUNCTION TO TEST */
 
-
 int main() {
   return 0;
 }

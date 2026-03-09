@@ -9,7 +9,6 @@ bool g_systemReady_b = false;
 
 /* FUNCTION TO TEST */
 
-
 void ProcessRecord(const MyLib_record_t *rec_pc, uint8_t multiplier_u8) {
   uint32_t l_acc_u32 = 0U;
 
