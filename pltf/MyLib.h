@@ -663,12 +663,6 @@ uint8_t UpdateCounter_u8(uint32_t add_u32);
  *   :l_State_u8 = 0;
  *   break
  *
- * case (default)
- *   :l_State_u8 = 0;
- *   :l_LastAdjusted_u32 = 0;
- *   :l_ret_u8 = 3;
- *   break
- *
  * endswitch
  *
  * :return l_ret_u8;
