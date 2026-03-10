@@ -2,153 +2,176 @@
 #include "unity.h"
 #include <ProcessRecord.h>
 
-void setUp(void) {
-  g_counter_u32 = 0U;
+
+
+
+void setUp(void)
+{
 }
-void tearDown(void) {
+void tearDown(void)
+{
 }
-void test_NULL_ptr_no_side_effects(void) {
-  uint32_t initial_counter = g_counter_u32;
+void test_NULL_pointer_no_side_effects(void)
+{
+    uint32_t initial_counter = g_counter_u32;
 
-  ProcessRecord(NULL, 5U);
+    ProcessRecord(NULL, 5U);
 
-  TEST_ASSERT_EQUAL_UINT32(initial_counter, g_counter_u32);
+    TEST_ASSERT_EQUAL_UINT32(initial_counter, g_counter_u32);
 }
-void test_mult_0_no_accumulation(void) {
-  MyLib_record_t rec = {.id_u16 = 1U, .value_u32 = 100U};
-  uint32_t initial_counter = g_counter_u32;
-  uint8_t mult = 0U;
+void test_multiplier_zero_no_accumulation(void)
+{
+    MyLib_record_t rec = {.id_u16 = 1U, .value_u32 = 1000U};
+    uint32_t initial_counter = g_counter_u32;
 
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(0U, (const uint16_t *)&mult, 0U);
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(0U, (const uint16_t *)&(uint8_t){0U}, 0U);
+    MyLib_ComputeAdjustedValue_u32_IgnoreArg_delta_pc_u16();
 
-  ProcessRecord(&rec, mult);
+    ProcessRecord(&rec, 0U);
 
-  TEST_ASSERT_EQUAL_UINT32(initial_counter, g_counter_u32);
+    TEST_ASSERT_EQUAL_UINT32(initial_counter, g_counter_u32);
 }
-void test_mult_1_single_accumulation(void) {
-  MyLib_record_t rec = {.id_u16 = 2U, .value_u32 = 50U};
-  uint32_t initial_counter = g_counter_u32;
-  uint8_t mult = 1U;
+void test_multiplier_one_value_zero(void)
+{
+    MyLib_record_t rec = {.id_u16 = 2U, .value_u32 = 0U};
+    uint32_t initial_counter = g_counter_u32;
 
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(50U, (const uint16_t *)&mult, 0U);
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(0U, (const uint16_t *)&(uint8_t){1U}, 0U);
+    MyLib_ComputeAdjustedValue_u32_IgnoreArg_delta_pc_u16();
 
-  ProcessRecord(&rec, mult);
+    ProcessRecord(&rec, 1U);
 
-  TEST_ASSERT_EQUAL_UINT32(initial_counter + 50U, g_counter_u32);
+    TEST_ASSERT_EQUAL_UINT32(initial_counter, g_counter_u32);
 }
-void test_mult_2_bounded_loop_twice(void) {
-  MyLib_record_t rec = {.id_u16 = 3U, .value_u32 = 75U};
-  uint32_t initial_counter = g_counter_u32;
-  uint8_t mult = 2U;
-  uint32_t expected_acc = 2U * 75U;
+void test_multiplier_one_value_midrange(void)
+{
+    MyLib_record_t rec = {.id_u16 = 3U, .value_u32 = 50000U};
+    uint32_t initial_counter = g_counter_u32;
 
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_acc, (const uint16_t *)&mult, 0U);
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(50000U, (const uint16_t *)&(uint8_t){1U}, 0U);
+    MyLib_ComputeAdjustedValue_u32_IgnoreArg_delta_pc_u16();
 
-  ProcessRecord(&rec, mult);
+    ProcessRecord(&rec, 1U);
 
-  TEST_ASSERT_EQUAL_UINT32(initial_counter + expected_acc, g_counter_u32);
+    TEST_ASSERT_EQUAL_UINT32(initial_counter + 50000U, g_counter_u32);
 }
-void test_mult_128_mid_range(void) {
-  MyLib_record_t rec = {.id_u16 = 4U, .value_u32 = 1000U};
-  uint32_t initial_counter = g_counter_u32;
-  uint8_t mult = 128U;
-  uint32_t expected_acc = 128U * 1000U;
+void test_multiplier_one_value_max(void)
+{
+    MyLib_record_t rec = {.id_u16 = 4U, .value_u32 = UINT32_MAX};
+    uint32_t initial_counter = g_counter_u32;
 
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_acc, (const uint16_t *)&mult, 0U);
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(UINT32_MAX, (const uint16_t *)&(uint8_t){1U}, 0U);
+    MyLib_ComputeAdjustedValue_u32_IgnoreArg_delta_pc_u16();
 
-  ProcessRecord(&rec, mult);
+    ProcessRecord(&rec, 1U);
 
-  TEST_ASSERT_EQUAL_UINT32(initial_counter + expected_acc, g_counter_u32);
+    TEST_ASSERT_EQUAL_UINT32(initial_counter + UINT32_MAX, g_counter_u32);
 }
-void test_mult_254_near_upper_boundary(void) {
-  MyLib_record_t rec = {.id_u16 = 5U, .value_u32 = 500U};
-  uint32_t initial_counter = g_counter_u32;
-  uint8_t mult = 254U;
-  uint32_t expected_acc = 254U * 500U;
+void test_multiplier_two_value_hundred(void)
+{
+    MyLib_record_t rec = {.id_u16 = 5U, .value_u32 = 100U};
+    uint32_t initial_counter = g_counter_u32;
 
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_acc, (const uint16_t *)&mult, 0U);
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(200U, (const uint16_t *)&(uint8_t){2U}, 0U);
+    MyLib_ComputeAdjustedValue_u32_IgnoreArg_delta_pc_u16();
 
-  ProcessRecord(&rec, mult);
+    ProcessRecord(&rec, 2U);
 
-  TEST_ASSERT_EQUAL_UINT32(initial_counter + expected_acc, g_counter_u32);
+    TEST_ASSERT_EQUAL_UINT32(initial_counter + 200U, g_counter_u32);
 }
-void test_mult_255_upper_boundary(void) {
-  MyLib_record_t rec = {.id_u16 = 6U, .value_u32 = 200U};
-  uint32_t initial_counter = g_counter_u32;
-  uint8_t mult = 255U;
-  uint32_t expected_acc = 255U * 200U;
+void test_multiplier_two_value_zero(void)
+{
+    MyLib_record_t rec = {.id_u16 = 6U, .value_u32 = 0U};
+    uint32_t initial_counter = g_counter_u32;
 
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_acc, (const uint16_t *)&mult, 0U);
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(0U, (const uint16_t *)&(uint8_t){2U}, 0U);
+    MyLib_ComputeAdjustedValue_u32_IgnoreArg_delta_pc_u16();
 
-  ProcessRecord(&rec, mult);
+    ProcessRecord(&rec, 2U);
 
-  TEST_ASSERT_EQUAL_UINT32(initial_counter + expected_acc, g_counter_u32);
+    TEST_ASSERT_EQUAL_UINT32(initial_counter, g_counter_u32);
 }
-void test_value_0_mult_10(void) {
-  MyLib_record_t rec = {.id_u16 = 7U, .value_u32 = 0U};
-  uint32_t initial_counter = g_counter_u32;
-  uint8_t mult = 10U;
+void test_multiplier_midrange_128(void)
+{
+    MyLib_record_t rec = {.id_u16 = 7U, .value_u32 = 1000U};
+    uint32_t initial_counter = g_counter_u32;
 
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(0U, (const uint16_t *)&mult, 0U);
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(128000U, (const uint16_t *)&(uint8_t){128U}, 0U);
+    MyLib_ComputeAdjustedValue_u32_IgnoreArg_delta_pc_u16();
 
-  ProcessRecord(&rec, mult);
+    ProcessRecord(&rec, 128U);
 
-  TEST_ASSERT_EQUAL_UINT32(initial_counter, g_counter_u32);
+    TEST_ASSERT_EQUAL_UINT32(initial_counter + 128000U, g_counter_u32);
 }
-void test_value_1_mult_10(void) {
-  MyLib_record_t rec = {.id_u16 = 8U, .value_u32 = 1U};
-  uint32_t initial_counter = g_counter_u32;
-  uint8_t mult = 10U;
+void test_multiplier_254_value_ten(void)
+{
+    MyLib_record_t rec = {.id_u16 = 8U, .value_u32 = 10U};
+    uint32_t initial_counter = g_counter_u32;
 
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(10U, (const uint16_t *)&mult, 0U);
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(2540U, (const uint16_t *)&(uint8_t){254U}, 0U);
+    MyLib_ComputeAdjustedValue_u32_IgnoreArg_delta_pc_u16();
 
-  ProcessRecord(&rec, mult);
+    ProcessRecord(&rec, 254U);
 
-  TEST_ASSERT_EQUAL_UINT32(initial_counter + 10U, g_counter_u32);
+    TEST_ASSERT_EQUAL_UINT32(initial_counter + 2540U, g_counter_u32);
 }
-void test_value_max_mult_1(void) {
-  MyLib_record_t rec = {.id_u16 = 9U, .value_u32 = 0xFFFFFFFFU};
-  uint32_t initial_counter = g_counter_u32;
-  uint8_t mult = 1U;
+void test_multiplier_max_255_value_ten(void)
+{
+    MyLib_record_t rec = {.id_u16 = 9U, .value_u32 = 10U};
+    uint32_t initial_counter = g_counter_u32;
 
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(0xFFFFFFFFU, (const uint16_t *)&mult, 0U);
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(2550U, (const uint16_t *)&(uint8_t){255U}, 0U);
+    MyLib_ComputeAdjustedValue_u32_IgnoreArg_delta_pc_u16();
 
-  ProcessRecord(&rec, mult);
+    ProcessRecord(&rec, 255U);
 
-  TEST_ASSERT_EQUAL_UINT32(initial_counter + 0xFFFFFFFFU, g_counter_u32);
+    TEST_ASSERT_EQUAL_UINT32(initial_counter + 2550U, g_counter_u32);
 }
-void test_value_max_mult_2_wraparound(void) {
-  MyLib_record_t rec = {.id_u16 = 10U, .value_u32 = 0xFFFFFFFFU};
-  uint32_t initial_counter = g_counter_u32;
-  uint8_t mult = 2U;
-  uint32_t expected_acc = 0xFFFFFFFEU;
+void test_multiplier_255_value_max_wraparound(void)
+{
+    MyLib_record_t rec = {.id_u16 = 10U, .value_u32 = UINT32_MAX};
+    uint32_t initial_counter = g_counter_u32;
+    uint32_t expected_acc = 0U;
+    
+    for (uint8_t i = 0U; i < 255U; i++)
+    {
+        expected_acc += UINT32_MAX;
+    }
 
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_acc, (const uint16_t *)&mult, 0U);
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_acc, (const uint16_t *)&(uint8_t){255U}, 0U);
+    MyLib_ComputeAdjustedValue_u32_IgnoreArg_delta_pc_u16();
 
-  ProcessRecord(&rec, mult);
+    ProcessRecord(&rec, 255U);
 
-  TEST_ASSERT_EQUAL_UINT32(initial_counter + expected_acc, g_counter_u32);
+    TEST_ASSERT_EQUAL_UINT32(initial_counter + expected_acc, g_counter_u32);
 }
-void test_counter_near_max_wraparound(void) {
-  MyLib_record_t rec = {.id_u16 = 11U, .value_u32 = 0x20U};
-  g_counter_u32 = 0xFFFFFFF0U;
-  uint8_t mult = 1U;
+void test_multiplier_10_intermediate_wraparound(void)
+{
+    MyLib_record_t rec = {.id_u16 = 11U, .value_u32 = 0xFFFFFFFFU / 5U};
+    uint32_t initial_counter = g_counter_u32;
+    uint32_t expected_acc = 0U;
+    
+    for (uint8_t i = 0U; i < 10U; i++)
+    {
+        expected_acc += rec.value_u32;
+    }
 
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(0x20U, (const uint16_t *)&mult, 0U);
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_acc, (const uint16_t *)&(uint8_t){10U}, 0U);
+    MyLib_ComputeAdjustedValue_u32_IgnoreArg_delta_pc_u16();
 
-  ProcessRecord(&rec, mult);
+    ProcessRecord(&rec, 10U);
 
-  TEST_ASSERT_EQUAL_UINT32(0x10U, g_counter_u32);
+    TEST_ASSERT_EQUAL_UINT32(initial_counter + expected_acc, g_counter_u32);
 }
-void test_mult_255_large_value_wraparound(void) {
-  MyLib_record_t rec = {.id_u16 = 12U, .value_u32 = 0x01000000U};
-  uint32_t initial_counter = g_counter_u32;
-  uint8_t mult = 255U;
-  uint32_t expected_acc = (uint32_t)(255ULL * 0x01000000ULL);
+void test_counter_wraparound_at_max(void)
+{
+    MyLib_record_t rec = {.id_u16 = 12U, .value_u32 = 1U};
+    g_counter_u32 = UINT32_MAX;
 
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_acc, (const uint16_t *)&mult, 0U);
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(1U, (const uint16_t *)&(uint8_t){1U}, 0U);
+    MyLib_ComputeAdjustedValue_u32_IgnoreArg_delta_pc_u16();
 
-  ProcessRecord(&rec, mult);
+    ProcessRecord(&rec, 1U);
 
-  TEST_ASSERT_EQUAL_UINT32(initial_counter + expected_acc, g_counter_u32);
+    TEST_ASSERT_EQUAL_UINT32(0U, g_counter_u32);
 }
