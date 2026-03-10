@@ -8,7 +8,9 @@
 *.out
 *.d
 *.yml
+/CMakeLists.txt
 
 # Ignore everything that is inside any test or vendor folder, including files and subfolders
 **/test/**
 **/vendor/**
+**/build/**
