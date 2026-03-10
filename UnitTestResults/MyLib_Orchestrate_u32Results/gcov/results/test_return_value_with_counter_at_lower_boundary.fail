@@ -1,0 +1,20 @@
+---
+:source:
+  :file: utExecutionAndResults/utUnderTest/test/test_return_value_with_counter_at_lower_boundary.c
+  :dirname: utExecutionAndResults/utUnderTest/test
+  :basename: test_return_value_with_counter_at_lower_boundary.c
+:successes: []
+:failures:
+- :test: test_return_value_with_counter_at_lower_boundary
+  :line: 28
+  :message: Memory Mismatch. Byte 2 Expected 0x39 Was 0xCB. Function MyLib_ProcessRecord
+    Argument rec_pc. Function called with unexpected argument value.
+  :unity_test_time: 0
+:ignores: []
+:counts:
+  :total: 1
+  :passed: 0
+  :failed: 1
+  :ignored: 0
+:stdout: []
+:time: 0.0027115639999806262

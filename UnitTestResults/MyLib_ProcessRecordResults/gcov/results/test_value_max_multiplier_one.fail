@@ -1,0 +1,20 @@
+---
+:source:
+  :file: utExecutionAndResults/utUnderTest/test/test_value_max_multiplier_one.c
+  :dirname: utExecutionAndResults/utUnderTest/test
+  :basename: test_value_max_multiplier_one.c
+:successes: []
+:failures:
+- :test: test_value_max_multiplier_one
+  :line: 17
+  :message: Element 0 Expected 0x0701 Was 0xFF01. Function MyLib_ComputeAdjustedValue_u32
+    Argument delta_pc_u16. Function called with unexpected argument value.
+  :unity_test_time: 0
+:ignores: []
+:counts:
+  :total: 1
+  :passed: 0
+  :failed: 1
+  :ignored: 0
+:stdout: []
+:time: 0.0026918319999822415

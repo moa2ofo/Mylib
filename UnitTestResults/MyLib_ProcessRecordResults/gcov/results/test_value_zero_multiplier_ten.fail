@@ -1,0 +1,20 @@
+---
+:source:
+  :file: utExecutionAndResults/utUnderTest/test/test_value_zero_multiplier_ten.c
+  :dirname: utExecutionAndResults/utUnderTest/test
+  :basename: test_value_zero_multiplier_ten.c
+:successes: []
+:failures:
+- :test: test_value_zero_multiplier_ten
+  :line: 17
+  :message: Element 0 Expected 0x060A Was 0x000A. Function MyLib_ComputeAdjustedValue_u32
+    Argument delta_pc_u16. Function called with unexpected argument value.
+  :unity_test_time: 0
+:ignores: []
+:counts:
+  :total: 1
+  :passed: 0
+  :failed: 1
+  :ignored: 0
+:stdout: []
+:time: 0.003457374999982221

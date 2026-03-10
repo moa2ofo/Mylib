@@ -1,0 +1,20 @@
+---
+:source:
+  :file: utExecutionAndResults/utUnderTest/test/test_record_value_division_odd_base.c
+  :dirname: utExecutionAndResults/utUnderTest/test
+  :basename: test_record_value_division_odd_base.c
+:successes: []
+:failures:
+- :test: test_record_value_division_odd_base
+  :line: 28
+  :message: Memory Mismatch. Byte 2 Expected 0xD7 Was 0xB0. Function MyLib_ProcessRecord
+    Argument rec_pc. Function called with unexpected argument value.
+  :unity_test_time: 0
+:ignores: []
+:counts:
+  :total: 1
+  :passed: 0
+  :failed: 1
+  :ignored: 0
+:stdout: []
+:time: 0.0036073059999921497

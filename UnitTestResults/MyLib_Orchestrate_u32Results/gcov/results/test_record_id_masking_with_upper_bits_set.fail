@@ -1,0 +1,20 @@
+---
+:source:
+  :file: utExecutionAndResults/utUnderTest/test/test_record_id_masking_with_upper_bits_set.c
+  :dirname: utExecutionAndResults/utUnderTest/test
+  :basename: test_record_id_masking_with_upper_bits_set.c
+:successes: []
+:failures:
+- :test: test_record_id_masking_with_upper_bits_set
+  :line: 28
+  :message: Memory Mismatch. Byte 2 Expected 0x6D Was 0xAF. Function MyLib_ProcessRecord
+    Argument rec_pc. Function called with unexpected argument value.
+  :unity_test_time: 0
+:ignores: []
+:counts:
+  :total: 1
+  :passed: 0
+  :failed: 1
+  :ignored: 0
+:stdout: []
+:time: 0.0037408009999921887

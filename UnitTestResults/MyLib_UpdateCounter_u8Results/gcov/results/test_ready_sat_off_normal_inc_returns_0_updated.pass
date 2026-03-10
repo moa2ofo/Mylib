@@ -1,0 +1,19 @@
+---
+:source:
+  :file: utExecutionAndResults/utUnderTest/test/test_ready_sat_off_normal_inc_returns_0_updated.c
+  :dirname: utExecutionAndResults/utUnderTest/test
+  :basename: test_ready_sat_off_normal_inc_returns_0_updated.c
+:successes:
+- :test: test_ready_sat_off_normal_inc_returns_0_updated
+  :line: 15
+  :message: ''
+  :unity_test_time: 0
+:failures: []
+:ignores: []
+:counts:
+  :total: 1
+  :passed: 1
+  :failed: 0
+  :ignored: 0
+:stdout: []
+:time: 0.004338407999966876
