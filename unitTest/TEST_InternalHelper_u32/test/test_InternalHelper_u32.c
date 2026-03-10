@@ -1,188 +1,149 @@
 #include "InternalHelper_u32.h"
 #include "unity.h"
 
-void setUp(void) {
-  g_counter_u32 = 0U;
-  g_record.id_u16 = 0U;
-  g_record.value_u32 = 0U;
-  g_systemReady_b = false;
+
+
+
+void setUp(void)
+{
 }
-void tearDown(void) {
+void tearDown(void)
+{
 }
-void test_y_zero_returns_x_unchanged(void) {
-  uint32_t result;
-  uint32_t x_u32 = 42U;
-  uint16_t y_u16 = 0U;
+void test_y_zero_returns_x_unchanged(void)
+{
+    uint32_t result_u32;
+    uint32_t seed_u32 = 12345U;
+    uint16_t iterations_u16 = 0U;
 
-  result = InternalHelper_u32(x_u32, y_u16);
+    result_u32 = InternalHelper_u32(seed_u32, iterations_u16);
 
-  TEST_ASSERT_EQUAL_UINT32(42U, result);
+    TEST_ASSERT_EQUAL_UINT32(seed_u32, result_u32);
 }
-void test_y_one_adds_zero(void) {
-  uint32_t result;
-  uint32_t x_u32 = 100U;
-  uint16_t y_u16 = 1U;
+void test_y_one_adds_zero_returns_x(void)
+{
+    uint32_t result_u32;
+    uint32_t seed_u32 = 500U;
+    uint16_t iterations_u16 = 1U;
 
-  result = InternalHelper_u32(x_u32, y_u16);
+    result_u32 = InternalHelper_u32(seed_u32, iterations_u16);
 
-  TEST_ASSERT_EQUAL_UINT32(100U, result);
+    TEST_ASSERT_EQUAL_UINT32(seed_u32, result_u32);
 }
-void test_y_ten_accumulates_correctly(void) {
-  uint32_t result;
-  uint32_t x_u32 = 0U;
-  uint16_t y_u16 = 10U;
-  uint32_t expected = 0U + (0U * 2U) + (1U * 2U) + (2U * 2U) + (3U * 2U) + (4U * 2U) + (5U * 2U) + (6U * 2U) + (7U * 2U) + (8U * 2U) + (9U * 2U);
+void test_y_ten_x_hundred_accumulates_correctly(void)
+{
+    uint32_t result_u32;
+    uint32_t seed_u32 = 100U;
+    uint16_t iterations_u16 = 10U;
+    uint32_t expected_u32 = 100U + 0U + 2U + 4U + 6U + 8U + 10U + 12U + 14U + 16U + 18U;
 
-  result = InternalHelper_u32(x_u32, y_u16);
+    result_u32 = InternalHelper_u32(seed_u32, iterations_u16);
 
-  TEST_ASSERT_EQUAL_UINT32(expected, result);
+    TEST_ASSERT_EQUAL_UINT32(expected_u32, result_u32);
 }
-void test_y_60534_large_iteration(void) {
-  uint32_t result;
-  uint32_t x_u32 = 0U;
-  uint16_t y_u16 = 60534U;
-  uint32_t expected = 0U;
-  uint32_t l_i_u16;
+void test_y_max_x_zero_accumulates_at_boundary(void)
+{
+    uint32_t result_u32;
+    uint32_t seed_u32 = 0U;
+    uint16_t iterations_u16 = 60535U;
+    uint32_t expected_u32 = 0U;
+    uint32_t i_u32;
 
-  for(l_i_u16 = 0U; l_i_u16 < y_u16; l_i_u16++) {
-    expected += (l_i_u16 * 2U);
-  }
+    for (i_u32 = 0U; i_u32 < iterations_u16; i_u32++)
+    {
+        expected_u32 += (i_u32 * 2U);
+    }
 
-  result = InternalHelper_u32(x_u32, y_u16);
+    result_u32 = InternalHelper_u32(seed_u32, iterations_u16);
 
-  TEST_ASSERT_EQUAL_UINT32(expected, result);
+    TEST_ASSERT_EQUAL_UINT32(expected_u32, result_u32);
 }
-void test_y_60535_upper_boundary(void) {
-  uint32_t result;
-  uint32_t x_u32 = 0U;
-  uint16_t y_u16 = 60535U;
-  uint32_t expected = 0U;
-  uint32_t l_i_u16;
+void test_x_zero_y_five_accumulates_from_zero(void)
+{
+    uint32_t result_u32;
+    uint32_t seed_u32 = 0U;
+    uint16_t iterations_u16 = 5U;
+    uint32_t expected_u32 = 0U + 0U + 2U + 4U + 6U + 8U;
 
-  for(l_i_u16 = 0U; l_i_u16 < y_u16; l_i_u16++) {
-    expected += (l_i_u16 * 2U);
-  }
+    result_u32 = InternalHelper_u32(seed_u32, iterations_u16);
 
-  result = InternalHelper_u32(x_u32, y_u16);
-
-  TEST_ASSERT_EQUAL_UINT32(expected, result);
+    TEST_ASSERT_EQUAL_UINT32(expected_u32, result_u32);
 }
-void test_x_zero_y_five(void) {
-  uint32_t result;
-  uint32_t x_u32 = 0U;
-  uint16_t y_u16 = 5U;
-  uint32_t expected = 0U + (0U * 2U) + (1U * 2U) + (2U * 2U) + (3U * 2U) + (4U * 2U);
+void test_x_one_y_three_initializes_correctly(void)
+{
+    uint32_t result_u32;
+    uint32_t seed_u32 = 1U;
+    uint16_t iterations_u16 = 3U;
+    uint32_t expected_u32 = 1U + 0U + 2U + 4U;
 
-  result = InternalHelper_u32(x_u32, y_u16);
+    result_u32 = InternalHelper_u32(seed_u32, iterations_u16);
 
-  TEST_ASSERT_EQUAL_UINT32(expected, result);
+    TEST_ASSERT_EQUAL_UINT32(expected_u32, result_u32);
 }
-void test_x_one_y_five(void) {
-  uint32_t result;
-  uint32_t x_u32 = 1U;
-  uint16_t y_u16 = 5U;
-  uint32_t expected = 1U + (0U * 2U) + (1U * 2U) + (2U * 2U) + (3U * 2U) + (4U * 2U);
+void test_x_midrange_y_twenty_typical_operation(void)
+{
+    uint32_t result_u32;
+    uint32_t seed_u32 = 30000U;
+    uint16_t iterations_u16 = 20U;
+    uint32_t expected_u32 = seed_u32;
+    uint16_t i_u16;
 
-  result = InternalHelper_u32(x_u32, y_u16);
+    for (i_u16 = 0U; i_u16 < iterations_u16; i_u16++)
+    {
+        expected_u32 += (i_u16 * 2U);
+    }
 
-  TEST_ASSERT_EQUAL_UINT32(expected, result);
+    result_u32 = InternalHelper_u32(seed_u32, iterations_u16);
+
+    TEST_ASSERT_EQUAL_UINT32(expected_u32, result_u32);
 }
-void test_x_30000_y_ten(void) {
-  uint32_t result;
-  uint32_t x_u32 = 30000U;
-  uint16_t y_u16 = 10U;
-  uint32_t expected = 30000U + (0U * 2U) + (1U * 2U) + (2U * 2U) + (3U * 2U) + (4U * 2U) + (5U * 2U) + (6U * 2U) + (7U * 2U) + (8U * 2U) + (9U * 2U);
+void test_x_max_y_two_accumulates_from_max_seed(void)
+{
+    uint32_t result_u32;
+    uint32_t seed_u32 = 60535U;
+    uint16_t iterations_u16 = 2U;
+    uint32_t expected_u32 = 60535U + 0U + 2U;
 
-  result = InternalHelper_u32(x_u32, y_u16);
+    result_u32 = InternalHelper_u32(seed_u32, iterations_u16);
 
-  TEST_ASSERT_EQUAL_UINT32(expected, result);
+    TEST_ASSERT_EQUAL_UINT32(expected_u32, result_u32);
 }
-void test_x_60534_y_five(void) {
-  uint32_t result;
-  uint32_t x_u32 = 60534U;
-  uint16_t y_u16 = 5U;
-  uint32_t expected = 60534U + (0U * 2U) + (1U * 2U) + (2U * 2U) + (3U * 2U) + (4U * 2U);
+void test_x_max_uint32_y_one_wraps_around(void)
+{
+    uint32_t result_u32;
+    uint32_t seed_u32 = 0xFFFFFFFFU;
+    uint16_t iterations_u16 = 1U;
+    uint32_t expected_u32 = seed_u32 + 0U;
 
-  result = InternalHelper_u32(x_u32, y_u16);
+    result_u32 = InternalHelper_u32(seed_u32, iterations_u16);
 
-  TEST_ASSERT_EQUAL_UINT32(expected, result);
+    TEST_ASSERT_EQUAL_UINT32(expected_u32, result_u32);
 }
-void test_x_60535_y_five(void) {
-  uint32_t result;
-  uint32_t x_u32 = 60535U;
-  uint16_t y_u16 = 5U;
-  uint32_t expected = 60535U + (0U * 2U) + (1U * 2U) + (2U * 2U) + (3U * 2U) + (4U * 2U);
+void test_x_near_max_y_ten_wraps_multiple_times(void)
+{
+    uint32_t result_u32;
+    uint32_t seed_u32 = 0xFFFFFFF0U;
+    uint16_t iterations_u16 = 10U;
+    uint32_t expected_u32 = seed_u32;
+    uint16_t i_u16;
 
-  result = InternalHelper_u32(x_u32, y_u16);
+    for (i_u16 = 0U; i_u16 < iterations_u16; i_u16++)
+    {
+        expected_u32 += (i_u16 * 2U);
+    }
 
-  TEST_ASSERT_EQUAL_UINT32(expected, result);
+    result_u32 = InternalHelper_u32(seed_u32, iterations_u16);
+
+    TEST_ASSERT_EQUAL_UINT32(expected_u32, result_u32);
 }
-void test_x_max_uint32_y_one_wraparound(void) {
-  uint32_t result;
-  uint32_t x_u32 = 0xFFFFFFFFU;
-  uint16_t y_u16 = 1U;
-  uint32_t expected = 0xFFFFFFFFU + (0U * 2U);
+void test_golden_vector_x_fifty_y_ten(void)
+{
+    uint32_t result_u32;
+    uint32_t seed_u32 = 50U;
+    uint16_t iterations_u16 = 10U;
+    uint32_t expected_u32 = 140U;
 
-  result = InternalHelper_u32(x_u32, y_u16);
+    result_u32 = InternalHelper_u32(seed_u32, iterations_u16);
 
-  TEST_ASSERT_EQUAL_UINT32(expected, result);
-}
-void test_x_near_max_y_ten_wraparound(void) {
-  uint32_t result;
-  uint32_t x_u32 = 0xFFFFFFF0U;
-  uint16_t y_u16 = 10U;
-  uint32_t expected = 0xFFFFFFF0U;
-  uint16_t l_i_u16;
-
-  for(l_i_u16 = 0U; l_i_u16 < y_u16; l_i_u16++) {
-    expected += (l_i_u16 * 2U);
-  }
-
-  result = InternalHelper_u32(x_u32, y_u16);
-
-  TEST_ASSERT_EQUAL_UINT32(expected, result);
-}
-void test_golden_x_100_y_3(void) {
-  uint32_t result;
-  uint32_t x_u32 = 100U;
-  uint16_t y_u16 = 3U;
-  uint32_t expected = 106U;
-
-  result = InternalHelper_u32(x_u32, y_u16);
-
-  TEST_ASSERT_EQUAL_UINT32(expected, result);
-}
-void test_golden_x_50_y_4(void) {
-  uint32_t result;
-  uint32_t x_u32 = 50U;
-  uint16_t y_u16 = 4U;
-  uint32_t expected = 62U;
-
-  result = InternalHelper_u32(x_u32, y_u16);
-
-  TEST_ASSERT_EQUAL_UINT32(expected, result);
-}
-void test_x_zero_y_zero(void) {
-  uint32_t result;
-  uint32_t x_u32 = 0U;
-  uint16_t y_u16 = 0U;
-
-  result = InternalHelper_u32(x_u32, y_u16);
-
-  TEST_ASSERT_EQUAL_UINT32(0U, result);
-}
-void test_x_60535_y_60535_max_boundary(void) {
-  uint32_t result;
-  uint32_t x_u32 = 60535U;
-  uint16_t y_u16 = 60535U;
-  uint32_t expected = 60535U;
-  uint32_t l_i_u16;
-
-  for(l_i_u16 = 0U; l_i_u16 < y_u16; l_i_u16++) {
-    expected += (l_i_u16 * 2U);
-  }
-
-  result = InternalHelper_u32(x_u32, y_u16);
-
-  TEST_ASSERT_EQUAL_UINT32(expected, result);
+    TEST_ASSERT_EQUAL_UINT32(expected_u32, result_u32);
 }
