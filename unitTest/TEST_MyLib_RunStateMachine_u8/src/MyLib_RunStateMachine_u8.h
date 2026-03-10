@@ -88,7 +88,6 @@
  * - 1: Initialization rejected because `rec_pc == NULL`
  * - 2: Counter update routine reported saturation
  */
-uint8_t MyLib_RunStateMachine_u8(const MyLib_record_t * rec_pc, uint32_t add_u32, const uint16_t * delta_pc_u16);
-
+uint8_t MyLib_RunStateMachine_u8(const MyLib_record_t *rec_pc, uint32_t add_u32, const uint16_t *delta_pc_u16);
 
 #endif /* TEST_MYLIB_RUNSTATEMACHINE_U8_H */
