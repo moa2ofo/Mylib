@@ -1,0 +1,19 @@
+---
+:source:
+  :file: utExecutionAndResults/utUnderTest/test/test_len1_factor2_array10_becomes_20_returns_20.c
+  :dirname: utExecutionAndResults/utUnderTest/test
+  :basename: test_len1_factor2_array10_becomes_20_returns_20.c
+:successes:
+- :test: test_len1_factor2_array10_becomes_20_returns_20
+  :line: 15
+  :message: ''
+  :unity_test_time: 0
+:failures: []
+:ignores: []
+:counts:
+  :total: 1
+  :passed: 1
+  :failed: 0
+  :ignored: 0
+:stdout: []
+:time: 0.004285807999991675
