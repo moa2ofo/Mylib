@@ -2,296 +2,342 @@
 #include "unity.h"
 #include <AnalyzeArray_u32.h>
 
-void setUp(void) {
+
+
+
+void setUp(void)
+{
 }
-void tearDown(void) {
+void tearDown(void)
+{
 }
-void test_values_NULL_returns_zero(void) {
-  uint32_t result;
+void test_NULL_pointer_returns_zero(void)
+{
+    uint32_t result_u32;
 
-  result = AnalyzeArray_u32(NULL, 5, 10);
+    result_u32 = AnalyzeArray_u32(NULL, 10U, 5U);
 
-  TEST_ASSERT_EQUAL_UINT32(0, result);
+    TEST_ASSERT_EQUAL_UINT32(0U, result_u32);
 }
-void test_len_zero_returns_zero(void) {
-  uint16_t values[5] = {1, 2, 3, 4, 5};
-  uint32_t result;
+void test_zero_length_returns_zero(void)
+{
+    uint16_t values_au16[5] = {1U, 2U, 3U, 4U, 5U};
+    uint32_t result_u32;
 
-  result = AnalyzeArray_u32(values, 0, 10);
+    result_u32 = AnalyzeArray_u32(values_au16, 0U, 5U);
 
-  TEST_ASSERT_EQUAL_UINT32(0, result);
+    TEST_ASSERT_EQUAL_UINT32(0U, result_u32);
 }
-void test_values_NULL_and_len_zero_returns_zero(void) {
-  uint32_t result;
+void test_NULL_pointer_and_zero_length_returns_zero(void)
+{
+    uint32_t result_u32;
 
-  result = AnalyzeArray_u32(NULL, 0, 10);
+    result_u32 = AnalyzeArray_u32(NULL, 0U, 5U);
 
-  TEST_ASSERT_EQUAL_UINT32(0, result);
+    TEST_ASSERT_EQUAL_UINT32(0U, result_u32);
 }
-void test_len_1_factor_1_element_10(void) {
-  uint16_t values[1] = {10};
-  uint32_t result;
+void test_single_element_factor_one(void)
+{
+    uint16_t values_au16[1] = {42U};
+    uint32_t result_u32;
+    uint32_t expected_sum_u32 = 42U;
 
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(10, NULL, 10);
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_sum_u32, NULL, expected_sum_u32);
+    MyLib_ComputeAdjustedValue_u32_IgnoreArg_delta_pc_u16();
 
-  result = AnalyzeArray_u32(values, 1, 1);
+    result_u32 = AnalyzeArray_u32(values_au16, 1U, 1U);
 
-  TEST_ASSERT_EQUAL_UINT16(10, values[0]);
-  TEST_ASSERT_EQUAL_UINT32(10, result);
+    TEST_ASSERT_EQUAL_UINT16(42U, values_au16[0]);
+    TEST_ASSERT_EQUAL_UINT32(expected_sum_u32, result_u32);
 }
-/**
- * @brief Test: len_u32 = 2 (just inside lower boundary), factor_u16 = 2, elements = {5, 10} → elements scaled to {10, 20}, sum returned = 30, MyLib_ComputeAdjustedValue_u32 called with (30, NULL)
- */
-void test_len_2_factor_2_elements_5_10(void) {
-  uint16_t values[2] = {5, 10};
-  uint32_t result;
+void test_two_elements_factor_one(void)
+{
+    uint16_t values_au16[2] = {10U, 20U};
+    uint32_t result_u32;
+    uint32_t expected_sum_u32 = 30U;
 
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(30, NULL, 30);
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_sum_u32, NULL, expected_sum_u32);
+    MyLib_ComputeAdjustedValue_u32_IgnoreArg_delta_pc_u16();
 
-  result = AnalyzeArray_u32(values, 2, 2);
+    result_u32 = AnalyzeArray_u32(values_au16, 2U, 1U);
 
-  TEST_ASSERT_EQUAL_UINT16(10, values[0]);
-  TEST_ASSERT_EQUAL_UINT16(20, values[1]);
-  TEST_ASSERT_EQUAL_UINT32(30, result);
+    TEST_ASSERT_EQUAL_UINT16(10U, values_au16[0]);
+    TEST_ASSERT_EQUAL_UINT16(20U, values_au16[1]);
+    TEST_ASSERT_EQUAL_UINT32(expected_sum_u32, result_u32);
 }
-void test_len_300_factor_1_all_elements_1(void) {
-  uint16_t values[300];
-  uint32_t result;
-  size_t i;
+void test_midrange_300_elements_factor_one(void)
+{
+    uint16_t values_au16[300];
+    uint32_t result_u32;
+    uint32_t expected_sum_u32 = 0U;
+    size_t i_u32;
 
-  for(i = 0; i < 300; i++) {
-    values[i] = 1;
-  }
+    for (i_u32 = 0U; i_u32 < 300U; i_u32++)
+    {
+        values_au16[i_u32] = 1U;
+        expected_sum_u32 += 1U;
+    }
 
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(300, NULL, 300);
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_sum_u32, NULL, expected_sum_u32);
+    MyLib_ComputeAdjustedValue_u32_IgnoreArg_delta_pc_u16();
 
-  result = AnalyzeArray_u32(values, 300, 1);
+    result_u32 = AnalyzeArray_u32(values_au16, 300U, 1U);
 
-  for(i = 0; i < 300; i++) {
-    TEST_ASSERT_EQUAL_UINT16(1, values[i]);
-  }
-  TEST_ASSERT_EQUAL_UINT32(300, result);
+    for (i_u32 = 0U; i_u32 < 300U; i_u32++)
+    {
+        TEST_ASSERT_EQUAL_UINT16(1U, values_au16[i_u32]);
+    }
+    TEST_ASSERT_EQUAL_UINT32(expected_sum_u32, result_u32);
 }
-void test_len_599_factor_1_all_elements_1(void) {
-  uint16_t values[599];
-  uint32_t result;
-  size_t i;
+void test_599_elements_factor_one(void)
+{
+    uint16_t values_au16[599];
+    uint32_t result_u32;
+    uint32_t expected_sum_u32 = 0U;
+    size_t i_u32;
 
-  for(i = 0; i < 599; i++) {
-    values[i] = 1;
-  }
+    for (i_u32 = 0U; i_u32 < 599U; i_u32++)
+    {
+        values_au16[i_u32] = 2U;
+        expected_sum_u32 += 2U;
+    }
 
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(599, NULL, 599);
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_sum_u32, NULL, expected_sum_u32);
+    MyLib_ComputeAdjustedValue_u32_IgnoreArg_delta_pc_u16();
 
-  result = AnalyzeArray_u32(values, 599, 1);
+    result_u32 = AnalyzeArray_u32(values_au16, 599U, 1U);
 
-  for(i = 0; i < 599; i++) {
-    TEST_ASSERT_EQUAL_UINT16(1, values[i]);
-  }
-  TEST_ASSERT_EQUAL_UINT32(599, result);
+    for (i_u32 = 0U; i_u32 < 599U; i_u32++)
+    {
+        TEST_ASSERT_EQUAL_UINT16(2U, values_au16[i_u32]);
+    }
+    TEST_ASSERT_EQUAL_UINT32(expected_sum_u32, result_u32);
 }
-void test_len_600_factor_1_all_elements_1(void) {
-  uint16_t values[600];
-  uint32_t result;
-  size_t i;
+void test_600_elements_factor_one(void)
+{
+    uint16_t values_au16[600];
+    uint32_t result_u32;
+    uint32_t expected_sum_u32 = 0U;
+    size_t i_u32;
 
-  for(i = 0; i < 600; i++) {
-    values[i] = 1;
-  }
+    for (i_u32 = 0U; i_u32 < 600U; i_u32++)
+    {
+        values_au16[i_u32] = 3U;
+        expected_sum_u32 += 3U;
+    }
 
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(600, NULL, 600);
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_sum_u32, NULL, expected_sum_u32);
+    MyLib_ComputeAdjustedValue_u32_IgnoreArg_delta_pc_u16();
 
-  result = AnalyzeArray_u32(values, 600, 1);
+    result_u32 = AnalyzeArray_u32(values_au16, 600U, 1U);
 
-  for(i = 0; i < 600; i++) {
-    TEST_ASSERT_EQUAL_UINT16(1, values[i]);
-  }
-  TEST_ASSERT_EQUAL_UINT32(600, result);
+    for (i_u32 = 0U; i_u32 < 600U; i_u32++)
+    {
+        TEST_ASSERT_EQUAL_UINT16(3U, values_au16[i_u32]);
+    }
+    TEST_ASSERT_EQUAL_UINT32(expected_sum_u32, result_u32);
 }
-/**
- * @brief Test: factor_u16 = 0 (lower boundary), len_u32 = 3, elements = {100, 200, 300} → all elements scaled to 0, sum returned = 0, MyLib_ComputeAdjustedValue_u32 called with (0, NULL)
- */
-void test_factor_0_len_3_elements_100_200_300(void) {
-  uint16_t values[3] = {100, 200, 300};
-  uint32_t result;
+void test_factor_zero_all_elements_become_zero(void)
+{
+    uint16_t values_au16[5] = {10U, 20U, 30U, 40U, 50U};
+    uint32_t result_u32;
+    size_t i_u32;
 
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(0, NULL, 0);
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(0U, NULL, 0U);
+    MyLib_ComputeAdjustedValue_u32_IgnoreArg_delta_pc_u16();
 
-  result = AnalyzeArray_u32(values, 3, 0);
+    result_u32 = AnalyzeArray_u32(values_au16, 5U, 0U);
 
-  TEST_ASSERT_EQUAL_UINT16(0, values[0]);
-  TEST_ASSERT_EQUAL_UINT16(0, values[1]);
-  TEST_ASSERT_EQUAL_UINT16(0, values[2]);
-  TEST_ASSERT_EQUAL_UINT32(0, result);
+    for (i_u32 = 0U; i_u32 < 5U; i_u32++)
+    {
+        TEST_ASSERT_EQUAL_UINT16(0U, values_au16[i_u32]);
+    }
+    TEST_ASSERT_EQUAL_UINT32(0U, result_u32);
 }
-/**
- * @brief Test: factor_u16 = 1 (just inside lower boundary), len_u32 = 3, elements = {10, 20, 30} → elements unchanged {10, 20, 30}, sum returned = 60, MyLib_ComputeAdjustedValue_u32 called with (60, NULL)
- */
-void test_factor_1_len_3_elements_10_20_30(void) {
-  uint16_t values[3] = {10, 20, 30};
-  uint32_t result;
+void test_factor_one_elements_unchanged(void)
+{
+    uint16_t values_au16[5] = {5U, 10U, 15U, 20U, 25U};
+    uint32_t result_u32;
+    uint32_t expected_sum_u32 = 75U;
 
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(60, NULL, 60);
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_sum_u32, NULL, expected_sum_u32);
+    MyLib_ComputeAdjustedValue_u32_IgnoreArg_delta_pc_u16();
 
-  result = AnalyzeArray_u32(values, 3, 1);
+    result_u32 = AnalyzeArray_u32(values_au16, 5U, 1U);
 
-  TEST_ASSERT_EQUAL_UINT16(10, values[0]);
-  TEST_ASSERT_EQUAL_UINT16(20, values[1]);
-  TEST_ASSERT_EQUAL_UINT16(30, values[2]);
-  TEST_ASSERT_EQUAL_UINT32(60, result);
+    TEST_ASSERT_EQUAL_UINT16(5U, values_au16[0]);
+    TEST_ASSERT_EQUAL_UINT16(10U, values_au16[1]);
+    TEST_ASSERT_EQUAL_UINT16(15U, values_au16[2]);
+    TEST_ASSERT_EQUAL_UINT16(20U, values_au16[3]);
+    TEST_ASSERT_EQUAL_UINT16(25U, values_au16[4]);
+    TEST_ASSERT_EQUAL_UINT32(expected_sum_u32, result_u32);
 }
-/**
- * @brief Test: factor_u16 = 32767 (mid-range), len_u32 = 2, elements = {2, 3} → elements scaled to {65534, 98301 mod 65536 = 32765}, sum = 98299, MyLib_ComputeAdjustedValue_u32 called with (98299, NULL)
- */
-void test_factor_32767_len_2_elements_2_3(void) {
-  uint16_t values[2] = {2, 3};
-  uint32_t result;
+void test_factor_midrange_32768(void)
+{
+    uint16_t values_au16[3] = {1U, 2U, 3U};
+    uint32_t result_u32;
+    uint32_t expected_sum_u32;
+    uint16_t expected_val0_u16;
+    uint16_t expected_val1_u16;
+    uint16_t expected_val2_u16;
 
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(98299, NULL, 98299);
+    expected_val0_u16 = (uint16_t)(1U * 32768U);
+    expected_val1_u16 = (uint16_t)(2U * 32768U);
+    expected_val2_u16 = (uint16_t)(3U * 32768U);
+    expected_sum_u32 = (uint32_t)expected_val0_u16 + (uint32_t)expected_val1_u16 + (uint32_t)expected_val2_u16;
 
-  result = AnalyzeArray_u32(values, 2, 32767);
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_sum_u32, NULL, expected_sum_u32);
+    MyLib_ComputeAdjustedValue_u32_IgnoreArg_delta_pc_u16();
 
-  TEST_ASSERT_EQUAL_UINT16(65534, values[0]);
-  TEST_ASSERT_EQUAL_UINT16(32765, values[1]);
-  TEST_ASSERT_EQUAL_UINT32(98299, result);
+    result_u32 = AnalyzeArray_u32(values_au16, 3U, 32768U);
+
+    TEST_ASSERT_EQUAL_UINT16(expected_val0_u16, values_au16[0]);
+    TEST_ASSERT_EQUAL_UINT16(expected_val1_u16, values_au16[1]);
+    TEST_ASSERT_EQUAL_UINT16(expected_val2_u16, values_au16[2]);
+    TEST_ASSERT_EQUAL_UINT32(expected_sum_u32, result_u32);
 }
-/**
- * @brief Test: factor_u16 = 65534 (just inside upper boundary), len_u32 = 2, elements = {1, 1} → elements scaled to {65534, 65534}, sum returned = 131068, MyLib_ComputeAdjustedValue_u32 called with (131068, NULL)
- */
-void test_factor_65534_len_2_elements_1_1(void) {
-  uint16_t values[2] = {1, 1};
-  uint32_t result;
+void test_factor_65534(void)
+{
+    uint16_t values_au16[2] = {2U, 3U};
+    uint32_t result_u32;
+    uint32_t expected_sum_u32;
+    uint16_t expected_val0_u16;
+    uint16_t expected_val1_u16;
 
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(131068, NULL, 131068);
+    expected_val0_u16 = (uint16_t)(2U * 65534U);
+    expected_val1_u16 = (uint16_t)(3U * 65534U);
+    expected_sum_u32 = (uint32_t)expected_val0_u16 + (uint32_t)expected_val1_u16;
 
-  result = AnalyzeArray_u32(values, 2, 65534);
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_sum_u32, NULL, expected_sum_u32);
+    MyLib_ComputeAdjustedValue_u32_IgnoreArg_delta_pc_u16();
 
-  TEST_ASSERT_EQUAL_UINT16(65534, values[0]);
-  TEST_ASSERT_EQUAL_UINT16(65534, values[1]);
-  TEST_ASSERT_EQUAL_UINT32(131068, result);
+    result_u32 = AnalyzeArray_u32(values_au16, 2U, 65534U);
+
+    TEST_ASSERT_EQUAL_UINT16(expected_val0_u16, values_au16[0]);
+    TEST_ASSERT_EQUAL_UINT16(expected_val1_u16, values_au16[1]);
+    TEST_ASSERT_EQUAL_UINT32(expected_sum_u32, result_u32);
 }
-/**
- * @brief Test: factor_u16 = 65535 (upper boundary), len_u32 = 2, elements = {1, 2} → elements scaled to {65535, 65535*2 mod 65536 = 65534}, sum = 131069, MyLib_ComputeAdjustedValue_u32 called with (131069, NULL)
- */
-void test_factor_65535_len_2_elements_1_2(void) {
-  uint16_t values[2] = {1, 2};
-  uint32_t result;
+void test_factor_65535_upper_boundary(void)
+{
+    uint16_t values_au16[2] = {1U, 2U};
+    uint32_t result_u32;
+    uint32_t expected_sum_u32;
+    uint16_t expected_val0_u16;
+    uint16_t expected_val1_u16;
 
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(131069, NULL, 131069);
+    expected_val0_u16 = (uint16_t)(1U * 65535U);
+    expected_val1_u16 = (uint16_t)(2U * 65535U);
+    expected_sum_u32 = (uint32_t)expected_val0_u16 + (uint32_t)expected_val1_u16;
 
-  result = AnalyzeArray_u32(values, 2, 65535);
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_sum_u32, NULL, expected_sum_u32);
+    MyLib_ComputeAdjustedValue_u32_IgnoreArg_delta_pc_u16();
 
-  TEST_ASSERT_EQUAL_UINT16(65535, values[0]);
-  TEST_ASSERT_EQUAL_UINT16(65534, values[1]);
-  TEST_ASSERT_EQUAL_UINT32(131069, result);
+    result_u32 = AnalyzeArray_u32(values_au16, 2U, 65535U);
+
+    TEST_ASSERT_EQUAL_UINT16(expected_val0_u16, values_au16[0]);
+    TEST_ASSERT_EQUAL_UINT16(expected_val1_u16, values_au16[1]);
+    TEST_ASSERT_EQUAL_UINT32(expected_sum_u32, result_u32);
 }
-void test_uint16_overflow_scaling(void) {
-  uint16_t values[1] = {65535};
-  uint32_t result;
+void test_element_overflow_during_scaling(void)
+{
+    uint16_t values_au16[1] = {65535U};
+    uint32_t result_u32;
+    uint16_t expected_val_u16;
+    uint32_t expected_sum_u32;
 
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(65534, NULL, 65534);
+    expected_val_u16 = (uint16_t)(65535U * 2U);
+    expected_sum_u32 = (uint32_t)expected_val_u16;
 
-  result = AnalyzeArray_u32(values, 1, 2);
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_sum_u32, NULL, expected_sum_u32);
+    MyLib_ComputeAdjustedValue_u32_IgnoreArg_delta_pc_u16();
 
-  TEST_ASSERT_EQUAL_UINT16(65534, values[0]);
-  TEST_ASSERT_EQUAL_UINT32(65534, result);
+    result_u32 = AnalyzeArray_u32(values_au16, 1U, 2U);
+
+    TEST_ASSERT_EQUAL_UINT16(expected_val_u16, values_au16[0]);
+    TEST_ASSERT_EQUAL_UINT32(expected_sum_u32, result_u32);
 }
-/**
- * @brief Test: uint32_t sum overflow → len_u32 = 2, factor_u16 = 1, elements = {0xFFFFFFFF (65535 repeated to max uint16), 1} such that sum wraps → verify wrap-around behavior in l_sum_u32, MyLib_ComputeAdjustedValue_u32 called with wrapped sum
- */
-void test_uint32_sum_overflow(void) {
-  uint16_t values[2] = {65535, 65535};
-  uint32_t result;
-  uint32_t expected_sum;
+void test_sum_overflow_during_accumulation(void)
+{
+    uint16_t values_au16[10];
+    uint32_t result_u32;
+    uint32_t expected_sum_u32 = 0U;
+    uint16_t scaled_val_u16;
+    size_t i_u32;
 
-  expected_sum = (uint32_t)65535 + (uint32_t)65535;
+    for (i_u32 = 0U; i_u32 < 10U; i_u32++)
+    {
+        values_au16[i_u32] = 65535U;
+    }
 
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_sum, NULL, expected_sum);
+    scaled_val_u16 = (uint16_t)(65535U * 65535U);
 
-  result = AnalyzeArray_u32(values, 2, 1);
+    for (i_u32 = 0U; i_u32 < 10U; i_u32++)
+    {
+        expected_sum_u32 += (uint32_t)scaled_val_u16;
+    }
 
-  TEST_ASSERT_EQUAL_UINT16(65535, values[0]);
-  TEST_ASSERT_EQUAL_UINT16(65535, values[1]);
-  TEST_ASSERT_EQUAL_UINT32(expected_sum, result);
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_sum_u32, NULL, expected_sum_u32);
+    MyLib_ComputeAdjustedValue_u32_IgnoreArg_delta_pc_u16();
+
+    result_u32 = AnalyzeArray_u32(values_au16, 10U, 65535U);
+
+    for (i_u32 = 0U; i_u32 < 10U; i_u32++)
+    {
+        TEST_ASSERT_EQUAL_UINT16(scaled_val_u16, values_au16[i_u32]);
+    }
+    TEST_ASSERT_EQUAL_UINT32(expected_sum_u32, result_u32);
 }
-/**
- * @brief Test: all array elements are 0 → len_u32 = 5, factor_u16 = 100, elements = {0, 0, 0, 0, 0} → all remain 0, sum returned = 0, MyLib_ComputeAdjustedValue_u32 called with (0, NULL)
- */
-void test_all_elements_zero(void) {
-  uint16_t values[5] = {0, 0, 0, 0, 0};
-  uint32_t result;
-  size_t i;
+void test_golden_vector_scaling_and_sum(void)
+{
+    uint16_t values_au16[5] = {1U, 2U, 3U, 4U, 5U};
+    uint32_t result_u32;
+    uint32_t expected_sum_u32;
 
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(0, NULL, 0);
+    expected_sum_u32 = 10U + 20U + 30U + 40U + 50U;
 
-  result = AnalyzeArray_u32(values, 5, 100);
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_sum_u32, NULL, expected_sum_u32);
+    MyLib_ComputeAdjustedValue_u32_IgnoreArg_delta_pc_u16();
 
-  for(i = 0; i < 5; i++) {
-    TEST_ASSERT_EQUAL_UINT16(0, values[i]);
-  }
-  TEST_ASSERT_EQUAL_UINT32(0, result);
+    result_u32 = AnalyzeArray_u32(values_au16, 5U, 10U);
+
+    TEST_ASSERT_EQUAL_UINT16(10U, values_au16[0]);
+    TEST_ASSERT_EQUAL_UINT16(20U, values_au16[1]);
+    TEST_ASSERT_EQUAL_UINT16(30U, values_au16[2]);
+    TEST_ASSERT_EQUAL_UINT16(40U, values_au16[3]);
+    TEST_ASSERT_EQUAL_UINT16(50U, values_au16[4]);
+    TEST_ASSERT_EQUAL_UINT32(expected_sum_u32, result_u32);
 }
-/**
- * @brief Test: all array elements are maximum uint16_t → len_u32 = 3, factor_u16 = 1, elements = {65535, 65535, 65535} → elements unchanged, sum = 196605, MyLib_ComputeAdjustedValue_u32 called with (196605, NULL)
- */
-void test_all_elements_max_uint16(void) {
-  uint16_t values[3] = {65535, 65535, 65535};
-  uint32_t result;
+void test_all_zero_elements_remain_zero(void)
+{
+    uint16_t values_au16[3] = {0U, 0U, 0U};
+    uint32_t result_u32;
 
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(196605, NULL, 196605);
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(0U, NULL, 0U);
+    MyLib_ComputeAdjustedValue_u32_IgnoreArg_delta_pc_u16();
 
-  result = AnalyzeArray_u32(values, 3, 1);
+    result_u32 = AnalyzeArray_u32(values_au16, 3U, 100U);
 
-  TEST_ASSERT_EQUAL_UINT16(65535, values[0]);
-  TEST_ASSERT_EQUAL_UINT16(65535, values[1]);
-  TEST_ASSERT_EQUAL_UINT16(65535, values[2]);
-  TEST_ASSERT_EQUAL_UINT32(196605, result);
+    TEST_ASSERT_EQUAL_UINT16(0U, values_au16[0]);
+    TEST_ASSERT_EQUAL_UINT16(0U, values_au16[1]);
+    TEST_ASSERT_EQUAL_UINT16(0U, values_au16[2]);
+    TEST_ASSERT_EQUAL_UINT32(0U, result_u32);
 }
-/**
- * @brief Test: mixed element values → len_u32 = 4, factor_u16 = 3, elements = {10, 0, 50, 100} → elements scaled to {30, 0, 150, 300}, sum returned = 480, MyLib_ComputeAdjustedValue_u32 called with (480, NULL)
- */
-void test_mixed_element_values(void) {
-  uint16_t values[4] = {10, 0, 50, 100};
-  uint32_t result;
+void test_mixed_zero_and_nonzero_elements(void)
+{
+    uint16_t values_au16[4] = {0U, 10U, 0U, 20U};
+    uint32_t result_u32;
+    uint32_t expected_sum_u32;
 
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(480, NULL, 480);
+    expected_sum_u32 = 0U + 50U + 0U + 100U;
 
-  result = AnalyzeArray_u32(values, 4, 3);
+    MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(expected_sum_u32, NULL, expected_sum_u32);
+    MyLib_ComputeAdjustedValue_u32_IgnoreArg_delta_pc_u16();
 
-  TEST_ASSERT_EQUAL_UINT16(30, values[0]);
-  TEST_ASSERT_EQUAL_UINT16(0, values[1]);
-  TEST_ASSERT_EQUAL_UINT16(150, values[2]);
-  TEST_ASSERT_EQUAL_UINT16(300, values[3]);
-  TEST_ASSERT_EQUAL_UINT32(480, result);
-}
-/**
- * @brief Test: verify in-place modification of array → len_u32 = 3, factor_u16 = 5, elements = {1, 2, 3} → after call, array contains {5, 10, 15}, sum returned = 30, MyLib_ComputeAdjustedValue_u32 called with (30, NULL)
- */
-void test_verify_inplace_modification(void) {
-  uint16_t values[3] = {1, 2, 3};
-  uint32_t result;
+    result_u32 = AnalyzeArray_u32(values_au16, 4U, 5U);
 
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(30, NULL, 30);
-
-  result = AnalyzeArray_u32(values, 3, 5);
-
-  TEST_ASSERT_EQUAL_UINT16(5, values[0]);
-  TEST_ASSERT_EQUAL_UINT16(10, values[1]);
-  TEST_ASSERT_EQUAL_UINT16(15, values[2]);
-  TEST_ASSERT_EQUAL_UINT32(30, result);
-}
-/**
- * @brief Test: MyLib_ComputeAdjustedValue_u32 is called with correct parameters → len_u32 = 2, factor_u16 = 10, elements = {5, 7} → elements scaled to {50, 70}, verify MyLib_ComputeAdjustedValue_u32 invoked exactly once with (120, NULL), sum returned = 120
- */
-void test_ComputeAdjustedValue_called_correctly(void) {
-  uint16_t values[2] = {5, 7};
-  uint32_t result;
-
-  MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(120, NULL, 120);
-
-  result = AnalyzeArray_u32(values, 2, 10);
-
-  TEST_ASSERT_EQUAL_UINT16(50, values[0]);
-  TEST_ASSERT_EQUAL_UINT16(70, values[1]);
-  TEST_ASSERT_EQUAL_UINT32(120, result);
+    TEST_ASSERT_EQUAL_UINT16(0U, values_au16[0]);
+    TEST_ASSERT_EQUAL_UINT16(50U, values_au16[1]);
+    TEST_ASSERT_EQUAL_UINT16(0U, values_au16[2]);
+    TEST_ASSERT_EQUAL_UINT16(100U, values_au16[3]);
+    TEST_ASSERT_EQUAL_UINT32(expected_sum_u32, result_u32);
 }
