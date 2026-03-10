@@ -5,7 +5,7 @@
   :basename: test_system_not_ready_returns_1_no_update.c
 :successes:
 - :test: test_system_not_ready_returns_1_no_update
-  :line: 15
+  :line: 13
   :message: ''
   :unity_test_time: 0
 :failures: []
@@ -16,4 +16,4 @@
   :failed: 0
   :ignored: 0
 :stdout: []
-:time: 0.0027037060000338897
+:time: 0.0033503539999912846

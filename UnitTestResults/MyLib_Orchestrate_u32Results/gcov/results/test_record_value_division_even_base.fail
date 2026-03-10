@@ -7,7 +7,7 @@
 :failures:
 - :test: test_record_value_division_even_base
   :line: 28
-  :message: Memory Mismatch. Byte 2 Expected 0x80 Was 0x14. Function MyLib_ProcessRecord
+  :message: Memory Mismatch. Byte 2 Expected 0x9A Was 0x0E. Function MyLib_ProcessRecord
     Argument rec_pc. Function called with unexpected argument value.
   :unity_test_time: 0
 :ignores: []
@@ -17,4 +17,4 @@
   :failed: 1
   :ignored: 0
 :stdout: []
-:time: 0.005479485000023487
+:time: 0.00291976099998692

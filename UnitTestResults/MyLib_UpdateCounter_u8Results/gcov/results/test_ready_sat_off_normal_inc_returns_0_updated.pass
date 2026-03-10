@@ -5,7 +5,7 @@
   :basename: test_ready_sat_off_normal_inc_returns_0_updated.c
 :successes:
 - :test: test_ready_sat_off_normal_inc_returns_0_updated
-  :line: 15
+  :line: 13
   :message: ''
   :unity_test_time: 0
 :failures: []
@@ -16,4 +16,4 @@
   :failed: 0
   :ignored: 0
 :stdout: []
-:time: 0.004338407999966876
+:time: 0.004185378000016726

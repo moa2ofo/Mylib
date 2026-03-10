@@ -7,7 +7,7 @@
 :failures:
 - :test: test_start_just_inside_upper_boundary_with_null_delta
   :line: 28
-  :message: Memory Mismatch. Byte 2 Expected 0x9E Was 0xA9. Function MyLib_ProcessRecord
+  :message: Memory Mismatch. Byte 2 Expected 0xE7 Was 0xD7. Function MyLib_ProcessRecord
     Argument rec_pc. Function called with unexpected argument value.
   :unity_test_time: 0
 :ignores: []
@@ -17,4 +17,4 @@
   :failed: 1
   :ignored: 0
 :stdout: []
-:time: 0.004247717999987799
+:time: 0.0034776109999938853
