@@ -27,7 +27,7 @@
     </tr>
     <tr>
       <th scope="row">Date:</th>
-      <td>2026-03-11 08:28:32</td>
+      <td>2026-03-11 09:36:21</td>
     </tr>
   </table>
 </div>
@@ -41,21 +41,21 @@
     </tr>
     <tr>
       <th scope="row">Lines:</th>
-      <td>0</td>
       <td>7</td>
-      <td class="coverage-none">0.0%</td>
+      <td>7</td>
+      <td class="coverage-high">100.0%</td>
     </tr>
     <tr>
       <th scope="row">Functions:</th>
-      <td>0</td>
       <td>1</td>
-      <td class="coverage-none">0.0%</td>
+      <td>1</td>
+      <td class="coverage-high">100.0%</td>
     </tr>
     <tr>
       <th scope="row">Branches:</th>
-      <td>0</td>
       <td>4</td>
-      <td class="coverage-none">0.0%</td>
+      <td>4</td>
+      <td class="coverage-high">100.0%</td>
     </tr>
   </table>
 </div>
@@ -81,7 +81,7 @@
         <a href="#l12">12</a>
       </td>
       <td>
-        <a href="#l12"> not called</a>
+        <a href="#l12"> called 11 times</a>
       </td>
     </tr>
   </table>
@@ -191,8 +191,8 @@
       <td class="lineno"><a id="l12" href="#l12">12</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount uncoveredLine">&cross;</td>
-      <td class="src uncoveredLine"><span class="kt">void</span><span class="w"> </span><span class="nf">MyLib_UpdateGlobalRecord</span><span class="p">(</span><span class="n">MyLib_record_t</span><span class="w"> </span><span class="o">*</span><span class="n">dest_p</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">MyLib_record_t</span><span class="w"> </span><span class="o">*</span><span class="n">src_pc</span><span class="p">)</span><span class="w"> </span><span class="p">{</span></td>
+      <td class="linecount coveredLine">11</td>
+      <td class="src coveredLine"><span class="kt">void</span><span class="w"> </span><span class="nf">MyLib_UpdateGlobalRecord</span><span class="p">(</span><span class="n">MyLib_record_t</span><span class="w"> </span><span class="o">*</span><span class="n">dest_p</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">MyLib_record_t</span><span class="w"> </span><span class="o">*</span><span class="n">src_pc</span><span class="p">)</span><span class="w"> </span><span class="p">{</span></td>
     </tr>
 
     <tr class="source-line">
@@ -206,17 +206,26 @@
     <tr class="source-line">
       <td class="lineno"><a id="l14" href="#l14">14</a></td>
       <td class="linebranch">
+        <details class="linebranchDetails">
+        <summary class="linebranchSummary">4/4</summary>
+        <div class="linebranchContents">
+          <div class="takenBranch">&check; Branch 0 taken 8 times.</div>
+          <div class="takenBranch">&check; Branch 1 taken 3 times.</div>
+          <div class="takenBranch">&check; Branch 2 taken 2 times.</div>
+          <div class="takenBranch">&check; Branch 3 taken 6 times.</div>
+        </div>
+        </details>
       </td>
-      <td class="linecount uncoveredLine">&cross;</td>
-      <td class="src uncoveredLine"><span class="w">  </span><span class="k">if</span><span class="p">((</span><span class="n">dest_p</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="n">src_pc</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">))</span><span class="w"> </span><span class="p">{</span></td>
+      <td class="linecount coveredLine">11</td>
+      <td class="src coveredLine"><span class="w">  </span><span class="k">if</span><span class="p">((</span><span class="n">dest_p</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="n">src_pc</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">))</span><span class="w"> </span><span class="p">{</span></td>
     </tr>
 
     <tr class="source-line">
       <td class="lineno"><a id="l15" href="#l15">15</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount uncoveredLine">&cross;</td>
-      <td class="src uncoveredLine"><span class="w">    </span><span class="k">return</span><span class="p">;</span></td>
+      <td class="linecount coveredLine">5</td>
+      <td class="src coveredLine"><span class="w">    </span><span class="k">return</span><span class="p">;</span></td>
     </tr>
 
     <tr class="source-line">
@@ -247,16 +256,16 @@
       <td class="lineno"><a id="l19" href="#l19">19</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount uncoveredLine">&cross;</td>
-      <td class="src uncoveredLine"><span class="w">  </span><span class="n">dest_p</span><span class="o">-&gt;</span><span class="n">id_u16</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">src_pc</span><span class="o">-&gt;</span><span class="n">id_u16</span><span class="p">;</span></td>
+      <td class="linecount coveredLine">6</td>
+      <td class="src coveredLine"><span class="w">  </span><span class="n">dest_p</span><span class="o">-&gt;</span><span class="n">id_u16</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">src_pc</span><span class="o">-&gt;</span><span class="n">id_u16</span><span class="p">;</span></td>
     </tr>
 
     <tr class="source-line">
       <td class="lineno"><a id="l20" href="#l20">20</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount uncoveredLine">&cross;</td>
-      <td class="src uncoveredLine"><span class="w">  </span><span class="n">dest_p</span><span class="o">-&gt;</span><span class="n">value_u32</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">src_pc</span><span class="o">-&gt;</span><span class="n">value_u32</span><span class="p">;</span></td>
+      <td class="linecount coveredLine">6</td>
+      <td class="src coveredLine"><span class="w">  </span><span class="n">dest_p</span><span class="o">-&gt;</span><span class="n">value_u32</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">src_pc</span><span class="o">-&gt;</span><span class="n">value_u32</span><span class="p">;</span></td>
     </tr>
 
     <tr class="source-line">
@@ -279,8 +288,8 @@
       <td class="lineno"><a id="l23" href="#l23">23</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount uncoveredLine">&cross;</td>
-      <td class="src uncoveredLine"><span class="w">  </span><span class="n">g_record</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">dest_p</span><span class="p">;</span></td>
+      <td class="linecount coveredLine">6</td>
+      <td class="src coveredLine"><span class="w">  </span><span class="n">g_record</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">dest_p</span><span class="p">;</span></td>
     </tr>
 
     <tr class="source-line">
@@ -303,8 +312,8 @@
       <td class="lineno"><a id="l26" href="#l26">26</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount uncoveredLine">&cross;</td>
-      <td class="src uncoveredLine"><span class="w">  </span><span class="n">g_systemReady_b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span></td>
+      <td class="linecount coveredLine">6</td>
+      <td class="src coveredLine"><span class="w">  </span><span class="n">g_systemReady_b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span></td>
     </tr>
 
     <tr class="source-line">

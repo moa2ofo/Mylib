@@ -7,12 +7,20 @@ uint32_t g_counter_u32 = 0U;
 bool g_systemReady_b = false;
 
 /* static globals (copied) */
- uint32_t CounterLimit_u32 = MYLIB_MAX_COUNT_U32;
-uint32_t get_CounterLimit_u32(void) { return CounterLimit_u32; }
-void set_CounterLimit_u32(uint32_t val) { CounterLimit_u32 = val; }
- bool SaturationEn_b = true;
-_Bool get_SaturationEn_b(void) { return SaturationEn_b; }
-void set_SaturationEn_b(_Bool val) { SaturationEn_b = val; }
+uint32_t CounterLimit_u32 = MYLIB_MAX_COUNT_U32;
+uint32_t get_CounterLimit_u32(void) {
+  return CounterLimit_u32;
+}
+void set_CounterLimit_u32(uint32_t val) {
+  CounterLimit_u32 = val;
+}
+bool SaturationEn_b = true;
+_Bool get_SaturationEn_b(void) {
+  return SaturationEn_b;
+}
+void set_SaturationEn_b(_Bool val) {
+  SaturationEn_b = val;
+}
 
 /* FUNCTION TO TEST */
 
