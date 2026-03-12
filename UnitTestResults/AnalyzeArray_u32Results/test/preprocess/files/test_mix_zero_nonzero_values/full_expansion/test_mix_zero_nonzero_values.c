@@ -2471,7 +2471,7 @@ void MyLib_RunStateMachine_u8_CMockIgnoreArg_delta_pc_u16(UNITY_UINT cmock_line)
 # 1 "utExecutionAndResults/utUnderTest/src/MyLib.h" 1
 # 5 "utExecutionAndResults/utUnderTest/src/AnalyzeArray_u32.h" 2
 # 61 "utExecutionAndResults/utUnderTest/src/AnalyzeArray_u32.h"
-uint32_t AnalyzeArray_u32(uint16_t * values_pu16, size_t len_u32, uint16_t factor_u16);
+uint32_t AnalyzeArray_u32(uint16_t *values_pu16, size_t len_u32, uint16_t factor_u16);
 # 4 "utExecutionAndResults/utUnderTest/test/test_mix_zero_nonzero_values.c" 2
 
 void setUp(void) {
