@@ -127,43 +127,49 @@ uint32_t MyLib_Orchestrate_u32(uint32_t start_u32, const uint16_t *delta_pc_u16)
 
   return (l_base_u32 + g_counter_u32);
 }
-uint8_t MyLib_UpdateCounter_u8(uint32_t add_u32) {
-  /* Function-local static cycle counter, persistent across calls */
-  static uint32_t l_CycleCnt_u32 = 0U;
-
-  uint32_t l_new_u32;
-  uint8_t l_ret_u8;
-
-  /* Step 1: Increment the function-static cycle counter */
-  l_CycleCnt_u32++;
-
-  /* Step 2: Check module readiness */
-  if(g_systemReady_b == false) {
-    /* System not ready, return error code 1 and perform no update */
-    return 1U;
-  }
-
-  /* Step 3: Compute tentative new counter value */
-  l_new_u32 = g_counter_u32 + add_u32;
-
-  /* Step 4: Apply saturation if enabled */
-  if((SaturationEn_b == true) && (l_new_u32 > CounterLimit_u32)) {
-    /* Saturation condition met: clamp to limit */
-    g_counter_u32 = CounterLimit_u32;
-    l_ret_u8 = 2U;
-  } else {
-    /* No saturation: store new value */
-    g_counter_u32 = l_new_u32;
-    l_ret_u8 = 0U;
-  }
-
-  /* Step 5: Periodically toggle SaturationEn_b every 16 calls */
-  if((l_CycleCnt_u32 & 0x0FU) == 0U) {
-    SaturationEn_b = !SaturationEn_b;
-  }
-
-  /* Return status code */
-  return l_ret_u8;
+uint8_t MyLib_UpdateCounter_u8(uint32_t add_u32)
+{
+    /* Function-local static cycle counter, persistent across calls */
+    static uint32_t l_CycleCnt_u32 = 0U;
+    
+    uint32_t l_new_u32;
+    uint8_t l_ret_u8;
+    
+    /* Step 1: Increment the function-static cycle counter */
+    l_CycleCnt_u32++;
+    
+    /* Step 2: Check module readiness */
+    if (g_systemReady_b == false)
+    {
+        /* System not ready, return error code 1 and perform no update */
+        return 1U;
+    }
+    
+    /* Step 3: Compute tentative new counter value */
+    l_new_u32 = g_counter_u32 + add_u32;
+    
+    /* Step 4: Apply saturation if enabled */
+    if ((SaturationEn_b == true) && (l_new_u32 > CounterLimit_u32))
+    {
+        /* Saturation condition met: clamp to limit */
+        g_counter_u32 = CounterLimit_u32;
+        l_ret_u8 = 2U;
+    }
+    else
+    {
+        /* No saturation: store new value */
+        g_counter_u32 = l_new_u32;
+        l_ret_u8 = 0U;
+    }
+    
+    /* Step 5: Periodically toggle SaturationEn_b every 16 calls */
+    if ((l_CycleCnt_u32 & 0x0FU) == 0U)
+    {
+        SaturationEn_b = !SaturationEn_b;
+    }
+    
+    /* Return status code */
+    return l_ret_u8;
 }
 int main() {
   return 0;
@@ -251,38 +257,51 @@ uint8_t UpdateCounter_u8(uint32_t add_u32) {
   return l_ret_u8;
 }
 
-uint8_t MyLib_RunStateMachine_u8(const MyLib_record_t *rec_pc, uint32_t add_u32, const uint16_t *delta_pc_u16) {
-  /* Function-static state variables preserve the state machine context. */
-  static uint8_t l_State_u8 = 0U;
-  static MyLib_record_t l_LastRecord = {0U, 0U};
-  static uint32_t l_LastAdjusted_u32 = 0U;
-
-  uint8_t l_ret_u8 = 0U;
-  uint32_t l_UpdateValue_u32 = 0U;
-
-  switch(l_State_u8) {
-  case 0U:
-    if(rec_pc == NULL) {
-      l_ret_u8 = 1U;
-    } else {
-      MyLib_UpdateGlobalRecord(&l_LastRecord, rec_pc);
-      l_State_u8 = 1U;
-      l_ret_u8 = 0U;
+uint8_t MyLib_RunStateMachine_u8(const MyLib_record_t *rec_pc, uint32_t add_u32, const uint16_t *delta_pc_u16)
+{
+    /* Static variables to preserve state machine context across calls */
+    static uint8_t l_State_u8 = 0U;
+    static MyLib_record_t l_LastRecord;
+    static uint32_t l_LastAdjusted_u32 = 0U;
+    
+    /* Local variables */
+    uint8_t l_ret_u8 = 0U;
+    uint32_t l_UpdateValue_u32 = 0U;
+    
+    /* State machine execution */
+    switch (l_State_u8)
+    {
+        case 0U: /* Init state */
+            if (rec_pc == NULL)
+            {
+                l_ret_u8 = 1U;
+            }
+            else
+            {
+                MyLib_UpdateGlobalRecord(&l_LastRecord, rec_pc);
+                l_State_u8 = 1U;
+                l_ret_u8 = 0U;
+            }
+            break;
+        
+        case 1U: /* Process state */
+            MyLib_ProcessRecord(&l_LastRecord, MYLIB_MULT_VALUE_U8);
+            l_LastAdjusted_u32 = MyLib_ComputeAdjustedValue_u32(l_LastRecord.value_u32, delta_pc_u16);
+            l_State_u8 = 2U;
+            l_ret_u8 = 0U;
+            break;
+        
+        case 2U: /* Update counter state */
+            l_UpdateValue_u32 = add_u32 + l_LastAdjusted_u32;
+            l_ret_u8 = MyLib_UpdateCounter_u8(l_UpdateValue_u32);
+            l_State_u8 = 0U;
+            break;
+        
+        default:
+            /* Defensive: should never reach here based on state machine design */
+            l_ret_u8 = 0U;
+            break;
     }
-    break;
-
-  case 1U:
-    MyLib_ProcessRecord(&l_LastRecord, MYLIB_MULT_VALUE_U8);
-    l_LastAdjusted_u32 = MyLib_ComputeAdjustedValue_u32(l_LastRecord.value_u32, delta_pc_u16);
-    l_State_u8 = 2U;
-    l_ret_u8 = 0U;
-    break;
-
-  case 2U:
-    l_UpdateValue_u32 = add_u32 + l_LastAdjusted_u32;
-    l_ret_u8 = MyLib_UpdateCounter_u8(l_UpdateValue_u32);
-    l_State_u8 = 0U;
-    break;
-  }
-  return l_ret_u8;
+    
+    return l_ret_u8;
 }
