@@ -4038,7 +4038,8 @@ uint8_t MyLib_RunStateMachine_u8(const MyLib_record_t *rec_pc, uint32_t add_u32,
  * @return uint32_t
  * Sum of the scaled array elements (wrap-around possible on overflow).
  */
-uint32_t MyLib_AnalyzeArray_u32(uint16_t *values_pu16, size_t len_u32, uint16_t factor_u16);
+uint32_t MyLib_AnalyzeArray_u32(uint16_t * values_pu16, size_t len_u32, uint16_t factor_u16);
+
 
 # 2 "utExecutionAndResults/utUnderTest/test/test_len_1_factor_2_value_100_becomes_200_returns_200.c" 2
 # 1 "utExecutionAndResults/utUnderTest/build/test/mocks/test_len_1_factor_2_value_100_becomes_200_returns_200/mock_MyLib.h" 1
