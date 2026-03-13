@@ -4029,7 +4029,8 @@ uint8_t MyLib_RunStateMachine_u8(const MyLib_record_t *rec_pc, uint32_t add_u32,
  * @return uint32_t
  * Combined result: computed base plus the current global counter.
  */
-uint32_t MyLib_Orchestrate_u32(uint32_t start_u32, const uint16_t *delta_pc_u16);
+uint32_t MyLib_Orchestrate_u32(uint32_t start_u32, const uint16_t * delta_pc_u16);
+
 
 # 2 "utExecutionAndResults/utUnderTest/test/test_record_id_lower_16_bits_all_zero.c" 2
 # 1 "utExecutionAndResults/utUnderTest/build/test/mocks/test_record_id_lower_16_bits_all_zero/mock_MyLib.h" 1

@@ -2477,7 +2477,7 @@ void MyLib_RunStateMachine_u8_CMockIgnoreArg_delta_pc_u16(UNITY_UINT cmock_line)
 # 1 "utExecutionAndResults/utUnderTest/src/MyLib.h" 1
 # 5 "utExecutionAndResults/utUnderTest/src/ProcessRecord.h" 2
 # 79 "utExecutionAndResults/utUnderTest/src/ProcessRecord.h"
-void ProcessRecord(const MyLib_record_t *rec_pc, uint8_t multiplier_u8);
+void ProcessRecord(const MyLib_record_t * rec_pc, uint8_t multiplier_u8);
 # 4 "utExecutionAndResults/utUnderTest/test/test_multiplier_two_value_zero.c" 2
 
 void setUp(void) {
