@@ -1,0 +1,5 @@
+<map id="MyLib_ProcessRecord" name="MyLib_ProcessRecord">
+<area shape="rect" id="Node000001" title="Process one record with a bounded accumulation and update module globals." alt="" coords="228,5,391,31"/>
+<area shape="rect" id="Node000002" href="$MyLib_8c.html#add13a4d8d439c55a7a840a180c935804" title="Run an orchestration sequence and return a combined result." alt="" coords="5,5,180,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="214,21,180,21,180,15,214,15"/>
+</map>

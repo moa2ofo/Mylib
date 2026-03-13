@@ -1,0 +1,12 @@
+<map id="InternalHelper_u32" name="InternalHelper_u32">
+<area shape="rect" id="Node000001" title=" " alt="" coords="761,80,908,105"/>
+<area shape="rect" id="Node000002" href="$MyLib_8c.html#ab76873d371c0f801495750c290ac869d" title="Compute an adjusted value from a base value and an optional delta." alt="" coords="463,55,713,80"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="747,86,711,83,712,77,748,81"/>
+<area shape="rect" id="Node000005" href="$MyLib_8c.html#add13a4d8d439c55a7a840a180c935804" title="Run an orchestration sequence and return a combined result." alt="" coords="5,80,180,105"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="747,95,180,95,180,90,747,90"/>
+<area shape="rect" id="Node000003" href="$MyLib_8c.html#a94d6f4e2dbaa27413d7096304c6b82cb" title="Scale an array in&#45;place and return the sum of scaled elements." alt="" coords="228,5,415,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="505,55,390,33,391,28,506,50"/>
+<area shape="rect" id="Node000004" href="$MyLib_8c.html#acc6858dfaa1f81a7b2e08e66b7e51f0c" title="Process one record with a bounded accumulation and update module globals." alt="" coords="240,55,403,80"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="449,70,403,70,403,65,449,65"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="227,80,180,86,180,80,226,75"/>
+</map>
