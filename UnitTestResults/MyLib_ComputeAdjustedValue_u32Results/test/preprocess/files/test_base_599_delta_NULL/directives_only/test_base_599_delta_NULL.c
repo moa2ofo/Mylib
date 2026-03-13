@@ -4021,7 +4021,8 @@ uint8_t MyLib_RunStateMachine_u8(const MyLib_record_t *rec_pc, uint32_t add_u32,
  * @return uint32_t
  * Adjusted value after applying delta and internal post-processing.
  */
-uint32_t MyLib_ComputeAdjustedValue_u32(uint32_t base_u32, const uint16_t *delta_pc_u16);
+uint32_t MyLib_ComputeAdjustedValue_u32(uint32_t base_u32, const uint16_t * delta_pc_u16);
+
 
 # 2 "utExecutionAndResults/utUnderTest/test/test_base_599_delta_NULL.c" 2
 # 1 "utExecutionAndResults/utUnderTest/build/test/mocks/test_base_599_delta_NULL/mock_MyLib.h" 1

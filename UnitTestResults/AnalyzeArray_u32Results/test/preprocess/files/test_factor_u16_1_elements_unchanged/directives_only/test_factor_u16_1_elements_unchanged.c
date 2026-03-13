@@ -11219,7 +11219,8 @@ void MyLib_RunStateMachine_u8_CMockIgnoreArg_delta_pc_u16(UNITY_LINE_TYPE cmock_
  * @return uint32_t
  * Sum of the scaled array elements (wrap-around possible on overflow).
  */
-uint32_t AnalyzeArray_u32(uint16_t *values_pu16, size_t len_u32, uint16_t factor_u16);
+uint32_t AnalyzeArray_u32(uint16_t * values_pu16, size_t len_u32, uint16_t factor_u16);
+
 
 # 4 "utExecutionAndResults/utUnderTest/test/test_factor_u16_1_elements_unchanged.c" 2
 

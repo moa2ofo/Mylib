@@ -4024,7 +4024,8 @@ uint8_t MyLib_RunStateMachine_u8(const MyLib_record_t *rec_pc, uint32_t add_u32,
  * @return void
  * No return value.
  */
-void MyLib_UpdateGlobalRecord(MyLib_record_t *dest_p, const MyLib_record_t *src_pc);
+void MyLib_UpdateGlobalRecord(MyLib_record_t * dest_p, const MyLib_record_t * src_pc);
+
 
 # 2 "utExecutionAndResults/utUnderTest/test/test_DestNullSrcValid_NoChange.c" 2
 # 1 "utExecutionAndResults/utUnderTest/build/test/mocks/test_DestNullSrcValid_NoChange/mock_MyLib.h" 1
