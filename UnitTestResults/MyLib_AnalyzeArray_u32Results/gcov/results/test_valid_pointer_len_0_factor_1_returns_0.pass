@@ -1,0 +1,19 @@
+---
+:source:
+  :file: utExecutionAndResults/utUnderTest/test/test_valid_pointer_len_0_factor_1_returns_0.c
+  :dirname: utExecutionAndResults/utUnderTest/test
+  :basename: test_valid_pointer_len_0_factor_1_returns_0.c
+:successes:
+- :test: test_valid_pointer_len_0_factor_1_returns_0
+  :line: 15
+  :message: ''
+  :unity_test_time: 0
+:failures: []
+:ignores: []
+:counts:
+  :total: 1
+  :passed: 1
+  :failed: 0
+  :ignored: 0
+:stdout: []
+:time: 0.0028440149999937603
