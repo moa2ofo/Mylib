@@ -2,7 +2,6 @@
 
 /* FUNCTION TO TEST */
 
-
 uint8_t MyLib_RunStateMachine_u8(const MyLib_record_t *rec_pc, uint32_t add_u32, const uint16_t *delta_pc_u16) {
   /* Static variables to preserve state machine context across calls */
   static uint8_t l_State_u8 = 0U;

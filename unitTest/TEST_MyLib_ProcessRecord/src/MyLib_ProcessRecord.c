@@ -2,7 +2,6 @@
 
 /* FUNCTION TO TEST */
 
-
 void MyLib_ProcessRecord(const MyLib_record_t *rec_pc, uint8_t multiplier_u8) {
   uint32_t l_acc_u32;
   uint8_t l_i_u8;

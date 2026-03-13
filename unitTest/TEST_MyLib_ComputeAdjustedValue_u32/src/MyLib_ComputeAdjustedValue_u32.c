@@ -2,7 +2,6 @@
 
 /* FUNCTION TO TEST */
 
-
 uint32_t MyLib_ComputeAdjustedValue_u32(uint32_t base_u32, const uint16_t *delta_pc_u16) {
   uint16_t l_d_u16;
   uint32_t l_val_u32;

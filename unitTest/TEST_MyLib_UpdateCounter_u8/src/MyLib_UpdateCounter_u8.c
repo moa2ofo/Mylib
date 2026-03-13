@@ -2,7 +2,6 @@
 
 /* FUNCTION TO TEST */
 
-
 uint8_t MyLib_UpdateCounter_u8(uint32_t add_u32) {
   /* Function-local static cycle counter, persistent across calls */
   static uint32_t l_CycleCnt_u32 = 0U;
