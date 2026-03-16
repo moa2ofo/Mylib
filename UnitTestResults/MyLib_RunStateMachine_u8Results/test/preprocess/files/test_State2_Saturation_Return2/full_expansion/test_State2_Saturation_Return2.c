@@ -307,7 +307,7 @@ uint8_t MyLib_UpdateCounter_u8(uint32_t add_u32);
 uint8_t UpdateCounter_u8(uint32_t add_u32);
 # 5 "utExecutionAndResults/utUnderTest/src/MyLib_RunStateMachine_u8.h" 2
 # 91 "utExecutionAndResults/utUnderTest/src/MyLib_RunStateMachine_u8.h"
-uint8_t MyLib_RunStateMachine_u8(const MyLib_record_t * rec_pc, uint32_t add_u32, const uint16_t * delta_pc_u16);
+uint8_t MyLib_RunStateMachine_u8(const MyLib_record_t *rec_pc, uint32_t add_u32, const uint16_t *delta_pc_u16);
 # 2 "utExecutionAndResults/utUnderTest/test/test_State2_Saturation_Return2.c" 2
 # 1 "utExecutionAndResults/utUnderTest/build/test/mocks/test_State2_Saturation_Return2/mock_MyLib.h" 1
 

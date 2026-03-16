@@ -307,7 +307,7 @@ uint8_t MyLib_UpdateCounter_u8(uint32_t add_u32);
 uint8_t UpdateCounter_u8(uint32_t add_u32);
 # 5 "utExecutionAndResults/utUnderTest/src/MyLib_RunStateMachine_u8.h" 2
 # 91 "utExecutionAndResults/utUnderTest/src/MyLib_RunStateMachine_u8.h"
-uint8_t MyLib_RunStateMachine_u8(const MyLib_record_t * rec_pc, uint32_t add_u32, const uint16_t * delta_pc_u16);
+uint8_t MyLib_RunStateMachine_u8(const MyLib_record_t *rec_pc, uint32_t add_u32, const uint16_t *delta_pc_u16);
 # 2 "utExecutionAndResults/utUnderTest/test/test_FullCycle_InitProcessUpdateSuccess_ReturnToState0.c" 2
 # 1 "utExecutionAndResults/utUnderTest/build/test/mocks/test_FullCycle_InitProcessUpdateSuccess_ReturnToState0/mock_MyLib.h" 1
 
@@ -2524,7 +2524,7 @@ void test_FullCycle_InitProcessUpdateSuccess_ReturnToState0(void) {
                                                          ((void *)0)
 # 26 "utExecutionAndResults/utUnderTest/test/test_FullCycle_InitProcessUpdateSuccess_ReturnToState0.c"
                                                              );
-  UnityAssertEqualNumber((UNITY_INT)(UNITY_UINT8 )((0U)), (UNITY_INT)(UNITY_UINT8 )((result)), (
+  UnityAssertEqualNumber((UNITY_INT)(UNITY_UINT8 )((0U)), (UNITY_INT)(UNITY_UINT8 )((reult)), (
 # 27 "utExecutionAndResults/utUnderTest/test/test_FullCycle_InitProcessUpdateSuccess_ReturnToState0.c" 3 4
  ((void *)0)
 # 27 "utExecutionAndResults/utUnderTest/test/test_FullCycle_InitProcessUpdateSuccess_ReturnToState0.c"

@@ -41,7 +41,7 @@ void test_FullCycle_InitProcessUpdateSuccess_ReturnToState0(void)
   result = MyLib_RunStateMachine_u8(&input_rec1, add_val,
                                                          ((void *)0)
                                                              );
-  UnityAssertEqualNumber((UNITY_INT)(UNITY_UINT8 )((0U)), (UNITY_INT)(UNITY_UINT8 )((result)), (
+  UnityAssertEqualNumber((UNITY_INT)(UNITY_UINT8 )((0U)), (UNITY_INT)(UNITY_UINT8 )((reult)), (
  ((void *)0)
  ), (UNITY_UINT)(27), UNITY_DISPLAY_STYLE_UINT8);
 

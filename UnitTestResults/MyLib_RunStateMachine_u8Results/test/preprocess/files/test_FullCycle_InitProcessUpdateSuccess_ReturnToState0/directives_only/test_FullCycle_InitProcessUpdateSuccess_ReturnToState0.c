@@ -4064,8 +4064,7 @@ uint8_t UpdateCounter_u8(uint32_t add_u32);
  * - 1: Initialization rejected because `rec_pc == NULL`
  * - 2: Counter update routine reported saturation
  */
-uint8_t MyLib_RunStateMachine_u8(const MyLib_record_t * rec_pc, uint32_t add_u32, const uint16_t * delta_pc_u16);
-
+uint8_t MyLib_RunStateMachine_u8(const MyLib_record_t *rec_pc, uint32_t add_u32, const uint16_t *delta_pc_u16);
 
 # 2 "utExecutionAndResults/utUnderTest/test/test_FullCycle_InitProcessUpdateSuccess_ReturnToState0.c" 2
 # 1 "utExecutionAndResults/utUnderTest/build/test/mocks/test_FullCycle_InitProcessUpdateSuccess_ReturnToState0/mock_MyLib.h" 1
@@ -11280,7 +11279,7 @@ void test_FullCycle_InitProcessUpdateSuccess_ReturnToState0(void) {
   MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(0U, NULL, 150U);
   MyLib_ComputeAdjustedValue_u32_IgnoreArg_base_u32();
   result = MyLib_RunStateMachine_u8(&input_rec1, add_val, NULL);
-  TEST_ASSERT_EQUAL_UINT8(0U, result);
+  TEST_ASSERT_EQUAL_UINT8(0U, reult);
 
   MyLib_UpdateCounter_u8_ExpectAndReturn(200U, 0U);
   result = MyLib_RunStateMachine_u8(&input_rec1, add_val, NULL);
