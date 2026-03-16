@@ -14,7 +14,8 @@
 | InternalHelper_u32             | y_60534_large_accumulation                                             | PASSED  | 100.0%    | 100.0%       |
 | InternalHelper_u32             | x_60535_y_zero_returns_60535                                           | PASSED  | 100.0%    | 100.0%       |
 | InternalHelper_u32             | x_zero_y_five_returns_twenty                                           | PASSED  | 100.0%    | 100.0%       |
-| AnalyzeArray_u32               | NO_TESTS                                                               | NOT EXC | -         | -            |
+| UpdateCounter_u8               | NO_TESTS                                                               | NOT EXC | -         | -            |
+| MyLib_RunStateMachine_u8       | NO_TESTS                                                               | NOT EXC | -         | -            |
 | MyLib_Orchestrate_u32          | start_0_delta_ptr_65534_verify_return_and_call                         | PASSED  | 100.0%    | 100.0%       |
 | MyLib_Orchestrate_u32          | g_counter_0_start_100_delta_NULL_verify_return                         | PASSED  | 100.0%    | 100.0%       |
 | MyLib_Orchestrate_u32          | upper_boundaries_all_params                                            | PASSED  | 100.0%    | 100.0%       |
@@ -54,6 +55,7 @@
 | MyLib_ProcessRecord            | multiplier_128_midrange                                                | PASSED  | 100.0%    | 100.0%       |
 | MyLib_ProcessRecord            | value_max_multiplier_one                                               | PASSED  | 100.0%    | 100.0%       |
 | MyLib_ProcessRecord            | multiplier_three_bounded_loop                                          | PASSED  | 100.0%    | 100.0%       |
+| AnalyzeArray_u32               | NO_TESTS                                                               | NOT EXC | -         | -            |
 | MyLib_ComputeAdjustedValue_u32 | base_300_delta_0                                                       | PASSED  | 100.0%    | 100.0%       |
 | MyLib_ComputeAdjustedValue_u32 | base_0_delta_0                                                         | PASSED  | 100.0%    | 100.0%       |
 | MyLib_ComputeAdjustedValue_u32 | base_600_delta_NULL                                                    | PASSED  | 100.0%    | 100.0%       |
