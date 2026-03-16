@@ -4,7 +4,7 @@
 
 
 uint8_t MyLib_RunStateMachine_u8(const MyLib_record_t *rec_pc, uint32_t add_u32, const uint16_t *delta_pc_u16) {
-  /* Static variables to preserve state machine context across calls */
+  /* Function-local static variables to preserve state machine context across calls */
   static uint8_t l_State_u8 = 0U;
   static MyLib_record_t l_LastRecord;
   static uint32_t l_LastAdjusted_u32 = 0U;
@@ -39,7 +39,7 @@ uint8_t MyLib_RunStateMachine_u8(const MyLib_record_t *rec_pc, uint32_t add_u32,
     break;
 
   default:
-    /* Defensive: should never reach here based on state machine design */
+    /* Defensive: should not occur if state machine is correctly managed */
     l_ret_u8 = 0U;
     break;
   }
