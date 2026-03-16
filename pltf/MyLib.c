@@ -251,9 +251,7 @@ uint8_t UpdateCounter_u8(uint32_t add_u32) {
   return l_ret_u8;
 }
 
-
-uint8_t MyLib_RunStateMachine_u8(const MyLib_record_t *rec_pc, uint32_t add_u32, const uint16_t *delta_pc_u16)
-{
+uint8_t MyLib_RunStateMachine_u8(const MyLib_record_t *rec_pc, uint32_t add_u32, const uint16_t *delta_pc_u16) {
   /* Function-local static variables to preserve state machine context across calls */
   static uint8_t l_State_u8 = 0U;
   static MyLib_record_t l_LastRecord;
