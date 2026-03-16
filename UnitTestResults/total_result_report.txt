@@ -78,15 +78,7 @@
 | MyLib_ComputeAdjustedValue_u32 | base_599_delta_NULL                                                    | PASSED  | 100.0%    | 100.0%       |
 | MyLib_ComputeAdjustedValue_u32 | base_1_delta_NULL                                                      | PASSED  | 100.0%    | 100.0%       |
 | MyLib_ComputeAdjustedValue_u32 | base_600_delta_1_duplicate                                             | PASSED  | 100.0%    | 100.0%       |
-| MyLib_UpdateGlobalRecord       | BothValid_CopyAndUpdate                                                | PASSED  | 100.0%    | 100.0%       |
-| MyLib_UpdateGlobalRecord       | DestNull_AfterSuccessfulCall                                           | PASSED  | 100.0%    | 100.0%       |
-| MyLib_UpdateGlobalRecord       | SrcNull_AfterSuccessfulCall                                            | PASSED  | 100.0%    | 100.0%       |
-| MyLib_UpdateGlobalRecord       | BothValid_BoundaryZero                                                 | PASSED  | 100.0%    | 100.0%       |
-| MyLib_UpdateGlobalRecord       | BothPointersNull_NoChange                                              | PASSED  | 100.0%    | 100.0%       |
-| MyLib_UpdateGlobalRecord       | DestValidSrcNull_NoChange                                              | PASSED  | 100.0%    | 100.0%       |
-| MyLib_UpdateGlobalRecord       | DestNullSrcValid_NoChange                                              | PASSED  | 100.0%    | 100.0%       |
-| MyLib_UpdateGlobalRecord       | BothValid_BoundaryMax                                                  | PASSED  | 100.0%    | 100.0%       |
-| MyLib_UpdateGlobalRecord       | BothValid_MidRange                                                     | PASSED  | 100.0%    | 100.0%       |
+| MyLib_UpdateGlobalRecord       | NO_TESTS                                                               | NOT EXC | -         | -            |
 | MyLib_AnalyzeArray_u32         | len_2_factor_65535_values_1_1_becomes_65535_65535_sum_wraps_to_65534   | PASSED  | 100.0%    | 100.0%       |
 | MyLib_AnalyzeArray_u32         | NULL_pointer_len_1_factor_1_returns_0                                  | PASSED  | 100.0%    | 100.0%       |
 | MyLib_AnalyzeArray_u32         | len_300_factor_1_all_1_unchanged_returns_300                           | PASSED  | 100.0%    | 100.0%       |
