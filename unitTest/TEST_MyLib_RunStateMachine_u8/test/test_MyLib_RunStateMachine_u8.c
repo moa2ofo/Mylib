@@ -192,7 +192,7 @@ void test_FullCycle_InitProcessUpdateSuccess_ReturnToState0(void) {
   MyLib_ComputeAdjustedValue_u32_ExpectAndReturn(0U, NULL, 150U);
   MyLib_ComputeAdjustedValue_u32_IgnoreArg_base_u32();
   result = MyLib_RunStateMachine_u8(&input_rec1, add_val, NULL);
-  TEST_ASSERT_EQUAL_UINT8(0U, result);
+  TEST_ASSERT_EQUAL_UINT8(0U, reult);
 
   MyLib_UpdateCounter_u8_ExpectAndReturn(200U, 0U);
   result = MyLib_RunStateMachine_u8(&input_rec1, add_val, NULL);
