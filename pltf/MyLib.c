@@ -251,7 +251,7 @@ uint8_t UpdateCounter_u8(uint32_t add_u32) {
   return l_ret_u8;
 }
 
-I apologize for the technical issue with the Reviewer tool. Since I cannot access the Reviewer at this moment, I will provide you with the implementation that strictly follows the [HEADER] specification:
+
 uint8_t MyLib_RunStateMachine_u8(const MyLib_record_t *rec_pc, uint32_t add_u32, const uint16_t *delta_pc_u16)
 {
   /* Function-local static variables to preserve state machine context across calls */
