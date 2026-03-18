@@ -1,7 +1,0 @@
-<map id="MyLib_ProcessRecord" name="MyLib_ProcessRecord">
-<area shape="rect" id="Node000001" title="Process one record with a bounded accumulation and update module globals." alt="" coords="259,31,421,56"/>
-<area shape="rect" id="Node000002" href="$MyLib_8c.html#add13a4d8d439c55a7a840a180c935804" title="Run an orchestration sequence and return a combined result." alt="" coords="21,5,195,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="245,36,195,30,196,25,245,30"/>
-<area shape="rect" id="Node000003" href="$MyLib_8c.html#a8740268c394e6c82a7a0128bb13067fa" title="Execute one step of an internal state machine operating on a record and updating the module counter." alt="" coords="5,55,211,80"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="245,56,211,59,211,54,245,50"/>
-</map>
