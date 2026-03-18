@@ -29,7 +29,6 @@ jobs:
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
-          git pull --rebase
 
       - name: Install clang-format
         run: |
@@ -163,9 +162,11 @@ jobs:
             if [ "$FAILED" -eq 1 ]; then
               git commit -m "[GitAct_Failed] - Git actions docker=${DOCKER_STATUS}, build=${BUILD_STATUS}, ut=${UT_STATUS} [skip ci]"
             else
-              git commit -m "[GitAct_Performed] - All git actions have been performed"
+              git commit -m "[GitAct_Performed] - All git actions have been performed [skip ci]"
             fi
-            git push
+
+            git pull --rebase origin "${GITHUB_REF_NAME}" || exit 1
+            git push origin HEAD:"${GITHUB_REF_NAME}" || exit 1
           fi
 
           if [ "$FAILED" -eq 1 ]; then
