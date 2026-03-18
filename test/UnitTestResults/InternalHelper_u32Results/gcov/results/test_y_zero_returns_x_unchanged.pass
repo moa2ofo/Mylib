@@ -1,0 +1,19 @@
+---
+:source:
+  :file: utExecutionAndResults/utUnderTest/test/test_y_zero_returns_x_unchanged.c
+  :dirname: utExecutionAndResults/utUnderTest/test
+  :basename: test_y_zero_returns_x_unchanged.c
+:successes:
+- :test: test_y_zero_returns_x_unchanged
+  :line: 10
+  :message: ''
+  :unity_test_time: 0
+:failures: []
+:ignores: []
+:counts:
+  :total: 1
+  :passed: 1
+  :failed: 0
+  :ignored: 0
+:stdout: []
+:time: 0.0027525430000139295
