@@ -63,6 +63,9 @@ jobs:
         run: |
           find dev test -type f \( -name "*.c" -o -name "*.h" \) \
             -not -path "*/docs/*" \
+            -not -path "*/UnitTestResults/*" \
+            -not -path "*/build/*" \
+            -not -path "*/git_action_scripts/*" \
             -exec clang-format --style=file:git_action_scripts/.clang-format -i {} \;
 
       - name: Verify Docker is available
