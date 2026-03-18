@@ -1,19 +1,16 @@
 // CEEDLING NOTICE: This generated file only to be consumed for test runner creation
 
-#include "utExecutionAndResults/utUnderTest/src/MyLib_ComputeAdjustedValue_u32.h"
-#include "utExecutionAndResults/utUnderTest/build/vendor/unity/src/unity.h"
 #include "mock_MyLib.h"
+#include "utExecutionAndResults/utUnderTest/build/vendor/unity/src/unity.h"
+#include "utExecutionAndResults/utUnderTest/src/MyLib_ComputeAdjustedValue_u32.h"
 
-void setUp(void)
-{
+void setUp(void) {
 }
 
-void tearDown(void)
-{
+void tearDown(void) {
 }
 
-void test_base_599_delta_1(void)
-{
+void test_base_599_delta_1(void) {
   uint32_t l_result_u32;
   uint32_t l_expected_u32 = 450U;
   uint16_t l_delta_u16 = 1U;
@@ -22,7 +19,5 @@ void test_base_599_delta_1(void)
 
   l_result_u32 = MyLib_ComputeAdjustedValue_u32(599U, &l_delta_u16);
 
-  UnityAssertEqualNumber((UNITY_INT)(UNITY_UINT32)((l_expected_u32)), (UNITY_INT)(UNITY_UINT32)((l_result_u32)), (
- ((void *)0)
- ), (UNITY_UINT)(20), UNITY_DISPLAY_STYLE_UINT32);
+  UnityAssertEqualNumber((UNITY_INT)(UNITY_UINT32)((l_expected_u32)), (UNITY_INT)(UNITY_UINT32)((l_result_u32)), (((void *)0)), (UNITY_UINT)(20), UNITY_DISPLAY_STYLE_UINT32);
 }

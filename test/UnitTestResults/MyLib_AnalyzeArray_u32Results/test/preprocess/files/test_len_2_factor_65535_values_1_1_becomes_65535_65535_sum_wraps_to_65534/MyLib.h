@@ -10,9 +10,7 @@ typedef struct {
 
 extern uint32_t g_counter_u32;
 extern MyLib_record_t g_record;
-extern
-      _Bool
-           g_systemReady_b;
+extern _Bool g_systemReady_b;
 void ProcessRecord(const MyLib_record_t *rec_pc, uint8_t multiplier_u8);
 void MyLib_ProcessRecord(const MyLib_record_t *rec_pc, uint8_t multiplier_u8);
 uint32_t MyLib_ComputeAdjustedValue_u32(uint32_t base_u32, const uint16_t *delta_pc_u16);

@@ -1,42 +1,31 @@
 // CEEDLING NOTICE: This generated file only to be consumed for test runner creation
 
-#include "utExecutionAndResults/utUnderTest/src/MyLib_AnalyzeArray_u32.h"
-#include "utExecutionAndResults/utUnderTest/build/vendor/unity/src/unity.h"
 #include "mock_MyLib.h"
+#include "utExecutionAndResults/utUnderTest/build/vendor/unity/src/unity.h"
+#include "utExecutionAndResults/utUnderTest/src/MyLib_AnalyzeArray_u32.h"
 
-void setUp(void)
-{
+void setUp(void) {
 }
 
-void tearDown(void)
-{
+void tearDown(void) {
 }
 
-void test_len_599_factor_1_all_1_unchanged_returns_599(void)
-{
+void test_len_599_factor_1_all_1_unchanged_returns_599(void) {
   uint16_t array[599];
   uint32_t result;
   size_t i;
 
-  for(i = 0U; i < 599U; i++)
-{
+  for(i = 0U; i < 599U; i++) {
     array[i] = 1U;
   }
 
-  MyLib_ComputeAdjustedValue_u32_CMockExpectAndReturn(24, 599U,
- ((void *)0)
- , 0U);
+  MyLib_ComputeAdjustedValue_u32_CMockExpectAndReturn(24, 599U, ((void *)0), 0U);
   MyLib_ComputeAdjustedValue_u32_CMockIgnoreArg_delta_pc_u16(25);
 
   result = MyLib_AnalyzeArray_u32(array, 599U, 1U);
 
-  for(i = 0U; i < 599U; i++)
-{
-    UnityAssertEqualNumber((UNITY_INT)(UNITY_UINT16)((1U)), (UNITY_INT)(UNITY_UINT16)((array[i])), (
-   ((void *)0)
-   ), (UNITY_UINT)(30), UNITY_DISPLAY_STYLE_UINT16);
+  for(i = 0U; i < 599U; i++) {
+    UnityAssertEqualNumber((UNITY_INT)(UNITY_UINT16)((1U)), (UNITY_INT)(UNITY_UINT16)((array[i])), (((void *)0)), (UNITY_UINT)(30), UNITY_DISPLAY_STYLE_UINT16);
   }
-  UnityAssertEqualNumber((UNITY_INT)(UNITY_UINT32)((599U)), (UNITY_INT)(UNITY_UINT32)((result)), (
- ((void *)0)
- ), (UNITY_UINT)(32), UNITY_DISPLAY_STYLE_UINT32);
+  UnityAssertEqualNumber((UNITY_INT)(UNITY_UINT32)((599U)), (UNITY_INT)(UNITY_UINT32)((result)), (((void *)0)), (UNITY_UINT)(32), UNITY_DISPLAY_STYLE_UINT32);
 }

@@ -1,19 +1,16 @@
 // CEEDLING NOTICE: This generated file only to be consumed for test runner creation
 
-#include "utExecutionAndResults/utUnderTest/src/MyLib_ProcessRecord.h"
-#include "utExecutionAndResults/utUnderTest/build/vendor/unity/src/unity.h"
 #include "mock_MyLib.h"
+#include "utExecutionAndResults/utUnderTest/build/vendor/unity/src/unity.h"
+#include "utExecutionAndResults/utUnderTest/src/MyLib_ProcessRecord.h"
 
-void setUp(void)
-{
+void setUp(void) {
 }
 
-void tearDown(void)
-{
+void tearDown(void) {
 }
 
-void test_minimal_increment_one(void)
-{
+void test_minimal_increment_one(void) {
   MyLib_record_t rec = {.id_u16 = 10U, .value_u32 = 1U};
   uint32_t initial_counter = g_counter_u32;
 
@@ -22,7 +19,5 @@ void test_minimal_increment_one(void)
 
   MyLib_ProcessRecord(&rec, 1U);
 
-  UnityAssertEqualNumber((UNITY_INT)(UNITY_UINT32)((initial_counter + 1U)), (UNITY_INT)(UNITY_UINT32)((g_counter_u32)), (
- ((void *)0)
- ), (UNITY_UINT)(20), UNITY_DISPLAY_STYLE_UINT32);
+  UnityAssertEqualNumber((UNITY_INT)(UNITY_UINT32)((initial_counter + 1U)), (UNITY_INT)(UNITY_UINT32)((g_counter_u32)), (((void *)0)), (UNITY_UINT)(20), UNITY_DISPLAY_STYLE_UINT32);
 }
