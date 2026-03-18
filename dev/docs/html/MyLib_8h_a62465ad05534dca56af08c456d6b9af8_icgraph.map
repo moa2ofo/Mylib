@@ -1,0 +1,5 @@
+<map id="MyLib_UpdateGlobalRecord" name="MyLib_UpdateGlobalRecord">
+<area shape="rect" id="Node000001" title="Copy a record into a destination and update module global state." alt="" coords="259,5,461,31"/>
+<area shape="rect" id="Node000002" href="$MyLib_8c.html#a8740268c394e6c82a7a0128bb13067fa" title="Execute one step of an internal state machine operating on a record and updating the module counter." alt="" coords="5,5,211,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="245,21,211,21,211,15,245,15"/>
+</map>

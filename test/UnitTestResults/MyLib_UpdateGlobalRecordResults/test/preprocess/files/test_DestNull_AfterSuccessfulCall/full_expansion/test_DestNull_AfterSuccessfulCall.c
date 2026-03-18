@@ -307,7 +307,7 @@ uint8_t UpdateCounter_u8(uint32_t add_u32);
 uint8_t MyLib_RunStateMachine_u8(const MyLib_record_t *rec_pc, uint32_t add_u32, const uint16_t *delta_pc_u16);
 # 5 "utExecutionAndResults/utUnderTest/src/MyLib_UpdateGlobalRecord.h" 2
 # 51 "utExecutionAndResults/utUnderTest/src/MyLib_UpdateGlobalRecord.h"
-void MyLib_UpdateGlobalRecord(MyLib_record_t * dest_p, const MyLib_record_t * src_pc);
+void MyLib_UpdateGlobalRecord(MyLib_record_t *dest_p, const MyLib_record_t *src_pc);
 # 2 "utExecutionAndResults/utUnderTest/test/test_DestNull_AfterSuccessfulCall.c" 2
 # 1 "utExecutionAndResults/utUnderTest/build/test/mocks/test_DestNull_AfterSuccessfulCall/mock_MyLib.h" 1
 

@@ -4052,8 +4052,7 @@ uint8_t MyLib_RunStateMachine_u8(const MyLib_record_t *rec_pc, uint32_t add_u32,
  * @return void
  * No return value.
  */
-void MyLib_ProcessRecord(const MyLib_record_t * rec_pc, uint8_t multiplier_u8);
-
+void MyLib_ProcessRecord(const MyLib_record_t *rec_pc, uint8_t multiplier_u8);
 
 # 2 "utExecutionAndResults/utUnderTest/test/test_value_max_multiplier_two_wraparound.c" 2
 # 1 "utExecutionAndResults/utUnderTest/build/test/mocks/test_value_max_multiplier_two_wraparound/mock_MyLib.h" 1

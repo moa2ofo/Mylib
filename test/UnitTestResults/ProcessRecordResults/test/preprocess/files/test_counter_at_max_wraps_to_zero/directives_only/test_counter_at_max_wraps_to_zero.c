@@ -11243,8 +11243,7 @@ void MyLib_RunStateMachine_u8_CMockIgnoreArg_delta_pc_u16(UNITY_LINE_TYPE cmock_
  * @return void
  * No return value.
  */
-void ProcessRecord(const MyLib_record_t * rec_pc, uint8_t multiplier_u8);
-
+void ProcessRecord(const MyLib_record_t *rec_pc, uint8_t multiplier_u8);
 
 # 4 "utExecutionAndResults/utUnderTest/test/test_counter_at_max_wraps_to_zero.c" 2
 
