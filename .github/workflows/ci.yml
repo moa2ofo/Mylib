@@ -48,9 +48,6 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Run swCmpDocsGenerator
-              run: |
-                python3 git_action_scripts/swCmpDocsGenerator.py
 
       - name: Build Docker image + Generate test units
         run: |
@@ -78,6 +75,12 @@ jobs:
         continue-on-error: true
         run: |
           sudo -E python3 git_action_scripts/swCmpBuildCheck.py
+
+      - name: Run swCmpDocsGenerator
+        id: sw_docs_generator
+        continue-on-error: true
+        run: |
+          sudo -E python3 git_action_scripts/swCmpDocsGenerator.py
 
       - name: Fix permissions for git_action_scripts workspace
         id: fix_permissions
