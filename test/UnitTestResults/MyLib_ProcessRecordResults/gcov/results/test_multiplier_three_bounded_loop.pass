@@ -1,0 +1,19 @@
+---
+:source:
+  :file: utExecutionAndResults/utUnderTest/test/test_multiplier_three_bounded_loop.c
+  :dirname: utExecutionAndResults/utUnderTest/test
+  :basename: test_multiplier_three_bounded_loop.c
+:successes:
+- :test: test_multiplier_three_bounded_loop
+  :line: 11
+  :message: ''
+  :unity_test_time: 0
+:failures: []
+:ignores: []
+:counts:
+  :total: 1
+  :passed: 1
+  :failed: 0
+  :ignored: 0
+:stdout: []
+:time: 0.0034001470000077916
