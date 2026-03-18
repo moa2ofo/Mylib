@@ -48,7 +48,10 @@ jobs:
         with:
           python-version: "3.12"
 
-      # NEW BLOCK ADDED HERE
+      - name: Run swCmpDocsGenerator
+              run: |
+                python3 git_action_scripts/swCmpDocsGenerator.py
+
       - name: Build Docker image + Generate test units
         run: |
           cd git_action_scripts
