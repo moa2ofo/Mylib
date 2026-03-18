@@ -50,6 +50,7 @@ jobs:
 
 
       - name: Build Docker image + Generate test units
+        id: generate_tests
         run: |
           cd git_action_scripts
           python run_docker.py build --tag llvm-c-parser:latest --file Dockerfile
@@ -103,9 +104,11 @@ jobs:
       - name: Commit and push changes (format + buildCheck + utResults)
         if: github.event_name == 'push' && always()
         env:
+          GENERATE_TESTS_OUTCOME: ${{ steps.generate_tests.outcome }}
           DOCKER_OUTCOME: ${{ steps.docker_info.outcome }}
           BUILD_OUTCOME:  ${{ steps.sw_cmp_build_check.outcome }}
           UT_OUTCOME:     ${{ steps.unit_tests.outcome }}
+          DOXYGEN_OUTCOME: ${{ steps.doxygen_generation.outcome }}
           RUN_URL:        ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
           git config --global user.name "github-actions"
@@ -118,15 +121,18 @@ jobs:
               *)       echo "failed" ;;
             esac
           }
-
+          GENERATE_TESTS_STATUS="$(map_outcome "$GENERATE_TESTS_OUTCOME")"
           DOCKER_STATUS="$(map_outcome "$DOCKER_OUTCOME")"
           BUILD_STATUS="$(map_outcome "$BUILD_OUTCOME")"
           UT_STATUS="$(map_outcome "$UT_OUTCOME")"
+          DOXYGEN_STATUS="$(map_outcome "$DOXYGEN_OUTCOME")"
 
           FAILED=0
-          for s in "$DOCKER_STATUS" "$BUILD_STATUS" "$UT_STATUS" ; do
+
+          for s in "$GENERATE_TESTS_STATUS" "$DOCKER_STATUS" "$BUILD_STATUS" "$UT_STATUS" "$DOXYGEN_STATUS" ; do
             [ "$s" = "failed" ] && FAILED=1
           done
+
 
           mkdir -p ci_status
 
@@ -139,8 +145,10 @@ jobs:
           {
             echo "${STATUS_LINE}"
             echo "Run: ${RUN_URL}"
+            echo "generate_tests: ${GENERATE_TESTS_STATUS}"
             echo "docker info: ${DOCKER_STATUS}"
             echo "swCmpBuildCheck: ${BUILD_STATUS}"
+            echo "doxygen: ${DOXYGEN_STATUS}"
             echo "unit tests: ${UT_STATUS}"
             echo "Timestamp (UTC): $(date -u +"%Y-%m-%dT%H:%M:%SZ")"
           } > ci_status/last_status
