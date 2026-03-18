@@ -162,11 +162,9 @@ jobs:
             if [ "$FAILED" -eq 1 ]; then
               git commit -m "[GitAct_Failed] - Git actions docker=${DOCKER_STATUS}, build=${BUILD_STATUS}, ut=${UT_STATUS} [skip ci]"
             else
-              git commit -m "[GitAct_Performed] - All git actions have been performed [skip ci]"
+              git commit -m "[GitAct_Performed] - All git actions have been performed"
             fi
-
-            git pull --rebase origin "${GITHUB_REF_NAME}" || exit 1
-            git push origin HEAD:"${GITHUB_REF_NAME}" || exit 1
+            git push
           fi
 
           if [ "$FAILED" -eq 1 ]; then
