@@ -1,0 +1,19 @@
+<map id="InternalHelper_u32" name="InternalHelper_u32">
+<area shape="rect" id="Node000001" title=" " alt="" coords="792,207,939,232"/>
+<area shape="rect" id="Node000002" href="$MyLib_8c.html#ab76873d371c0f801495750c290ac869d" title="Compute an adjusted value from a base value and an optional delta." alt="" coords="493,131,744,156"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="810,205,660,159,662,154,811,200"/>
+<area shape="rect" id="Node000006" href="$MyLib_8c.html#add13a4d8d439c55a7a840a180c935804" title="Run an orchestration sequence and return a combined result." alt="" coords="21,205,195,231"/>
+<area shape="poly" id="edge9_Node000001_Node000006" title=" " alt="" coords="778,232,674,242,544,249,401,252,258,246,170,233,170,228,259,241,401,247,544,244,673,236,778,227"/>
+<area shape="rect" id="Node000003" href="$MyLib_8c.html#a9a012e582e10fbe8211f3dec731d71f5" title="Scale an array in&#45;place and return the sum of scaled elements." alt="" coords="282,5,422,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="587,125,523,85,444,44,411,33,413,28,446,40,526,80,590,121"/>
+<area shape="rect" id="Node000004" href="$MyLib_8c.html#a94d6f4e2dbaa27413d7096304c6b82cb" title="Scale an array in&#45;place and return the sum of scaled elements." alt="" coords="259,55,445,80"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="559,129,397,83,398,78,561,124"/>
+<area shape="rect" id="Node000005" href="$MyLib_8c.html#acc6858dfaa1f81a7b2e08e66b7e51f0c" title="Process one record with a bounded accumulation and update module globals." alt="" coords="271,156,433,181"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="480,159,434,164,433,158,479,154"/>
+<area shape="rect" id="Node000007" href="$MyLib_8c.html#a8740268c394e6c82a7a0128bb13067fa" title="Execute one step of an internal state machine operating on a record and updating the module counter." alt="" coords="5,131,211,156"/>
+<area shape="poly" id="edge7_Node000002_Node000007" title=" " alt="" coords="480,146,211,146,211,141,480,141"/>
+<area shape="rect" id="Node000008" href="$MyLib_8c.html#a09e209253fe184eddc89f13fbf751b50" title="Process one record with a bounded accumulation and update module globals." alt="" coords="293,205,411,231"/>
+<area shape="poly" id="edge8_Node000002_Node000008" title=" " alt="" coords="561,162,446,195,401,208,399,203,445,190,560,157"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="276,187,172,208,171,203,275,181"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="257,161,211,157,211,151,257,156"/>
+</map>

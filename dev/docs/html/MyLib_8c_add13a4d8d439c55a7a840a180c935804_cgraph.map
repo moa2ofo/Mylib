@@ -1,0 +1,10 @@
+<map id="MyLib_Orchestrate_u32" name="MyLib_Orchestrate_u32">
+<area shape="rect" id="Node000001" title="Run an orchestration sequence and return a combined result." alt="" coords="5,5,180,31"/>
+<area shape="rect" id="Node000002" href="$MyLib_8c.html#ab5e4dfbd8dae29eeb60944034baa1ee6" title=" " alt="" coords="737,5,884,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="180,15,724,15,724,21,180,21"/>
+<area shape="rect" id="Node000003" href="$MyLib_8c.html#acc6858dfaa1f81a7b2e08e66b7e51f0c" title="Process one record with a bounded accumulation and update module globals." alt="" coords="228,31,391,56"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="181,26,215,30,214,35,180,31"/>
+<area shape="rect" id="Node000004" href="$MyLib_8c.html#ab76873d371c0f801495750c290ac869d" title="Compute an adjusted value from a base value and an optional delta." alt="" coords="439,31,689,56"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="391,41,425,41,425,46,391,46"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="687,28,723,24,724,30,688,33"/>
+</map>
