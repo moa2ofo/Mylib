@@ -1,0 +1,19 @@
+---
+:source:
+  :file: utExecutionAndResults/utUnderTest/test/test_BothPointersNull_NoChange.c
+  :dirname: utExecutionAndResults/utUnderTest/test
+  :basename: test_BothPointersNull_NoChange.c
+:successes:
+- :test: test_BothPointersNull_NoChange
+  :line: 11
+  :message: ''
+  :unity_test_time: 0
+:failures: []
+:ignores: []
+:counts:
+  :total: 1
+  :passed: 1
+  :failed: 0
+  :ignored: 0
+:stdout: []
+:time: 0.0036348699999848577
