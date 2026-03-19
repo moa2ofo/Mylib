@@ -1,0 +1,20 @@
+---
+:source:
+  :file: utExecutionAndResults/utUnderTest/test/test_State2_MidRangeValues_ReturnFromUpdateCounter.c
+  :dirname: utExecutionAndResults/utUnderTest/test
+  :basename: test_State2_MidRangeValues_ReturnFromUpdateCounter.c
+:successes: []
+:failures:
+- :test: test_State2_MidRangeValues_ReturnFromUpdateCounter
+  :line: 25
+  :message: Expected 0x0000C350 Was 0x00000000. Function MyLib_ComputeAdjustedValue_u32
+    Argument base_u32. Function called with unexpected argument value.
+  :unity_test_time: 0
+:ignores: []
+:counts:
+  :total: 1
+  :passed: 0
+  :failed: 1
+  :ignored: 0
+:stdout: []
+:time: 0.005247206999996479

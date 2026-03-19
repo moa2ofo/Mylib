@@ -7,7 +7,7 @@
 :failures: []
 :ignores:
 - :test: test_MyLib_UpdateCounter_u8
-  :line: 12
+  :line: 13
   :message: Auto-generated stub test
   :unity_test_time: 0
 :counts:
@@ -16,4 +16,4 @@
   :failed: 0
   :ignored: 1
 :stdout: []
-:time: 0.0009990049999828443
+:time: 0.0009996980000153144

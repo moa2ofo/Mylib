@@ -82,7 +82,7 @@ static void run_test(UnityTestFunction func, const char* name, UNITY_LINE_TYPE l
 int main(void)
 {
   UnityBegin("test_InternalHelper_u32_1.c");
-  run_test(test_InternalHelper_u32, "test_InternalHelper_u32", 10);
+  run_test(test_InternalHelper_u32, "test_InternalHelper_u32", 12);
 
   CMock_Guts_MemFreeFinal();
   return UNITY_END();
