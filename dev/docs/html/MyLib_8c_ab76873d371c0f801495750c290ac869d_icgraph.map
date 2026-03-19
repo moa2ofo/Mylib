@@ -1,0 +1,16 @@
+<map id="MyLib_ComputeAdjustedValue_u32" name="MyLib_ComputeAdjustedValue_u32">
+<area shape="rect" id="Node000001" title="Compute an adjusted value from a base value and an optional delta." alt="" coords="493,104,744,129"/>
+<area shape="rect" id="Node000002" href="$MyLib_8c.html#a9a012e582e10fbe8211f3dec731d71f5" title="Scale an array in&#45;place and return the sum of scaled elements." alt="" coords="282,5,422,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="578,100,516,72,444,45,407,33,409,28,446,39,518,67,580,95"/>
+<area shape="rect" id="Node000003" href="$MyLib_8c.html#a94d6f4e2dbaa27413d7096304c6b82cb" title="Scale an array in&#45;place and return the sum of scaled elements." alt="" coords="259,55,445,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="536,104,421,83,422,77,537,99"/>
+<area shape="rect" id="Node000004" href="$MyLib_8c.html#acc6858dfaa1f81a7b2e08e66b7e51f0c" title="Process one record with a bounded accumulation and update module globals." alt="" coords="271,104,433,129"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="479,119,434,119,434,114,479,114"/>
+<area shape="rect" id="Node000006" href="$MyLib_8c.html#a8740268c394e6c82a7a0128bb13067fa" title="Execute one step of an internal state machine operating on a record and updating the module counter." alt="" coords="5,153,211,179"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="527,134,446,145,211,163,211,158,445,139,526,129"/>
+<area shape="rect" id="Node000007" href="$MyLib_8c.html#a09e209253fe184eddc89f13fbf751b50" title="Process one record with a bounded accumulation and update module globals." alt="" coords="293,205,411,231"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="576,137,446,188,392,208,390,203,444,184,574,132"/>
+<area shape="rect" id="Node000005" href="$MyLib_8c.html#add13a4d8d439c55a7a840a180c935804" title="Run an orchestration sequence and return a combined result." alt="" coords="21,104,195,129"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="257,119,195,119,195,114,257,114"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="276,135,172,156,171,151,275,129"/>
+</map>
