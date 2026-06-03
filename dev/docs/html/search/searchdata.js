@@ -1,6 +1,6 @@
 var indexSectionsWithContent =
 {
-  0: "acgimpsuv",
+  0: "acdghilmpsuv",
   1: "m",
   2: "m",
   3: "aimpu",
@@ -15,7 +15,7 @@ var indexSectionNames =
   2: "files",
   3: "functions",
   4: "variables",
-  5: "defines"
+  5: "groups"
 };
 
 var indexSectionLabels =
@@ -25,6 +25,6 @@ var indexSectionLabels =
   2: "Files",
   3: "Functions",
   4: "Variables",
-  5: "Macros"
+  5: "Modules"
 };
 

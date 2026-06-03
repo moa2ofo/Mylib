@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['id_5fu16_0',['id_u16',['../structMyLib__record__t.html#a9a6dce19d8cf804b57197cc56c99cf09',1,'MyLib_record_t']]],
-  ['internalhelper_5fu32_1',['internalhelper_u32',['../MyLib_8c.html#ab5e4dfbd8dae29eeb60944034baa1ee6',1,'InternalHelper_u32(uint32_t x_u32, uint16_t y_u16):&#160;MyLib.c'],['../MyLib_8h.html#ab5e4dfbd8dae29eeb60944034baa1ee6',1,'InternalHelper_u32(uint32_t x_u32, uint16_t y_u16):&#160;MyLib.h']]]
+  ['g_5fcounter_5fu32_0',['g_counter_u32',['../MyLib_8c.html#aa3c57dece8bc2a0d0c9e52fcc2d8be53',1,'g_counter_u32:&#160;MyLib.c'],['../MyLib_8h.html#aa3c57dece8bc2a0d0c9e52fcc2d8be53',1,'g_counter_u32:&#160;MyLib.c']]],
+  ['g_5frecord_1',['g_record',['../MyLib_8c.html#a722501d19fa04664f6ffb03d9afe79c1',1,'g_record:&#160;MyLib.c'],['../MyLib_8h.html#a722501d19fa04664f6ffb03d9afe79c1',1,'g_record:&#160;MyLib.c']]],
+  ['g_5fsystemready_5fb_2',['g_systemready_b',['../MyLib_8c.html#a05e1a5458dfac73ed0b08722e32ceb1b',1,'g_systemReady_b:&#160;MyLib.c'],['../MyLib_8h.html#a05e1a5458dfac73ed0b08722e32ceb1b',1,'g_systemReady_b:&#160;MyLib.c']]],
+  ['global_20interactions_3',['Global interactions',['../group__MyLib.html#autotoc_md1',1,'']]]
 ];

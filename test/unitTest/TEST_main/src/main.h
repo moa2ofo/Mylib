@@ -5,5 +5,4 @@
 
 int main(void);
 
-
 #endif /* TEST_MAIN_H */

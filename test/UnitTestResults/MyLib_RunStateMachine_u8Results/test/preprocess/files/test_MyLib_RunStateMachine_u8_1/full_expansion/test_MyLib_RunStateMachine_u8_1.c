@@ -307,7 +307,7 @@ uint8_t MyLib_UpdateCounter_u8(uint32_t add_u32);
 uint8_t UpdateCounter_u8(uint32_t add_u32);
 # 5 "utExecutionAndResults/utUnderTest/src/MyLib_RunStateMachine_u8.h" 2
 # 91 "utExecutionAndResults/utUnderTest/src/MyLib_RunStateMachine_u8.h"
-uint8_t MyLib_RunStateMachine_u8(const MyLib_record_t * rec_pc, uint32_t add_u32, const uint16_t * delta_pc_u16);
+uint8_t MyLib_RunStateMachine_u8(const MyLib_record_t *rec_pc, uint32_t add_u32, const uint16_t *delta_pc_u16);
 # 2 "utExecutionAndResults/utUnderTest/test/test_MyLib_RunStateMachine_u8_1.c" 2
 # 1 "utExecutionAndResults/utUnderTest/build/vendor/unity/src/unity.h" 1
 # 22 "utExecutionAndResults/utUnderTest/build/vendor/unity/src/unity.h"
@@ -2479,11 +2479,12 @@ void UpdateCounter_u8_CMockIgnoreArg_add_u32(UNITY_UINT cmock_line);
 #pragma GCC diagnostic pop
 # 5 "utExecutionAndResults/utUnderTest/test/test_MyLib_RunStateMachine_u8_1.c" 2
 
-void setUp(void) {}
+void setUp(void) {
+}
 
-void tearDown(void) {}
+void tearDown(void) {
+}
 
-void test_MyLib_RunStateMachine_u8(void)
-{
-    UnityIgnore( (("Auto-generated stub test")), (UNITY_UINT)(12));
+void test_MyLib_RunStateMachine_u8(void) {
+  UnityIgnore( (("Auto-generated stub test")), (UNITY_UINT)(13));
 }

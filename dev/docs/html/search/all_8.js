@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['value_5fu32_0',['value_u32',['../structMyLib__record__t.html#a45afba76c8e6d381eaa9014fdf488307',1,'MyLib_record_t']]]
+  ['processrecord_0',['processrecord',['../group__MyLib.html#ga09e209253fe184eddc89f13fbf751b50',1,'ProcessRecord(const MyLib_record_t *rec_pc, uint8_t multiplier_u8):&#160;MyLib.c'],['../group__MyLib.html#ga09e209253fe184eddc89f13fbf751b50',1,'ProcessRecord(const MyLib_record_t *rec_pc, uint8_t multiplier_u8):&#160;MyLib.c']]]
 ];

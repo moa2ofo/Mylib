@@ -45,7 +45,6 @@
  * @return uint32_t
  * Adjusted value after applying delta and internal post-processing.
  */
-uint32_t MyLib_ComputeAdjustedValue_u32(uint32_t base_u32, const uint16_t * delta_pc_u16);
-
+uint32_t MyLib_ComputeAdjustedValue_u32(uint32_t base_u32, const uint16_t *delta_pc_u16);
 
 #endif /* TEST_MYLIB_COMPUTEADJUSTEDVALUE_U32_H */

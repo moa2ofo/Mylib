@@ -2484,11 +2484,12 @@ void MyLib_RunStateMachine_u8_CMockIgnoreArg_delta_pc_u16(UNITY_UINT cmock_line)
 #pragma GCC diagnostic pop
 # 5 "utExecutionAndResults/utUnderTest/test/test_InternalHelper_u32_1.c" 2
 
-void setUp(void) {}
+void setUp(void) {
+}
 
-void tearDown(void) {}
+void tearDown(void) {
+}
 
-void test_InternalHelper_u32(void)
-{
-    UnityIgnore( (("Auto-generated stub test")), (UNITY_UINT)(12));
+void test_InternalHelper_u32(void) {
+  UnityIgnore( (("Auto-generated stub test")), (UNITY_UINT)(13));
 }

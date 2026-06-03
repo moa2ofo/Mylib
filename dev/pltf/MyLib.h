@@ -7,7 +7,6 @@
 #include <stddef.h>
 #include <stdint.h>
 
-
 /* ========================= */
 /*        MODULE GROUP       */
 /* ========================= */
@@ -45,9 +44,6 @@
  * @enduml
  *
  */
-
-
-
 
 /* Numeric macros */
 #define MYLIB_MAX_COUNT_U32 (100U)

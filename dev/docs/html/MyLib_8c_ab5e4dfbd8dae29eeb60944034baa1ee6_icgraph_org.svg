@@ -20,7 +20,7 @@
 <!-- Node2 -->
 <g id="Node000002" class="node">
 <title>Node2</title>
-<g id="a_Node000002"><a xlink:href="MyLib_8c.html#ab76873d371c0f801495750c290ac869d" target="_top" xlink:title="Compute an adjusted value from a base value and an optional delta.">
+<g id="a_Node000002"><a xlink:href="group__MyLib.html#gab76873d371c0f801495750c290ac869d" target="_top" xlink:title="Compute an adjusted value from a base value and an optional delta.">
 <polygon fill="white" stroke="#666666" points="554,-89.37 366,-89.37 366,-70.37 554,-70.37 554,-89.37"/>
 <text text-anchor="middle" x="460" y="-77.37" font-family="Helvetica,sans-Serif" font-size="10.00">MyLib_ComputeAdjustedValue_u32</text>
 </a>
@@ -38,7 +38,7 @@
 <!-- Node6 -->
 <g id="Node000006" class="node">
 <title>Node6</title>
-<g id="a_Node000006"><a xlink:href="MyLib_8c.html#add13a4d8d439c55a7a840a180c935804" target="_top" xlink:title="Run an orchestration sequence and return a combined result.">
+<g id="a_Node000006"><a xlink:href="group__MyLib.html#gadd13a4d8d439c55a7a840a180c935804" target="_top" xlink:title="Run an orchestration sequence and return a combined result.">
 <polygon fill="white" stroke="#666666" points="142.5,-33.37 11.5,-33.37 11.5,-14.37 142.5,-14.37 142.5,-33.37"/>
 <text text-anchor="middle" x="77" y="-21.37" font-family="Helvetica,sans-Serif" font-size="10.00">MyLib_Orchestrate_u32</text>
 </a>
@@ -56,7 +56,7 @@
 <!-- Node3 -->
 <g id="Node000003" class="node">
 <title>Node3</title>
-<g id="a_Node000003"><a xlink:href="MyLib_8c.html#a9a012e582e10fbe8211f3dec731d71f5" target="_top" xlink:title="Scale an array in&#45;place and return the sum of scaled elements.">
+<g id="a_Node000003"><a xlink:href="group__MyLib.html#ga9a012e582e10fbe8211f3dec731d71f5" target="_top" xlink:title="Scale an array in&#45;place and return the sum of scaled elements.">
 <polygon fill="white" stroke="#666666" points="312.5,-183.37 207.5,-183.37 207.5,-164.37 312.5,-164.37 312.5,-183.37"/>
 <text text-anchor="middle" x="260" y="-171.37" font-family="Helvetica,sans-Serif" font-size="10.00">AnalyzeArray_u32</text>
 </a>
@@ -74,7 +74,7 @@
 <!-- Node4 -->
 <g id="Node000004" class="node">
 <title>Node4</title>
-<g id="a_Node000004"><a xlink:href="MyLib_8c.html#a94d6f4e2dbaa27413d7096304c6b82cb" target="_top" xlink:title="Scale an array in&#45;place and return the sum of scaled elements.">
+<g id="a_Node000004"><a xlink:href="group__MyLib.html#ga94d6f4e2dbaa27413d7096304c6b82cb" target="_top" xlink:title="Scale an array in&#45;place and return the sum of scaled elements.">
 <polygon fill="white" stroke="#666666" points="330,-146.37 190,-146.37 190,-127.37 330,-127.37 330,-146.37"/>
 <text text-anchor="middle" x="260" y="-134.37" font-family="Helvetica,sans-Serif" font-size="10.00">MyLib_AnalyzeArray_u32</text>
 </a>
@@ -92,7 +92,7 @@
 <!-- Node5 -->
 <g id="Node000005" class="node">
 <title>Node5</title>
-<g id="a_Node000005"><a xlink:href="MyLib_8c.html#acc6858dfaa1f81a7b2e08e66b7e51f0c" target="_top" xlink:title="Process one record with a bounded accumulation and update module globals.">
+<g id="a_Node000005"><a xlink:href="group__MyLib.html#gacc6858dfaa1f81a7b2e08e66b7e51f0c" target="_top" xlink:title="Process one record with a bounded accumulation and update module globals.">
 <polygon fill="white" stroke="#666666" points="321,-70.37 199,-70.37 199,-51.37 321,-51.37 321,-70.37"/>
 <text text-anchor="middle" x="260" y="-58.37" font-family="Helvetica,sans-Serif" font-size="10.00">MyLib_ProcessRecord</text>
 </a>
@@ -110,7 +110,7 @@
 <!-- Node7 -->
 <g id="Node000007" class="node">
 <title>Node7</title>
-<g id="a_Node000007"><a xlink:href="MyLib_8c.html#a8740268c394e6c82a7a0128bb13067fa" target="_top" xlink:title="Execute one step of an internal state machine operating on a record and updating the module counter.">
+<g id="a_Node000007"><a xlink:href="group__MyLib.html#ga8740268c394e6c82a7a0128bb13067fa" target="_top" xlink:title="Execute one step of an internal state machine operating on a record and updating the module counter.">
 <polygon fill="white" stroke="#666666" points="154,-89.37 0,-89.37 0,-70.37 154,-70.37 154,-89.37"/>
 <text text-anchor="middle" x="77" y="-77.37" font-family="Helvetica,sans-Serif" font-size="10.00">MyLib_RunStateMachine_u8</text>
 </a>
@@ -128,7 +128,7 @@
 <!-- Node8 -->
 <g id="Node000008" class="node">
 <title>Node8</title>
-<g id="a_Node000008"><a xlink:href="MyLib_8c.html#a09e209253fe184eddc89f13fbf751b50" target="_top" xlink:title="Process one record with a bounded accumulation and update module globals.">
+<g id="a_Node000008"><a xlink:href="group__MyLib.html#ga09e209253fe184eddc89f13fbf751b50" target="_top" xlink:title="Process one record with a bounded accumulation and update module globals.">
 <polygon fill="white" stroke="#666666" points="304,-33.37 216,-33.37 216,-14.37 304,-14.37 304,-33.37"/>
 <text text-anchor="middle" x="260" y="-21.37" font-family="Helvetica,sans-Serif" font-size="10.00">ProcessRecord</text>
 </a>

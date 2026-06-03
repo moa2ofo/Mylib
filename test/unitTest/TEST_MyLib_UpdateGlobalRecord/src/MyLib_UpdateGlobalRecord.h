@@ -48,7 +48,6 @@
  * @return void
  * No return value.
  */
-void MyLib_UpdateGlobalRecord(MyLib_record_t * dest_p, const MyLib_record_t * src_pc);
-
+void MyLib_UpdateGlobalRecord(MyLib_record_t *dest_p, const MyLib_record_t *src_pc);
 
 #endif /* TEST_MYLIB_UPDATEGLOBALRECORD_H */
