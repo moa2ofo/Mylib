@@ -7,6 +7,48 @@
 #include <stddef.h>
 #include <stdint.h>
 
+
+/* ========================= */
+/*        MODULE GROUP       */
+/* ========================= */
+
+/**
+ * @defgroup MyLib MyLib Module
+ * @brief Deterministic record processing and counter management module
+ *
+ * The MyLib module provides a set of deterministic utilities for:
+ * - Record processing with bounded accumulation
+ * - Adjusted value computation with internal post-processing
+ * - Global counter management with optional saturation
+ * - Array scaling and analysis
+ * - Record synchronization with global state
+ * - High-level orchestration of operations
+ * - Internal state machine execution
+ *
+ * ## Design constraints
+ * - No dynamic allocation
+ * - Fully deterministic execution
+ * - Bounded loops only
+ * - Explicit global state handling
+ *
+ * ## Global interactions
+ * - g_counter_u32
+ * - g_record
+ * - g_systemReady_b
+ *
+ * ## High-level interaction
+ * @startuml
+ * External -> MyLib_RunStateMachine_u8
+ * MyLib_RunStateMachine_u8 -> MyLib_ProcessRecord
+ * MyLib_RunStateMachine_u8 -> MyLib_ComputeAdjustedValue_u32
+ * MyLib_RunStateMachine_u8 -> MyLib_UpdateCounter_u8
+ * @enduml
+ *
+ */
+
+
+
+
 /* Numeric macros */
 #define MYLIB_MAX_COUNT_U32 (100U)
 #define MYLIB_MULT_VALUE_U8 (5U)
@@ -23,6 +65,7 @@ extern MyLib_record_t g_record;
 extern bool g_systemReady_b;
 
 /**
+ * @ingroup MyLib
  * @brief Process one record with a bounded accumulation and update module globals.
  *
  * @details
@@ -98,6 +141,7 @@ extern bool g_systemReady_b;
 void ProcessRecord(const MyLib_record_t *rec_pc, uint8_t multiplier_u8);
 
 /**
+ * @ingroup MyLib
  * @brief Process one record with a bounded accumulation and update module globals.
  *
  * @details
@@ -173,6 +217,7 @@ void ProcessRecord(const MyLib_record_t *rec_pc, uint8_t multiplier_u8);
 void MyLib_ProcessRecord(const MyLib_record_t *rec_pc, uint8_t multiplier_u8);
 
 /**
+ * @ingroup MyLib
  * @brief Compute an adjusted value from a base value and an optional delta.
  *
  * @details
@@ -217,6 +262,7 @@ void MyLib_ProcessRecord(const MyLib_record_t *rec_pc, uint8_t multiplier_u8);
 uint32_t MyLib_ComputeAdjustedValue_u32(uint32_t base_u32, const uint16_t *delta_pc_u16);
 
 /**
+ * @ingroup MyLib
  * @brief Scale an array in-place and return the sum of scaled elements.
  *
  * @details
@@ -278,6 +324,7 @@ uint32_t MyLib_ComputeAdjustedValue_u32(uint32_t base_u32, const uint16_t *delta
 uint32_t MyLib_AnalyzeArray_u32(uint16_t *values_pu16, size_t len_u32, uint16_t factor_u16);
 
 /**
+ * @ingroup MyLib
  * @brief Scale an array in-place and return the sum of scaled elements.
  *
  * @details
@@ -335,6 +382,7 @@ uint32_t MyLib_AnalyzeArray_u32(uint16_t *values_pu16, size_t len_u32, uint16_t 
 uint32_t AnalyzeArray_u32(uint16_t *values_pu16, size_t len_u32, uint16_t factor_u16);
 
 /**
+ * @ingroup MyLib
  * @brief Copy a record into a destination and update module global state.
  *
  * @details
@@ -382,6 +430,7 @@ uint32_t AnalyzeArray_u32(uint16_t *values_pu16, size_t len_u32, uint16_t factor
 void MyLib_UpdateGlobalRecord(MyLib_record_t *dest_p, const MyLib_record_t *src_pc);
 
 /**
+ * @ingroup MyLib
  * @brief Run an orchestration sequence and return a combined result.
  *
  * @details
@@ -434,6 +483,7 @@ void MyLib_UpdateGlobalRecord(MyLib_record_t *dest_p, const MyLib_record_t *src_
 uint32_t MyLib_Orchestrate_u32(uint32_t start_u32, const uint16_t *delta_pc_u16);
 
 /**
+ * @ingroup MyLib
  * @brief Compute a deterministic accumulated value based on an input seed and loop bound.
  *
  * @details
@@ -483,6 +533,7 @@ uint32_t MyLib_Orchestrate_u32(uint32_t start_u32, const uint16_t *delta_pc_u16)
 static uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
 
 /**
+ * @ingroup MyLib
  * @brief Update the module global counter with optional saturation handling.
  *
  * @details
@@ -545,6 +596,7 @@ static uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
 uint8_t MyLib_UpdateCounter_u8(uint32_t add_u32);
 
 /**
+ * @ingroup MyLib
  * @brief Update the module global counter with optional saturation handling.
  *
  * @details
@@ -601,6 +653,7 @@ uint8_t MyLib_UpdateCounter_u8(uint32_t add_u32);
 uint8_t UpdateCounter_u8(uint32_t add_u32);
 
 /**
+ * @ingroup MyLib
  * @brief Execute one step of an internal state machine operating on a record and updating the module counter.
  *
  * @details
