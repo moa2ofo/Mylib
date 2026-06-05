@@ -1,0 +1,8 @@
+#ifndef TEST_UNIT_BF679415_MYLIB_RUNSTATEMACHINE_U8_HELP_H
+#define TEST_UNIT_BF679415_MYLIB_RUNSTATEMACHINE_U8_HELP_H
+
+#include "unit_bf679415_MyLib_RunStateMachine_u8.h"
+#include <stddef.h>
+#include <string.h>
+
+#endif /* TEST_UNIT_BF679415_MYLIB_RUNSTATEMACHINE_U8_HELP_H */

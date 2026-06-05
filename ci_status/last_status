@@ -1,8 +1,8 @@
 GIT ACTION FAILED
-Run: https://github.com/moa2ofo/Mylib/actions/runs/27016466338
+Run: https://github.com/moa2ofo/Mylib/actions/runs/27016948240
 generate_tests: performed
 docker info: performed
 swCmpBuildCheck: performed
 doxygen: performed
 unit tests: failed
-Timestamp (UTC): 2026-06-05T13:04:57Z
+Timestamp (UTC): 2026-06-05T13:15:08Z
