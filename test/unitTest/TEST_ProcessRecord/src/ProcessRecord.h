@@ -76,7 +76,6 @@
  * @return void
  * No return value.
  */
-void ProcessRecord(const MyLib_record_t * rec_pc, uint8_t multiplier_u8);
-
+void ProcessRecord(const MyLib_record_t *rec_pc, uint8_t multiplier_u8);
 
 #endif /* TEST_PROCESSRECORD_H */

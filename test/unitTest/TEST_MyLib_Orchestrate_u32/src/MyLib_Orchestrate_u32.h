@@ -53,7 +53,6 @@
  * @return uint32_t
  * Combined result: computed base plus the current global counter.
  */
-uint32_t MyLib_Orchestrate_u32(uint32_t start_u32, const uint16_t * delta_pc_u16);
-
+uint32_t MyLib_Orchestrate_u32(uint32_t start_u32, const uint16_t *delta_pc_u16);
 
 #endif /* TEST_MYLIB_ORCHESTRATE_U32_H */

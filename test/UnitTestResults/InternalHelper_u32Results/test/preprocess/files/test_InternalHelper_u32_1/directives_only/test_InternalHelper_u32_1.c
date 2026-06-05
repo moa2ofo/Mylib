@@ -4028,7 +4028,6 @@ uint8_t MyLib_RunStateMachine_u8(const MyLib_record_t *rec_pc, uint32_t add_u32,
  */
 uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
 
-
 # 2 "utExecutionAndResults/utUnderTest/test/test_InternalHelper_u32_1.c" 2
 # 1 "utExecutionAndResults/utUnderTest/build/vendor/unity/src/unity.h" 1
 /* =========================================================================
@@ -11226,11 +11225,12 @@ void MyLib_RunStateMachine_u8_CMockIgnoreArg_delta_pc_u16(UNITY_LINE_TYPE cmock_
 
 # 5 "utExecutionAndResults/utUnderTest/test/test_InternalHelper_u32_1.c" 2
 
-void setUp(void) {}
+void setUp(void) {
+}
 
-void tearDown(void) {}
+void tearDown(void) {
+}
 
-void test_InternalHelper_u32(void)
-{
-    TEST_IGNORE_MESSAGE("Auto-generated stub test");
+void test_InternalHelper_u32(void) {
+  TEST_IGNORE_MESSAGE("Auto-generated stub test");
 }

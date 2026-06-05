@@ -82,7 +82,7 @@ static void run_test(UnityTestFunction func, const char* name, UNITY_LINE_TYPE l
 int main(void)
 {
   UnityBegin("test_MyLib_UpdateGlobalRecord_1.c");
-  run_test(test_MyLib_UpdateGlobalRecord, "test_MyLib_UpdateGlobalRecord", 10);
+  run_test(test_MyLib_UpdateGlobalRecord, "test_MyLib_UpdateGlobalRecord", 12);
 
   CMock_Guts_MemFreeFinal();
   return UNITY_END();

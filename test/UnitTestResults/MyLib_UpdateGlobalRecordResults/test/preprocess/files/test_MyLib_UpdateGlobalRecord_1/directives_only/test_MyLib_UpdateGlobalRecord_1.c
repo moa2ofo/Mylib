@@ -4024,8 +4024,7 @@ uint8_t MyLib_RunStateMachine_u8(const MyLib_record_t *rec_pc, uint32_t add_u32,
  * @return void
  * No return value.
  */
-void MyLib_UpdateGlobalRecord(MyLib_record_t * dest_p, const MyLib_record_t * src_pc);
-
+void MyLib_UpdateGlobalRecord(MyLib_record_t *dest_p, const MyLib_record_t *src_pc);
 
 # 2 "utExecutionAndResults/utUnderTest/test/test_MyLib_UpdateGlobalRecord_1.c" 2
 # 1 "utExecutionAndResults/utUnderTest/build/vendor/unity/src/unity.h" 1
@@ -11217,11 +11216,12 @@ void MyLib_RunStateMachine_u8_CMockIgnoreArg_delta_pc_u16(UNITY_LINE_TYPE cmock_
 
 # 5 "utExecutionAndResults/utUnderTest/test/test_MyLib_UpdateGlobalRecord_1.c" 2
 
-void setUp(void) {}
+void setUp(void) {
+}
 
-void tearDown(void) {}
+void tearDown(void) {
+}
 
-void test_MyLib_UpdateGlobalRecord(void)
-{
-    TEST_IGNORE_MESSAGE("Auto-generated stub test");
+void test_MyLib_UpdateGlobalRecord(void) {
+  TEST_IGNORE_MESSAGE("Auto-generated stub test");
 }
