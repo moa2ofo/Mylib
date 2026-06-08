@@ -332,6 +332,7 @@ uint32_t MyLib_AnalyzeArray_u32(uint16_t *values_pu16, size_t len_u32, uint16_t 
  * @return uint32_t
  * Sum of the scaled array elements (wrap-around possible on overflow).
  */
+uint32_t AnalyzeArray_u32(uint16_t *values_pu16, size_t len_u32, uint16_t factor_u16);
 
 /**
  * @brief Copy a record into a destination and update module global state.
@@ -541,7 +542,6 @@ uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
  * - 1: Rejected because `g_systemReady_b == false`
  * - 2: Saturation applied and `g_counter_u32` clamped to `CounterLimit_u32`
  */
-uint8_t MyLib_UpdateCounter_u8(uint32_t add_u32);
 
 /**
  * @brief Update the module global counter with optional saturation handling.

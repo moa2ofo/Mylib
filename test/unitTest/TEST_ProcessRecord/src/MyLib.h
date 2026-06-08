@@ -95,6 +95,10 @@ extern bool g_systemReady_b;
  * @return void
  * No return value.
  */
+<<<<<<< Updated upstream:test/unitTest/TEST_ProcessRecord/src/MyLib.h
+=======
+void ProcessRecord(const MyLib_record_t *rec_pc, uint8_t multiplier_u8);
+>>>>>>> Stashed changes:unitTest/TEST_InternalHelper_u32/src/MyLib.h
 
 /**
  * @brief Process one record with a bounded accumulation and update module globals.
