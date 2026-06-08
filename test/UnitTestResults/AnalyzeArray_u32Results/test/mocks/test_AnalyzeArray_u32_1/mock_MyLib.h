@@ -122,6 +122,34 @@ void MyLib_AnalyzeArray_u32_CMockIgnoreArg_values_pu16(UNITY_LINE_TYPE cmock_lin
 void MyLib_AnalyzeArray_u32_CMockIgnoreArg_len_u32(UNITY_LINE_TYPE cmock_line);
 #define MyLib_AnalyzeArray_u32_IgnoreArg_factor_u16() MyLib_AnalyzeArray_u32_CMockIgnoreArg_factor_u16(__LINE__)
 void MyLib_AnalyzeArray_u32_CMockIgnoreArg_factor_u16(UNITY_LINE_TYPE cmock_line);
+#define AnalyzeArray_u32_Ignore() TEST_FAIL_MESSAGE("AnalyzeArray_u32 requires _IgnoreAndReturn");
+#define AnalyzeArray_u32_IgnoreAndReturn(cmock_retval) AnalyzeArray_u32_CMockIgnoreAndReturn(__LINE__, cmock_retval)
+void AnalyzeArray_u32_CMockIgnoreAndReturn(UNITY_LINE_TYPE cmock_line, uint32_t cmock_to_return);
+#define AnalyzeArray_u32_StopIgnore() AnalyzeArray_u32_CMockStopIgnore()
+void AnalyzeArray_u32_CMockStopIgnore(void);
+#define AnalyzeArray_u32_ExpectAnyArgs() TEST_FAIL_MESSAGE("AnalyzeArray_u32 requires _ExpectAnyArgsAndReturn");
+#define AnalyzeArray_u32_ExpectAnyArgsAndReturn(cmock_retval) AnalyzeArray_u32_CMockExpectAnyArgsAndReturn(__LINE__, cmock_retval)
+void AnalyzeArray_u32_CMockExpectAnyArgsAndReturn(UNITY_LINE_TYPE cmock_line, uint32_t cmock_to_return);
+#define AnalyzeArray_u32_Expect(values_pu16, len_u32, factor_u16) TEST_FAIL_MESSAGE("AnalyzeArray_u32 requires _ExpectAndReturn");
+#define AnalyzeArray_u32_ExpectAndReturn(values_pu16, len_u32, factor_u16, cmock_retval) AnalyzeArray_u32_CMockExpectAndReturn(__LINE__, values_pu16, len_u32, factor_u16, cmock_retval)
+void AnalyzeArray_u32_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, uint16_t* values_pu16, size_t len_u32, uint16_t factor_u16, uint32_t cmock_to_return);
+typedef uint32_t (* CMOCK_AnalyzeArray_u32_CALLBACK)(uint16_t* values_pu16, size_t len_u32, uint16_t factor_u16, int cmock_num_calls);
+void AnalyzeArray_u32_AddCallback(CMOCK_AnalyzeArray_u32_CALLBACK Callback);
+void AnalyzeArray_u32_Stub(CMOCK_AnalyzeArray_u32_CALLBACK Callback);
+#define AnalyzeArray_u32_StubWithCallback AnalyzeArray_u32_Stub
+#define AnalyzeArray_u32_ExpectWithArray(values_pu16, values_pu16_Depth, len_u32, factor_u16) TEST_FAIL_MESSAGE("AnalyzeArray_u32 requires _ExpectWithArrayAndReturn");
+#define AnalyzeArray_u32_ExpectWithArrayAndReturn(values_pu16, values_pu16_Depth, len_u32, factor_u16, cmock_retval) AnalyzeArray_u32_CMockExpectWithArrayAndReturn(__LINE__, values_pu16, (values_pu16_Depth), len_u32, factor_u16, cmock_retval)
+void AnalyzeArray_u32_CMockExpectWithArrayAndReturn(UNITY_LINE_TYPE cmock_line, uint16_t* values_pu16, int values_pu16_Depth, size_t len_u32, uint16_t factor_u16, uint32_t cmock_to_return);
+#define AnalyzeArray_u32_ReturnThruPtr_values_pu16(values_pu16) AnalyzeArray_u32_CMockReturnMemThruPtr_values_pu16(__LINE__, values_pu16, sizeof(uint16_t))
+#define AnalyzeArray_u32_ReturnArrayThruPtr_values_pu16(values_pu16, cmock_len) AnalyzeArray_u32_CMockReturnMemThruPtr_values_pu16(__LINE__, values_pu16, (cmock_len * sizeof(*values_pu16)))
+#define AnalyzeArray_u32_ReturnMemThruPtr_values_pu16(values_pu16, cmock_size) AnalyzeArray_u32_CMockReturnMemThruPtr_values_pu16(__LINE__, values_pu16, (cmock_size))
+void AnalyzeArray_u32_CMockReturnMemThruPtr_values_pu16(UNITY_LINE_TYPE cmock_line, uint16_t const* values_pu16, size_t cmock_size);
+#define AnalyzeArray_u32_IgnoreArg_values_pu16() AnalyzeArray_u32_CMockIgnoreArg_values_pu16(__LINE__)
+void AnalyzeArray_u32_CMockIgnoreArg_values_pu16(UNITY_LINE_TYPE cmock_line);
+#define AnalyzeArray_u32_IgnoreArg_len_u32() AnalyzeArray_u32_CMockIgnoreArg_len_u32(__LINE__)
+void AnalyzeArray_u32_CMockIgnoreArg_len_u32(UNITY_LINE_TYPE cmock_line);
+#define AnalyzeArray_u32_IgnoreArg_factor_u16() AnalyzeArray_u32_CMockIgnoreArg_factor_u16(__LINE__)
+void AnalyzeArray_u32_CMockIgnoreArg_factor_u16(UNITY_LINE_TYPE cmock_line);
 #define MyLib_UpdateGlobalRecord_IgnoreAndReturn(cmock_retval) TEST_FAIL_MESSAGE("MyLib_UpdateGlobalRecord requires _Ignore (not AndReturn)");
 #define MyLib_UpdateGlobalRecord_Ignore() MyLib_UpdateGlobalRecord_CMockIgnore()
 void MyLib_UpdateGlobalRecord_CMockIgnore(void);
@@ -189,23 +217,6 @@ void InternalHelper_u32_Stub(CMOCK_InternalHelper_u32_CALLBACK Callback);
 void InternalHelper_u32_CMockIgnoreArg_x_u32(UNITY_LINE_TYPE cmock_line);
 #define InternalHelper_u32_IgnoreArg_y_u16() InternalHelper_u32_CMockIgnoreArg_y_u16(__LINE__)
 void InternalHelper_u32_CMockIgnoreArg_y_u16(UNITY_LINE_TYPE cmock_line);
-#define MyLib_UpdateCounter_u8_Ignore() TEST_FAIL_MESSAGE("MyLib_UpdateCounter_u8 requires _IgnoreAndReturn");
-#define MyLib_UpdateCounter_u8_IgnoreAndReturn(cmock_retval) MyLib_UpdateCounter_u8_CMockIgnoreAndReturn(__LINE__, cmock_retval)
-void MyLib_UpdateCounter_u8_CMockIgnoreAndReturn(UNITY_LINE_TYPE cmock_line, uint8_t cmock_to_return);
-#define MyLib_UpdateCounter_u8_StopIgnore() MyLib_UpdateCounter_u8_CMockStopIgnore()
-void MyLib_UpdateCounter_u8_CMockStopIgnore(void);
-#define MyLib_UpdateCounter_u8_ExpectAnyArgs() TEST_FAIL_MESSAGE("MyLib_UpdateCounter_u8 requires _ExpectAnyArgsAndReturn");
-#define MyLib_UpdateCounter_u8_ExpectAnyArgsAndReturn(cmock_retval) MyLib_UpdateCounter_u8_CMockExpectAnyArgsAndReturn(__LINE__, cmock_retval)
-void MyLib_UpdateCounter_u8_CMockExpectAnyArgsAndReturn(UNITY_LINE_TYPE cmock_line, uint8_t cmock_to_return);
-#define MyLib_UpdateCounter_u8_Expect(add_u32) TEST_FAIL_MESSAGE("MyLib_UpdateCounter_u8 requires _ExpectAndReturn");
-#define MyLib_UpdateCounter_u8_ExpectAndReturn(add_u32, cmock_retval) MyLib_UpdateCounter_u8_CMockExpectAndReturn(__LINE__, add_u32, cmock_retval)
-void MyLib_UpdateCounter_u8_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, uint32_t add_u32, uint8_t cmock_to_return);
-typedef uint8_t (* CMOCK_MyLib_UpdateCounter_u8_CALLBACK)(uint32_t add_u32, int cmock_num_calls);
-void MyLib_UpdateCounter_u8_AddCallback(CMOCK_MyLib_UpdateCounter_u8_CALLBACK Callback);
-void MyLib_UpdateCounter_u8_Stub(CMOCK_MyLib_UpdateCounter_u8_CALLBACK Callback);
-#define MyLib_UpdateCounter_u8_StubWithCallback MyLib_UpdateCounter_u8_Stub
-#define MyLib_UpdateCounter_u8_IgnoreArg_add_u32() MyLib_UpdateCounter_u8_CMockIgnoreArg_add_u32(__LINE__)
-void MyLib_UpdateCounter_u8_CMockIgnoreArg_add_u32(UNITY_LINE_TYPE cmock_line);
 #define UpdateCounter_u8_Ignore() TEST_FAIL_MESSAGE("UpdateCounter_u8 requires _IgnoreAndReturn");
 #define UpdateCounter_u8_IgnoreAndReturn(cmock_retval) UpdateCounter_u8_CMockIgnoreAndReturn(__LINE__, cmock_retval)
 void UpdateCounter_u8_CMockIgnoreAndReturn(UNITY_LINE_TYPE cmock_line, uint8_t cmock_to_return);

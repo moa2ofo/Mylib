@@ -280,23 +280,28 @@ extern
       _Bool 
 # 23 "utExecutionAndResults/utUnderTest/src/MyLib.h"
            g_systemReady_b;
-# 172 "utExecutionAndResults/utUnderTest/src/MyLib.h"
+# 98 "utExecutionAndResults/utUnderTest/src/MyLib.h"
+<<<<<<< Updated upstream:test/unitTest/TEST_ProcessRecord/src/MyLib.h
+=======
+void ProcessRecord(const MyLib_record_t *rec_pc, uint8_t multiplier_u8);
+>>>>>>> Stashed changes:unitTest/TEST_InternalHelper_u32/src/MyLib.h
+# 176 "utExecutionAndResults/utUnderTest/src/MyLib.h"
 void MyLib_ProcessRecord(const MyLib_record_t *rec_pc, uint8_t multiplier_u8);
-# 216 "utExecutionAndResults/utUnderTest/src/MyLib.h"
+# 220 "utExecutionAndResults/utUnderTest/src/MyLib.h"
 uint32_t MyLib_ComputeAdjustedValue_u32(uint32_t base_u32, const uint16_t *delta_pc_u16);
-# 277 "utExecutionAndResults/utUnderTest/src/MyLib.h"
+# 281 "utExecutionAndResults/utUnderTest/src/MyLib.h"
 uint32_t MyLib_AnalyzeArray_u32(uint16_t *values_pu16, size_t len_u32, uint16_t factor_u16);
-# 334 "utExecutionAndResults/utUnderTest/src/MyLib.h"
+# 338 "utExecutionAndResults/utUnderTest/src/MyLib.h"
 uint32_t AnalyzeArray_u32(uint16_t *values_pu16, size_t len_u32, uint16_t factor_u16);
-# 381 "utExecutionAndResults/utUnderTest/src/MyLib.h"
+# 385 "utExecutionAndResults/utUnderTest/src/MyLib.h"
 void MyLib_UpdateGlobalRecord(MyLib_record_t *dest_p, const MyLib_record_t *src_pc);
-# 433 "utExecutionAndResults/utUnderTest/src/MyLib.h"
+# 437 "utExecutionAndResults/utUnderTest/src/MyLib.h"
 uint32_t MyLib_Orchestrate_u32(uint32_t start_u32, const uint16_t *delta_pc_u16);
-# 482 "utExecutionAndResults/utUnderTest/src/MyLib.h"
+# 486 "utExecutionAndResults/utUnderTest/src/MyLib.h"
 uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
-# 544 "utExecutionAndResults/utUnderTest/src/MyLib.h"
+# 548 "utExecutionAndResults/utUnderTest/src/MyLib.h"
 uint8_t MyLib_UpdateCounter_u8(uint32_t add_u32);
-# 600 "utExecutionAndResults/utUnderTest/src/MyLib.h"
+# 604 "utExecutionAndResults/utUnderTest/src/MyLib.h"
 uint8_t UpdateCounter_u8(uint32_t add_u32);
-# 687 "utExecutionAndResults/utUnderTest/src/MyLib.h"
+# 691 "utExecutionAndResults/utUnderTest/src/MyLib.h"
 uint8_t MyLib_RunStateMachine_u8(const MyLib_record_t *rec_pc, uint32_t add_u32, const uint16_t *delta_pc_u16);

@@ -290,13 +290,20 @@ uint32_t MyLib_ComputeAdjustedValue_u32(uint32_t base_u32, const uint16_t *delta
 uint32_t MyLib_AnalyzeArray_u32(uint16_t *values_pu16, size_t len_u32, uint16_t factor_u16);
 # 335 "utExecutionAndResults/utUnderTest/src/MyLib.h"
 uint32_t AnalyzeArray_u32(uint16_t *values_pu16, size_t len_u32, uint16_t factor_u16);
-# 382 "utExecutionAndResults/utUnderTest/src/MyLib.h"
+# 392 "utExecutionAndResults/utUnderTest/src/MyLib.h"
+uint32_t AnalyzeArray_u32(uint16_t *values_pu16, size_t len_u32, uint16_t factor_u16);
+# 439 "utExecutionAndResults/utUnderTest/src/MyLib.h"
 void MyLib_UpdateGlobalRecord(MyLib_record_t *dest_p, const MyLib_record_t *src_pc);
-# 434 "utExecutionAndResults/utUnderTest/src/MyLib.h"
+# 491 "utExecutionAndResults/utUnderTest/src/MyLib.h"
 uint32_t MyLib_Orchestrate_u32(uint32_t start_u32, const uint16_t *delta_pc_u16);
-# 483 "utExecutionAndResults/utUnderTest/src/MyLib.h"
+# 540 "utExecutionAndResults/utUnderTest/src/MyLib.h"
 uint32_t InternalHelper_u32(uint32_t x_u32, uint16_t y_u16);
-# 545 "utExecutionAndResults/utUnderTest/src/MyLib.h"
+# 602 "utExecutionAndResults/utUnderTest/src/MyLib.h"
 uint8_t MyLib_UpdateCounter_u8(uint32_t add_u32);
-# 601 "utExecutionAndResults/utUnderTest/src/MyLib.h"
+# 658 "utExecutionAndResults/utUnderTest/src/MyLib.h"
 uint8_t UpdateCounter_u8(uint32_t add_u32);
+# 745 "utExecutionAndResults/utUnderTest/src/MyLib.h"
+<<<<<<< Updated upstream:test/unitTest/TEST_MyLib_RunStateMachine_u8/src/MyLib.h
+=======
+uint8_t MyLib_RunStateMachine_u8(const MyLib_record_t *rec_pc, uint32_t add_u32, const uint16_t *delta_pc_u16);
+>>>>>>> Stashed changes:unitTest/TEST_MyLib_AnalyzeArray_u32/src/MyLib.h
