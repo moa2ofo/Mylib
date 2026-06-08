@@ -1,0 +1,5 @@
+<map id="UpdateCounter_u8" name="UpdateCounter_u8">
+<area shape="rect" id="Node000001" title="Update the module global counter with optional saturation handling." alt="" coords="5,5,148,31"/>
+<area shape="rect" id="Node000002" href="$AleLib_8c.html#adb628d68b37d8eb553cb07ac01ef4759" title="Update the module global counter with optional saturation handling." alt="" coords="196,5,385,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="148,15,182,15,182,21,148,21"/>
+</map>

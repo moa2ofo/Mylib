@@ -1,0 +1,9 @@
+<map id="MyLib_UpdateCounter_u8" name="MyLib_UpdateCounter_u8">
+<area shape="rect" id="Node000001" title="Update the module global counter with optional saturation handling." alt="" coords="300,55,489,80"/>
+<area shape="rect" id="Node000002" href="$AleLib_8c.html#a8740268c394e6c82a7a0128bb13067fa" title="Execute one step of an internal state machine operating on a record and updating the module counter." alt="" coords="26,5,231,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="312,55,198,33,199,28,313,50"/>
+<area shape="rect" id="Node000003" href="$AleLib_8c.html#a2c78229facc056079a8d10f683645168" title="Function that reuses existing MyLib services from the same library." alt="" coords="5,55,252,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="286,70,252,70,252,65,286,65"/>
+<area shape="rect" id="Node000004" href="$AleLib_8c.html#aa19af382ea69ad8ab8de7b6d582b1562" title="Update the module global counter with optional saturation handling." alt="" coords="57,104,200,129"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="313,85,199,107,198,101,312,80"/>
+</map>

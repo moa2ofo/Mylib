@@ -1,0 +1,21 @@
+<map id="InternalHelper_u32" name="InternalHelper_u32">
+<area shape="rect" id="Node000001" title=" " alt="" coords="1087,132,1233,157"/>
+<area shape="rect" id="Node000002" href="$AleLib_8c.html#ab76873d371c0f801495750c290ac869d" title="Compute an adjusted value from a base value and an optional delta." alt="" coords="788,81,1039,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1083,132,975,109,976,104,1084,126"/>
+<area shape="rect" id="Node000006" href="$AleLib_8c.html#add13a4d8d439c55a7a840a180c935804" title="Run an orchestration sequence and return a combined result." alt="" coords="315,156,490,181"/>
+<area shape="poly" id="edge10_Node000001_Node000006" title=" " alt="" coords="1073,150,491,169,491,163,1073,145"/>
+<area shape="rect" id="Node000003" href="$AleLib_8c.html#a94d6f4e2dbaa27413d7096304c6b82cb" title="Scale an array in&#45;place and return the sum of scaled elements." alt="" coords="553,5,740,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="854,80,692,33,693,28,855,75"/>
+<area shape="rect" id="Node000005" href="$AleLib_8c.html#acc6858dfaa1f81a7b2e08e66b7e51f0c" title="Process one record with a bounded accumulation and update module globals." alt="" coords="565,107,728,132"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="774,110,729,114,728,109,774,105"/>
+<area shape="rect" id="Node000008" href="$AleLib_8c.html#a8740268c394e6c82a7a0128bb13067fa" title="Execute one step of an internal state machine operating on a record and updating the module counter." alt="" coords="300,56,505,81"/>
+<area shape="poly" id="edge9_Node000002_Node000008" title=" " alt="" coords="774,90,506,76,506,71,774,84"/>
+<area shape="rect" id="Node000004" href="$AleLib_8c.html#a9a012e582e10fbe8211f3dec731d71f5" title="Scale an array in&#45;place and return the sum of scaled elements." alt="" coords="333,5,473,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="539,21,473,21,473,15,539,15"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="570,137,467,159,466,153,569,132"/>
+<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="571,106,464,84,465,79,572,101"/>
+<area shape="rect" id="Node000009" href="$AleLib_8c.html#a09e209253fe184eddc89f13fbf751b50" title="Process one record with a bounded accumulation and update module globals." alt="" coords="344,107,461,132"/>
+<area shape="poly" id="edge8_Node000005_Node000009" title=" " alt="" coords="552,122,462,122,462,117,552,117"/>
+<area shape="rect" id="Node000007" href="$AleLib_8c.html#a2c78229facc056079a8d10f683645168" title="Function that reuses existing MyLib services from the same library." alt="" coords="5,156,252,181"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="302,171,252,171,252,166,302,166"/>
+</map>

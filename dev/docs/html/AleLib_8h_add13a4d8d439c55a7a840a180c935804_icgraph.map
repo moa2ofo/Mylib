@@ -1,0 +1,5 @@
+<map id="MyLib_Orchestrate_u32" name="MyLib_Orchestrate_u32">
+<area shape="rect" id="Node000001" title="Run an orchestration sequence and return a combined result." alt="" coords="300,5,475,31"/>
+<area shape="rect" id="Node000002" href="$AleLib_8c.html#a2c78229facc056079a8d10f683645168" title="Function that reuses existing MyLib services from the same library." alt="" coords="5,5,252,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="286,21,252,21,252,15,286,15"/>
+</map>

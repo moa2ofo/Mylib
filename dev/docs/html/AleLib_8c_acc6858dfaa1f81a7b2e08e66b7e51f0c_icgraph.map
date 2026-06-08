@@ -1,0 +1,11 @@
+<map id="MyLib_ProcessRecord" name="MyLib_ProcessRecord">
+<area shape="rect" id="Node000001" title="Process one record with a bounded accumulation and update module globals." alt="" coords="553,55,716,80"/>
+<area shape="rect" id="Node000002" href="$AleLib_8c.html#add13a4d8d439c55a7a840a180c935804" title="Run an orchestration sequence and return a combined result." alt="" coords="315,5,490,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="561,54,463,33,464,28,562,49"/>
+<area shape="rect" id="Node000004" href="$AleLib_8c.html#a8740268c394e6c82a7a0128bb13067fa" title="Execute one step of an internal state machine operating on a record and updating the module counter." alt="" coords="300,55,505,80"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="540,70,506,70,506,65,540,65"/>
+<area shape="rect" id="Node000005" href="$AleLib_8c.html#a09e209253fe184eddc89f13fbf751b50" title="Process one record with a bounded accumulation and update module globals." alt="" coords="344,104,461,129"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="561,86,462,107,461,102,560,80"/>
+<area shape="rect" id="Node000003" href="$AleLib_8c.html#a2c78229facc056079a8d10f683645168" title="Function that reuses existing MyLib services from the same library." alt="" coords="5,5,252,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="302,21,252,21,252,15,302,15"/>
+</map>

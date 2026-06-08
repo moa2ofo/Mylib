@@ -202,7 +202,6 @@ uint8_t UpdateCounter_u8(uint32_t add_u32) {
   return MyLib_UpdateCounter_u8(add_u32);
 }
 
-
 uint8_t MyLib_RunStateMachine_u8(const MyLib_record_t *rec_pc, uint32_t add_u32, const uint16_t *delta_pc_u16) {
   /* Function-local static variables to preserve state machine context across calls */
   static uint8_t l_State_u8 = 0U;
@@ -252,10 +251,7 @@ uint8_t MyLib_RunStateMachine_u8(const MyLib_record_t *rec_pc, uint32_t add_u32,
  * ========================================================================== */
 
 /* Additional typedefs used only by the syntax edge-case functions. */
-typedef enum {
-  MYLIB_SYNTAX_OK = 0U,
-  MYLIB_SYNTAX_NOT_OK = 1U
-} MyLib_SyntaxStatus_t;
+typedef enum { MYLIB_SYNTAX_OK = 0U, MYLIB_SYNTAX_NOT_OK = 1U } MyLib_SyntaxStatus_t;
 
 typedef void (*MyLib_Callback_t)(uint8_t id_u8, uint32_t value_u32);
 typedef uint32_t (*MyLib_Transform_t)(uint32_t value_u32);
@@ -263,29 +259,22 @@ typedef uint32_t (*MyLib_Transform_t)(uint32_t value_u32);
 typedef union {
   uint32_t raw_u32;
   struct {
-    uint32_t low_u32  : 16;
+    uint32_t low_u32 : 16;
     uint32_t high_u32 : 16;
   } bits;
 } MyLib_PackedWord_t;
 
-typedef enum {
-  MYLIB_LOCAL_STATE_INIT = 0,
-  MYLIB_LOCAL_STATE_READY = 1,
-  MYLIB_LOCAL_STATE_ERROR = 2
-} MyLib_LocalState_t;
+typedef enum { MYLIB_LOCAL_STATE_INIT = 0, MYLIB_LOCAL_STATE_READY = 1, MYLIB_LOCAL_STATE_ERROR = 2 } MyLib_LocalState_t;
 
 typedef uint32_t MyLib_Vector3_u32[3];
 
-#define MYLIB_SYNTAX_BASE_LIMIT_U32    (100U)
+#define MYLIB_SYNTAX_BASE_LIMIT_U32 (100U)
 #define MYLIB_SYNTAX_WARNING_LIMIT_U32 (MYLIB_SYNTAX_BASE_LIMIT_U32 - 10U)
-#define MYLIB_SYNTAX_ERROR_LIMIT_U32   (MYLIB_SYNTAX_BASE_LIMIT_U32 + 20U)
+#define MYLIB_SYNTAX_ERROR_LIMIT_U32 (MYLIB_SYNTAX_BASE_LIMIT_U32 + 20U)
 
-#define MYLIB_SYNTAX_IS_WARNING_RANGE(x) \
-  (((x) >= MYLIB_SYNTAX_WARNING_LIMIT_U32) && ((x) < MYLIB_SYNTAX_ERROR_LIMIT_U32))
+#define MYLIB_SYNTAX_IS_WARNING_RANGE(x) (((x) >= MYLIB_SYNTAX_WARNING_LIMIT_U32) && ((x) < MYLIB_SYNTAX_ERROR_LIMIT_U32))
 
-#define MYLIB_SYNTAX_MULTILINE_SUM(a, b) \
-  ((a) + \
-   (b))
+#define MYLIB_SYNTAX_MULTILINE_SUM(a, b) ((a) + (b))
 
 #ifndef MYLIB_FEATURE_SCALE_FACTOR
 #define MYLIB_FEATURE_SCALE_FACTOR (2U)
@@ -310,7 +299,7 @@ static uint8_t SyntaxStaticArray_au8[5] = {1U, 2U, 3U, 4U, 5U};
 static const uint16_t SyntaxConstTable_au16[] = {10U, 20U, 30U};
 static MyLib_LocalState_t SyntaxCurrentState = MYLIB_LOCAL_STATE_INIT;
 static MyLib_Vector3_u32 SyntaxStaticVector = {1U, 2U, 3U};
-static const char * const SyntaxTextWithKeywords = "static inline must not be changed here";
+static const char *const SyntaxTextWithKeywords = "static inline must not be changed here";
 
 /**
  * @brief Static function definition used to validate static handling.
@@ -337,26 +326,14 @@ static inline uint32_t Syntax_StaticInlineFunction_u32(uint32_t value_u32) {
 /**
  * @brief Function with return type and parameters split across lines.
  */
-uint32_t
-Syntax_MultilineReturnAndParams_u32(
-  uint32_t a_u32,
-  uint32_t b_u32,
-  uint32_t c_u32
-)
-{
+uint32_t Syntax_MultilineReturnAndParams_u32(uint32_t a_u32, uint32_t b_u32, uint32_t c_u32) {
   return a_u32 + b_u32 + c_u32;
 }
 
 /**
  * @brief Function with pointer and const qualifiers split across lines.
  */
-const MyLib_record_t *
-Syntax_FindRecordById(
-  const MyLib_record_t *records_pc,
-  uint32_t count_u32,
-  uint16_t id_u16
-)
-{
+const MyLib_record_t *Syntax_FindRecordById(const MyLib_record_t *records_pc, uint32_t count_u32, uint16_t id_u16) {
   uint32_t l_i_u32;
 
   if(records_pc == NULL) {
@@ -387,7 +364,7 @@ MyLib_SyntaxStatus_t Syntax_UpdateOutputPointer(uint32_t **out_ppu32, uint32_t *
 /**
  * @brief Function with const pointer variations.
  */
-uint32_t Syntax_ConstPointerMix_u32(const uint32_t * const input_pcu32, uint32_t * const output_pu32) {
+uint32_t Syntax_ConstPointerMix_u32(const uint32_t *const input_pcu32, uint32_t *const output_pu32) {
   if((input_pcu32 == NULL) || (output_pu32 == NULL)) {
     return 0U;
   }
@@ -599,8 +576,7 @@ uint32_t Syntax_ReadVectorElement_u32(uint8_t index_u8) {
 /**
  * @brief Function with volatile and const volatile pointer qualifiers.
  */
-uint32_t Syntax_FunctionWithManyQualifiers_u32(volatile uint32_t * volatile value_pvu32,
-                                               const volatile uint32_t * const reference_pcvu32) {
+uint32_t Syntax_FunctionWithManyQualifiers_u32(volatile uint32_t *volatile value_pvu32, const volatile uint32_t *const reference_pcvu32) {
   if((value_pvu32 == NULL) || (reference_pcvu32 == NULL)) {
     return 0U;
   }
@@ -612,9 +588,7 @@ uint32_t Syntax_FunctionWithManyQualifiers_u32(volatile uint32_t * volatile valu
 /**
  * @brief Function that reuses existing MyLib services from the same library.
  */
-uint32_t Syntax_ReusesMyLibServices_u32(MyLib_record_t *dest_p,
-                                        const MyLib_record_t *src_pc,
-                                        uint32_t add_u32) {
+uint32_t Syntax_ReusesMyLibServices_u32(MyLib_record_t *dest_p, const MyLib_record_t *src_pc, uint32_t add_u32) {
   MyLib_UpdateGlobalRecord(dest_p, src_pc);
 
   if(g_systemReady_b == false) {
@@ -625,4 +599,3 @@ uint32_t Syntax_ReusesMyLibServices_u32(MyLib_record_t *dest_p,
 
   return MyLib_Orchestrate_u32(add_u32, NULL);
 }
-

@@ -1,0 +1,5 @@
+<map id="Syntax_UseLocalFunctionPointer_u32" name="Syntax_UseLocalFunctionPointer_u32">
+<area shape="rect" id="Node000001" title="Function calling a static helper through a function pointer." alt="" coords="5,5,271,31"/>
+<area shape="rect" id="Node000002" href="$AleLib_8c.html#a9e0a27027238328d93a21c44db75d57f" title="Local static helper reused by function&#45;pointer syntax tests." alt="" coords="319,5,504,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="271,15,305,15,305,21,271,21"/>
+</map>

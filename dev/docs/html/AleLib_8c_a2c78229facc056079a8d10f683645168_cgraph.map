@@ -1,0 +1,16 @@
+<map id="Syntax_ReusesMyLibServices_u32" name="Syntax_ReusesMyLibServices_u32">
+<area shape="rect" id="Node000001" title="Function that reuses existing MyLib services from the same library." alt="" coords="5,55,252,80"/>
+<area shape="rect" id="Node000002" href="$AleLib_8c.html#add13a4d8d439c55a7a840a180c935804" title="Run an orchestration sequence and return a combined result." alt="" coords="314,5,489,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="199,52,316,31,317,36,200,57"/>
+<area shape="rect" id="Node000006" href="$AleLib_8c.html#adb628d68b37d8eb553cb07ac01ef4759" title="Update the module global counter with optional saturation handling." alt="" coords="307,55,496,80"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="252,65,293,65,293,70,252,70"/>
+<area shape="rect" id="Node000007" href="$AleLib_8c.html#a62465ad05534dca56af08c456d6b9af8" title="Copy a record into a destination and update module global state." alt="" coords="300,104,503,129"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="200,77,317,99,316,104,199,83"/>
+<area shape="rect" id="Node000003" href="$AleLib_8c.html#ab5e4dfbd8dae29eeb60944034baa1ee6" title=" " alt="" coords="1060,5,1207,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="489,15,1046,15,1046,21,489,21"/>
+<area shape="rect" id="Node000004" href="$AleLib_8c.html#acc6858dfaa1f81a7b2e08e66b7e51f0c" title="Process one record with a bounded accumulation and update module globals." alt="" coords="551,31,713,56"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="489,25,537,30,537,36,489,30"/>
+<area shape="rect" id="Node000005" href="$AleLib_8c.html#ab76873d371c0f801495750c290ac869d" title="Compute an adjusted value from a base value and an optional delta." alt="" coords="761,31,1012,56"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="713,41,748,41,748,46,713,46"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="1010,28,1046,24,1047,30,1011,33"/>
+</map>

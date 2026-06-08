@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['mylib_2ec_0',['MyLib.c',['../MyLib_8c.html',1,'']]],
-  ['mylib_2eh_1',['MyLib.h',['../MyLib_8h.html',1,'']]]
+  ['alelib_2ec_0',['AleLib.c',['../AleLib_8c.html',1,'']]],
+  ['alelib_2eh_1',['AleLib.h',['../AleLib_8h.html',1,'']]]
 ];
