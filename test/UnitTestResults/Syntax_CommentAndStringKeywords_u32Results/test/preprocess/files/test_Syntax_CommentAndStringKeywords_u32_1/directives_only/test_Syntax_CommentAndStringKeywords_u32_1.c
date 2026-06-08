@@ -834,59 +834,6 @@
 
 #define MYLIB_H 
 
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/12/include/stdbool.h" 1 3 4
-/* Copyright (C) 1998-2022 Free Software Foundation, Inc.
-
-This file is part of GCC.
-
-GCC is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 3, or (at your option)
-any later version.
-
-GCC is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-Under Section 7 of GPL version 3, you are granted additional
-permissions described in the GCC Runtime Library Exception, version
-3.1, as published by the Free Software Foundation.
-
-You should have received a copy of the GNU General Public License and
-a copy of the GCC Runtime Library Exception along with this program;
-see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
-<http://www.gnu.org/licenses/>.  */
-
-/*
- * ISO C Standard:  7.16  Boolean type and values  <stdbool.h>
- */
-
-
-#define _STDBOOL_H 
-
-
-
-#define bool _Bool
-
-
-
-
-#define true 1
-#define false 0
-
-
-
-
-
-
-
-
-
-/* Signal that all the definitions are present.  */
-#define __bool_true_false_are_defined 1
-
-# 7 "utExecutionAndResults/utUnderTest/src/AleLib.h" 2
 # 1 "/usr/lib/gcc/x86_64-linux-gnu/12/include/stdarg.h" 1 3 4
 /* Copyright (C) 1989-2022 Free Software Foundation, Inc.
 
@@ -996,6 +943,59 @@ typedef __gnuc_va_list va_list;
 
 
 
+
+# 7 "utExecutionAndResults/utUnderTest/src/AleLib.h" 2
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/12/include/stdbool.h" 1 3 4
+/* Copyright (C) 1998-2022 Free Software Foundation, Inc.
+
+This file is part of GCC.
+
+GCC is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 3, or (at your option)
+any later version.
+
+GCC is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+Under Section 7 of GPL version 3, you are granted additional
+permissions described in the GCC Runtime Library Exception, version
+3.1, as published by the Free Software Foundation.
+
+You should have received a copy of the GNU General Public License and
+a copy of the GCC Runtime Library Exception along with this program;
+see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
+<http://www.gnu.org/licenses/>.  */
+
+/*
+ * ISO C Standard:  7.16  Boolean type and values  <stdbool.h>
+ */
+
+
+#define _STDBOOL_H 
+
+
+
+#define bool _Bool
+
+
+
+
+#define true 1
+#define false 0
+
+
+
+
+
+
+
+
+
+/* Signal that all the definitions are present.  */
+#define __bool_true_false_are_defined 1
 
 # 8 "utExecutionAndResults/utUnderTest/src/AleLib.h" 2
 # 1 "/usr/lib/gcc/x86_64-linux-gnu/12/include/stddef.h" 1 3 4
@@ -4089,16 +4089,11 @@ uint8_t UpdateCounter_u8(uint32_t add_u32);
  */
 uint8_t MyLib_RunStateMachine_u8(const MyLib_record_t *rec_pc, uint32_t add_u32, const uint16_t *delta_pc_u16);
 
-
-
 /* ==========================================================================
  * C syntax edge-case declarations for generator validation
  * ========================================================================== */
 
-typedef enum {
-  MYLIB_SYNTAX_OK = 0U,
-  MYLIB_SYNTAX_NOT_OK = 1U
-} MyLib_SyntaxStatus_t;
+typedef enum { MYLIB_SYNTAX_OK = 0U, MYLIB_SYNTAX_NOT_OK = 1U } MyLib_SyntaxStatus_t;
 
 typedef void (*MyLib_Callback_t)(uint8_t id_u8, uint32_t value_u32);
 typedef uint32_t (*MyLib_Transform_t)(uint32_t value_u32);
@@ -4106,16 +4101,12 @@ typedef uint32_t (*MyLib_Transform_t)(uint32_t value_u32);
 typedef union {
   uint32_t raw_u32;
   struct {
-    uint32_t low_u32  : 16;
+    uint32_t low_u32 : 16;
     uint32_t high_u32 : 16;
   } bits;
 } MyLib_PackedWord_t;
 
-typedef enum {
-  MYLIB_LOCAL_STATE_INIT = 0,
-  MYLIB_LOCAL_STATE_READY = 1,
-  MYLIB_LOCAL_STATE_ERROR = 2
-} MyLib_LocalState_t;
+typedef enum { MYLIB_LOCAL_STATE_INIT = 0, MYLIB_LOCAL_STATE_READY = 1, MYLIB_LOCAL_STATE_ERROR = 2 } MyLib_LocalState_t;
 
 typedef uint32_t MyLib_Vector3_u32[3];
 
@@ -4127,26 +4118,16 @@ uint32_t Syntax_InlineFunction_u32(uint32_t value_u32);
 /**
  * @brief Function with return type and parameters split across lines.
  */
-uint32_t
-Syntax_MultilineReturnAndParams_u32(
-  uint32_t a_u32,
-  uint32_t b_u32,
-  uint32_t c_u32
-);
+uint32_t Syntax_MultilineReturnAndParams_u32(uint32_t a_u32, uint32_t b_u32, uint32_t c_u32);
 
 /**
  * @brief Function with pointer and const qualifiers split across lines.
  */
-const MyLib_record_t *
-Syntax_FindRecordById(
-  const MyLib_record_t *records_pc,
-  uint32_t count_u32,
-  uint16_t id_u16
-);
+const MyLib_record_t *Syntax_FindRecordById(const MyLib_record_t *records_pc, uint32_t count_u32, uint16_t id_u16);
 
 MyLib_SyntaxStatus_t Syntax_UpdateOutputPointer(uint32_t **out_ppu32, uint32_t *storage_pu32);
 
-uint32_t Syntax_ConstPointerMix_u32(const uint32_t * const input_pcu32, uint32_t * const output_pu32);
+uint32_t Syntax_ConstPointerMix_u32(const uint32_t *const input_pcu32, uint32_t *const output_pu32);
 
 uint32_t *Syntax_ReturnPointer(uint32_t *value_pu32);
 
@@ -4182,12 +4163,9 @@ uint32_t Syntax_WeakFunction_u32(uint32_t value_u32);
 
 uint32_t Syntax_ReadVectorElement_u32(uint8_t index_u8);
 
-uint32_t Syntax_FunctionWithManyQualifiers_u32(volatile uint32_t * volatile value_pvu32,
-                                               const volatile uint32_t * const reference_pcvu32);
+uint32_t Syntax_FunctionWithManyQualifiers_u32(volatile uint32_t *volatile value_pvu32, const volatile uint32_t *const reference_pcvu32);
 
-uint32_t Syntax_ReusesMyLibServices_u32(MyLib_record_t *dest_p,
-                                        const MyLib_record_t *src_pc,
-                                        uint32_t add_u32);
+uint32_t Syntax_ReusesMyLibServices_u32(MyLib_record_t *dest_p, const MyLib_record_t *src_pc, uint32_t add_u32);
 
 # 5 "utExecutionAndResults/utUnderTest/src/Syntax_CommentAndStringKeywords_u32.h" 2
 
@@ -11857,11 +11835,12 @@ void Syntax_ReusesMyLibServices_u32_CMockIgnoreArg_add_u32(UNITY_LINE_TYPE cmock
 
 # 5 "utExecutionAndResults/utUnderTest/test/test_Syntax_CommentAndStringKeywords_u32_1.c" 2
 
-void setUp(void) {}
+void setUp(void) {
+}
 
-void tearDown(void) {}
+void tearDown(void) {
+}
 
-void test_Syntax_CommentAndStringKeywords_u32(void)
-{
-    TEST_IGNORE_MESSAGE("Auto-generated stub test");
+void test_Syntax_CommentAndStringKeywords_u32(void) {
+  TEST_IGNORE_MESSAGE("Auto-generated stub test");
 }

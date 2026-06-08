@@ -14,8 +14,6 @@
 
 
 
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/12/include/stdbool.h" 1 3 4
-# 7 "utExecutionAndResults/utUnderTest/src/AleLib.h" 2
 # 1 "/usr/lib/gcc/x86_64-linux-gnu/12/include/stdarg.h" 1 3 4
 # 40 "/usr/lib/gcc/x86_64-linux-gnu/12/include/stdarg.h" 3 4
 
@@ -23,6 +21,8 @@
 typedef __builtin_va_list __gnuc_va_list;
 # 99 "/usr/lib/gcc/x86_64-linux-gnu/12/include/stdarg.h" 3 4
 typedef __gnuc_va_list va_list;
+# 7 "utExecutionAndResults/utUnderTest/src/AleLib.h" 2
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/12/include/stdbool.h" 1 3 4
 # 8 "utExecutionAndResults/utUnderTest/src/AleLib.h" 2
 # 1 "/usr/lib/gcc/x86_64-linux-gnu/12/include/stddef.h" 1 3 4
 # 145 "/usr/lib/gcc/x86_64-linux-gnu/12/include/stddef.h" 3 4
@@ -318,12 +318,7 @@ uint8_t MyLib_RunStateMachine_u8(const MyLib_record_t *rec_pc, uint32_t add_u32,
 
 
 
-
-
-typedef enum {
-  MYLIB_SYNTAX_OK = 0U,
-  MYLIB_SYNTAX_NOT_OK = 1U
-} MyLib_SyntaxStatus_t;
+typedef enum { MYLIB_SYNTAX_OK = 0U, MYLIB_SYNTAX_NOT_OK = 1U } MyLib_SyntaxStatus_t;
 
 typedef void (*MyLib_Callback_t)(uint8_t id_u8, uint32_t value_u32);
 typedef uint32_t (*MyLib_Transform_t)(uint32_t value_u32);
@@ -336,11 +331,7 @@ typedef union {
   } bits;
 } MyLib_PackedWord_t;
 
-typedef enum {
-  MYLIB_LOCAL_STATE_INIT = 0,
-  MYLIB_LOCAL_STATE_READY = 1,
-  MYLIB_LOCAL_STATE_ERROR = 2
-} MyLib_LocalState_t;
+typedef enum { MYLIB_LOCAL_STATE_INIT = 0, MYLIB_LOCAL_STATE_READY = 1, MYLIB_LOCAL_STATE_ERROR = 2 } MyLib_LocalState_t;
 
 typedef uint32_t MyLib_Vector3_u32[3];
 
@@ -352,26 +343,16 @@ uint32_t Syntax_InlineFunction_u32(uint32_t value_u32);
 
 
 
-uint32_t
-Syntax_MultilineReturnAndParams_u32(
-  uint32_t a_u32,
-  uint32_t b_u32,
-  uint32_t c_u32
-);
+uint32_t Syntax_MultilineReturnAndParams_u32(uint32_t a_u32, uint32_t b_u32, uint32_t c_u32);
 
 
 
 
-const MyLib_record_t *
-Syntax_FindRecordById(
-  const MyLib_record_t *records_pc,
-  uint32_t count_u32,
-  uint16_t id_u16
-);
+const MyLib_record_t *Syntax_FindRecordById(const MyLib_record_t *records_pc, uint32_t count_u32, uint16_t id_u16);
 
 MyLib_SyntaxStatus_t Syntax_UpdateOutputPointer(uint32_t **out_ppu32, uint32_t *storage_pu32);
 
-uint32_t Syntax_ConstPointerMix_u32(const uint32_t * const input_pcu32, uint32_t * const output_pu32);
+uint32_t Syntax_ConstPointerMix_u32(const uint32_t *const input_pcu32, uint32_t *const output_pu32);
 
 uint32_t *Syntax_ReturnPointer(uint32_t *value_pu32);
 
@@ -392,9 +373,9 @@ uint32_t Syntax_ProcessRecordByValue_u32(MyLib_record_t record);
 uint32_t Syntax_ReadPackedHigh_u32(MyLib_PackedWord_t word);
 
 MyLib_LocalState_t Syntax_AdvanceLocalState(
-# 768 "utExecutionAndResults/utUnderTest/src/AleLib.h" 3 4
+# 749 "utExecutionAndResults/utUnderTest/src/AleLib.h" 3 4
                                            _Bool 
-# 768 "utExecutionAndResults/utUnderTest/src/AleLib.h"
+# 749 "utExecutionAndResults/utUnderTest/src/AleLib.h"
                                                 error_b);
 
 uint32_t Syntax_MacroHeavyFunction_u32(uint32_t a_u32, uint32_t b_u32);
@@ -411,12 +392,9 @@ uint32_t Syntax_WeakFunction_u32(uint32_t value_u32);
 
 uint32_t Syntax_ReadVectorElement_u32(uint8_t index_u8);
 
-uint32_t Syntax_FunctionWithManyQualifiers_u32(volatile uint32_t * volatile value_pvu32,
-                                               const volatile uint32_t * const reference_pcvu32);
+uint32_t Syntax_FunctionWithManyQualifiers_u32(volatile uint32_t *volatile value_pvu32, const volatile uint32_t *const reference_pcvu32);
 
-uint32_t Syntax_ReusesMyLibServices_u32(MyLib_record_t *dest_p,
-                                        const MyLib_record_t *src_pc,
-                                        uint32_t add_u32);
+uint32_t Syntax_ReusesMyLibServices_u32(MyLib_record_t *dest_p, const MyLib_record_t *src_pc, uint32_t add_u32);
 # 5 "utExecutionAndResults/utUnderTest/src/Syntax_NoInlineFunction_u32.h" 2
 
 
@@ -3101,11 +3079,12 @@ void Syntax_ReusesMyLibServices_u32_CMockIgnoreArg_add_u32(UNITY_UINT cmock_line
 #pragma GCC diagnostic pop
 # 5 "utExecutionAndResults/utUnderTest/test/test_Syntax_NoInlineFunction_u32_1.c" 2
 
-void setUp(void) {}
+void setUp(void) {
+}
 
-void tearDown(void) {}
+void tearDown(void) {
+}
 
-void test_Syntax_NoInlineFunction_u32(void)
-{
-    UnityIgnore( (("Auto-generated stub test")), (UNITY_UINT)(12));
+void test_Syntax_NoInlineFunction_u32(void) {
+  UnityIgnore( (("Auto-generated stub test")), (UNITY_UINT)(13));
 }

@@ -1,38 +1,42 @@
-| function_name                           | test_name                        | status  | linesCvrg | branchesCvrg |
-|-----------------------------------------|----------------------------------|---------|-----------|--------------|
-| Syntax_ConditionalCompileFunction_u32   | NO_TESTS                         | NOT EXC | -         | -            |
-| MyLib_UpdateGlobalRecord                | MyLib_UpdateGlobalRecord_1       | PASSED  | 0.0%      | 0.0%         |
-| Syntax_ApplyTransform_u32               | NO_TESTS                         | NOT EXC | -         | -            |
-| Syntax_RegisterLocalVariable_u32        | NO_TESTS                         | NOT EXC | -         | -            |
-| Syntax_ProcessRecordByValue_u32         | NO_TESTS                         | NOT EXC | -         | -            |
-| Syntax_NotifyWithCallback               | NO_TESTS                         | NOT EXC | -         | -            |
-| Syntax_AdvanceLocalState                | NO_TESTS                         | NOT EXC | -         | -            |
-| Syntax_SumVariadic_u32                  | NO_TESTS                         | NOT EXC | -         | -            |
-| Syntax_MacroHeavyFunction_u32           | NO_TESTS                         | NOT EXC | -         | -            |
-| MyLib_RunStateMachine_u8                | NO_TESTS                         | NOT EXC | -         | -            |
-| Syntax_LocalDouble_u32                  | NO_TESTS                         | NOT EXC | -         | -            |
-| Syntax_StaticInlineFunction_u32         | NO_TESTS                         | NOT EXC | -         | -            |
-| Syntax_UpdateOutputPointer              | NO_TESTS                         | NOT EXC | -         | -            |
-| ProcessRecord                           | NO_TESTS                         | NOT EXC | -         | -            |
-| Syntax_ConstPointerMix_u32              | NO_TESTS                         | NOT EXC | -         | -            |
-| Syntax_ReadStaticArrayAndConstTable_u16 | NO_TESTS                         | NOT EXC | -         | -            |
-| Syntax_ReadPackedHigh_u32               | NO_TESTS                         | NOT EXC | -         | -            |
-| MyLib_Orchestrate_u32                   | MyLib_Orchestrate_u32_1          | PASSED  | 0.0%      | 0.0%         |
-| AnalyzeArray_u32                        | NO_TESTS                         | NOT EXC | -         | -            |
-| Syntax_NoInlineFunction_u32             | NO_TESTS                         | NOT EXC | -         | -            |
-| MyLib_ComputeAdjustedValue_u32          | MyLib_ComputeAdjustedValue_u32_1 | PASSED  | 0.0%      | 0.0%         |
-| Syntax_StaticFunction_u8                | NO_TESTS                         | NOT EXC | -         | -            |
-| Syntax_InlineFunction_u32               | NO_TESTS                         | NOT EXC | -         | -            |
-| MyLib_ProcessRecord                     | MyLib_ProcessRecord_1            | PASSED  | 0.0%      | 0.0%         |
-| InternalHelper_u32                      | InternalHelper_u32_1             | PASSED  | 0.0%      | 0.0%         |
-| Syntax_ReadVectorElement_u32            | NO_TESTS                         | NOT EXC | -         | -            |
-| MyLib_AnalyzeArray_u32                  | MyLib_AnalyzeArray_u32_1         | PASSED  | 0.0%      | 0.0%         |
-| Syntax_WeakFunction_u32                 | NO_TESTS                         | NOT EXC | -         | -            |
-| Syntax_UseLocalFunctionPointer_u32      | NO_TESTS                         | NOT EXC | -         | -            |
-| main                                    | NO_TESTS                         | NOT EXC | -         | -            |
-| Syntax_ReturnPointer                    | NO_TESTS                         | NOT EXC | -         | -            |
-| Syntax_SumMatrix2x2_u32                 | NO_TESTS                         | NOT EXC | -         | -            |
-| MyLib_UpdateCounter_u8                  | MyLib_UpdateCounter_u8_1         | PASSED  | 0.0%      | 0.0%         |
-| Syntax_SumFixedArray_u32                | NO_TESTS                         | NOT EXC | -         | -            |
-| UpdateCounter_u8                        | UpdateCounter_u8_1               | PASSED  | 0.0%      | 0.0%         |
-| Syntax_CommentAndStringKeywords_u32     | NO_TESTS                         | NOT EXC | -         | -            |
+| function_name                           | test_name | status  | linesCvrg | branchesCvrg |
+|-----------------------------------------|-----------|---------|-----------|--------------|
+| Syntax_ConditionalCompileFunction_u32   | NO_TESTS  | NOT EXC | -         | -            |
+| MyLib_UpdateGlobalRecord                | NO_TESTS  | NOT EXC | -         | -            |
+| Syntax_ApplyTransform_u32               | NO_TESTS  | NOT EXC | -         | -            |
+| Syntax_RegisterLocalVariable_u32        | NO_TESTS  | NOT EXC | -         | -            |
+| Syntax_ProcessRecordByValue_u32         | NO_TESTS  | NOT EXC | -         | -            |
+| Syntax_NotifyWithCallback               | NO_TESTS  | NOT EXC | -         | -            |
+| Syntax_AdvanceLocalState                | NO_TESTS  | NOT EXC | -         | -            |
+| Syntax_SumVariadic_u32                  | NO_TESTS  | NOT EXC | -         | -            |
+| Syntax_MacroHeavyFunction_u32           | NO_TESTS  | NOT EXC | -         | -            |
+| MyLib_RunStateMachine_u8                | NO_TESTS  | NOT EXC | -         | -            |
+| Syntax_LocalDouble_u32                  | NO_TESTS  | NOT EXC | -         | -            |
+| Syntax_StaticInlineFunction_u32         | NO_TESTS  | NOT EXC | -         | -            |
+| Syntax_UpdateOutputPointer              | NO_TESTS  | NOT EXC | -         | -            |
+| ProcessRecord                           | NO_TESTS  | NOT EXC | -         | -            |
+| Syntax_ConstPointerMix_u32              | NO_TESTS  | NOT EXC | -         | -            |
+| Syntax_ReadStaticArrayAndConstTable_u16 | NO_TESTS  | NOT EXC | -         | -            |
+| Syntax_ReadPackedHigh_u32               | NO_TESTS  | NOT EXC | -         | -            |
+| MyLib_Orchestrate_u32                   | NO_TESTS  | NOT EXC | -         | -            |
+| AnalyzeArray_u32                        | NO_TESTS  | NOT EXC | -         | -            |
+| Syntax_NoInlineFunction_u32             | NO_TESTS  | NOT EXC | -         | -            |
+| MyLib_ComputeAdjustedValue_u32          | NO_TESTS  | NOT EXC | -         | -            |
+| Syntax_StaticFunction_u8                | NO_TESTS  | NOT EXC | -         | -            |
+| Syntax_InlineFunction_u32               | NO_TESTS  | NOT EXC | -         | -            |
+| MyLib_ProcessRecord                     | NO_TESTS  | NOT EXC | -         | -            |
+| InternalHelper_u32                      | NO_TESTS  | NOT EXC | -         | -            |
+| Syntax_FunctionWithManyQualifiers_u32   | NO_TESTS  | NOT EXC | -         | -            |
+| Syntax_ReadVectorElement_u32            | NO_TESTS  | NOT EXC | -         | -            |
+| MyLib_AnalyzeArray_u32                  | NO_TESTS  | NOT EXC | -         | -            |
+| Syntax_WeakFunction_u32                 | NO_TESTS  | NOT EXC | -         | -            |
+| Syntax_UseLocalFunctionPointer_u32      | NO_TESTS  | NOT EXC | -         | -            |
+| main                                    | NO_TESTS  | NOT EXC | -         | -            |
+| Syntax_ReturnPointer                    | NO_TESTS  | NOT EXC | -         | -            |
+| Syntax_SumMatrix2x2_u32                 | NO_TESTS  | NOT EXC | -         | -            |
+| Syntax_MultilineReturnAndParams_u32     | NO_TESTS  | NOT EXC | -         | -            |
+| Syntax_ReusesMyLibServices_u32          | NO_TESTS  | NOT EXC | -         | -            |
+| Syntax_FindRecordById                   | NO_TESTS  | NOT EXC | -         | -            |
+| MyLib_UpdateCounter_u8                  | NO_TESTS  | NOT EXC | -         | -            |
+| Syntax_SumFixedArray_u32                | NO_TESTS  | NOT EXC | -         | -            |
+| UpdateCounter_u8                        | NO_TESTS  | NOT EXC | -         | -            |
+| Syntax_CommentAndStringKeywords_u32     | NO_TESTS  | NOT EXC | -         | -            |

@@ -82,7 +82,7 @@ static void run_test(UnityTestFunction func, const char* name, UNITY_LINE_TYPE l
 int main(void)
 {
   UnityBegin("test_Syntax_AdvanceLocalState_1.c");
-  run_test(test_Syntax_AdvanceLocalState, "test_Syntax_AdvanceLocalState", 10);
+  run_test(test_Syntax_AdvanceLocalState, "test_Syntax_AdvanceLocalState", 12);
 
   CMock_Guts_MemFreeFinal();
   return UNITY_END();

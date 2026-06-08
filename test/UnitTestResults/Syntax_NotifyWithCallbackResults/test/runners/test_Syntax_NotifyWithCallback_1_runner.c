@@ -82,7 +82,7 @@ static void run_test(UnityTestFunction func, const char* name, UNITY_LINE_TYPE l
 int main(void)
 {
   UnityBegin("test_Syntax_NotifyWithCallback_1.c");
-  run_test(test_Syntax_NotifyWithCallback, "test_Syntax_NotifyWithCallback", 10);
+  run_test(test_Syntax_NotifyWithCallback, "test_Syntax_NotifyWithCallback", 12);
 
   CMock_Guts_MemFreeFinal();
   return UNITY_END();
