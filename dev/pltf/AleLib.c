@@ -1,6 +1,6 @@
 /* MyLib.c */
 
-#include "MyLib.h"
+#include "AleLib.h"
 
 /* Global variables */
 uint32_t g_counter_u32 = 0U;
